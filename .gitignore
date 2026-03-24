@@ -1,0 +1,4 @@
+
+# local nested git metadata kept out of archive
+picoCTF/MY_GIT/challenge/.git_saved/
+picoCTF/MY_GIT/challenge_poc_run/.git_saved/
