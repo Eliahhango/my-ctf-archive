@@ -2,7 +2,7 @@
 
 ## Overview
 
-This directory contains the local materials and saved solve workflow for the `LootStash` challenge on Hack The Box. This is a reversing challenge where the program appears to rely on `rand()` and time-based behavior, but the actual secret is stored directly inside a static loot table in the binary.
+This directory contains the local materials and manual walkthrough for the `LootStash` challenge on Hack The Box. This is a reversing challenge where the program appears to rely on `rand()` and time-based behavior, but the actual secret is stored directly inside a static loot table in the binary.
 
 The clean solve is therefore static extraction rather than trying to race or predict the runtime selection.
 
@@ -11,7 +11,6 @@ The clean solve is therefore static extraction rather than trying to race or pre
 - Challenge: `LootStash`
 - Category: `Reversing`
 - Platform: `Hack The Box`
-- Saved PoC: `lootstash_poc.sh`
 
 ## Directory Contents
 
@@ -21,26 +20,19 @@ The clean solve is therefore static extraction rather than trying to race or pre
 
 ## First Commands To Run
 
-Start by inspecting the archive and extracted binary:
+Start with the original challenge materials in this folder. The goal is to identify the bug or recovery path from the provided files, then follow the numbered walkthrough below to reach the flag manually.
 
 ```bash
 cd "/home/eliah/Desktop/CTF/HackTheBox/LootStash"
 ls -lah
 unzip -l "rev_lootstash.zip"
-file rev_lootstash/stash
 ```
 
-Read the saved PoC:
+Useful first inspection commands:
 
 ```bash
-sed -n "1,220p" "lootstash_poc.sh"
-```
-
-Run it:
-
-```bash
-chmod +x "lootstash_poc.sh"
-./lootstash_poc.sh
+file 'rev_lootstash.zip'
+strings -n 5 'rev_lootstash.zip' | head -200
 ```
 
 ## What The Binary Appears To Do
@@ -78,20 +70,17 @@ readelf -S rev_lootstash/stash
 
 But for the actual solve, simple string extraction is sufficient.
 
-## What The Saved PoC Does
+## Optional Archive Reference
 
-The PoC runs `strings` against the binary, searches for a pattern matching `HTB{...}`, and prints the recovered flag. It intentionally avoids unnecessary complexity because the challenge does not require dynamic instrumentation once the static embedding is recognized.
+The archived reference notes runs `strings` against the binary, searches for a pattern matching `HTB{...}`, and prints the recovered flag. It intentionally avoids unnecessary complexity because the challenge does not require dynamic instrumentation once the static embedding is recognized.
 
-## Reproduction Commands
+## Manual Reproduction Flow
 
-Use this sequence for the fast path:
+Use the walkthrough above as the authoritative solve path. The short command block below is only the setup phase before you execute the numbered manual steps in this README.
 
 ```bash
 cd "/home/eliah/Desktop/CTF/HackTheBox/LootStash"
-unzip -l "rev_lootstash.zip"
-strings -n 5 rev_lootstash/stash | grep 'HTB{'
-sed -n "1,220p" "lootstash_poc.sh"
-bash "lootstash_poc.sh"
+ls -lah
 ```
 
 ## Study Notes

@@ -2,7 +2,7 @@
 
 ## Overview
 
-This directory contains the local materials and saved solve workflow for the `Critical Flight` challenge on Hack The Box CTF Try Out. This is a hardware-focused challenge based on Gerber PCB production files. The goal is to inspect the board layers individually and notice that the flag is hidden across multiple copper layers rather than in the obvious top-level board view.
+This directory contains the local materials and manual walkthrough for the `Critical Flight` challenge on Hack The Box CTF Try Out. This is a hardware-focused challenge based on Gerber PCB production files. The goal is to inspect the board layers individually and notice that the flag is hidden across multiple copper layers rather than in the obvious top-level board view.
 
 This challenge is useful because it teaches a real hardware review habit: never trust only the rendered top or fully composited board image. Critical information can be buried inside inner or bottom layers.
 
@@ -11,7 +11,6 @@ This challenge is useful because it teaches a real hardware review habit: never 
 - Challenge: `Critical Flight`
 - Category: `Hardware`
 - Platform: `Hack The Box CTF Try Out`
-- Saved PoC: `critical_flight_poc.sh`
 
 ## Directory Contents
 
@@ -28,7 +27,7 @@ This challenge is useful because it teaches a real hardware review habit: never 
 
 ## First Commands To Run
 
-Start by reviewing the folder and the archive:
+Start with the original challenge materials in this folder. The goal is to identify the bug or recovery path from the provided files, then follow the numbered walkthrough below to reach the flag manually.
 
 ```bash
 cd "/home/eliah/Desktop/CTF/HackTheBox/Critical_Flight"
@@ -36,17 +35,11 @@ ls -lah
 unzip -l "hw_critical_flight.zip"
 ```
 
-Read the saved PoC:
+Useful first inspection commands:
 
 ```bash
-sed -n "1,220p" "critical_flight_poc.sh"
-```
-
-Run it:
-
-```bash
-chmod +x "critical_flight_poc.sh"
-./critical_flight_poc.sh
+file 'hw_critical_flight.zip'
+strings -n 5 'hw_critical_flight.zip' | head -200
 ```
 
 ## What Gerber Files Are
@@ -122,15 +115,13 @@ find flight_control_board -type f | sort
 find layers -type f | sort
 ```
 
-## Reproduction Commands
+## Manual Reproduction Flow
 
-Use this sequence for the shortest fast path:
+Use the walkthrough above as the authoritative solve path. The short command block below is only the setup phase before you execute the numbered manual steps in this README.
 
 ```bash
 cd "/home/eliah/Desktop/CTF/HackTheBox/Critical_Flight"
-unzip -l "hw_critical_flight.zip"
-sed -n "1,220p" "critical_flight_poc.sh"
-bash "critical_flight_poc.sh"
+ls -lah
 ```
 
 ## Study Notes

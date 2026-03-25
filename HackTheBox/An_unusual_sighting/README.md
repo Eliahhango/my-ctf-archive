@@ -2,16 +2,15 @@
 
 ## Overview
 
-This directory contains the local materials and saved solve workflow for the `An unusual sighting` challenge on Hack The Box. This is a forensics challenge based on SSH logs and shell history from a compromised development server. The solve is not about breaking a service directly. It is about reading the timeline carefully and extracting the exact indicators the remote quiz expects.
+This directory contains the local materials and manual walkthrough for the `An unusual sighting` challenge on Hack The Box. This is a forensics challenge based on SSH logs and shell history from a compromised development server. The solve is not about breaking a service directly. It is about reading the timeline carefully and extracting the exact indicators the remote quiz expects.
 
-The saved PoC answers the live question flow automatically. This README explains how those answers are derived and what to look for if you want to solve it manually.
+The archived notes in this folder preserve the final answer flow, while this README explains how to derive each answer manually from the evidence.
 
 ## Challenge Profile
 
 - Challenge: `An unusual sighting`
 - Category: `Forensics`
 - Platform: `Hack The Box`
-- Saved PoC: `an_unusual_sighting_poc.sh`
 
 ## Directory Contents
 
@@ -21,7 +20,7 @@ The saved PoC answers the live question flow automatically. This README explains
 
 ## First Commands To Run
 
-Start by listing the folder and checking the archives:
+Start with the original challenge materials in this folder. The goal is to identify the bug or recovery path from the provided files, then follow the numbered walkthrough below to reach the flag manually.
 
 ```bash
 cd "/home/eliah/Desktop/CTF/HackTheBox/An_unusual_sighting"
@@ -30,23 +29,13 @@ unzip -l "challenge.zip"
 unzip -l "forensics_an_unusual_sighting.zip"
 ```
 
-Read the saved PoC:
+Useful first inspection commands:
 
 ```bash
-sed -n "1,220p" "an_unusual_sighting_poc.sh"
-```
-
-Run it:
-
-```bash
-chmod +x "an_unusual_sighting_poc.sh"
-./an_unusual_sighting_poc.sh
-```
-
-To reuse it against a fresh spawned target:
-
-```bash
-./an_unusual_sighting_poc.sh <HOST> <PORT>
+file 'challenge.zip'
+strings -n 5 'challenge.zip' | head -200
+file 'forensics_an_unusual_sighting.zip'
+strings -n 5 'forensics_an_unusual_sighting.zip' | head -200
 ```
 
 ## What The Challenge Asks For
@@ -107,7 +96,7 @@ The values recovered during solving were:
 - First command after login: `whoami`
 - Final command before logout: `./setup`
 
-The saved PoC simply waits for each prompt from the service and submits those answers in order.
+The archived notes in this folder simply replay the derived answers in prompt order.
 
 ## Why This Challenge Is Useful
 
@@ -118,17 +107,15 @@ This is a good introductory forensics exercise because it trains the habit of ex
 - a public key fingerprint can attribute access across multiple systems
 - command history can reveal attacker intent immediately
 
-## Reproduction Commands
+## Manual Reproduction Flow
 
-Use this sequence for the shortest path:
+Use the walkthrough above as the authoritative solve path. The short command block below is only the setup phase before you execute the numbered manual steps in this README.
 
 ```bash
 cd "/home/eliah/Desktop/CTF/HackTheBox/An_unusual_sighting"
-unzip -l "forensics_an_unusual_sighting.zip"
-sed -n "1,220p" "an_unusual_sighting_poc.sh"
-bash "an_unusual_sighting_poc.sh"
+ls -lah
 ```
 
 ## Study Notes
 
-This challenge is worth revisiting if you are practicing basic incident-response workflows. The PoC provides the final answers quickly, but the more valuable exercise is to extract each answer manually from the logs and build the attacker timeline yourself before comparing it to the script.
+This challenge is worth revisiting if you are practicing basic incident-response workflows. Extract each answer manually from the logs, build the attacker timeline yourself, and use the archived solve notes only as a secondary check.

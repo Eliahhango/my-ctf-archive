@@ -2,14 +2,13 @@
 
 ## Overview
 
-This directory contains the local materials and saved solve workflow for the `Labyrinth` challenge on Hack The Box - CTF Try Out. This README is written as a practical walkthrough so someone can open the folder, inspect the challenge files, understand the intended weakness, and reproduce the solve with commands that are easy to copy and run.
+This directory contains the local materials and manual walkthrough for the `Labyrinth` challenge on Hack The Box - CTF Try Out. This README is written as a practical walkthrough so someone can open the folder, inspect the challenge files, understand the intended weakness, and reproduce the solve with commands that are easy to copy and run.
 
 ## Challenge Profile
 
 - Challenge: `Labyrinth`
 - Category: `Pwn / Binary Exploitation`
 - Platform: `Hack The Box - CTF Try Out`
-- Saved PoC: `labyrinth_poc.sh`
 
 ## Directory Contents
 
@@ -19,36 +18,19 @@ This directory contains the local materials and saved solve workflow for the `La
 
 ## First Commands To Run
 
-Begin with a short inventory so you can see the original challenge archive, any extracted directories, and the solve script saved in this folder.
+Start with the original challenge materials in this folder. The goal is to identify the bug or recovery path from the provided files, then follow the numbered walkthrough below to reach the flag manually.
 
 ```bash
 cd "/home/eliah/Desktop/CTF/HackTheBox/Labyrinth"
 ls -lah
-```
-
-If you want to verify what was originally provided by Hack The Box, inspect the archive contents before extracting or re-extracting them.
-
-```bash
 unzip -l "pwn_labyrinth.zip"
 ```
 
-Read the top of the PoC first. The comments there summarize the exact idea used during the solve and usually explain the bug, leak, algorithm, or reversing trick directly.
+Useful first inspection commands:
 
 ```bash
-sed -n "1,220p" "labyrinth_poc.sh"
-```
-
-Run the PoC after reviewing the notes.
-
-```bash
-chmod +x "labyrinth_poc.sh"
-./labyrinth_poc.sh
-```
-
-If the script targets a spawned remote service, you can usually point it at a fresh instance by supplying a host and port.
-
-```bash
-./labyrinth_poc.sh <HOST> <PORT>
+file 'pwn_labyrinth.zip'
+strings -n 5 'pwn_labyrinth.zip' | head -200
 ```
 
 ## Walkthrough
@@ -125,17 +107,15 @@ path" while fixing just enough surrounding state for that path to succeed.
 Final live flag obtained during testing:
 HTB{3sc4p3_fr0m_4b0v3}
 
-## Reproduction Commands
+## Manual Reproduction Flow
 
-Use the following command sequence if you want a short and reliable path from opening the folder to reproducing the saved solve.
+Use the walkthrough above as the authoritative solve path. The short command block below is only the setup phase before you execute the numbered manual steps in this README.
 
 ```bash
 cd "/home/eliah/Desktop/CTF/HackTheBox/Labyrinth"
-unzip -l "pwn_labyrinth.zip"
-sed -n "1,220p" "labyrinth_poc.sh"
-bash "labyrinth_poc.sh"
+ls -lah
 ```
 
 ## Study Notes
 
-This challenge is worth revisiting if you are practicing `Pwn / Binary Exploitation` problems. The saved PoC is meant to be the fast path, but the better learning path is to inspect the provided files yourself first, confirm the weakness manually, and then compare your reasoning with the script comments and implementation.
+This challenge is worth revisiting if you are practicing `Pwn / Binary Exploitation` problems. Inspect the binary yourself first, confirm the weakness manually, and use the archived solve notes only after you have traced the bug and exploit path on your own.

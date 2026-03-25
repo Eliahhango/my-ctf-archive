@@ -2,7 +2,7 @@
 
 ## Overview
 
-This directory contains the local materials and saved solve workflow for the `Failure Failure` challenge from `picoCTF 2026`. This is a web and infrastructure challenge built around the interaction between application behavior and load-balancer health checks. The flag is not hidden behind a memory corruption bug or a forgotten route. It becomes reachable only after the attacker forces the primary backend to look unhealthy enough that HAProxy fails over to the backup system.
+This directory contains the local materials and manual walkthrough for the `Failure Failure` challenge from `picoCTF 2026`. This is a web and infrastructure challenge built around the interaction between application behavior and load-balancer health checks. The flag is not hidden behind a memory corruption bug or a forgotten route. It becomes reachable only after the attacker forces the primary backend to look unhealthy enough that HAProxy fails over to the backup system.
 
 This is a useful challenge because it teaches a real operational security lesson: availability logic can create an attack surface when backup systems behave differently from primary systems.
 
@@ -14,7 +14,6 @@ This is a useful challenge because it teaches a real operational security lesson
 - Event or Platform: `picoCTF 2026`
 - Difficulty: `Medium`
 - Author: `DARKRAICG492`
-- Saved PoC: `failure_failure_poc.sh`
 
 ## Directory Contents
 
@@ -24,26 +23,18 @@ This is a useful challenge because it teaches a real operational security lesson
 
 ## First Commands To Run
 
-Start by reading the application and HAProxy configuration side by side:
+Start with the original challenge materials in this folder. The goal is to identify the bug or recovery path from the provided files, then follow the numbered walkthrough below to reach the flag manually.
 
 ```bash
 cd "/home/eliah/Desktop/CTF/picoCTF/Failure_Failure"
 ls -lah
-sed -n '1,220p' app.py
-sed -n '1,260p' haproxy.cfg
 ```
 
-Read the saved PoC next:
+Useful first inspection commands:
 
 ```bash
-sed -n "1,220p" "failure_failure_poc.sh"
-```
-
-Run it:
-
-```bash
-chmod +x "failure_failure_poc.sh"
-./failure_failure_poc.sh
+sed -n '1,220p' 'app.py'
+sed -n '1,220p' 'haproxy.cfg'
 ```
 
 ## Core Vulnerability
@@ -106,7 +97,7 @@ Once you understand both files together, the solve path becomes obvious.
 
 ## Triggering Failover
 
-The saved PoC floods the service with enough concurrent requests to exceed the limiter and then polls until the flag appears. That is the practical way to reproduce the behavior.
+A practical manual reproduction is to flood the service with enough concurrent requests to exceed the limiter and then poll until the flag appears.
 
 A manual version of the same idea would be:
 
@@ -142,16 +133,13 @@ This is a good challenge because it pushes you to think beyond “the applicatio
 
 The deeper lesson is simple: security-relevant behavior must stay consistent across primary and backup systems, and health-check failure codes should be designed carefully.
 
-## Reproduction Commands
+## Manual Reproduction Flow
 
-Use this sequence for the fastest path:
+Use the walkthrough above as the authoritative solve path. The short command block below is only the setup phase before you execute the numbered manual steps in this README.
 
 ```bash
 cd "/home/eliah/Desktop/CTF/picoCTF/Failure_Failure"
-sed -n '1,220p' app.py
-sed -n '1,260p' haproxy.cfg
-sed -n "1,220p" "failure_failure_poc.sh"
-bash "failure_failure_poc.sh"
+ls -lah
 ```
 
 ## Study Notes

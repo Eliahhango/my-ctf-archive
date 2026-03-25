@@ -2,7 +2,7 @@
 
 ## Overview
 
-This directory contains the local materials and saved solve workflow for the `MY GIT` challenge from `picoCTF 2026`. The goal of this README is to make the folder immediately useful to someone reviewing the archive later: what the challenge was about, what files matter, how the solve works at a high level, and which commands to run first.
+This directory contains the local materials and manual walkthrough for the `MY GIT` challenge from `picoCTF 2026`. The goal of this README is to make the folder immediately useful to someone reviewing the archive later: what the challenge was about, what files matter, how the solve works at a high level, and which commands to run first.
 
 ## Challenge Profile
 
@@ -12,7 +12,6 @@ This directory contains the local materials and saved solve workflow for the `MY
 - Event or Platform: `picoCTF 2026`
 - Difficulty: `Medium`
 - Author: `DARKRAICG492`
-- Saved PoC: `my_git_poc.sh`
 
 ## Directory Contents
 
@@ -22,19 +21,12 @@ This directory contains the local materials and saved solve workflow for the `MY
 
 ## First Commands To Run
 
-Start by listing the directory and reading the saved proof-of-concept script. In this archive, the PoC comments are treated as the primary solve notes and usually contain the most important reasoning.
+This folder does not include original challenge files. Start by reading the challenge description and the manual walkthrough below, then connect to a fresh challenge instance and reproduce the steps one by one.
 
 ```bash
 cd "/home/eliah/Desktop/CTF/picoCTF/MY_GIT"
 ls -lah
-sed -n "1,220p" "my_git_poc.sh"
-```
-
-If you want to execute the saved solve directly:
-
-```bash
-chmod +x "my_git_poc.sh"
-./my_git_poc.sh
+printf 'Follow the manual walkthrough below against the live service.\n'
 ```
 
 ## Walkthrough
@@ -175,19 +167,18 @@ it wrongly assumes the user is privileged and prints the flag.
 picoCTF{1mp3rs0n4t4_g17_345y_506743df}
 
 Note about reruns:
-This script is written as a one-shot PoC. It clones into a fresh subdirectory,
+This script is written as a one-shot archived notes. It clones into a fresh subdirectory,
 makes a new forged commit, pushes it, and prints the flag directly.
 
-## Reproduction Commands
+## Manual Reproduction Flow
 
-Use this sequence if you want the shortest path from opening the folder to reproducing the saved solve:
+Use the walkthrough above as the authoritative solve path. The short command block below is only the setup phase before you execute the numbered manual steps in this README.
 
 ```bash
 cd "/home/eliah/Desktop/CTF/picoCTF/MY_GIT"
-sed -n "1,220p" "my_git_poc.sh"
-bash "my_git_poc.sh"
+ls -lah
 ```
 
 ## Study Notes
 
-This folder is best used as a practical study reference for `General Skills`-style problems. The fastest path is to run the PoC, but the more valuable path is to read the solve notes first, inspect the local files yourself, and then compare your reasoning to the saved exploit or script.
+This folder is best used as a practical study reference for `General Skills`-style problems. Work through the manual inspection and exploitation steps first, then compare your reasoning against the archived solve notes if you want an extra cross-check.

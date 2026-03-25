@@ -2,7 +2,7 @@
 
 ## Overview
 
-This directory contains the local materials and saved solve workflow for the `Labyrinth Linguist` challenge on Hack The Box - CTF Try Out. The archived notes identify it as a `Easy` challenge. This README is written as a practical walkthrough so someone can open the folder, inspect the challenge files, understand the intended weakness, and reproduce the solve with commands that are easy to copy and run.
+This directory contains the local materials and manual walkthrough for the `Labyrinth Linguist` challenge on Hack The Box - CTF Try Out. The archived notes identify it as a `Easy` challenge. This README is written as a practical walkthrough so someone can open the folder, inspect the challenge files, understand the intended weakness, and reproduce the solve with commands that are easy to copy and run.
 
 ## Challenge Profile
 
@@ -10,7 +10,6 @@ This directory contains the local materials and saved solve workflow for the `La
 - Category: `Web`
 - Platform: `Hack The Box - CTF Try Out`
 - Difficulty: `Easy`
-- Saved PoC: `labyrinth_linguist_poc.sh`
 
 ## Directory Contents
 
@@ -25,36 +24,23 @@ This directory contains the local materials and saved solve workflow for the `La
 
 ## First Commands To Run
 
-Begin with a short inventory so you can see the original challenge archive, any extracted directories, and the solve script saved in this folder.
+Start with the original challenge materials in this folder. The goal is to identify the bug or recovery path from the provided files, then follow the numbered walkthrough below to reach the flag manually.
 
 ```bash
 cd "/home/eliah/Desktop/CTF/HackTheBox/Labyrinth_Linguist"
 ls -lah
-```
-
-If you want to verify what was originally provided by Hack The Box, inspect the archive contents before extracting or re-extracting them.
-
-```bash
 unzip -l "web_labyrinth_linguist.zip"
 ```
 
-Read the top of the PoC first. The comments there summarize the exact idea used during the solve and usually explain the bug, leak, algorithm, or reversing trick directly.
+Useful first inspection commands:
 
 ```bash
-sed -n "1,220p" "labyrinth_linguist_poc.sh"
-```
-
-Run the PoC after reviewing the notes.
-
-```bash
-chmod +x "labyrinth_linguist_poc.sh"
-./labyrinth_linguist_poc.sh
-```
-
-If the script targets a spawned remote service, you can usually point it at a fresh instance by supplying a host and port.
-
-```bash
-./labyrinth_linguist_poc.sh <HOST> <PORT>
+sed -n '1,220p' 'Dockerfile'
+sed -n '1,220p' 'build-docker.sh'
+sed -n '1,220p' 'entrypoint.sh'
+sed -n '1,220p' 'flag.txt'
+file 'web_labyrinth_linguist.zip'
+strings -n 5 'web_labyrinth_linguist.zip' | head -200
 ```
 
 ## Walkthrough
@@ -131,23 +117,19 @@ Notes on the Scanner trick:
 - next() then returns the full command output as a single string.
 
 Usage:
-bash labyrinth_linguist_poc.sh
-bash labyrinth_linguist_poc.sh http://154.57.164.74:31332/
 
 Final flag recovered on this instance:
 HTB{f13ry_t3mpl4t35_fr0m_th3_d3pth5!!_b28a4e5618d3b6f7e34ddc500f9f19fa}
 
-## Reproduction Commands
+## Manual Reproduction Flow
 
-Use the following command sequence if you want a short and reliable path from opening the folder to reproducing the saved solve.
+Use the walkthrough above as the authoritative solve path. The short command block below is only the setup phase before you execute the numbered manual steps in this README.
 
 ```bash
 cd "/home/eliah/Desktop/CTF/HackTheBox/Labyrinth_Linguist"
-unzip -l "web_labyrinth_linguist.zip"
-sed -n "1,220p" "labyrinth_linguist_poc.sh"
-bash "labyrinth_linguist_poc.sh"
+ls -lah
 ```
 
 ## Study Notes
 
-This challenge is worth revisiting if you are practicing `Web` problems. The saved PoC is meant to be the fast path, but the better learning path is to inspect the provided files yourself first, confirm the weakness manually, and then compare your reasoning with the script comments and implementation.
+This challenge is worth revisiting if you are practicing `Web` problems. Inspect the routes and source manually first, confirm the weakness yourself, and only then compare your reasoning against the archived solve notes.

@@ -2,7 +2,7 @@
 
 ## Overview
 
-This directory contains the local materials and saved solve workflow for the `TunnelMadness` challenge on Hack The Box. This is a reversing challenge built around a 3D maze embedded directly in the binary. The main work is recovering the maze layout, understanding the movement mapping, and then replaying the correct route against the live service to obtain the real flag.
+This directory contains the local materials and manual walkthrough for the `TunnelMadness` challenge on Hack The Box. This is a reversing challenge built around a 3D maze embedded directly in the binary. The main work is recovering the maze layout, understanding the movement mapping, and then replaying the correct route against the live service to obtain the real flag.
 
 The local binary is useful for analysis, but it is not the final source of truth for the flag. The solve has to be completed against the spawned target.
 
@@ -11,7 +11,6 @@ The local binary is useful for analysis, but it is not the final source of truth
 - Challenge: `TunnelMadness`
 - Category: `Reversing`
 - Platform: `Hack The Box`
-- Saved PoC: `tunnelmadness_poc.sh`
 
 ## Directory Contents
 
@@ -21,32 +20,19 @@ The local binary is useful for analysis, but it is not the final source of truth
 
 ## First Commands To Run
 
-Begin by reviewing the archive and the extracted binary:
+Start with the original challenge materials in this folder. The goal is to identify the bug or recovery path from the provided files, then follow the numbered walkthrough below to reach the flag manually.
 
 ```bash
 cd "/home/eliah/Desktop/CTF/HackTheBox/TunnelMadness"
 ls -lah
 unzip -l "rev_tunnelmadness.zip"
-file rev_tunnelmadness/tunnel
 ```
 
-Read the solve script comments:
+Useful first inspection commands:
 
 ```bash
-sed -n "1,220p" "tunnelmadness_poc.sh"
-```
-
-Run the saved route against the service:
-
-```bash
-chmod +x "tunnelmadness_poc.sh"
-./tunnelmadness_poc.sh
-```
-
-To target a new spawned instance:
-
-```bash
-./tunnelmadness_poc.sh <HOST> <PORT>
+file 'rev_tunnelmadness.zip'
+strings -n 5 'rev_tunnelmadness.zip' | head -200
 ```
 
 ## Challenge Structure
@@ -84,7 +70,7 @@ Once that mapping is known, the route can be expressed as a string of movement c
 
 The local binary includes a fake `/flag.txt` string. That is a deliberate trap. It means static extraction alone is not enough to finish the challenge cleanly. You must solve the maze locally, then send the valid path to the live service to retrieve the real flag.
 
-That is why the saved PoC does not stop at path recovery. It also handles the final remote interaction.
+That is why the archived reference notes does not stop at path recovery. It also handles the final remote interaction.
 
 ## Manual Analysis Commands
 
@@ -120,17 +106,15 @@ The shortest valid route recovered during solving is:
 UUURFURURRFRRFFUUFURRUFUFFRFUFUUUUFFRRUUUFURFDFFUFFRRRRRFRR
 ```
 
-That route is the key artifact in this solve. The PoC simply feeds it to the live service at the correct prompt sequence.
+That route is the key artifact in this solve. The archived notes in this folder simply feed that recovered route to the live service at the correct prompt sequence.
 
-## Reproduction Commands
+## Manual Reproduction Flow
 
-Use this sequence for the shortest clean reproduction:
+Use the walkthrough above as the authoritative solve path. The short command block below is only the setup phase before you execute the numbered manual steps in this README.
 
 ```bash
 cd "/home/eliah/Desktop/CTF/HackTheBox/TunnelMadness"
-unzip -l "rev_tunnelmadness.zip"
-sed -n "1,220p" "tunnelmadness_poc.sh"
-bash "tunnelmadness_poc.sh"
+ls -lah
 ```
 
 ## Study Notes

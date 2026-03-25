@@ -2,7 +2,7 @@
 
 ## Overview
 
-This directory contains the local materials and saved solve workflow for the `ping-cmd` challenge from `picoCTF 2026`. The goal of this README is to make the folder immediately useful to someone reviewing the archive later: what the challenge was about, what files matter, how the solve works at a high level, and which commands to run first.
+This directory contains the local materials and manual walkthrough for the `ping-cmd` challenge from `picoCTF 2026`. The goal of this README is to make the folder immediately useful to someone reviewing the archive later: what the challenge was about, what files matter, how the solve works at a high level, and which commands to run first.
 
 ## Challenge Profile
 
@@ -12,7 +12,6 @@ This directory contains the local materials and saved solve workflow for the `pi
 - Event or Platform: `picoCTF 2026`
 - Difficulty: `Medium`
 - Author: `YAHAYA MEDDY`
-- Saved PoC: `ping_cmd_poc.sh`
 
 ## Directory Contents
 
@@ -20,25 +19,12 @@ This directory contains the local materials and saved solve workflow for the `pi
 
 ## First Commands To Run
 
-Start by listing the directory and reading the saved proof-of-concept script. In this archive, the PoC comments are treated as the primary solve notes and usually contain the most important reasoning.
+This folder does not include original challenge files. Start by reading the challenge description and the manual walkthrough below, then connect to a fresh challenge instance and reproduce the steps one by one.
 
 ```bash
 cd "/home/eliah/Desktop/CTF/picoCTF/ping-cmd"
 ls -lah
-sed -n "1,220p" "ping_cmd_poc.sh"
-```
-
-If you want to execute the saved solve directly:
-
-```bash
-chmod +x "ping_cmd_poc.sh"
-./ping_cmd_poc.sh
-```
-
-Many of these saved scripts also accept a target host and port so they can be reused against a fresh instance:
-
-```bash
-./ping_cmd_poc.sh <HOST> <PORT>
+printf 'Follow the manual walkthrough below against the live service.\n'
 ```
 
 ## Walkthrough
@@ -143,16 +129,15 @@ Command injection is dangerous because it turns a simple feature such as
 
 picoCTF{p1nG_c0mm@nd_3xpL0it_su33essFuL_252214ae}
 
-## Reproduction Commands
+## Manual Reproduction Flow
 
-Use this sequence if you want the shortest path from opening the folder to reproducing the saved solve:
+Use the walkthrough above as the authoritative solve path. The short command block below is only the setup phase before you execute the numbered manual steps in this README.
 
 ```bash
 cd "/home/eliah/Desktop/CTF/picoCTF/ping-cmd"
-sed -n "1,220p" "ping_cmd_poc.sh"
-bash "ping_cmd_poc.sh"
+ls -lah
 ```
 
 ## Study Notes
 
-This folder is best used as a practical study reference for `General Skills`-style problems. The fastest path is to run the PoC, but the more valuable path is to read the solve notes first, inspect the local files yourself, and then compare your reasoning to the saved exploit or script.
+This folder is best used as a practical study reference for `General Skills`-style problems. Work through the manual inspection and exploitation steps first, then compare your reasoning against the archived solve notes if you want an extra cross-check.

@@ -2,9 +2,9 @@
 
 ## Overview
 
-This directory contains the local materials and saved solve workflow for the `Micro-CMS v2` challenge from `Hacker101 / HackerOne CTF`. This level is a strong follow-up to the original Micro-CMS because it shows a very realistic pattern: some obvious bugs were fixed, but the application still contains several broken trust boundaries.
+This directory contains the local materials and manual walkthrough for the `Micro-CMS v2` challenge from `Hacker101 / HackerOne CTF`. This level is a strong follow-up to the original Micro-CMS because it shows a very realistic pattern: some obvious bugs were fixed, but the application still contains several broken trust boundaries.
 
-The saved PoC covers three flags built around SQL injection, missing authorization on one HTTP method, and secret leakage through the login flow itself.
+This folder documents three flags built around SQL injection, missing authorization on one HTTP method, and secret leakage through the login flow itself.
 
 ## Challenge Profile
 
@@ -12,7 +12,6 @@ The saved PoC covers three flags built around SQL injection, missing authorizati
 - Category: `Web`
 - Collection: `HackerOne`
 - Event or Platform: `Hacker101 / HackerOne CTF`
-- Saved PoC: `micro_cms_v2_poc.sh`
 
 ## Directory Contents
 
@@ -20,19 +19,12 @@ The saved PoC covers three flags built around SQL injection, missing authorizati
 
 ## First Commands To Run
 
-Start by reading the saved notes:
+This folder does not include original challenge files. Start by reading the challenge description and the manual walkthrough below, then connect to a fresh challenge instance and reproduce the steps one by one.
 
 ```bash
 cd "/home/eliah/Desktop/CTF/HackerOne/Micro-CMS_v2"
 ls -lah
-sed -n "1,260p" "micro_cms_v2_poc.sh"
-```
-
-Run the PoC:
-
-```bash
-chmod +x "micro_cms_v2_poc.sh"
-./micro_cms_v2_poc.sh
+printf 'Follow the manual walkthrough below against the live service.\n'
 ```
 
 ## Why This Level Is Educational
@@ -88,14 +80,13 @@ This level is a very realistic example of patch-incomplete security:
 
 That is why reviewing applications by feature rather than by bug class can be dangerous. If the whole class of issue is not removed, related paths often remain exploitable.
 
-## Reproduction Commands
+## Manual Reproduction Flow
 
-Use this sequence for the fastest path:
+Use the walkthrough above as the authoritative solve path. The short command block below is only the setup phase before you execute the numbered manual steps in this README.
 
 ```bash
 cd "/home/eliah/Desktop/CTF/HackerOne/Micro-CMS_v2"
-sed -n "1,260p" "micro_cms_v2_poc.sh"
-bash "micro_cms_v2_poc.sh"
+ls -lah
 ```
 
 ## Study Notes

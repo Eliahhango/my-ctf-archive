@@ -2,7 +2,7 @@
 
 ## Overview
 
-This directory contains the local materials and saved solve workflow for the `BugDB v1` challenge from `Hacker101 / HackerOne CTF`. The goal of this README is to make the folder immediately useful to someone reviewing the archive later: what the challenge was about, what files matter, how the solve works at a high level, and which commands to run first.
+This directory contains the local materials and manual walkthrough for the `BugDB v1` challenge from `Hacker101 / HackerOne CTF`. The goal of this README is to make the folder immediately useful to someone reviewing the archive later: what the challenge was about, what files matter, how the solve works at a high level, and which commands to run first.
 
 ## Challenge Profile
 
@@ -10,7 +10,6 @@ This directory contains the local materials and saved solve workflow for the `Bu
 - Category: `Web, GraphQL`
 - Collection: `HackerOne`
 - Event or Platform: `Hacker101 / HackerOne CTF`
-- Saved PoC: `bugdb_v1_poc.sh`
 
 ## Directory Contents
 
@@ -18,19 +17,12 @@ This directory contains the local materials and saved solve workflow for the `Bu
 
 ## First Commands To Run
 
-Start by listing the directory and reading the saved proof-of-concept script. In this archive, the PoC comments are treated as the primary solve notes and usually contain the most important reasoning.
+This folder does not include original challenge files. Start by reading the challenge description and the manual walkthrough below, then connect to a fresh challenge instance and reproduce the steps one by one.
 
 ```bash
 cd "/home/eliah/Desktop/CTF/HackerOne/BugDB_v1"
 ls -lah
-sed -n "1,220p" "bugdb_v1_poc.sh"
-```
-
-If you want to execute the saved solve directly:
-
-```bash
-chmod +x "bugdb_v1_poc.sh"
-./bugdb_v1_poc.sh
+printf 'Follow the manual walkthrough below against the live service.\n'
 ```
 
 ## Walkthrough
@@ -114,21 +106,15 @@ Even though the bug is marked private, the resolver still returns the text.
 Expected leaked value:
 ^FLAG^2292a5f6acdb70c90e7aac6e066968497b4f7f029bd24b88b5bbe923bff3fa55$FLAG$
 
-### One-shot behavior
+## Manual Reproduction Flow
 
-Running this script performs the final extraction query automatically and
-prints only the flag, so you do not need to type the commands one by one.
-
-## Reproduction Commands
-
-Use this sequence if you want the shortest path from opening the folder to reproducing the saved solve:
+Use the walkthrough above as the authoritative solve path. The short command block below is only the setup phase before you execute the numbered manual steps in this README.
 
 ```bash
 cd "/home/eliah/Desktop/CTF/HackerOne/BugDB_v1"
-sed -n "1,220p" "bugdb_v1_poc.sh"
-bash "bugdb_v1_poc.sh"
+ls -lah
 ```
 
 ## Study Notes
 
-This folder is best used as a practical study reference for `Web, GraphQL`-style problems. The fastest path is to run the PoC, but the more valuable path is to read the solve notes first, inspect the local files yourself, and then compare your reasoning to the saved exploit or script.
+This folder is best used as a practical study reference for `Web, GraphQL`-style problems. Enumerate the schema and test the vulnerable query paths manually first, then use the archived solve notes only as a reference check.

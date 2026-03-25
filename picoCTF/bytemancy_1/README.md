@@ -2,7 +2,7 @@
 
 ## Overview
 
-This directory contains the local materials and saved solve workflow for the `bytemancy 1` challenge from `picoCTF 2026`. The goal of this README is to make the folder immediately useful to someone reviewing the archive later: what the challenge was about, what files matter, how the solve works at a high level, and which commands to run first.
+This directory contains the local materials and manual walkthrough for the `bytemancy 1` challenge from `picoCTF 2026`. The goal of this README is to make the folder immediately useful to someone reviewing the archive later: what the challenge was about, what files matter, how the solve works at a high level, and which commands to run first.
 
 ## Challenge Profile
 
@@ -12,7 +12,6 @@ This directory contains the local materials and saved solve workflow for the `by
 - Event or Platform: `picoCTF 2026`
 - Difficulty: `Medium`
 - Author: `LT 'SYREAL' JONES`
-- Saved PoC: `bytemancy_1_poc.sh`
 
 ## Directory Contents
 
@@ -21,19 +20,17 @@ This directory contains the local materials and saved solve workflow for the `by
 
 ## First Commands To Run
 
-Start by listing the directory and reading the saved proof-of-concept script. In this archive, the PoC comments are treated as the primary solve notes and usually contain the most important reasoning.
+Start with the original challenge materials in this folder. The goal is to identify the bug or recovery path from the provided files, then follow the numbered walkthrough below to reach the flag manually.
 
 ```bash
 cd "/home/eliah/Desktop/CTF/picoCTF/bytemancy_1"
 ls -lah
-sed -n "1,220p" "bytemancy_1_poc.sh"
 ```
 
-If you want to execute the saved solve directly:
+Useful first inspection commands:
 
 ```bash
-chmod +x "bytemancy_1_poc.sh"
-./bytemancy_1_poc.sh
+sed -n '1,220p' 'app.py'
 ```
 
 ## Walkthrough
@@ -168,16 +165,15 @@ The server returns the flag once it receives exactly 1751 lowercase e bytes.
 
 picoCTF{h0w_m4ny_e's???_0c1ad83a}
 
-## Reproduction Commands
+## Manual Reproduction Flow
 
-Use this sequence if you want the shortest path from opening the folder to reproducing the saved solve:
+Use the walkthrough above as the authoritative solve path. The short command block below is only the setup phase before you execute the numbered manual steps in this README.
 
 ```bash
 cd "/home/eliah/Desktop/CTF/picoCTF/bytemancy_1"
-sed -n "1,220p" "bytemancy_1_poc.sh"
-bash "bytemancy_1_poc.sh"
+ls -lah
 ```
 
 ## Study Notes
 
-This folder is best used as a practical study reference for `General Skills`-style problems. The fastest path is to run the PoC, but the more valuable path is to read the solve notes first, inspect the local files yourself, and then compare your reasoning to the saved exploit or script.
+This folder is best used as a practical study reference for `General Skills`-style problems. Work through the manual inspection and exploitation steps first, then compare your reasoning against the archived solve notes if you want an extra cross-check.

@@ -2,7 +2,7 @@
 
 ## Overview
 
-This directory contains the local materials and saved solve workflow for the `Fool the Lockout` challenge from `picoCTF 2026`. This is a web challenge centered on a login rate limiter that looks effective at first glance but is weak in practice. The defense only blocks fast brute force. A patient attacker can stay within the threshold, wait for the reset window, and continue credential stuffing safely.
+This directory contains the local materials and manual walkthrough for the `Fool the Lockout` challenge from `picoCTF 2026`. This is a web challenge centered on a login rate limiter that looks effective at first glance but is weak in practice. The defense only blocks fast brute force. A patient attacker can stay within the threshold, wait for the reset window, and continue credential stuffing safely.
 
 The challenge is a useful example of how security controls can fail at the policy level even when they appear to work at the UI level.
 
@@ -14,7 +14,6 @@ The challenge is a useful example of how security controls can fail at the polic
 - Event or Platform: `picoCTF 2026`
 - Difficulty: `Medium`
 - Author: `DAVID GAVIRIA`
-- Saved PoC: `fool_the_lockout_poc.sh`
 
 ## Directory Contents
 
@@ -24,26 +23,18 @@ The challenge is a useful example of how security controls can fail at the polic
 
 ## First Commands To Run
 
-Start by reading the source code and the candidate credential dump:
+Start with the original challenge materials in this folder. The goal is to identify the bug or recovery path from the provided files, then follow the numbered walkthrough below to reach the flag manually.
 
 ```bash
 cd "/home/eliah/Desktop/CTF/picoCTF/Fool_the_Lockout"
 ls -lah
-sed -n '1,260p' app.py
-sed -n '1,260p' creds-dump.txt
 ```
 
-Read the PoC:
+Useful first inspection commands:
 
 ```bash
-sed -n "1,240p" "fool_the_lockout_poc.sh"
-```
-
-Run it:
-
-```bash
-chmod +x "fool_the_lockout_poc.sh"
-./fool_the_lockout_poc.sh
+sed -n '1,220p' 'app.py'
+sed -n '1,220p' 'creds-dump.txt'
 ```
 
 ## Core Weakness
@@ -94,7 +85,7 @@ The safe approach is:
 4. continue with the next batch
 5. stop when the login redirect indicates success
 
-The saved PoC includes both:
+The folder also preserves both of these helper approaches as reference:
 
 - a fast mode using the already recovered valid credential
 - a slower `--bruteforce` mode that reproduces the patient attack strategy
@@ -114,22 +105,13 @@ Real defenses need more than a single threshold. They usually require some combi
 - credential stuffing detection
 - stronger authentication design overall
 
-## Reproduction Commands
+## Manual Reproduction Flow
 
-Use this sequence for the fastest path:
+Use the walkthrough above as the authoritative solve path. The short command block below is only the setup phase before you execute the numbered manual steps in this README.
 
 ```bash
 cd "/home/eliah/Desktop/CTF/picoCTF/Fool_the_Lockout"
-sed -n '1,260p' app.py
-sed -n '1,260p' creds-dump.txt
-sed -n "1,240p" "fool_the_lockout_poc.sh"
-bash "fool_the_lockout_poc.sh"
-```
-
-To replay the slower discovery method:
-
-```bash
-bash "fool_the_lockout_poc.sh" --bruteforce
+ls -lah
 ```
 
 ## Study Notes

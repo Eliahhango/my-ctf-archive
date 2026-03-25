@@ -2,14 +2,13 @@
 
 ## Overview
 
-This directory contains the local materials and saved solve workflow for the `Jailbreak` challenge on Hack The Box. This README is written as a practical walkthrough so someone can open the folder, inspect the challenge files, understand the intended weakness, and reproduce the solve with commands that are easy to copy and run.
+This directory contains the local materials and manual walkthrough for the `Jailbreak` challenge on Hack The Box. This README is written as a practical walkthrough so someone can open the folder, inspect the challenge files, understand the intended weakness, and reproduce the solve with commands that are easy to copy and run.
 
 ## Challenge Profile
 
 - Challenge: `Jailbreak`
 - Category: `Web`
 - Platform: `Hack The Box`
-- Saved PoC: `jailbreak_poc.sh`
 
 ## Directory Contents
 
@@ -17,30 +16,12 @@ This directory contains the local materials and saved solve workflow for the `Ja
 
 ## First Commands To Run
 
-Begin with a short inventory so you can see the original challenge archive, any extracted directories, and the solve script saved in this folder.
+This folder does not include original challenge files. Start by reading the challenge description and the manual walkthrough below, then connect to a fresh challenge instance and reproduce the steps one by one.
 
 ```bash
 cd "/home/eliah/Desktop/CTF/HackTheBox/Jailbreak"
 ls -lah
-```
-
-Read the top of the PoC first. The comments there summarize the exact idea used during the solve and usually explain the bug, leak, algorithm, or reversing trick directly.
-
-```bash
-sed -n "1,220p" "jailbreak_poc.sh"
-```
-
-Run the PoC after reviewing the notes.
-
-```bash
-chmod +x "jailbreak_poc.sh"
-./jailbreak_poc.sh
-```
-
-If the script targets a spawned remote service, you can usually point it at a fresh instance by supplying a host and port.
-
-```bash
-./jailbreak_poc.sh <HOST> <PORT>
+printf 'Follow the manual walkthrough below against the live service.\n'
 ```
 
 ## Walkthrough
@@ -136,16 +117,15 @@ Safe parsing generally means:
 
 HTB{b1om3tric_l0cks_4nd_fl1cker1ng_l1ghts_c89ad12a436c81cabb1d862cf6c06547}
 
-## Reproduction Commands
+## Manual Reproduction Flow
 
-Use the following command sequence if you want a short and reliable path from opening the folder to reproducing the saved solve.
+Use the walkthrough above as the authoritative solve path. The short command block below is only the setup phase before you execute the numbered manual steps in this README.
 
 ```bash
 cd "/home/eliah/Desktop/CTF/HackTheBox/Jailbreak"
-sed -n "1,220p" "jailbreak_poc.sh"
-bash "jailbreak_poc.sh"
+ls -lah
 ```
 
 ## Study Notes
 
-This challenge is worth revisiting if you are practicing `Web` problems. The saved PoC is meant to be the fast path, but the better learning path is to inspect the provided files yourself first, confirm the weakness manually, and then compare your reasoning with the script comments and implementation.
+This challenge is worth revisiting if you are practicing `Web` problems. Inspect the routes and source manually first, confirm the weakness yourself, and only then compare your reasoning against the archived solve notes.

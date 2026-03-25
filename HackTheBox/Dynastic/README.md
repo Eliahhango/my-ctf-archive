@@ -2,7 +2,7 @@
 
 ## Overview
 
-This directory contains the local materials and saved solve workflow for the `Dynastic` challenge on Hack The Box. This is a classical-crypto challenge based on a position-dependent Caesar-style shift, better known as the Trithemius cipher.
+This directory contains the local materials and manual walkthrough for the `Dynastic` challenge on Hack The Box. This is a classical-crypto challenge based on a position-dependent Caesar-style shift, better known as the Trithemius cipher.
 
 The supplied source code already reveals the encryption logic. The task is therefore to reverse the transformation correctly and apply it to the provided output text.
 
@@ -11,7 +11,6 @@ The supplied source code already reveals the encryption logic. The task is there
 - Challenge: `Dynastic`
 - Category: `Crypto`
 - Platform: `Hack The Box`
-- Saved PoC: `dynastic_poc.sh`
 
 ## Directory Contents
 
@@ -22,7 +21,7 @@ The supplied source code already reveals the encryption logic. The task is there
 
 ## First Commands To Run
 
-Start by reviewing the archive and the extracted files:
+Start with the original challenge materials in this folder. The goal is to identify the bug or recovery path from the provided files, then follow the numbered walkthrough below to reach the flag manually.
 
 ```bash
 cd "/home/eliah/Desktop/CTF/HackTheBox/Dynastic"
@@ -30,24 +29,12 @@ ls -lah
 unzip -l "crypto_dynastic.zip"
 ```
 
-Inspect the challenge files:
+Useful first inspection commands:
 
 ```bash
-sed -n '1,220p' crypto_dynastic/source.py
-sed -n '1,120p' crypto_dynastic/output.txt
-```
-
-Read the saved PoC:
-
-```bash
-sed -n "1,220p" "dynastic_poc.sh"
-```
-
-Run it:
-
-```bash
-chmod +x "dynastic_poc.sh"
-./dynastic_poc.sh
+find challenge_download -maxdepth 2 -type f | sort
+file 'crypto_dynastic.zip'
+strings -n 5 'crypto_dynastic.zip' | head -200
 ```
 
 ## Cipher Logic
@@ -108,22 +95,19 @@ print("".join(plaintext))
 PY
 ```
 
-## What The Saved PoC Does
+## Optional Archive Reference
 
-The PoC reads the final line of `output.txt`, reverses the per-position shift, and wraps the recovered plaintext inside the `HTB{...}` format expected by the challenge.
+The archived notes in this folder reverse the per-position shift from the final line of `output.txt` and reconstruct the plaintext flag.
 
 That makes the solve reproducible directly from the local files with no network dependency.
 
-## Reproduction Commands
+## Manual Reproduction Flow
 
-Use this sequence for the fast path:
+Use the walkthrough above as the authoritative solve path. The short command block below is only the setup phase before you execute the numbered manual steps in this README.
 
 ```bash
 cd "/home/eliah/Desktop/CTF/HackTheBox/Dynastic"
-unzip -l "crypto_dynastic.zip"
-sed -n '1,220p' crypto_dynastic/source.py
-sed -n "1,220p" "dynastic_poc.sh"
-bash "dynastic_poc.sh"
+ls -lah
 ```
 
 ## Study Notes

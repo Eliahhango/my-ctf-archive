@@ -2,7 +2,7 @@
 
 ## Overview
 
-This directory contains the local materials and saved solve workflow for the `Follow The Media` challenge from `CTFZone`. The goal of this README is to make the folder immediately useful to someone reviewing the archive later: what the challenge was about, what files matter, how the solve works at a high level, and which commands to run first.
+This directory contains the local materials and manual walkthrough for the `Follow The Media` challenge from `CTFZone`. The goal of this README is to make the folder immediately useful to someone reviewing the archive later: what the challenge was about, what files matter, how the solve works at a high level, and which commands to run first.
 
 ## Challenge Profile
 
@@ -11,7 +11,6 @@ This directory contains the local materials and saved solve workflow for the `Fo
 - Collection: `CTFZone`
 - Event or Platform: `CTFZone`
 - Difficulty: `Medium`
-- Saved PoC: `follow_the_media_poc.sh`
 
 ## Directory Contents
 
@@ -20,19 +19,17 @@ This directory contains the local materials and saved solve workflow for the `Fo
 
 ## First Commands To Run
 
-Start by listing the directory and reading the saved proof-of-concept script. In this archive, the PoC comments are treated as the primary solve notes and usually contain the most important reasoning.
+Start with the original challenge materials in this folder. The goal is to identify the bug or recovery path from the provided files, then follow the numbered walkthrough below to reach the flag manually.
 
 ```bash
 cd "/home/eliah/Desktop/CTF/CTFZone/Follow_The_Media"
 ls -lah
-sed -n "1,220p" "follow_the_media_poc.sh"
 ```
 
-If you want to execute the saved solve directly:
+Useful first inspection commands:
 
 ```bash
-chmod +x "follow_the_media_poc.sh"
-./follow_the_media_poc.sh
+sed -n '1,220p' 'description.md'
 ```
 
 ## Walkthrough
@@ -127,16 +124,15 @@ This is a classic OSINT identity pivot:
 
 ctfzone{118_james@ruby.social_lazyatom.com_lazyatom_3530}
 
-## Reproduction Commands
+## Manual Reproduction Flow
 
-Use this sequence if you want the shortest path from opening the folder to reproducing the saved solve:
+Use the walkthrough above as the authoritative solve path. The short command block below is only the setup phase before you execute the numbered manual steps in this README.
 
 ```bash
 cd "/home/eliah/Desktop/CTF/CTFZone/Follow_The_Media"
-sed -n "1,220p" "follow_the_media_poc.sh"
-bash "follow_the_media_poc.sh"
+ls -lah
 ```
 
 ## Study Notes
 
-This folder is best used as a practical study reference for `OSINT`-style problems. The fastest path is to run the PoC, but the more valuable path is to read the solve notes first, inspect the local files yourself, and then compare your reasoning to the saved exploit or script.
+This folder is best used as a practical study reference for `OSINT`-style problems. Follow the public-source trail manually first, then use the archived solve notes only to confirm the final chain of evidence.

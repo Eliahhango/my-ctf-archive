@@ -2,7 +2,7 @@
 
 ## Overview
 
-This directory contains picoCTF challenge archives, local artifacts, and saved proof-of-concept scripts. Most of the folders are built around practical solves for web, pwn, reversing, crypto, general skills, and scripting-style tasks. The READMEs generated here are intended to make each folder useful as a study reference rather than only a flag dump.
+This directory contains picoCTF challenge archives, local artifacts, and challenge-specific walkthroughs. Most of the folders are built around practical solves for web, pwn, reversing, crypto, general skills, and scripting-style tasks. The READMEs are intended to make each folder useful as a study reference rather than only a flag dump.
 
 ## Challenge Folders
 
@@ -25,8 +25,8 @@ Use the collection-level directory as an index and each challenge folder as the 
 
 1. List the challenge folders.
 2. Open the challenge README.
-3. Read the PoC comments first.
-4. Run the saved script only after understanding the approach.
+3. Inspect the local files that came with the challenge.
+4. Follow the manual commands in the README until you reach the answer.
 
 ```bash
 cd "/home/eliah/Desktop/CTF/picoCTF"

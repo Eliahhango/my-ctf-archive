@@ -2,7 +2,7 @@
 
 ## Overview
 
-This directory contains the local materials and saved solve workflow for the `Regularity` challenge on Hack The Box CTF Try Out. This is a binary exploitation challenge with a clean stack overflow and a very convenient jump gadget. The unusual part is that you do not need a stack address leak to run shellcode, because the program already leaves a register pointing at your controlled buffer.
+This directory contains the local materials and manual walkthrough for the `Regularity` challenge on Hack The Box CTF Try Out. This is a binary exploitation challenge with a clean stack overflow and a very convenient jump gadget. The unusual part is that you do not need a stack address leak to run shellcode, because the program already leaves a register pointing at your controlled buffer.
 
 That makes the challenge a strong example of how register state can remove the need for a more complicated exploit chain.
 
@@ -11,7 +11,6 @@ That makes the challenge a strong example of how register state can remove the n
 - Challenge: `Regularity`
 - Category: `Pwn`
 - Platform: `Hack The Box CTF Try Out`
-- Saved PoC: `regularity_poc.sh`
 
 ## Directory Contents
 
@@ -21,32 +20,19 @@ That makes the challenge a strong example of how register state can remove the n
 
 ## First Commands To Run
 
-Start by reviewing the archive and the binary:
+Start with the original challenge materials in this folder. The goal is to identify the bug or recovery path from the provided files, then follow the numbered walkthrough below to reach the flag manually.
 
 ```bash
 cd "/home/eliah/Desktop/CTF/HackTheBox/Regularity"
 ls -lah
 unzip -l "pwn_regularity.zip"
-file pwn_regularity/regularity
 ```
 
-Read the saved PoC:
+Useful first inspection commands:
 
 ```bash
-sed -n "1,220p" "regularity_poc.sh"
-```
-
-Run it:
-
-```bash
-chmod +x "regularity_poc.sh"
-./regularity_poc.sh
-```
-
-To reuse it against a fresh spawned target:
-
-```bash
-./regularity_poc.sh <HOST> <PORT>
+file 'pwn_regularity.zip'
+strings -n 5 'pwn_regularity.zip' | head -200
 ```
 
 ## What The Binary Does
@@ -108,15 +94,13 @@ What you want to confirm:
 - the existence of `jmp rsi`
 - that `rsi` still points at your input when control returns
 
-## Reproduction Commands
+## Manual Reproduction Flow
 
-Use this sequence for the fast path:
+Use the walkthrough above as the authoritative solve path. The short command block below is only the setup phase before you execute the numbered manual steps in this README.
 
 ```bash
 cd "/home/eliah/Desktop/CTF/HackTheBox/Regularity"
-unzip -l "pwn_regularity.zip"
-sed -n "1,220p" "regularity_poc.sh"
-bash "regularity_poc.sh"
+ls -lah
 ```
 
 ## Study Notes

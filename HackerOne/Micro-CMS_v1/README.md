@@ -2,9 +2,9 @@
 
 ## Overview
 
-This directory contains the local materials and saved solve workflow for the `Micro-CMS v1` challenge from `Hacker101 / HackerOne CTF`. This level is useful because it is not built around one bug. It is built around a cluster of trust and validation failures in the same small application.
+This directory contains the local materials and manual walkthrough for the `Micro-CMS v1` challenge from `Hacker101 / HackerOne CTF`. This level is useful because it is not built around one bug. It is built around a cluster of trust and validation failures in the same small application.
 
-The saved PoC demonstrates four distinct flag paths, each revealing a different class of web weakness: predictable identifiers, route tampering, inconsistent escaping, and weak HTML sanitization.
+This folder documents four distinct flag paths, each revealing a different class of web weakness: predictable identifiers, route tampering, inconsistent escaping, and weak HTML sanitization.
 
 ## Challenge Profile
 
@@ -12,7 +12,6 @@ The saved PoC demonstrates four distinct flag paths, each revealing a different 
 - Category: `Web`
 - Collection: `HackerOne`
 - Event or Platform: `Hacker101 / HackerOne CTF`
-- Saved PoC: `micro_cms_v1_poc.sh`
 
 ## Directory Contents
 
@@ -20,19 +19,12 @@ The saved PoC demonstrates four distinct flag paths, each revealing a different 
 
 ## First Commands To Run
 
-Read the saved walkthrough first:
+This folder does not include original challenge files. Start by reading the challenge description and the manual walkthrough below, then connect to a fresh challenge instance and reproduce the steps one by one.
 
 ```bash
 cd "/home/eliah/Desktop/CTF/HackerOne/Micro-CMS_v1"
 ls -lah
-sed -n "1,260p" "micro_cms_v1_poc.sh"
-```
-
-Run the PoC:
-
-```bash
-chmod +x "micro_cms_v1_poc.sh"
-./micro_cms_v1_poc.sh
+printf 'Follow the manual walkthrough below against the live service.\n'
 ```
 
 ## Why This Level Is Good Practice
@@ -91,14 +83,13 @@ still survives. The application then embeds the flag in an attribute on the surv
 
 That is a classic example of blacklist-based sanitization failing against the broader HTML attack surface.
 
-## Reproduction Commands
+## Manual Reproduction Flow
 
-Use this sequence for the fastest path:
+Use the walkthrough above as the authoritative solve path. The short command block below is only the setup phase before you execute the numbered manual steps in this README.
 
 ```bash
 cd "/home/eliah/Desktop/CTF/HackerOne/Micro-CMS_v1"
-sed -n "1,260p" "micro_cms_v1_poc.sh"
-bash "micro_cms_v1_poc.sh"
+ls -lah
 ```
 
 ## Study Notes

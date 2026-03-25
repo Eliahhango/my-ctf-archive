@@ -2,16 +2,15 @@
 
 ## Overview
 
-This directory contains the local materials and saved solve workflow for the `Stop Drop and Roll` challenge on Hack The Box. This is a lightweight scripting challenge built around a repeated text-based protocol. The puzzle itself is simple. The real point is to recognize that any repetitive rule-based interaction becomes trivial once you script the mapping cleanly.
+This directory contains the local materials and manual walkthrough for the `Stop Drop and Roll` challenge on Hack The Box. This is a lightweight scripting challenge built around a repeated text-based protocol. The puzzle itself is simple. The real point is to recognize that any repetitive rule-based interaction becomes trivial once you script the mapping cleanly.
 
-The saved PoC handles all rounds automatically and is a good example of how to parse prompts from an interactive TCP service.
+The archived notes in this folder show one way to automate the repeated prompt handling, but the manual protocol is fully explained below.
 
 ## Challenge Profile
 
 - Challenge: `Stop Drop and Roll`
 - Category: `Misc / Scripting`
 - Platform: `Hack The Box`
-- Saved PoC: `stop_drop_and_roll_poc.sh`
 
 ## Directory Contents
 
@@ -19,25 +18,12 @@ The saved PoC handles all rounds automatically and is a good example of how to p
 
 ## First Commands To Run
 
-Read the PoC:
+This folder does not include original challenge files. Start by reading the challenge description and the manual walkthrough below, then connect to a fresh challenge instance and reproduce the steps one by one.
 
 ```bash
 cd "/home/eliah/Desktop/CTF/HackTheBox/Stop_Drop_and_Roll"
 ls -lah
-sed -n "1,220p" "stop_drop_and_roll_poc.sh"
-```
-
-Run it:
-
-```bash
-chmod +x "stop_drop_and_roll_poc.sh"
-./stop_drop_and_roll_poc.sh
-```
-
-To point it at a fresh spawned service:
-
-```bash
-./stop_drop_and_roll_poc.sh <HOST> <PORT>
+printf 'Follow the manual walkthrough below against the live service.\n'
 ```
 
 ## Service Behavior
@@ -84,9 +70,9 @@ nc <HOST> <PORT>
 
 Once you see the repeated structure, the need for scripting becomes obvious.
 
-## What The Saved PoC Does
+## Optional Archive Reference
 
-The saved script:
+The same interaction can be done manually:
 
 - connects to the TCP service
 - sends `y` to start
@@ -97,14 +83,13 @@ The saved script:
 
 This is a useful pattern for many CTF “interactive trivia” services where a short parser is all that is required.
 
-## Reproduction Commands
+## Manual Reproduction Flow
 
-Use this sequence for the fast path:
+Use the walkthrough above as the authoritative solve path. The short command block below is only the setup phase before you execute the numbered manual steps in this README.
 
 ```bash
 cd "/home/eliah/Desktop/CTF/HackTheBox/Stop_Drop_and_Roll"
-sed -n "1,220p" "stop_drop_and_roll_poc.sh"
-bash "stop_drop_and_roll_poc.sh"
+ls -lah
 ```
 
 ## Study Notes

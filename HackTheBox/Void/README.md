@@ -2,16 +2,15 @@
 
 ## Overview
 
-This directory contains the local materials and saved solve workflow for the `Void` challenge on Hack The Box CTF Try Out. This is a compact binary exploitation challenge whose main lesson is that even a tiny binary with almost no imported functions can still be exploited if the attacker understands how ELF dynamic resolution works.
+This directory contains the local materials and manual walkthrough for the `Void` challenge on Hack The Box CTF Try Out. This is a compact binary exploitation challenge whose main lesson is that even a tiny binary with almost no imported functions can still be exploited if the attacker understands how ELF dynamic resolution works.
 
-The saved PoC already contains the final payload bytes. This README explains why those bytes are needed and how the attack works conceptually.
+The archived notes in this folder preserve one working payload, while this README explains why those bytes are needed and how the attack works conceptually.
 
 ## Challenge Profile
 
 - Challenge: `Void`
 - Category: `Pwn / Binary Exploitation`
 - Platform: `Hack The Box - CTF Try Out`
-- Saved PoC: `void_poc.sh`
 
 ## Directory Contents
 
@@ -21,7 +20,7 @@ The saved PoC already contains the final payload bytes. This README explains why
 
 ## First Commands To Run
 
-Begin with a quick directory and archive inspection:
+Start with the original challenge materials in this folder. The goal is to identify the bug or recovery path from the provided files, then follow the numbered walkthrough below to reach the flag manually.
 
 ```bash
 cd "/home/eliah/Desktop/CTF/HackTheBox/Void"
@@ -29,32 +28,11 @@ ls -lah
 unzip -l "pwn_void.zip"
 ```
 
-Inspect the binary properties before reading the exploit:
+Useful first inspection commands:
 
 ```bash
-file challenge/void
-checksec --file=challenge/void
-readelf -s challenge/void | sed -n '1,220p'
-objdump -d -Mintel challenge/void | sed -n '1,220p'
-```
-
-Read the saved PoC:
-
-```bash
-sed -n "1,240p" "void_poc.sh"
-```
-
-Run the exploit:
-
-```bash
-chmod +x "void_poc.sh"
-./void_poc.sh
-```
-
-To point it at a fresh spawned instance:
-
-```bash
-./void_poc.sh <HOST> <PORT>
+file 'pwn_void.zip'
+strings -n 5 'pwn_void.zip' | head -200
 ```
 
 ## Vulnerable Function
@@ -129,24 +107,22 @@ What you want to identify:
 - the resolver trampoline in the PLT
 - a writable memory region for the second-stage blob
 
-## How The Saved PoC Is Structured
+## How The Saved archived notes Is Structured
 
-The PoC contains two payloads:
+The archived notes in this folder preserve two payloads:
 
 - `stage1`: the initial overflow and primary ROP chain
 - `stage2`: the forged `ret2dlresolve` data used to resolve `system`
 
 That design keeps the script portable. You do not need `pwntools` at runtime, because the exploit already embeds the final bytes that were generated from the local challenge binary.
 
-## Reproduction Commands
+## Manual Reproduction Flow
 
-Use this sequence for a clean reproduction:
+Use the walkthrough above as the authoritative solve path. The short command block below is only the setup phase before you execute the numbered manual steps in this README.
 
 ```bash
 cd "/home/eliah/Desktop/CTF/HackTheBox/Void"
-unzip -l "pwn_void.zip"
-sed -n "1,240p" "void_poc.sh"
-bash "void_poc.sh"
+ls -lah
 ```
 
 ## Study Notes
@@ -158,4 +134,4 @@ This challenge is especially valuable if you want practice with:
 - PLT and GOT internals
 - the dynamic loader as an exploitation primitive
 
-The PoC gives the answer quickly, but the best learning path is to step through the loader-related entries with `readelf` and `objdump` until the second-stage payload structure makes sense.
+The best learning path is to step through the loader-related entries with `readelf` and `objdump` until the second-stage payload structure makes sense. The archived notes are only a reference after that analysis.

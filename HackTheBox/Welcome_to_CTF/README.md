@@ -2,7 +2,7 @@
 
 ## Overview
 
-This directory contains the local materials and saved solve workflow for the `Welcome to CTF` challenge on Hack The Box. This is the onboarding warmup challenge, and its purpose is to reinforce the most basic habit in CTF work: inspect what the service already gives you before looking for something more complicated.
+This directory contains the local materials and manual walkthrough for the `Welcome to CTF` challenge on Hack The Box. This is the onboarding warmup challenge, and its purpose is to reinforce the most basic habit in CTF work: inspect what the service already gives you before looking for something more complicated.
 
 There is no exploit here. The flag is exposed directly in the HTTP response.
 
@@ -11,7 +11,6 @@ There is no exploit here. The flag is exposed directly in the HTTP response.
 - Challenge: `Welcome to CTF`
 - Category: `Warmup`
 - Platform: `Hack The Box`
-- Saved PoC: `welcome_to_ctf_poc.sh`
 
 ## Directory Contents
 
@@ -19,25 +18,12 @@ There is no exploit here. The flag is exposed directly in the HTTP response.
 
 ## First Commands To Run
 
-Read the saved PoC:
+This folder does not include original challenge files. Start by reading the challenge description and the manual walkthrough below, then connect to a fresh challenge instance and reproduce the steps one by one.
 
 ```bash
 cd "/home/eliah/Desktop/CTF/HackTheBox/Welcome_to_CTF"
 ls -lah
-sed -n "1,220p" "welcome_to_ctf_poc.sh"
-```
-
-Run it:
-
-```bash
-chmod +x "welcome_to_ctf_poc.sh"
-./welcome_to_ctf_poc.sh
-```
-
-To use it against a different spawned target:
-
-```bash
-./welcome_to_ctf_poc.sh <HOST> <PORT>
+printf 'Follow the manual walkthrough below against the live service.\n'
 ```
 
 ## What The Challenge Teaches
@@ -76,14 +62,13 @@ The lesson is simple but important: sensitive values are sometimes exposed direc
 
 Many easy challenge solves and many real web findings come from observation rather than technical exploitation.
 
-## Reproduction Commands
+## Manual Reproduction Flow
 
-Use this sequence for the fast path:
+Use the walkthrough above as the authoritative solve path. The short command block below is only the setup phase before you execute the numbered manual steps in this README.
 
 ```bash
 cd "/home/eliah/Desktop/CTF/HackTheBox/Welcome_to_CTF"
-sed -n "1,220p" "welcome_to_ctf_poc.sh"
-bash "welcome_to_ctf_poc.sh"
+ls -lah
 ```
 
 ## Study Notes

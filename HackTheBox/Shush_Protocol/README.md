@@ -2,7 +2,7 @@
 
 ## Overview
 
-This directory contains the local materials and saved solve workflow for the `Shush Protocol` challenge on Hack The Box CTF Try Out. This is an ICS/traffic-analysis challenge based on a Modbus/TCP packet capture. The critical lesson is that “custom” industrial protocol extensions do not become secure just because they are unusual. If the traffic is plaintext, secrets will still leak.
+This directory contains the local materials and manual walkthrough for the `Shush Protocol` challenge on Hack The Box CTF Try Out. This is an ICS/traffic-analysis challenge based on a Modbus/TCP packet capture. The critical lesson is that “custom” industrial protocol extensions do not become secure just because they are unusual. If the traffic is plaintext, secrets will still leak.
 
 The solve comes from recognizing the protocol, following the right stream, and noticing that the password and flag appear directly in the traffic associated with a nonstandard function code.
 
@@ -11,7 +11,6 @@ The solve comes from recognizing the protocol, following the right stream, and n
 - Challenge: `Shush Protocol`
 - Category: `ICS`
 - Platform: `Hack The Box CTF Try Out`
-- Saved PoC: `shush_protocol_poc.sh`
 
 ## Directory Contents
 
@@ -21,20 +20,19 @@ The solve comes from recognizing the protocol, following the right stream, and n
 
 ## First Commands To Run
 
-Start by reviewing the archive and the saved notes:
+Start with the original challenge materials in this folder. The goal is to identify the bug or recovery path from the provided files, then follow the numbered walkthrough below to reach the flag manually.
 
 ```bash
 cd "/home/eliah/Desktop/CTF/HackTheBox/Shush_Protocol"
 ls -lah
 unzip -l "ics_shush_protocol.zip"
-sed -n "1,220p" "shush_protocol_poc.sh"
 ```
 
-Run the saved PoC:
+Useful first inspection commands:
 
 ```bash
-chmod +x "shush_protocol_poc.sh"
-./shush_protocol_poc.sh
+file 'ics_shush_protocol.zip'
+strings -n 5 'ics_shush_protocol.zip' | head -200
 ```
 
 ## Protocol Identification
@@ -97,15 +95,13 @@ The challenge is worth keeping as a reference point for:
 - ICS traffic triage
 - following custom protocol logic in packet captures
 
-## Reproduction Commands
+## Manual Reproduction Flow
 
-Use this sequence for the fast path:
+Use the walkthrough above as the authoritative solve path. The short command block below is only the setup phase before you execute the numbered manual steps in this README.
 
 ```bash
 cd "/home/eliah/Desktop/CTF/HackTheBox/Shush_Protocol"
-unzip -l "ics_shush_protocol.zip"
-sed -n "1,220p" "shush_protocol_poc.sh"
-bash "shush_protocol_poc.sh"
+ls -lah
 ```
 
 ## Study Notes

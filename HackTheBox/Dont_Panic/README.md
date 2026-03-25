@@ -2,7 +2,7 @@
 
 ## Overview
 
-This directory contains the local materials and saved solve workflow for the `Don't Panic!` challenge on Hack The Box. This is a reversing challenge packaged as a small Rust binary. The underlying logic is simple: the program validates the user input byte by byte using a large set of tiny checker routines.
+This directory contains the local materials and manual walkthrough for the `Don't Panic!` challenge on Hack The Box. This is a reversing challenge packaged as a small Rust binary. The underlying logic is simple: the program validates the user input byte by byte using a large set of tiny checker routines.
 
 The main challenge is not defeating anti-analysis or solving obfuscation. It is recognizing that the binary has decomposed the flag check into many small per-character comparisons and then reconstructing the accepted input from those constants.
 
@@ -11,7 +11,6 @@ The main challenge is not defeating anti-analysis or solving obfuscation. It is 
 - Challenge: `Don't Panic!`
 - Category: `Reversing`
 - Platform: `Hack The Box`
-- Saved PoC: `dont_panic_poc.sh`
 
 ## Directory Contents
 
@@ -21,26 +20,19 @@ The main challenge is not defeating anti-analysis or solving obfuscation. It is 
 
 ## First Commands To Run
 
-Start by inspecting the archive and the binary:
+Start with the original challenge materials in this folder. The goal is to identify the bug or recovery path from the provided files, then follow the numbered walkthrough below to reach the flag manually.
 
 ```bash
 cd "/home/eliah/Desktop/CTF/HackTheBox/Dont_Panic"
 ls -lah
 unzip -l "rev_dontpanic.zip"
-file rev_dontpanic/dontpanic
 ```
 
-Read the saved PoC:
+Useful first inspection commands:
 
 ```bash
-sed -n "1,220p" "dont_panic_poc.sh"
-```
-
-Run it:
-
-```bash
-chmod +x "dont_panic_poc.sh"
-./dont_panic_poc.sh
+file 'rev_dontpanic.zip'
+strings -n 5 'rev_dontpanic.zip' | head -200
 ```
 
 ## What The Binary Is Doing
@@ -90,19 +82,17 @@ What to look for:
 - the individual byte-checker functions
 - the immediate constants used in those comparisons
 
-## What The Saved PoC Does
+## Optional Archive Reference
 
-The saved script simply prints the reconstructed flag, because the hard part was the analysis of the binary rather than any live interaction. Once the byte constants were recovered, there was no reason to keep the solve more complicated than necessary.
+Once the byte constants are recovered, the solve is fully manual: reconstruct the accepted string and submit it. The hard part is the analysis, not the final interaction.
 
-## Reproduction Commands
+## Manual Reproduction Flow
 
-Use this sequence for the fast path:
+Use the walkthrough above as the authoritative solve path. The short command block below is only the setup phase before you execute the numbered manual steps in this README.
 
 ```bash
 cd "/home/eliah/Desktop/CTF/HackTheBox/Dont_Panic"
-unzip -l "rev_dontpanic.zip"
-sed -n "1,220p" "dont_panic_poc.sh"
-bash "dont_panic_poc.sh"
+ls -lah
 ```
 
 ## Study Notes

@@ -2,16 +2,15 @@
 
 ## Overview
 
-This directory contains the local materials and saved solve workflow for the `Debug` challenge on Hack The Box CTF Try Out. This is a hardware forensics challenge based on a Saleae logic capture. The solve is not about exploitation in the usual sense. It is about identifying the electrical interface correctly, decoding the traffic with the proper serial settings, and recognizing that the boot log itself leaks the flag.
+This directory contains the local materials and manual walkthrough for the `Debug` challenge on Hack The Box CTF Try Out. This is a hardware forensics challenge based on a Saleae logic capture. The solve is not about exploitation in the usual sense. It is about identifying the electrical interface correctly, decoding the traffic with the proper serial settings, and recognizing that the boot log itself leaks the flag.
 
-The saved PoC prints the final flag immediately, but the real learning value comes from understanding how to recognize UART in a raw capture and how to recover the correct baud rate.
+The archived notes in this folder preserve the recovered flag, but the real learning value comes from recognizing UART in the raw capture and recovering the correct baud rate.
 
 ## Challenge Profile
 
 - Challenge: `Debug`
 - Category: `Hardware`
 - Platform: `Hack The Box CTF Try Out`
-- Saved PoC: `debug_poc.sh`
 
 ## Directory Contents
 
@@ -21,7 +20,7 @@ The saved PoC prints the final flag immediately, but the real learning value com
 
 ## First Commands To Run
 
-Start by reviewing the local files and the original archive:
+Start with the original challenge materials in this folder. The goal is to identify the bug or recovery path from the provided files, then follow the numbered walkthrough below to reach the flag manually.
 
 ```bash
 cd "/home/eliah/Desktop/CTF/HackTheBox/Debug"
@@ -29,18 +28,14 @@ ls -lah
 unzip -l "hw_debug.zip"
 ```
 
-Read the saved PoC:
+Useful first inspection commands:
 
 ```bash
-sed -n "1,220p" "debug_poc.sh"
+file 'hw_debug.zip'
+strings -n 5 'hw_debug.zip' | head -200
 ```
 
-Run it:
-
-```bash
-chmod +x "debug_poc.sh"
-./debug_poc.sh
-```
+Open `hw_debug.sal` in Logic 2 / Saleae and add the appropriate analyzer as described in the walkthrough below.
 
 ## What The File Represents
 
@@ -129,7 +124,6 @@ Use this workflow if you want to retrace the solve manually:
 ```bash
 cd "/home/eliah/Desktop/CTF/HackTheBox/Debug"
 unzip -l "hw_debug.zip"
-sed -n "1,220p" "debug_poc.sh"
 ```
 
 Then open `hw_debug.sal` in Logic 2 and:
@@ -138,15 +132,13 @@ Then open `hw_debug.sal` in Logic 2 and:
 - set baud to `115200`
 - inspect the decoded text near the end of the capture
 
-## Reproduction Commands
+## Manual Reproduction Flow
 
-Use this sequence for the fast path:
+Use the walkthrough above as the authoritative solve path. The short command block below is only the setup phase before you execute the numbered manual steps in this README.
 
 ```bash
 cd "/home/eliah/Desktop/CTF/HackTheBox/Debug"
-unzip -l "hw_debug.zip"
-sed -n "1,220p" "debug_poc.sh"
-bash "debug_poc.sh"
+ls -lah
 ```
 
 ## Study Notes

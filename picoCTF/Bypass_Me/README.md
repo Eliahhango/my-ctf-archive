@@ -2,7 +2,7 @@
 
 ## Overview
 
-This directory contains the local materials and saved solve workflow for the `Bypass Me` challenge from `picoCTF 2026`. This is a reversing challenge built around a common pattern: the program appears to sanitize input and hides its password behind light obfuscation, but the real security decision is based on the raw decoded value rather than the cleaned-up display output.
+This directory contains the local materials and manual walkthrough for the `Bypass Me` challenge from `picoCTF 2026`. This is a reversing challenge built around a common pattern: the program appears to sanitize input and hides its password behind light obfuscation, but the real security decision is based on the raw decoded value rather than the cleaned-up display output.
 
 The solve is mostly about following the actual comparison path, recovering the XOR-obfuscated password, and then using it in the real runtime environment.
 
@@ -14,7 +14,6 @@ The solve is mostly about following the actual comparison path, recovering the X
 - Event or Platform: `picoCTF 2026`
 - Difficulty: `Medium`
 - Author: `PRINCE NIYONSHUTI N.`
-- Saved PoC: `bypass_me_poc.sh`
 
 ## Directory Contents
 
@@ -23,21 +22,18 @@ The solve is mostly about following the actual comparison path, recovering the X
 
 ## First Commands To Run
 
-Start by inspecting the binary and reading the saved notes:
+Start with the original challenge materials in this folder. The goal is to identify the bug or recovery path from the provided files, then follow the numbered walkthrough below to reach the flag manually.
 
 ```bash
 cd "/home/eliah/Desktop/CTF/picoCTF/Bypass_Me"
 ls -lah
-file bypassme.bin
-nm -C bypassme.bin
-sed -n "1,260p" "bypass_me_poc.sh"
 ```
 
-Run the PoC:
+Useful first inspection commands:
 
 ```bash
-chmod +x "bypass_me_poc.sh"
-./bypass_me_poc.sh
+file 'bypassme.bin'
+strings -n 5 'bypassme.bin' | head -200
 ```
 
 ## Core Reversing Lesson
@@ -108,20 +104,17 @@ Once you confirm that `strcmp()` uses the raw buffer, the “sanitized input” 
 
 ## Why The Remote Step Matters
 
-Locally, you can validate the recovered password against the binary, but the real flag file exists only on the challenge server. That is why the saved PoC uses SSH to run the binary remotely with the recovered password.
+Locally, you can validate the recovered password against the binary, but the real flag file exists only on the challenge server. That is why the archived reference notes uses SSH to run the binary remotely with the recovered password.
 
 The local analysis proves the password. The remote run retrieves the flag.
 
-## Reproduction Commands
+## Manual Reproduction Flow
 
-Use this sequence for the fast path:
+Use the walkthrough above as the authoritative solve path. The short command block below is only the setup phase before you execute the numbered manual steps in this README.
 
 ```bash
 cd "/home/eliah/Desktop/CTF/picoCTF/Bypass_Me"
-file bypassme.bin
-nm -C bypassme.bin
-sed -n "1,260p" "bypass_me_poc.sh"
-bash "bypass_me_poc.sh"
+ls -lah
 ```
 
 ## Study Notes

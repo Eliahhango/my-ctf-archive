@@ -2,14 +2,13 @@
 
 ## Overview
 
-This directory contains the local materials and saved solve workflow for the `HTB Proxy` challenge on Hack The Box CTF Try Out. This README is written as a practical walkthrough so someone can open the folder, inspect the challenge files, understand the intended weakness, and reproduce the solve with commands that are easy to copy and run.
+This directory contains the local materials and manual walkthrough for the `HTB Proxy` challenge on Hack The Box CTF Try Out. This README is written as a practical walkthrough so someone can open the folder, inspect the challenge files, understand the intended weakness, and reproduce the solve with commands that are easy to copy and run.
 
 ## Challenge Profile
 
 - Challenge: `HTB Proxy`
 - Category: `Web`
 - Platform: `Hack The Box CTF Try Out`
-- Saved PoC: `htb_proxy_poc.sh`
 
 ## Directory Contents
 
@@ -24,36 +23,23 @@ This directory contains the local materials and saved solve workflow for the `HT
 
 ## First Commands To Run
 
-Begin with a short inventory so you can see the original challenge archive, any extracted directories, and the solve script saved in this folder.
+Start with the original challenge materials in this folder. The goal is to identify the bug or recovery path from the provided files, then follow the numbered walkthrough below to reach the flag manually.
 
 ```bash
 cd "/home/eliah/Desktop/CTF/HackTheBox/HTB_Proxy"
 ls -lah
-```
-
-If you want to verify what was originally provided by Hack The Box, inspect the archive contents before extracting or re-extracting them.
-
-```bash
 unzip -l "web_htb_proxy.zip"
 ```
 
-Read the top of the PoC first. The comments there summarize the exact idea used during the solve and usually explain the bug, leak, algorithm, or reversing trick directly.
+Useful first inspection commands:
 
 ```bash
-sed -n "1,220p" "htb_proxy_poc.sh"
-```
-
-Run the PoC after reviewing the notes.
-
-```bash
-chmod +x "htb_proxy_poc.sh"
-./htb_proxy_poc.sh
-```
-
-If the script targets a spawned remote service, you can usually point it at a fresh instance by supplying a host and port.
-
-```bash
-./htb_proxy_poc.sh <HOST> <PORT>
+sed -n '1,220p' 'Dockerfile'
+sed -n '1,220p' 'build_docker.sh'
+sed -n '1,220p' 'entrypoint.sh'
+sed -n '1,220p' 'flag.txt'
+file 'web_htb_proxy.zip'
+strings -n 5 'web_htb_proxy.zip' | head -200
 ```
 
 ## Walkthrough
@@ -147,17 +133,15 @@ Host: 10-244-40-71.default.pod.cluster.local:5000
 Flag obtained on this instance:
 HTB{r3inv3nting_th3_wh331_c4n_cr34t3_h34dach35_41808acdd4d47662f43de96acebc2b31}
 
-## Reproduction Commands
+## Manual Reproduction Flow
 
-Use the following command sequence if you want a short and reliable path from opening the folder to reproducing the saved solve.
+Use the walkthrough above as the authoritative solve path. The short command block below is only the setup phase before you execute the numbered manual steps in this README.
 
 ```bash
 cd "/home/eliah/Desktop/CTF/HackTheBox/HTB_Proxy"
-unzip -l "web_htb_proxy.zip"
-sed -n "1,220p" "htb_proxy_poc.sh"
-bash "htb_proxy_poc.sh"
+ls -lah
 ```
 
 ## Study Notes
 
-This challenge is worth revisiting if you are practicing `Web` problems. The saved PoC is meant to be the fast path, but the better learning path is to inspect the provided files yourself first, confirm the weakness manually, and then compare your reasoning with the script comments and implementation.
+This challenge is worth revisiting if you are practicing `Web` problems. Inspect the routes and source manually first, confirm the weakness yourself, and only then compare your reasoning against the archived solve notes.

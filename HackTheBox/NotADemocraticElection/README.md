@@ -2,7 +2,7 @@
 
 ## Overview
 
-This directory contains the local materials and saved solve workflow for the `NotADemocraticElection` challenge on Hack The Box. This is a blockchain challenge where the smart contract looks straightforward at first, but the vote-accounting logic is broken in two separate ways.
+This directory contains the local materials and manual walkthrough for the `NotADemocraticElection` challenge on Hack The Box. This is a blockchain challenge where the smart contract looks straightforward at first, but the vote-accounting logic is broken in two separate ways.
 
 The critical bug is an `abi.encodePacked` collision on two dynamic strings. A second issue then makes the attack even stronger by allowing the same voter weight to be reused repeatedly.
 
@@ -11,7 +11,6 @@ The critical bug is an `abi.encodePacked` collision on two dynamic strings. A se
 - Challenge: `NotADemocraticElection`
 - Category: `Blockchain`
 - Platform: `Hack The Box`
-- Saved PoC: `not_a_democratic_election_poc.sh`
 
 ## Directory Contents
 
@@ -21,7 +20,7 @@ The critical bug is an `abi.encodePacked` collision on two dynamic strings. A se
 
 ## First Commands To Run
 
-Start by listing the folder and verifying the archive contents:
+Start with the original challenge materials in this folder. The goal is to identify the bug or recovery path from the provided files, then follow the numbered walkthrough below to reach the flag manually.
 
 ```bash
 cd "/home/eliah/Desktop/CTF/HackTheBox/NotADemocraticElection"
@@ -29,24 +28,11 @@ ls -lah
 unzip -l "blockchain_notademocraticelection.zip"
 ```
 
-If you want to inspect the Solidity code manually before running the PoC:
+Useful first inspection commands:
 
 ```bash
-sed -n '1,220p' blockchain_notademocraticelection/Setup.sol
-sed -n '1,260p' blockchain_notademocraticelection/NotADemocraticElection.sol
-```
-
-Read the PoC notes:
-
-```bash
-sed -n "1,260p" "not_a_democratic_election_poc.sh"
-```
-
-Run the saved exploit:
-
-```bash
-chmod +x "not_a_democratic_election_poc.sh"
-./not_a_democratic_election_poc.sh
+file 'blockchain_notademocraticelection.zip'
+strings -n 5 'blockchain_notademocraticelection.zip' | head -200
 ```
 
 ## Core Vulnerability
@@ -108,7 +94,7 @@ When reading the contract, focus on:
 
 ## Practical Execution Model
 
-The saved PoC uses the local Python virtual environment in the folder and talks to both:
+The archived notes in this folder talk to both of the following services:
 
 - the launcher service that exposes the challenge metadata
 - the JSON-RPC endpoint that accepts transactions
@@ -124,15 +110,13 @@ The script:
 
 That makes the solve easy to reproduce without rebuilding the exploit logic from scratch.
 
-## Reproduction Commands
+## Manual Reproduction Flow
 
-Use the following sequence:
+Use the walkthrough above as the authoritative solve path. The short command block below is only the setup phase before you execute the numbered manual steps in this README.
 
 ```bash
 cd "/home/eliah/Desktop/CTF/HackTheBox/NotADemocraticElection"
-unzip -l "blockchain_notademocraticelection.zip"
-sed -n "1,260p" "not_a_democratic_election_poc.sh"
-bash "not_a_democratic_election_poc.sh"
+ls -lah
 ```
 
 ## Study Notes

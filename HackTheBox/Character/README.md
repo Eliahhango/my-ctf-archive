@@ -2,7 +2,7 @@
 
 ## Overview
 
-This directory contains the local materials and saved solve workflow for the `Character` challenge on Hack The Box. This is a very simple terminal-style challenge, but it demonstrates an important security lesson clearly: leaking a secret one character at a time is still leaking the secret.
+This directory contains the local materials and manual walkthrough for the `Character` challenge on Hack The Box. This is a very simple terminal-style challenge, but it demonstrates an important security lesson clearly: leaking a secret one character at a time is still leaking the secret.
 
 The service is designed to feel tedious for a human. The correct response is to automate the repeated requests and reconstruct the full flag from the individual character disclosures.
 
@@ -12,7 +12,6 @@ The service is designed to feel tedious for a human. The correct response is to 
 - Category: `terminal / warmup`
 - Platform: `Hack The Box`
 - Difficulty: `very easy`
-- Saved PoC: `character_poc.sh`
 
 ## Directory Contents
 
@@ -20,25 +19,12 @@ The service is designed to feel tedious for a human. The correct response is to 
 
 ## First Commands To Run
 
-Read the saved PoC:
+This folder does not include original challenge files. Start by reading the challenge description and the manual walkthrough below, then connect to a fresh challenge instance and reproduce the steps one by one.
 
 ```bash
 cd "/home/eliah/Desktop/CTF/HackTheBox/Character"
 ls -lah
-sed -n "1,220p" "character_poc.sh"
-```
-
-Run it:
-
-```bash
-chmod +x "character_poc.sh"
-./character_poc.sh
-```
-
-To point it at a new spawned instance:
-
-```bash
-./character_poc.sh <HOST> <PORT>
+printf 'Follow the manual walkthrough below against the live service.\n'
 ```
 
 ## What The Service Does
@@ -77,9 +63,9 @@ You will quickly see that the service is just walking you through the flag one p
 
 That is the point where scripting becomes the obvious answer.
 
-## What The Saved PoC Does
+## Optional Archive Reference
 
-The PoC keeps one socket open, sends increasing integers, parses lines of the form:
+The archived notes in this folder automate the same idea by keeping one socket open, sending increasing integers, and parsing lines of the form:
 
 ```text
 Character at Index N: X
@@ -89,14 +75,13 @@ and appends each returned character to a local string until the service reports 
 
 The script also handles slight network timing issues by performing short follow-up reads when the result and the next prompt arrive in separate packets.
 
-## Reproduction Commands
+## Manual Reproduction Flow
 
-Use this sequence for the fast path:
+Use the walkthrough above as the authoritative solve path. The short command block below is only the setup phase before you execute the numbered manual steps in this README.
 
 ```bash
 cd "/home/eliah/Desktop/CTF/HackTheBox/Character"
-sed -n "1,220p" "character_poc.sh"
-bash "character_poc.sh"
+ls -lah
 ```
 
 ## Study Notes

@@ -2,16 +2,15 @@
 
 ## Overview
 
-This directory contains the local materials and saved solve workflow for the `Abyss` challenge on Hack The Box CTF Try Out. This is a binary exploitation challenge built around an unsafe login parser. The important idea is not just that a buffer can be overflowed, but that the overflow happens because raw input from `read()` is later treated like a NUL-terminated C string.
+This directory contains the local materials and manual walkthrough for the `Abyss` challenge on Hack The Box CTF Try Out. This is a binary exploitation challenge built around an unsafe login parser. The important idea is not just that a buffer can be overflowed, but that the overflow happens because raw input from `read()` is later treated like a NUL-terminated C string.
 
-The saved PoC in this folder is intended to be the practical reproduction path. This README expands the reasoning so that someone who has never seen the challenge before can inspect the binary, understand the bug, and then run the exploit with confidence.
+This README is written so the challenge can be solved manually from the files and commands in this folder. The archived notes remain useful as a historical reference, but they are no longer the primary path through the material.
 
 ## Challenge Profile
 
 - Challenge: `Abyss`
 - Category: `Pwn / Binary Exploitation`
 - Platform: `Hack The Box - CTF Try Out`
-- Saved PoC: `abyss_poc.sh`
 
 ## Directory Contents
 
@@ -21,7 +20,7 @@ The saved PoC in this folder is intended to be the practical reproduction path. 
 
 ## First Commands To Run
 
-Start by reviewing the files in the directory and confirming what was shipped with the challenge.
+Start with the original challenge materials in this folder. The goal is to identify the bug or recovery path from the provided files, then follow the numbered walkthrough below to reach the flag manually.
 
 ```bash
 cd "/home/eliah/Desktop/CTF/HackTheBox/Abyss"
@@ -29,31 +28,11 @@ ls -lah
 unzip -l "pwn_abyss.zip"
 ```
 
-If you want to inspect the extracted binary manually before running the PoC, these commands are a good starting point:
+Useful first inspection commands:
 
 ```bash
-file pwn_abyss/*
-checksec --file=pwn_abyss/abyss
-strings -n 5 pwn_abyss/abyss | head -200
-```
-
-Read the PoC comments next. They summarize the exact exploit path.
-
-```bash
-sed -n "1,220p" "abyss_poc.sh"
-```
-
-Run the exploit:
-
-```bash
-chmod +x "abyss_poc.sh"
-./abyss_poc.sh
-```
-
-To reuse the same exploit against a fresh spawned instance:
-
-```bash
-./abyss_poc.sh <HOST> <PORT>
+file 'pwn_abyss.zip'
+strings -n 5 'pwn_abyss.zip' | head -200
 ```
 
 ## What The Binary Does
@@ -88,13 +67,13 @@ The exploit does not need a long ROP chain. A simpler and cleaner path works.
 6. Perform a partial return-address overwrite so execution lands inside `cmd_read()`.
 7. Skip the authentication check and provide `flag.txt` as the filename.
 
-The saved exploit uses a partial overwrite instead of a full 8-byte address because the vulnerable loop stops on the first NUL byte. A full 64-bit pointer would introduce zero bytes too early. Overwriting only the low bytes avoids that issue and is enough to redirect control flow.
+The manual exploit path uses a partial overwrite instead of a full 8-byte address because the vulnerable loop stops on the first NUL byte. A full 64-bit pointer would introduce zero bytes too early. Overwriting only the low bytes avoids that issue and is enough to redirect control flow.
 
 ## Why The Partial Overwrite Works
 
 The intended return target is `0x4014eb`, which is already inside the file-read logic after the logged-in check has succeeded. That is more reliable than trying to build a larger chain.
 
-The PoC therefore uses:
+The manual exploit path uses:
 
 - a carefully aligned `USER` payload
 - a full-sized `PASS` payload with no terminator
@@ -129,15 +108,13 @@ What you are looking for:
 - where the return address sits relative to the stack buffer
 - where a useful re-entry point exists in the read path
 
-## Reproduction Commands
+## Manual Reproduction Flow
 
-If you want the shortest path from opening the folder to reproducing the solve, use this sequence:
+Use the walkthrough above as the authoritative solve path. The short command block below is only the setup phase before you execute the numbered manual steps in this README.
 
 ```bash
 cd "/home/eliah/Desktop/CTF/HackTheBox/Abyss"
-unzip -l "pwn_abyss.zip"
-sed -n "1,220p" "abyss_poc.sh"
-bash "abyss_poc.sh"
+ls -lah
 ```
 
 ## Study Notes
@@ -148,4 +125,4 @@ This is a useful challenge for practicing three core exploitation ideas:
 - parser-driven overflows that do not look like classic `gets()` bugs
 - partial return-address overwrites when full pointers are inconvenient
 
-The PoC gives the fast result, but the deeper learning comes from stepping through the vulnerable login parser and watching how the unterminated `PASS` input changes stack state.
+The deeper learning comes from stepping through the vulnerable login parser and watching how the unterminated `PASS` input changes stack state. The archived notes are only a later reference.

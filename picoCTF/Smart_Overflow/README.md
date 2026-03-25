@@ -2,7 +2,7 @@
 
 ## Overview
 
-This directory contains the local materials and saved solve workflow for the `Smart_Overflow` challenge from `picoCTF 2026`. The goal of this README is to make the folder immediately useful to someone reviewing the archive later: what the challenge was about, what files matter, how the solve works at a high level, and which commands to run first.
+This directory contains the local materials and manual walkthrough for the `Smart_Overflow` challenge from `picoCTF 2026`. The goal of this README is to make the folder immediately useful to someone reviewing the archive later: what the challenge was about, what files matter, how the solve works at a high level, and which commands to run first.
 
 ## Challenge Profile
 
@@ -12,7 +12,6 @@ This directory contains the local materials and saved solve workflow for the `Sm
 - Event or Platform: `picoCTF 2026`
 - Difficulty: `Medium`
 - Author: `OB`
-- Saved PoC: `smart_overflow_poc.sh`
 
 ## Directory Contents
 
@@ -23,25 +22,18 @@ This directory contains the local materials and saved solve workflow for the `Sm
 
 ## First Commands To Run
 
-Start by listing the directory and reading the saved proof-of-concept script. In this archive, the PoC comments are treated as the primary solve notes and usually contain the most important reasoning.
+Start with the original challenge materials in this folder. The goal is to identify the bug or recovery path from the provided files, then follow the numbered walkthrough below to reach the flag manually.
 
 ```bash
 cd "/home/eliah/Desktop/CTF/picoCTF/Smart_Overflow"
 ls -lah
-sed -n "1,220p" "smart_overflow_poc.sh"
 ```
 
-If you want to execute the saved solve directly:
+Useful first inspection commands:
 
 ```bash
-chmod +x "smart_overflow_poc.sh"
-./smart_overflow_poc.sh
-```
-
-Many of these saved scripts also accept a target host and port so they can be reused against a fresh instance:
-
-```bash
-./smart_overflow_poc.sh <HOST> <PORT>
+sed -n '1,220p' 'IntOverflowBank.sol'
+sed -n '1,220p' 'package.json'
 ```
 
 ## Walkthrough
@@ -183,16 +175,15 @@ versions. In production, the fix would be one of these:
 
 picoCTF{Sm4r7_OverFL0ws_ExI5t_728375ba}
 
-## Reproduction Commands
+## Manual Reproduction Flow
 
-Use this sequence if you want the shortest path from opening the folder to reproducing the saved solve:
+Use the walkthrough above as the authoritative solve path. The short command block below is only the setup phase before you execute the numbered manual steps in this README.
 
 ```bash
 cd "/home/eliah/Desktop/CTF/picoCTF/Smart_Overflow"
-sed -n "1,220p" "smart_overflow_poc.sh"
-bash "smart_overflow_poc.sh"
+ls -lah
 ```
 
 ## Study Notes
 
-This folder is best used as a practical study reference for `Blockchain`-style problems. The fastest path is to run the PoC, but the more valuable path is to read the solve notes first, inspect the local files yourself, and then compare your reasoning to the saved exploit or script.
+This folder is best used as a practical study reference for `Blockchain`-style problems. Read the contract, reproduce the arithmetic or state mistake manually, and use the archived solve notes only as a reference.

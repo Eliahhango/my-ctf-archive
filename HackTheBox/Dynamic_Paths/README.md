@@ -2,7 +2,7 @@
 
 ## Overview
 
-This directory contains the local materials and saved solve workflow for the `Dynamic Paths` challenge on Hack The Box. This is an algorithms challenge where the service repeatedly sends weighted grids and expects the minimum path cost from the top-left corner to the bottom-right corner.
+This directory contains the local materials and manual walkthrough for the `Dynamic Paths` challenge on Hack The Box. This is an algorithms challenge where the service repeatedly sends weighted grids and expects the minimum path cost from the top-left corner to the bottom-right corner.
 
 The challenge is a clean example of dynamic programming. The main difficulty is not the math itself, but recognizing the pattern quickly and implementing it in a way that can handle a stream of many rounds without timing out.
 
@@ -11,7 +11,6 @@ The challenge is a clean example of dynamic programming. The main difficulty is 
 - Challenge: `Dynamic Paths`
 - Category: `Coding / Algorithms`
 - Platform: `Hack The Box`
-- Saved PoC: `dynamic_paths_poc.sh`
 
 ## Directory Contents
 
@@ -19,25 +18,12 @@ The challenge is a clean example of dynamic programming. The main difficulty is 
 
 ## First Commands To Run
 
-Start by reading the saved script:
+This folder does not include original challenge files. Start by reading the challenge description and the manual walkthrough below, then connect to a fresh challenge instance and reproduce the steps one by one.
 
 ```bash
 cd "/home/eliah/Desktop/CTF/HackTheBox/Dynamic_Paths"
 ls -lah
-sed -n "1,220p" "dynamic_paths_poc.sh"
-```
-
-Run it:
-
-```bash
-chmod +x "dynamic_paths_poc.sh"
-./dynamic_paths_poc.sh
-```
-
-To use it against a different spawned target:
-
-```bash
-./dynamic_paths_poc.sh <HOST> <PORT>
+printf 'Follow the manual walkthrough below against the live service.\n'
 ```
 
 ## Problem Model
@@ -78,7 +64,7 @@ dp[c] = min(dp[c], dp[c - 1]) + grid[r][c]
 
 That is enough to solve each grid efficiently while the service continues sending new rounds.
 
-## Why The Saved PoC Is Structured The Way It Is
+## Why The Saved archived notes Is Structured The Way It Is
 
 The remote service does not send only one puzzle. It sends many, and it expects answers quickly. The script therefore handles three jobs:
 
@@ -86,7 +72,7 @@ The remote service does not send only one puzzle. It sends many, and it expects 
 2. parse each incoming grid cleanly
 3. compute and return the answer immediately
 
-That is why the PoC is socket-driven rather than just a standalone local algorithm demo.
+That is why the archived reference notes is socket-driven rather than just a standalone local algorithm demo.
 
 ## Manual Testing Idea
 
@@ -122,14 +108,13 @@ PY
 
 That should print the minimum path sum for the sample grid.
 
-## Reproduction Commands
+## Manual Reproduction Flow
 
-Use this sequence for the fast path:
+Use the walkthrough above as the authoritative solve path. The short command block below is only the setup phase before you execute the numbered manual steps in this README.
 
 ```bash
 cd "/home/eliah/Desktop/CTF/HackTheBox/Dynamic_Paths"
-sed -n "1,220p" "dynamic_paths_poc.sh"
-bash "dynamic_paths_poc.sh"
+ls -lah
 ```
 
 ## Study Notes

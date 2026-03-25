@@ -2,7 +2,7 @@
 
 ## Overview
 
-This directory contains the local materials and saved solve workflow for the `Flag Command` challenge on Hack The Box. This is a web challenge built around a fake terminal adventure interface. The important weakness is that the frontend JavaScript exposes a hidden command path that the backend accepts directly.
+This directory contains the local materials and manual walkthrough for the `Flag Command` challenge on Hack The Box. This is a web challenge built around a fake terminal adventure interface. The important weakness is that the frontend JavaScript exposes a hidden command path that the backend accepts directly.
 
 The challenge is a strong example of a common web-security lesson: values hidden in client-side code are not secrets.
 
@@ -11,7 +11,6 @@ The challenge is a strong example of a common web-security lesson: values hidden
 - Challenge: `Flag Command`
 - Category: `Web`
 - Platform: `Hack The Box`
-- Saved PoC: `flag_command_poc.sh`
 
 ## Directory Contents
 
@@ -19,25 +18,12 @@ The challenge is a strong example of a common web-security lesson: values hidden
 
 ## First Commands To Run
 
-Read the saved PoC:
+This folder does not include original challenge files. Start by reading the challenge description and the manual walkthrough below, then connect to a fresh challenge instance and reproduce the steps one by one.
 
 ```bash
 cd "/home/eliah/Desktop/CTF/HackTheBox/Flag_Command"
 ls -lah
-sed -n "1,220p" "flag_command_poc.sh"
-```
-
-Run it:
-
-```bash
-chmod +x "flag_command_poc.sh"
-./flag_command_poc.sh
-```
-
-To use it against a different spawned instance:
-
-```bash
-./flag_command_poc.sh <HOST> <PORT>
+printf 'Follow the manual walkthrough below against the live service.\n'
 ```
 
 ## How The Application Works
@@ -91,9 +77,9 @@ This is a clean demonstration of why client-side secrets do not exist in any mea
 
 The correct place to enforce sensitive logic is always on the server.
 
-## What The Saved PoC Does
+## Optional Archive Reference
 
-The PoC:
+The same result can be reached manually with this logic:
 
 1. requests `/api/options`
 2. extracts the first secret command from the JSON response
@@ -102,14 +88,13 @@ The PoC:
 
 That mirrors the exact logic a manual solve would use, but without relying on a hardcoded hidden string.
 
-## Reproduction Commands
+## Manual Reproduction Flow
 
-Use this sequence for the fast path:
+Use the walkthrough above as the authoritative solve path. The short command block below is only the setup phase before you execute the numbered manual steps in this README.
 
 ```bash
 cd "/home/eliah/Desktop/CTF/HackTheBox/Flag_Command"
-sed -n "1,220p" "flag_command_poc.sh"
-bash "flag_command_poc.sh"
+ls -lah
 ```
 
 ## Study Notes

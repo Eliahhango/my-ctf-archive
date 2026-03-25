@@ -2,7 +2,7 @@
 
 ## Overview
 
-This directory contains the local materials and saved solve workflow for the `FlagCasino` challenge on Hack The Box. This is a reversing challenge built around poor use of `rand()`. The binary tries to look like a game of chance, but its randomness is fully predictable because each round reseeds the PRNG from a single input byte.
+This directory contains the local materials and manual walkthrough for the `FlagCasino` challenge on Hack The Box. This is a reversing challenge built around poor use of `rand()`. The binary tries to look like a game of chance, but its randomness is fully predictable because each round reseeds the PRNG from a single input byte.
 
 The solve is a clean demonstration of why repeated reseeding with tiny inputs makes “random” validation logic easy to reverse.
 
@@ -11,7 +11,6 @@ The solve is a clean demonstration of why repeated reseeding with tiny inputs ma
 - Challenge: `FlagCasino`
 - Category: `Reversing`
 - Platform: `Hack The Box`
-- Saved PoC: `flagcasino_poc.sh`
 
 ## Directory Contents
 
@@ -21,26 +20,19 @@ The solve is a clean demonstration of why repeated reseeding with tiny inputs ma
 
 ## First Commands To Run
 
-Start by reviewing the folder and archive:
+Start with the original challenge materials in this folder. The goal is to identify the bug or recovery path from the provided files, then follow the numbered walkthrough below to reach the flag manually.
 
 ```bash
 cd "/home/eliah/Desktop/CTF/HackTheBox/FlagCasino"
 ls -lah
 unzip -l "rev_flagcasino.zip"
-file rev_flagcasino/casino
 ```
 
-Read the saved PoC:
+Useful first inspection commands:
 
 ```bash
-sed -n "1,220p" "flagcasino_poc.sh"
-```
-
-Run it:
-
-```bash
-chmod +x "flagcasino_poc.sh"
-./flagcasino_poc.sh
+file 'rev_flagcasino.zip'
+strings -n 5 'rev_flagcasino.zip' | head -200
 ```
 
 ## What The Binary Does
@@ -90,21 +82,19 @@ What you want to identify:
 
 Once you confirm the seed is just the current character, the brute-force approach is obvious.
 
-## What The Saved PoC Does
+## Optional Archive Reference
 
-The PoC reads the binary, extracts the table from the known offset, loads libc with `ctypes`, and then reproduces the same `srand` / `rand` behavior locally. For each target integer in the table, it tests all 256 candidate bytes until the first `rand()` output matches.
+The archived notes in this folder extract the table from the binary, reproduce the same `srand` / `rand` behavior locally, and brute-force each byte position until the outputs match.
 
 That directly reconstructs the flag.
 
-## Reproduction Commands
+## Manual Reproduction Flow
 
-Use this sequence for the fast path:
+Use the walkthrough above as the authoritative solve path. The short command block below is only the setup phase before you execute the numbered manual steps in this README.
 
 ```bash
 cd "/home/eliah/Desktop/CTF/HackTheBox/FlagCasino"
-unzip -l "rev_flagcasino.zip"
-sed -n "1,220p" "flagcasino_poc.sh"
-bash "flagcasino_poc.sh"
+ls -lah
 ```
 
 ## Study Notes

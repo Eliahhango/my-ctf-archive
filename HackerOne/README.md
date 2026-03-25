@@ -21,8 +21,8 @@ Use the collection-level directory as an index and each challenge folder as the 
 
 1. List the challenge folders.
 2. Open the challenge README.
-3. Read the PoC comments first.
-4. Run the saved script only after understanding the approach.
+3. Inspect the route behavior and any local notes or artifacts.
+4. Follow the manual HTTP requests and analysis steps in the README.
 
 ```bash
 cd "/home/eliah/Desktop/CTF/HackerOne"

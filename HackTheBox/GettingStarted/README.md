@@ -2,14 +2,13 @@
 
 ## Overview
 
-This directory contains the local materials and saved solve workflow for the `GettingStarted` challenge on Hack The Box - CTF Try Out. This README is written as a practical walkthrough so someone can open the folder, inspect the challenge files, understand the intended weakness, and reproduce the solve with commands that are easy to copy and run.
+This directory contains the local materials and manual walkthrough for the `GettingStarted` challenge on Hack The Box - CTF Try Out. This README is written as a practical walkthrough so someone can open the folder, inspect the challenge files, understand the intended weakness, and reproduce the solve with commands that are easy to copy and run.
 
 ## Challenge Profile
 
 - Challenge: `GettingStarted`
 - Category: `Pwn / Binary Exploitation`
 - Platform: `Hack The Box - CTF Try Out`
-- Saved PoC: `getting_started_poc.sh`
 
 ## Directory Contents
 
@@ -19,36 +18,19 @@ This directory contains the local materials and saved solve workflow for the `Ge
 
 ## First Commands To Run
 
-Begin with a short inventory so you can see the original challenge archive, any extracted directories, and the solve script saved in this folder.
+Start with the original challenge materials in this folder. The goal is to identify the bug or recovery path from the provided files, then follow the numbered walkthrough below to reach the flag manually.
 
 ```bash
 cd "/home/eliah/Desktop/CTF/HackTheBox/GettingStarted"
 ls -lah
-```
-
-If you want to verify what was originally provided by Hack The Box, inspect the archive contents before extracting or re-extracting them.
-
-```bash
 unzip -l "pwn_getting_started.zip"
 ```
 
-Read the top of the PoC first. The comments there summarize the exact idea used during the solve and usually explain the bug, leak, algorithm, or reversing trick directly.
+Useful first inspection commands:
 
 ```bash
-sed -n "1,220p" "getting_started_poc.sh"
-```
-
-Run the PoC after reviewing the notes.
-
-```bash
-chmod +x "getting_started_poc.sh"
-./getting_started_poc.sh
-```
-
-If the script targets a spawned remote service, you can usually point it at a fresh instance by supplying a host and port.
-
-```bash
-./getting_started_poc.sh <HOST> <PORT>
+file 'pwn_getting_started.zip'
+strings -n 5 'pwn_getting_started.zip' | head -200
 ```
 
 ## Walkthrough
@@ -117,17 +99,15 @@ python3 -c 'print("A"*44)' | nc 154.57.164.67 31260
 Final live flag obtained during testing:
 HTB{b0f_tut0r14l5_4r3_g00d}
 
-## Reproduction Commands
+## Manual Reproduction Flow
 
-Use the following command sequence if you want a short and reliable path from opening the folder to reproducing the saved solve.
+Use the walkthrough above as the authoritative solve path. The short command block below is only the setup phase before you execute the numbered manual steps in this README.
 
 ```bash
 cd "/home/eliah/Desktop/CTF/HackTheBox/GettingStarted"
-unzip -l "pwn_getting_started.zip"
-sed -n "1,220p" "getting_started_poc.sh"
-bash "getting_started_poc.sh"
+ls -lah
 ```
 
 ## Study Notes
 
-This challenge is worth revisiting if you are practicing `Pwn / Binary Exploitation` problems. The saved PoC is meant to be the fast path, but the better learning path is to inspect the provided files yourself first, confirm the weakness manually, and then compare your reasoning with the script comments and implementation.
+This challenge is worth revisiting if you are practicing `Pwn / Binary Exploitation` problems. Inspect the binary yourself first, confirm the weakness manually, and use the archived solve notes only after you have traced the bug and exploit path on your own.

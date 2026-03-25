@@ -2,7 +2,7 @@
 
 ## Overview
 
-This directory contains the local materials and saved solve workflow for the `Micro-CMS (next level after the first Micro-CMS instance)` challenge from `Hacker101 / HackerOne CTF`. The goal of this README is to make the folder immediately useful to someone reviewing the archive later: what the challenge was about, what files matter, how the solve works at a high level, and which commands to run first.
+This directory contains the local materials and manual walkthrough for the `Micro-CMS (next level after the first Micro-CMS instance)` challenge from `Hacker101 / HackerOne CTF`. The goal of this README is to make the folder immediately useful to someone reviewing the archive later: what the challenge was about, what files matter, how the solve works at a high level, and which commands to run first.
 
 ## Challenge Profile
 
@@ -10,7 +10,6 @@ This directory contains the local materials and saved solve workflow for the `Mi
 - Category: `Web`
 - Collection: `HackerOne`
 - Event or Platform: `Hacker101 / HackerOne CTF`
-- Saved PoC: `micro_cms_2_poc.sh`
 
 ## Directory Contents
 
@@ -18,19 +17,12 @@ This directory contains the local materials and saved solve workflow for the `Mi
 
 ## First Commands To Run
 
-Start by listing the directory and reading the saved proof-of-concept script. In this archive, the PoC comments are treated as the primary solve notes and usually contain the most important reasoning.
+This folder does not include original challenge files. Start by reading the challenge description and the manual walkthrough below, then connect to a fresh challenge instance and reproduce the steps one by one.
 
 ```bash
 cd "/home/eliah/Desktop/CTF/HackerOne/Micro-CMS_2"
 ls -lah
-sed -n "1,220p" "micro_cms_2_poc.sh"
-```
-
-If you want to execute the saved solve directly:
-
-```bash
-chmod +x "micro_cms_2_poc.sh"
-./micro_cms_2_poc.sh
+printf 'Follow the manual walkthrough below against the live service.\n'
 ```
 
 ## Walkthrough
@@ -103,21 +95,15 @@ The page contains:
 <img src=x flag="^FLAG^...$FLAG$" onerror=alert(1)>
 so the flag can be pulled straight from the HTML source.
 
-### One-shot behavior
+## Manual Reproduction Flow
 
-Running this script creates a disposable page with the image payload,
-fetches the rendered page, and prints the flag directly.
-
-## Reproduction Commands
-
-Use this sequence if you want the shortest path from opening the folder to reproducing the saved solve:
+Use the walkthrough above as the authoritative solve path. The short command block below is only the setup phase before you execute the numbered manual steps in this README.
 
 ```bash
 cd "/home/eliah/Desktop/CTF/HackerOne/Micro-CMS_2"
-sed -n "1,220p" "micro_cms_2_poc.sh"
-bash "micro_cms_2_poc.sh"
+ls -lah
 ```
 
 ## Study Notes
 
-This folder is best used as a practical study reference for `Web`-style problems. The fastest path is to run the PoC, but the more valuable path is to read the solve notes first, inspect the local files yourself, and then compare your reasoning to the saved exploit or script.
+This folder is best used as a practical study reference for `Web`-style problems. Follow the HTTP requests and source analysis manually first, then compare your reasoning against the archived solve notes only if needed.

@@ -2,7 +2,7 @@
 
 ## Overview
 
-This directory contains the local materials and saved solve workflow for the `Undo` challenge from `picoCTF 2026`. The goal of this README is to make the folder immediately useful to someone reviewing the archive later: what the challenge was about, what files matter, how the solve works at a high level, and which commands to run first.
+This directory contains the local materials and manual walkthrough for the `Undo` challenge from `picoCTF 2026`. The goal of this README is to make the folder immediately useful to someone reviewing the archive later: what the challenge was about, what files matter, how the solve works at a high level, and which commands to run first.
 
 ## Challenge Profile
 
@@ -12,7 +12,6 @@ This directory contains the local materials and saved solve workflow for the `Un
 - Event or Platform: `picoCTF 2026`
 - Difficulty: `Medium`
 - Author: `YAHAYA MEDDY`
-- Saved PoC: `undo_poc.sh`
 
 ## Directory Contents
 
@@ -20,19 +19,12 @@ This directory contains the local materials and saved solve workflow for the `Un
 
 ## First Commands To Run
 
-Start by listing the directory and reading the saved proof-of-concept script. In this archive, the PoC comments are treated as the primary solve notes and usually contain the most important reasoning.
+This folder does not include original challenge files. Start by reading the challenge description and the manual walkthrough below, then connect to a fresh challenge instance and reproduce the steps one by one.
 
 ```bash
 cd "/home/eliah/Desktop/CTF/picoCTF/Undo"
 ls -lah
-sed -n "1,220p" "undo_poc.sh"
-```
-
-If you want to execute the saved solve directly:
-
-```bash
-chmod +x "undo_poc.sh"
-./undo_poc.sh
+printf 'Follow the manual walkthrough below against the live service.\n'
 ```
 
 ## Walkthrough
@@ -109,16 +101,15 @@ picoCTF{Revers1ng_t3xt_Tr4nsf0rm@t10ns_5469b5d2}
 
 picoCTF{Revers1ng_t3xt_Tr4nsf0rm@t10ns_5469b5d2}
 
-## Reproduction Commands
+## Manual Reproduction Flow
 
-Use this sequence if you want the shortest path from opening the folder to reproducing the saved solve:
+Use the walkthrough above as the authoritative solve path. The short command block below is only the setup phase before you execute the numbered manual steps in this README.
 
 ```bash
 cd "/home/eliah/Desktop/CTF/picoCTF/Undo"
-sed -n "1,220p" "undo_poc.sh"
-bash "undo_poc.sh"
+ls -lah
 ```
 
 ## Study Notes
 
-This folder is best used as a practical study reference for `General Skills`-style problems. The fastest path is to run the PoC, but the more valuable path is to read the solve notes first, inspect the local files yourself, and then compare your reasoning to the saved exploit or script.
+This folder is best used as a practical study reference for `General Skills`-style problems. Work through the manual inspection and exploitation steps first, then compare your reasoning against the archived solve notes if you want an extra cross-check.

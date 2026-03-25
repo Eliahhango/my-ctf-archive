@@ -2,16 +2,15 @@
 
 ## Overview
 
-This directory contains the local materials and saved solve workflow for the `Silicon Data Sleuthing` challenge on Hack The Box. This is a firmware-forensics task centered on an extracted OpenWrt image. The remote service asks a fixed set of questions, and the solve consists of recovering the required configuration values from the firmware contents.
+This directory contains the local materials and manual walkthrough for the `Silicon Data Sleuthing` challenge on Hack The Box. This is a firmware-forensics task centered on an extracted OpenWrt image. The remote service asks a fixed set of questions, and the solve consists of recovering the required configuration values from the firmware contents.
 
-The saved PoC already answers the live question flow, but the real educational value is in understanding where each answer comes from inside the extracted router data.
+The archived notes in this folder preserve the final answer flow, but the real educational value is understanding where each answer comes from inside the extracted router data.
 
 ## Challenge Profile
 
 - Challenge: `Silicon Data Sleuthing`
 - Category: `Forensics`
 - Platform: `Hack The Box`
-- Saved PoC: `silicon_data_sleuthing_poc.sh`
 
 ## Directory Contents
 
@@ -20,31 +19,18 @@ The saved PoC already answers the live question flow, but the real educational v
 
 ## First Commands To Run
 
-Review the local files first:
+Start with the original challenge materials in this folder. The goal is to identify the bug or recovery path from the provided files, then follow the numbered walkthrough below to reach the flag manually.
 
 ```bash
 cd "/home/eliah/Desktop/CTF/HackTheBox/Silicon_Data_Sleuthing"
 ls -lah
-file challenge.bin
 ```
 
-Read the saved PoC:
+Useful first inspection commands:
 
 ```bash
-sed -n "1,220p" "silicon_data_sleuthing_poc.sh"
-```
-
-Run the saved answer script:
-
-```bash
-chmod +x "silicon_data_sleuthing_poc.sh"
-./silicon_data_sleuthing_poc.sh
-```
-
-To use it against a fresh spawned instance:
-
-```bash
-./silicon_data_sleuthing_poc.sh <HOST> <PORT>
+file 'challenge.bin'
+strings -n 5 'challenge.bin' | head -200
 ```
 
 ## Investigation Approach
@@ -117,17 +103,15 @@ This challenge is good practice because it mirrors a very realistic firmware-rev
 
 In real assessments, this kind of information often leads directly to credential reuse, lateral movement, remote access, or administrative takeover of embedded systems.
 
-## Reproduction Commands
+## Manual Reproduction Flow
 
-Use this sequence for the fast path:
+Use the walkthrough above as the authoritative solve path. The short command block below is only the setup phase before you execute the numbered manual steps in this README.
 
 ```bash
 cd "/home/eliah/Desktop/CTF/HackTheBox/Silicon_Data_Sleuthing"
-file challenge.bin
-sed -n "1,220p" "silicon_data_sleuthing_poc.sh"
-bash "silicon_data_sleuthing_poc.sh"
+ls -lah
 ```
 
 ## Study Notes
 
-This challenge is worth revisiting if you are practicing firmware triage and OpenWrt-oriented forensics. The PoC gives the final answers quickly, but the more valuable exercise is mapping each answer back to the exact configuration file or metadata source in the extracted image.
+This challenge is worth revisiting if you are practicing firmware triage and OpenWrt-oriented forensics. The more valuable exercise is mapping each answer back to the exact configuration file or metadata source in the extracted image, then using the archived notes only as a cross-check.

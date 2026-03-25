@@ -2,7 +2,7 @@
 
 ## Overview
 
-This directory contains the local materials and saved solve workflow for the `Satellite Hijack` challenge on Hack The Box. This is a reversing challenge built around a shared library that hides its real behavior behind an IFUNC resolver and runtime code patching.
+This directory contains the local materials and manual walkthrough for the `Satellite Hijack` challenge on Hack The Box. This is a reversing challenge built around a shared library that hides its real behavior behind an IFUNC resolver and runtime code patching.
 
 At first glance the binary appears to be a simple terminal program, but the real validation logic is buried inside `library.so`. The important task is to recover that hidden logic and reconstruct the expected flag body statically.
 
@@ -11,7 +11,6 @@ At first glance the binary appears to be a simple terminal program, but the real
 - Challenge: `Satellite Hijack`
 - Category: `Reversing`
 - Platform: `Hack The Box`
-- Saved PoC: `satellite_hijack_poc.sh`
 
 ## Directory Contents
 
@@ -21,26 +20,19 @@ At first glance the binary appears to be a simple terminal program, but the real
 
 ## First Commands To Run
 
-Start by reviewing the local files:
+Start with the original challenge materials in this folder. The goal is to identify the bug or recovery path from the provided files, then follow the numbered walkthrough below to reach the flag manually.
 
 ```bash
 cd "/home/eliah/Desktop/CTF/HackTheBox/Satellite_Hijack"
 ls -lah
 unzip -l "rev_satellitehijack.zip"
-file rev_satellitehijack/satellite rev_satellitehijack/library.so
 ```
 
-Read the saved PoC:
+Useful first inspection commands:
 
 ```bash
-sed -n "1,220p" "satellite_hijack_poc.sh"
-```
-
-Run it:
-
-```bash
-chmod +x "satellite_hijack_poc.sh"
-./satellite_hijack_poc.sh
+file 'rev_satellitehijack.zip'
+strings -n 5 'rev_satellitehijack.zip' | head -200
 ```
 
 ## Why This Challenge Is Interesting
@@ -84,7 +76,7 @@ So the remaining task is to recover the exact 28-byte key.
 
 The validator does not store the key as one neat string. Instead, it writes overlapping 8-byte immediates onto the stack. That overlap is important. If you reconstruct the bytes naively, you get the wrong result.
 
-The saved PoC solves this correctly by rebuilding the stack layout exactly, extracting the first `0x1c` bytes, and then reversing the XOR-by-index transformation.
+The archived notes in this folder rebuild the stack layout exactly, extract the first `0x1c` bytes, and then reverse the XOR-by-index transformation.
 
 That yields the final flag body directly.
 
@@ -108,15 +100,13 @@ Useful questions to answer during analysis:
 - what import or GOT entry is patched
 - how is the final candidate validated
 
-## Reproduction Commands
+## Manual Reproduction Flow
 
-Use this sequence for a clean reproduction:
+Use the walkthrough above as the authoritative solve path. The short command block below is only the setup phase before you execute the numbered manual steps in this README.
 
 ```bash
 cd "/home/eliah/Desktop/CTF/HackTheBox/Satellite_Hijack"
-unzip -l "rev_satellitehijack.zip"
-sed -n "1,220p" "satellite_hijack_poc.sh"
-bash "satellite_hijack_poc.sh"
+ls -lah
 ```
 
 ## Study Notes

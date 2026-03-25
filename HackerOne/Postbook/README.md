@@ -2,7 +2,7 @@
 
 ## Overview
 
-This directory contains the local materials and saved solve workflow for the `Postbook` challenge from `Hacker101 CTF / HackerOne`. This is a web challenge built around insecure session design. The application treats a client-controlled cookie as the user’s identity, and that cookie is derived from a predictable value instead of being a secure session token.
+This directory contains the local materials and manual walkthrough for the `Postbook` challenge from `Hacker101 CTF / HackerOne`. This is a web challenge built around insecure session design. The application treats a client-controlled cookie as the user’s identity, and that cookie is derived from a predictable value instead of being a secure session token.
 
 The result is full account impersonation with no need for password guessing or memory corruption. Once the attacker understands how the cookie is generated, admin access becomes trivial.
 
@@ -12,7 +12,6 @@ The result is full account impersonation with no need for password guessing or m
 - Category: `Web`
 - Collection: `HackerOne`
 - Event or Platform: `Hacker101 CTF / HackerOne`
-- Saved PoC: `postbook_poc.sh`
 
 ## Directory Contents
 
@@ -20,19 +19,12 @@ The result is full account impersonation with no need for password guessing or m
 
 ## First Commands To Run
 
-Read the saved PoC:
+This folder does not include original challenge files. Start by reading the challenge description and the manual walkthrough below, then connect to a fresh challenge instance and reproduce the steps one by one.
 
 ```bash
 cd "/home/eliah/Desktop/CTF/HackerOne/Postbook"
 ls -lah
-sed -n "1,220p" "postbook_poc.sh"
-```
-
-Run it:
-
-```bash
-chmod +x "postbook_poc.sh"
-./postbook_poc.sh
+printf 'Follow the manual walkthrough below against the live service.\n'
 ```
 
 ## Core Vulnerability
@@ -101,14 +93,13 @@ This is a foundational web-security lesson. Authentication and authorization mus
 
 If the browser can forge the identity value, the application no longer controls who the user is.
 
-## Reproduction Commands
+## Manual Reproduction Flow
 
-Use this sequence for the fast path:
+Use the walkthrough above as the authoritative solve path. The short command block below is only the setup phase before you execute the numbered manual steps in this README.
 
 ```bash
 cd "/home/eliah/Desktop/CTF/HackerOne/Postbook"
-sed -n "1,220p" "postbook_poc.sh"
-bash "postbook_poc.sh"
+ls -lah
 ```
 
 ## Study Notes

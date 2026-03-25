@@ -2,7 +2,7 @@
 
 ## Overview
 
-This directory contains the local materials and saved solve workflow for the `Heap Havoc` challenge from `picoCTF 2026`. This is a binary exploitation challenge where the challenge text tries to frame the bug as a stack problem, but the real vulnerability is a heap overflow. That mismatch is part of what makes the challenge useful: it rewards trusting the source code and memory layout rather than the surrounding story.
+This directory contains the local materials and manual walkthrough for the `Heap Havoc` challenge from `picoCTF 2026`. This is a binary exploitation challenge where the challenge text tries to frame the bug as a stack problem, but the real vulnerability is a heap overflow. That mismatch is part of what makes the challenge useful: it rewards trusting the source code and memory layout rather than the surrounding story.
 
 The exploit works by overflowing one heap-allocated name buffer into the next heap object, rewriting a function pointer so the program jumps into the hidden `winner()` routine.
 
@@ -14,7 +14,6 @@ The exploit works by overflowing one heap-allocated name buffer into the next he
 - Event or Platform: `picoCTF 2026`
 - Difficulty: `Medium`
 - Author: `YAHAYA MEDDY`
-- Saved PoC: `heap_havoc_poc.sh`
 
 ## Directory Contents
 
@@ -25,26 +24,20 @@ The exploit works by overflowing one heap-allocated name buffer into the next he
 
 ## First Commands To Run
 
-Start by reading the source and the saved exploit notes:
+Start with the original challenge materials in this folder. The goal is to identify the bug or recovery path from the provided files, then follow the numbered walkthrough below to reach the flag manually.
 
 ```bash
 cd "/home/eliah/Desktop/CTF/picoCTF/Heap_Havoc"
 ls -lah
-sed -n '1,220p' vuln.c
-sed -n "1,260p" "heap_havoc_poc.sh"
 ```
 
-Run the PoC:
+Useful first inspection commands:
 
 ```bash
-chmod +x "heap_havoc_poc.sh"
-./heap_havoc_poc.sh
-```
-
-To reuse it against a fresh remote instance:
-
-```bash
-./heap_havoc_poc.sh <HOST> <PORT>
+sed -n '1,220p' 'flag.txt'
+file 'vuln'
+strings -n 5 'vuln' | head -200
+sed -n '1,220p' 'vuln.c'
 ```
 
 ## Why The Challenge Description Is Misleading
@@ -121,7 +114,7 @@ What you want to confirm:
 
 ## Exploit Structure
 
-The saved exploit uses:
+The manual exploit path uses:
 
 - padding to fill the first name allocation
 - more bytes to move across the gap into the second struct
@@ -130,15 +123,13 @@ The saved exploit uses:
 
 Then it sends a harmless second argument so the second `strcpy()` succeeds and the program reaches the callback call.
 
-## Reproduction Commands
+## Manual Reproduction Flow
 
-Use this sequence for the fast path:
+Use the walkthrough above as the authoritative solve path. The short command block below is only the setup phase before you execute the numbered manual steps in this README.
 
 ```bash
 cd "/home/eliah/Desktop/CTF/picoCTF/Heap_Havoc"
-sed -n '1,220p' vuln.c
-sed -n "1,260p" "heap_havoc_poc.sh"
-bash "heap_havoc_poc.sh"
+ls -lah
 ```
 
 ## Study Notes

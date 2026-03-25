@@ -2,7 +2,7 @@
 
 ## Overview
 
-This directory contains the local materials and saved solve workflow for the `XSS Playground by zseano` challenge from `Hacker101 / HackerOne CTF`. Although the theme suggests XSS, the actual flag path in this instance comes from inspecting the shipped JavaScript and discovering that the frontend contains both a hidden action and the custom header needed to authorize it.
+This directory contains the local materials and manual walkthrough for the `XSS Playground by zseano` challenge from `Hacker101 / HackerOne CTF`. Although the theme suggests XSS, the actual flag path in this instance comes from inspecting the shipped JavaScript and discovering that the frontend contains both a hidden action and the custom header needed to authorize it.
 
 This makes the challenge a very strong example of a broader web-security lesson: public JavaScript is not a safe place to hide secrets, internal features, or authorization material.
 
@@ -12,7 +12,6 @@ This makes the challenge a very strong example of a broader web-security lesson:
 - Category: `Web`
 - Collection: `HackerOne`
 - Event or Platform: `Hacker101 / HackerOne CTF`
-- Saved PoC: `xss_playground_poc.sh`
 
 ## Directory Contents
 
@@ -20,19 +19,12 @@ This makes the challenge a very strong example of a broader web-security lesson:
 
 ## First Commands To Run
 
-Read the saved PoC:
+This folder does not include original challenge files. Start by reading the challenge description and the manual walkthrough below, then connect to a fresh challenge instance and reproduce the steps one by one.
 
 ```bash
 cd "/home/eliah/Desktop/CTF/HackerOne/XSS_Playground"
 ls -lah
-sed -n "1,220p" "xss_playground_poc.sh"
-```
-
-Run it:
-
-```bash
-chmod +x "xss_playground_poc.sh"
-./xss_playground_poc.sh
+printf 'Follow the manual walkthrough below against the live service.\n'
 ```
 
 ## What Makes The Challenge Interesting
@@ -88,14 +80,13 @@ For the actual flag solve, however, XSS is not even required. Source inspection 
 
 That is part of what makes the challenge educational: the highest-value bug path is not always the one suggested by the title.
 
-## Reproduction Commands
+## Manual Reproduction Flow
 
-Use this sequence for the fast path:
+Use the walkthrough above as the authoritative solve path. The short command block below is only the setup phase before you execute the numbered manual steps in this README.
 
 ```bash
 cd "/home/eliah/Desktop/CTF/HackerOne/XSS_Playground"
-sed -n "1,220p" "xss_playground_poc.sh"
-bash "xss_playground_poc.sh"
+ls -lah
 ```
 
 ## Study Notes
