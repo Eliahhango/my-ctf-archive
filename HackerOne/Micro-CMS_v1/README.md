@@ -1,0 +1,113 @@
+# Micro-CMS v1
+
+## Overview
+
+This directory contains the local materials and saved solve workflow for the `Micro-CMS v1` challenge from `Hacker101 / HackerOne CTF`. This level is useful because it is not built around one bug. It is built around a cluster of trust and validation failures in the same small application.
+
+The saved PoC demonstrates four distinct flag paths, each revealing a different class of web weakness: predictable identifiers, route tampering, inconsistent escaping, and weak HTML sanitization.
+
+## Challenge Profile
+
+- Challenge: `Micro-CMS v1`
+- Category: `Web`
+- Collection: `HackerOne`
+- Event or Platform: `Hacker101 / HackerOne CTF`
+- Saved PoC: `micro_cms_v1_poc.sh`
+
+## Directory Contents
+
+- `micro_cms_v1_poc.sh`
+
+## First Commands To Run
+
+Read the saved walkthrough first:
+
+```bash
+cd "/home/eliah/Desktop/CTF/HackerOne/Micro-CMS_v1"
+ls -lah
+sed -n "1,260p" "micro_cms_v1_poc.sh"
+```
+
+Run the PoC:
+
+```bash
+chmod +x "micro_cms_v1_poc.sh"
+./micro_cms_v1_poc.sh
+```
+
+## Why This Level Is Good Practice
+
+This challenge is a compact demonstration of how a single application can fail in several independent ways at once. That makes it closer to real-world testing than a toy challenge with only one clean bug.
+
+The four paths are:
+
+1. predictable identifiers expose a hidden page
+2. malformed path input breaks backend assumptions
+3. a title is escaped in one view but rendered unsafely in another
+4. body HTML survives weak sanitization
+
+The key lesson is that security consistency matters. A defense that works in one route, one page, or one rendering context is not enough if sibling paths are weaker.
+
+## Flag 0: Hidden Page Through Predictable IDs
+
+Creating a new page reveals that page identifiers follow a sequence. Once that is clear, earlier IDs can be probed even if they are not linked publicly.
+
+In this instance:
+
+- `/page/7` returned a protected response
+- `/page/edit/7` exposed the private page content in the edit form
+
+That is an access-control failure combined with guessable object references.
+
+## Flag 1: Path Tampering
+
+The application assumes the page ID path segment is always a normal integer. Appending a quote to the route:
+
+```text
+/page/edit/1'
+```
+
+breaks that assumption and causes the backend to leak a flag directly.
+
+This is a reminder that URLs and route segments are still attacker-controlled input. Form fields are not the only place input validation matters.
+
+## Flag 2: Title Escaping Is Inconsistent
+
+A malicious title is rendered safely on the page view itself, but not on the homepage listing. That means the same user-controlled field is treated differently in different contexts.
+
+This is one of the most common real XSS patterns: developers sanitize or escape in the “obvious” view but forget that the same field appears elsewhere in a different rendering context.
+
+In this level, the homepage becomes the vulnerable surface.
+
+## Flag 3: Weak Body Sanitization
+
+The body renderer strips or rewrites some obvious script-related patterns, but dangerous HTML such as:
+
+```html
+<img src=x onerror=alert(1)>
+```
+
+still survives. The application then embeds the flag in an attribute on the surviving element, so the response itself leaks the token without requiring an actual browser popup or admin interaction.
+
+That is a classic example of blacklist-based sanitization failing against the broader HTML attack surface.
+
+## Reproduction Commands
+
+Use this sequence for the fastest path:
+
+```bash
+cd "/home/eliah/Desktop/CTF/HackerOne/Micro-CMS_v1"
+sed -n "1,260p" "micro_cms_v1_poc.sh"
+bash "micro_cms_v1_poc.sh"
+```
+
+## Study Notes
+
+This is one of the better folders in the archive for studying web testing mindset. It rewards thinking broadly about:
+
+- object references
+- path handling
+- rendering context
+- HTML sanitization
+
+It is worth revisiting because it shows how several “small” trust mistakes can coexist in one app and each become a valid attack path.

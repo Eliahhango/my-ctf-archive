@@ -1,0 +1,1576 @@
+<?xml version="1.0" encoding="utf-8"?>
+<svg width="48.400000000000006mm" height="48.82900000000001mm" viewBox="20.8 -69.629 48.400000000000006 48.82900000000001" style="background-color:white" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+  <g transform="translate(20.8 -20.8) scale(1 -1) translate(-20.8 69.629)">
+    <rect x="46.082" y="-65.42" width="0.8" height="1.3" fill="black"/>
+    <path d="M 47.732 -65.02 L 47.732 -64.52" fill="none" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="0.8"/>
+    <path d="M 48.982 -65.02 L 48.982 -64.52" fill="none" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="0.8"/>
+    <path d="M 50.232 -65.02 L 50.232 -64.52" fill="none" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="0.8"/>
+    <path d="M 52.5805 -47.4165 L 52.8755 -47.4165 L 52.8755 -47.0715 L 52.5805 -47.0715 L 52.5805 -47.4165" fill="black"/>
+    <circle cx="52.5805" cy="-47.4165" r="0.1475" fill="black"/>
+    <circle cx="52.8755" cy="-47.4165" r="0.1475" fill="black"/>
+    <circle cx="52.8755" cy="-47.0715" r="0.1475" fill="black"/>
+    <circle cx="52.5805" cy="-47.0715" r="0.1475" fill="black"/>
+    <rect x="52.5805" y="-47.564" width="0.295" height="0.295" fill="black"/>
+    <rect x="52.703" y="-47.3915" width="0.345" height="0.295" transform="rotate(90.0 52.8755 -47.244)" fill="black"/>
+    <rect x="52.5805" y="-47.219" width="0.295" height="0.295" transform="rotate(180.0 52.728 -47.0715)" fill="black"/>
+    <rect x="52.408" y="-47.3915" width="0.345" height="0.295" transform="rotate(-90.0 52.5805 -47.244)" fill="black"/>
+    <path d="M 53.5505 -47.4165 L 53.8455 -47.4165 L 53.8455 -47.0715 L 53.5505 -47.0715 L 53.5505 -47.4165" fill="black"/>
+    <circle cx="53.5505" cy="-47.4165" r="0.1475" fill="black"/>
+    <circle cx="53.8455" cy="-47.4165" r="0.1475" fill="black"/>
+    <circle cx="53.8455" cy="-47.0715" r="0.1475" fill="black"/>
+    <circle cx="53.5505" cy="-47.0715" r="0.1475" fill="black"/>
+    <rect x="53.5505" y="-47.564" width="0.295" height="0.295" fill="black"/>
+    <rect x="53.673" y="-47.3915" width="0.345" height="0.295" transform="rotate(90.0 53.8455 -47.244)" fill="black"/>
+    <rect x="53.5505" y="-47.219" width="0.295" height="0.295" transform="rotate(180.0 53.698 -47.0715)" fill="black"/>
+    <rect x="53.378" y="-47.3915" width="0.345" height="0.295" transform="rotate(-90.0 53.5505 -47.244)" fill="black"/>
+    <path d="M 36.4235 -52.6595 L 36.1285 -52.6595 L 36.1285 -53.0045 L 36.4235 -53.0045 L 36.4235 -52.6595" fill="black"/>
+    <circle cx="36.4235" cy="-52.6595" r="0.1475" fill="black"/>
+    <circle cx="36.1285" cy="-52.6595" r="0.1475" fill="black"/>
+    <circle cx="36.1285" cy="-53.0045" r="0.1475" fill="black"/>
+    <circle cx="36.4235" cy="-53.0045" r="0.1475" fill="black"/>
+    <rect x="36.1285" y="-52.807" width="0.295" height="0.295" transform="rotate(180.0 36.276 -52.6595)" fill="black"/>
+    <rect x="35.956" y="-52.9795" width="0.345" height="0.295" transform="rotate(-90.0 36.1285 -52.832)" fill="black"/>
+    <rect x="36.1285" y="-53.152" width="0.295" height="0.295" fill="black"/>
+    <rect x="36.251" y="-52.9795" width="0.345" height="0.295" transform="rotate(90.0 36.4235 -52.832)" fill="black"/>
+    <path d="M 35.4535 -52.6595 L 35.1585 -52.6595 L 35.1585 -53.0045 L 35.4535 -53.0045 L 35.4535 -52.6595" fill="black"/>
+    <circle cx="35.4535" cy="-52.6595" r="0.1475" fill="black"/>
+    <circle cx="35.1585" cy="-52.6595" r="0.1475" fill="black"/>
+    <circle cx="35.1585" cy="-53.0045" r="0.1475" fill="black"/>
+    <circle cx="35.4535" cy="-53.0045" r="0.1475" fill="black"/>
+    <rect x="35.1585" y="-52.807" width="0.295" height="0.295" transform="rotate(180.0 35.306 -52.6595)" fill="black"/>
+    <rect x="34.986" y="-52.9795" width="0.345" height="0.295" transform="rotate(-90.0 35.1585 -52.832)" fill="black"/>
+    <rect x="35.1585" y="-53.152" width="0.295" height="0.295" fill="black"/>
+    <rect x="35.281" y="-52.9795" width="0.345" height="0.295" transform="rotate(90.0 35.4535 -52.832)" fill="black"/>
+    <path d="M 49.2305 -34.887 L 49.2305 -35.182 L 49.5755 -35.182 L 49.5755 -34.887 L 49.2305 -34.887" fill="black"/>
+    <circle cx="49.2305" cy="-34.887" r="0.1475" fill="black"/>
+    <circle cx="49.2305" cy="-35.182" r="0.1475" fill="black"/>
+    <circle cx="49.5755" cy="-35.182" r="0.1475" fill="black"/>
+    <circle cx="49.5755" cy="-34.887" r="0.1475" fill="black"/>
+    <rect x="49.083" y="-35.182" width="0.295" height="0.295" transform="rotate(-90.0 49.2305 -35.0345)" fill="black"/>
+    <rect x="49.2305" y="-35.3295" width="0.345" height="0.295" fill="black"/>
+    <rect x="49.428" y="-35.182" width="0.295" height="0.295" transform="rotate(90.0 49.5755 -35.0345)" fill="black"/>
+    <rect x="49.2305" y="-35.0345" width="0.345" height="0.295" transform="rotate(180.0 49.403 -34.887)" fill="black"/>
+    <path d="M 49.2305 -35.857 L 49.2305 -36.152 L 49.5755 -36.152 L 49.5755 -35.857 L 49.2305 -35.857" fill="black"/>
+    <circle cx="49.2305" cy="-35.857" r="0.1475" fill="black"/>
+    <circle cx="49.2305" cy="-36.152" r="0.1475" fill="black"/>
+    <circle cx="49.5755" cy="-36.152" r="0.1475" fill="black"/>
+    <circle cx="49.5755" cy="-35.857" r="0.1475" fill="black"/>
+    <rect x="49.083" y="-36.152" width="0.295" height="0.295" transform="rotate(-90.0 49.2305 -36.0045)" fill="black"/>
+    <rect x="49.2305" y="-36.2995" width="0.345" height="0.295" fill="black"/>
+    <rect x="49.428" y="-36.152" width="0.295" height="0.295" transform="rotate(90.0 49.5755 -36.0045)" fill="black"/>
+    <rect x="49.2305" y="-36.0045" width="0.345" height="0.295" transform="rotate(180.0 49.403 -35.857)" fill="black"/>
+    <path d="M 55.6715 -41.6535 L 55.6715 -41.3585 L 55.3265 -41.3585 L 55.3265 -41.6535 L 55.6715 -41.6535" fill="black"/>
+    <circle cx="55.6715" cy="-41.6535" r="0.1475" fill="black"/>
+    <circle cx="55.6715" cy="-41.3585" r="0.1475" fill="black"/>
+    <circle cx="55.3265" cy="-41.3585" r="0.1475" fill="black"/>
+    <circle cx="55.3265" cy="-41.6535" r="0.1475" fill="black"/>
+    <rect x="55.524" y="-41.6535" width="0.295" height="0.295" transform="rotate(90.0 55.6715 -41.506)" fill="black"/>
+    <rect x="55.3265" y="-41.506" width="0.345" height="0.295" transform="rotate(180.0 55.499 -41.3585)" fill="black"/>
+    <rect x="55.179" y="-41.6535" width="0.295" height="0.295" transform="rotate(-90.0 55.3265 -41.506)" fill="black"/>
+    <rect x="55.3265" y="-41.801" width="0.345" height="0.295" fill="black"/>
+    <path d="M 55.6715 -40.6835 L 55.6715 -40.3885 L 55.3265 -40.3885 L 55.3265 -40.6835 L 55.6715 -40.6835" fill="black"/>
+    <circle cx="55.6715" cy="-40.6835" r="0.1475" fill="black"/>
+    <circle cx="55.6715" cy="-40.3885" r="0.1475" fill="black"/>
+    <circle cx="55.3265" cy="-40.3885" r="0.1475" fill="black"/>
+    <circle cx="55.3265" cy="-40.6835" r="0.1475" fill="black"/>
+    <rect x="55.524" y="-40.6835" width="0.295" height="0.295" transform="rotate(90.0 55.6715 -40.536)" fill="black"/>
+    <rect x="55.3265" y="-40.536" width="0.345" height="0.295" transform="rotate(180.0 55.499 -40.3885)" fill="black"/>
+    <rect x="55.179" y="-40.6835" width="0.295" height="0.295" transform="rotate(-90.0 55.3265 -40.536)" fill="black"/>
+    <rect x="55.3265" y="-40.831" width="0.345" height="0.295" fill="black"/>
+    <rect x="36.6138" y="-44.2964" width="0.35" height="0.38" fill="black"/>
+    <rect x="36.6138" y="-44.7964" width="0.35" height="0.38" fill="black"/>
+    <rect x="36.8788" y="-45.3114" width="0.35" height="0.38" fill="black"/>
+    <rect x="37.3788" y="-45.3114" width="0.35" height="0.38" fill="black"/>
+    <rect x="37.8788" y="-45.3114" width="0.35" height="0.38" fill="black"/>
+    <rect x="38.1438" y="-44.7964" width="0.35" height="0.38" fill="black"/>
+    <rect x="38.1438" y="-44.2964" width="0.35" height="0.38" fill="black"/>
+    <rect x="37.8788" y="-43.7814" width="0.35" height="0.38" fill="black"/>
+    <rect x="37.3788" y="-43.7814" width="0.35" height="0.38" fill="black"/>
+    <rect x="36.8788" y="-43.7814" width="0.35" height="0.38" fill="black"/>
+    <rect x="29.346" y="-69.629" width="0.8" height="1.4" fill="black"/>
+    <rect x="32.846" y="-69.629" width="0.8" height="1.4" fill="black"/>
+    <rect x="31.096" y="-65.629" width="0.8" height="1.4" fill="black"/>
+    <rect x="36.331" y="-69.629" width="0.8" height="1.4" fill="black"/>
+    <rect x="39.831" y="-69.629" width="0.8" height="1.4" fill="black"/>
+    <rect x="38.081" y="-65.629" width="0.8" height="1.4" fill="black"/>
+    <path d="M 35.468 -27.0279 L 35.9055 -27.0279 L 35.9055 -26.5153 L 35.468 -26.5153 L 35.468 -27.0279" fill="black"/>
+    <circle cx="35.468" cy="-27.0279" r="0.21875" fill="black"/>
+    <circle cx="35.9055" cy="-27.0279" r="0.21875" fill="black"/>
+    <circle cx="35.9055" cy="-26.5153" r="0.21875" fill="black"/>
+    <circle cx="35.468" cy="-26.5153" r="0.21875" fill="black"/>
+    <rect x="35.468" y="-27.2466" width="0.4375" height="0.4375" fill="black"/>
+    <rect x="35.6493" y="-26.9903" width="0.5125" height="0.4375" transform="rotate(90.0 35.9055 -26.7716)" fill="black"/>
+    <rect x="35.468" y="-26.7341" width="0.4375" height="0.4375" transform="rotate(180.0 35.6868 -26.5153)" fill="black"/>
+    <rect x="35.2118" y="-26.9903" width="0.5125" height="0.4375" transform="rotate(-90.0 35.468 -26.7716)" fill="black"/>
+    <path d="M 37.0431 -27.0279 L 37.4806 -27.0279 L 37.4806 -26.5153 L 37.0431 -26.5153 L 37.0431 -27.0279" fill="black"/>
+    <circle cx="37.0431" cy="-27.0279" r="0.21875" fill="black"/>
+    <circle cx="37.4806" cy="-27.0279" r="0.21875" fill="black"/>
+    <circle cx="37.4806" cy="-26.5153" r="0.21875" fill="black"/>
+    <circle cx="37.0431" cy="-26.5153" r="0.21875" fill="black"/>
+    <rect x="37.0431" y="-27.2466" width="0.4375" height="0.4375" fill="black"/>
+    <rect x="37.2243" y="-26.9903" width="0.5125" height="0.4375" transform="rotate(90.0 37.4806 -26.7716)" fill="black"/>
+    <rect x="37.0431" y="-26.7341" width="0.4375" height="0.4375" transform="rotate(180.0 37.2618 -26.5153)" fill="black"/>
+    <rect x="36.7868" y="-26.9903" width="0.5125" height="0.4375" transform="rotate(-90.0 37.0431 -26.7716)" fill="black"/>
+    <path d="M 40.4391 -24.7553 L 40.4391 -24.3178 L 39.9265 -24.3178 L 39.9265 -24.7553 L 40.4391 -24.7553" fill="black"/>
+    <circle cx="40.4391" cy="-24.7553" r="0.21875" fill="black"/>
+    <circle cx="40.4391" cy="-24.3178" r="0.21875" fill="black"/>
+    <circle cx="39.9265" cy="-24.3178" r="0.21875" fill="black"/>
+    <circle cx="39.9265" cy="-24.7553" r="0.21875" fill="black"/>
+    <rect x="40.2203" y="-24.7553" width="0.4375" height="0.4375" transform="rotate(90.0 40.4391 -24.5366)" fill="black"/>
+    <rect x="39.9265" y="-24.5366" width="0.5125" height="0.4375" transform="rotate(180.0 40.1828 -24.3178)" fill="black"/>
+    <rect x="39.7078" y="-24.7553" width="0.4375" height="0.4375" transform="rotate(-90.0 39.9265 -24.5366)" fill="black"/>
+    <rect x="39.9265" y="-24.9741" width="0.5125" height="0.4375" fill="black"/>
+    <path d="M 40.4391 -23.1804 L 40.4391 -22.7429 L 39.9265 -22.7429 L 39.9265 -23.1804 L 40.4391 -23.1804" fill="black"/>
+    <circle cx="40.4391" cy="-23.1804" r="0.21875" fill="black"/>
+    <circle cx="40.4391" cy="-22.7429" r="0.21875" fill="black"/>
+    <circle cx="39.9265" cy="-22.7429" r="0.21875" fill="black"/>
+    <circle cx="39.9265" cy="-23.1804" r="0.21875" fill="black"/>
+    <rect x="40.2203" y="-23.1804" width="0.4375" height="0.4375" transform="rotate(90.0 40.4391 -22.9616)" fill="black"/>
+    <rect x="39.9265" y="-22.9616" width="0.5125" height="0.4375" transform="rotate(180.0 40.1828 -22.7429)" fill="black"/>
+    <rect x="39.7078" y="-23.1804" width="0.4375" height="0.4375" transform="rotate(-90.0 39.9265 -22.9616)" fill="black"/>
+    <rect x="39.9265" y="-23.3991" width="0.5125" height="0.4375" fill="black"/>
+    <path d="M 42.5705 -43.9875 L 42.8655 -43.9875 L 42.8655 -43.6425 L 42.5705 -43.6425 L 42.5705 -43.9875" fill="black"/>
+    <circle cx="42.5705" cy="-43.9875" r="0.1475" fill="black"/>
+    <circle cx="42.8655" cy="-43.9875" r="0.1475" fill="black"/>
+    <circle cx="42.8655" cy="-43.6425" r="0.1475" fill="black"/>
+    <circle cx="42.5705" cy="-43.6425" r="0.1475" fill="black"/>
+    <rect x="42.5705" y="-44.135" width="0.295" height="0.295" fill="black"/>
+    <rect x="42.693" y="-43.9625" width="0.345" height="0.295" transform="rotate(90.0 42.8655 -43.815)" fill="black"/>
+    <rect x="42.5705" y="-43.79" width="0.295" height="0.295" transform="rotate(180.0 42.718 -43.6425)" fill="black"/>
+    <rect x="42.398" y="-43.9625" width="0.345" height="0.295" transform="rotate(-90.0 42.5705 -43.815)" fill="black"/>
+    <path d="M 43.5405 -43.9875 L 43.8355 -43.9875 L 43.8355 -43.6425 L 43.5405 -43.6425 L 43.5405 -43.9875" fill="black"/>
+    <circle cx="43.5405" cy="-43.9875" r="0.1475" fill="black"/>
+    <circle cx="43.8355" cy="-43.9875" r="0.1475" fill="black"/>
+    <circle cx="43.8355" cy="-43.6425" r="0.1475" fill="black"/>
+    <circle cx="43.5405" cy="-43.6425" r="0.1475" fill="black"/>
+    <rect x="43.5405" y="-44.135" width="0.295" height="0.295" fill="black"/>
+    <rect x="43.663" y="-43.9625" width="0.345" height="0.295" transform="rotate(90.0 43.8355 -43.815)" fill="black"/>
+    <rect x="43.5405" y="-43.79" width="0.295" height="0.295" transform="rotate(180.0 43.688 -43.6425)" fill="black"/>
+    <rect x="43.368" y="-43.9625" width="0.345" height="0.295" transform="rotate(-90.0 43.5405 -43.815)" fill="black"/>
+    <path d="M 39.7965 -54.3765 L 39.7965 -54.0815 L 39.4515 -54.0815 L 39.4515 -54.3765 L 39.7965 -54.3765" fill="black"/>
+    <circle cx="39.7965" cy="-54.3765" r="0.1475" fill="black"/>
+    <circle cx="39.7965" cy="-54.0815" r="0.1475" fill="black"/>
+    <circle cx="39.4515" cy="-54.0815" r="0.1475" fill="black"/>
+    <circle cx="39.4515" cy="-54.3765" r="0.1475" fill="black"/>
+    <rect x="39.649" y="-54.3765" width="0.295" height="0.295" transform="rotate(90.0 39.7965 -54.229)" fill="black"/>
+    <rect x="39.4515" y="-54.229" width="0.345" height="0.295" transform="rotate(180.0 39.624 -54.0815)" fill="black"/>
+    <rect x="39.304" y="-54.3765" width="0.295" height="0.295" transform="rotate(-90.0 39.4515 -54.229)" fill="black"/>
+    <rect x="39.4515" y="-54.524" width="0.345" height="0.295" fill="black"/>
+    <path d="M 39.7965 -53.4065 L 39.7965 -53.1115 L 39.4515 -53.1115 L 39.4515 -53.4065 L 39.7965 -53.4065" fill="black"/>
+    <circle cx="39.7965" cy="-53.4065" r="0.1475" fill="black"/>
+    <circle cx="39.7965" cy="-53.1115" r="0.1475" fill="black"/>
+    <circle cx="39.4515" cy="-53.1115" r="0.1475" fill="black"/>
+    <circle cx="39.4515" cy="-53.4065" r="0.1475" fill="black"/>
+    <rect x="39.649" y="-53.4065" width="0.295" height="0.295" transform="rotate(90.0 39.7965 -53.259)" fill="black"/>
+    <rect x="39.4515" y="-53.259" width="0.345" height="0.295" transform="rotate(180.0 39.624 -53.1115)" fill="black"/>
+    <rect x="39.304" y="-53.4065" width="0.295" height="0.295" transform="rotate(-90.0 39.4515 -53.259)" fill="black"/>
+    <rect x="39.4515" y="-53.554" width="0.345" height="0.295" fill="black"/>
+    <path d="M 38.0037 -29.1363 L 38.0037 -29.4313 L 38.3487 -29.4313 L 38.3487 -29.1363 L 38.0037 -29.1363" fill="black"/>
+    <circle cx="38.0037" cy="-29.1363" r="0.1475" fill="black"/>
+    <circle cx="38.0037" cy="-29.4313" r="0.1475" fill="black"/>
+    <circle cx="38.3487" cy="-29.4313" r="0.1475" fill="black"/>
+    <circle cx="38.3487" cy="-29.1363" r="0.1475" fill="black"/>
+    <rect x="37.8562" y="-29.4313" width="0.295" height="0.295" transform="rotate(-90.0 38.0037 -29.2838)" fill="black"/>
+    <rect x="38.0037" y="-29.5788" width="0.345" height="0.295" fill="black"/>
+    <rect x="38.2012" y="-29.4313" width="0.295" height="0.295" transform="rotate(90.0 38.3487 -29.2838)" fill="black"/>
+    <rect x="38.0037" y="-29.2838" width="0.345" height="0.295" transform="rotate(180.0 38.1762 -29.1363)" fill="black"/>
+    <path d="M 38.0037 -30.1063 L 38.0037 -30.4013 L 38.3487 -30.4013 L 38.3487 -30.1063 L 38.0037 -30.1063" fill="black"/>
+    <circle cx="38.0037" cy="-30.1063" r="0.1475" fill="black"/>
+    <circle cx="38.0037" cy="-30.4013" r="0.1475" fill="black"/>
+    <circle cx="38.3487" cy="-30.4013" r="0.1475" fill="black"/>
+    <circle cx="38.3487" cy="-30.1063" r="0.1475" fill="black"/>
+    <rect x="37.8562" y="-30.4013" width="0.295" height="0.295" transform="rotate(-90.0 38.0037 -30.2538)" fill="black"/>
+    <rect x="38.0037" y="-30.5488" width="0.345" height="0.295" fill="black"/>
+    <rect x="38.2012" y="-30.4013" width="0.295" height="0.295" transform="rotate(90.0 38.3487 -30.2538)" fill="black"/>
+    <rect x="38.0037" y="-30.2538" width="0.345" height="0.295" transform="rotate(180.0 38.1762 -30.1063)" fill="black"/>
+    <path d="M 44.3485 -36.4945 L 44.6435 -36.4945 L 44.6435 -36.1495 L 44.3485 -36.1495 L 44.3485 -36.4945" fill="black"/>
+    <circle cx="44.3485" cy="-36.4945" r="0.1475" fill="black"/>
+    <circle cx="44.6435" cy="-36.4945" r="0.1475" fill="black"/>
+    <circle cx="44.6435" cy="-36.1495" r="0.1475" fill="black"/>
+    <circle cx="44.3485" cy="-36.1495" r="0.1475" fill="black"/>
+    <rect x="44.3485" y="-36.642" width="0.295" height="0.295" fill="black"/>
+    <rect x="44.471" y="-36.4695" width="0.345" height="0.295" transform="rotate(90.0 44.6435 -36.322)" fill="black"/>
+    <rect x="44.3485" y="-36.297" width="0.295" height="0.295" transform="rotate(180.0 44.496 -36.1495)" fill="black"/>
+    <rect x="44.176" y="-36.4695" width="0.345" height="0.295" transform="rotate(-90.0 44.3485 -36.322)" fill="black"/>
+    <path d="M 45.3185 -36.4945 L 45.6135 -36.4945 L 45.6135 -36.1495 L 45.3185 -36.1495 L 45.3185 -36.4945" fill="black"/>
+    <circle cx="45.3185" cy="-36.4945" r="0.1475" fill="black"/>
+    <circle cx="45.6135" cy="-36.4945" r="0.1475" fill="black"/>
+    <circle cx="45.6135" cy="-36.1495" r="0.1475" fill="black"/>
+    <circle cx="45.3185" cy="-36.1495" r="0.1475" fill="black"/>
+    <rect x="45.3185" y="-36.642" width="0.295" height="0.295" fill="black"/>
+    <rect x="45.441" y="-36.4695" width="0.345" height="0.295" transform="rotate(90.0 45.6135 -36.322)" fill="black"/>
+    <rect x="45.3185" y="-36.297" width="0.295" height="0.295" transform="rotate(180.0 45.466 -36.1495)" fill="black"/>
+    <rect x="45.146" y="-36.4695" width="0.345" height="0.295" transform="rotate(-90.0 45.3185 -36.322)" fill="black"/>
+    <path d="M 45.5725 -41.5745 L 45.8675 -41.5745 L 45.8675 -41.2295 L 45.5725 -41.2295 L 45.5725 -41.5745" fill="black"/>
+    <circle cx="45.5725" cy="-41.5745" r="0.1475" fill="black"/>
+    <circle cx="45.8675" cy="-41.5745" r="0.1475" fill="black"/>
+    <circle cx="45.8675" cy="-41.2295" r="0.1475" fill="black"/>
+    <circle cx="45.5725" cy="-41.2295" r="0.1475" fill="black"/>
+    <rect x="45.5725" y="-41.722" width="0.295" height="0.295" fill="black"/>
+    <rect x="45.695" y="-41.5495" width="0.345" height="0.295" transform="rotate(90.0 45.8675 -41.402)" fill="black"/>
+    <rect x="45.5725" y="-41.377" width="0.295" height="0.295" transform="rotate(180.0 45.72 -41.2295)" fill="black"/>
+    <rect x="45.4" y="-41.5495" width="0.345" height="0.295" transform="rotate(-90.0 45.5725 -41.402)" fill="black"/>
+    <path d="M 46.5425 -41.5745 L 46.8375 -41.5745 L 46.8375 -41.2295 L 46.5425 -41.2295 L 46.5425 -41.5745" fill="black"/>
+    <circle cx="46.5425" cy="-41.5745" r="0.1475" fill="black"/>
+    <circle cx="46.8375" cy="-41.5745" r="0.1475" fill="black"/>
+    <circle cx="46.8375" cy="-41.2295" r="0.1475" fill="black"/>
+    <circle cx="46.5425" cy="-41.2295" r="0.1475" fill="black"/>
+    <rect x="46.5425" y="-41.722" width="0.295" height="0.295" fill="black"/>
+    <rect x="46.665" y="-41.5495" width="0.345" height="0.295" transform="rotate(90.0 46.8375 -41.402)" fill="black"/>
+    <rect x="46.5425" y="-41.377" width="0.295" height="0.295" transform="rotate(180.0 46.69 -41.2295)" fill="black"/>
+    <rect x="46.37" y="-41.5495" width="0.345" height="0.295" transform="rotate(-90.0 46.5425 -41.402)" fill="black"/>
+    <path d="M 44.6025 -34.2085 L 44.8975 -34.2085 L 44.8975 -33.8635 L 44.6025 -33.8635 L 44.6025 -34.2085" fill="black"/>
+    <circle cx="44.6025" cy="-34.2085" r="0.1475" fill="black"/>
+    <circle cx="44.8975" cy="-34.2085" r="0.1475" fill="black"/>
+    <circle cx="44.8975" cy="-33.8635" r="0.1475" fill="black"/>
+    <circle cx="44.6025" cy="-33.8635" r="0.1475" fill="black"/>
+    <rect x="44.6025" y="-34.356" width="0.295" height="0.295" fill="black"/>
+    <rect x="44.725" y="-34.1835" width="0.345" height="0.295" transform="rotate(90.0 44.8975 -34.036)" fill="black"/>
+    <rect x="44.6025" y="-34.011" width="0.295" height="0.295" transform="rotate(180.0 44.75 -33.8635)" fill="black"/>
+    <rect x="44.43" y="-34.1835" width="0.345" height="0.295" transform="rotate(-90.0 44.6025 -34.036)" fill="black"/>
+    <path d="M 45.5725 -34.2085 L 45.8675 -34.2085 L 45.8675 -33.8635 L 45.5725 -33.8635 L 45.5725 -34.2085" fill="black"/>
+    <circle cx="45.5725" cy="-34.2085" r="0.1475" fill="black"/>
+    <circle cx="45.8675" cy="-34.2085" r="0.1475" fill="black"/>
+    <circle cx="45.8675" cy="-33.8635" r="0.1475" fill="black"/>
+    <circle cx="45.5725" cy="-33.8635" r="0.1475" fill="black"/>
+    <rect x="45.5725" y="-34.356" width="0.295" height="0.295" fill="black"/>
+    <rect x="45.695" y="-34.1835" width="0.345" height="0.295" transform="rotate(90.0 45.8675 -34.036)" fill="black"/>
+    <rect x="45.5725" y="-34.011" width="0.295" height="0.295" transform="rotate(180.0 45.72 -33.8635)" fill="black"/>
+    <rect x="45.4" y="-34.1835" width="0.345" height="0.295" transform="rotate(-90.0 45.5725 -34.036)" fill="black"/>
+    <path d="M 46.0755 -29.6725 L 45.7805 -29.6725 L 45.7805 -30.0175 L 46.0755 -30.0175 L 46.0755 -29.6725" fill="black"/>
+    <circle cx="46.0755" cy="-29.6725" r="0.1475" fill="black"/>
+    <circle cx="45.7805" cy="-29.6725" r="0.1475" fill="black"/>
+    <circle cx="45.7805" cy="-30.0175" r="0.1475" fill="black"/>
+    <circle cx="46.0755" cy="-30.0175" r="0.1475" fill="black"/>
+    <rect x="45.7805" y="-29.82" width="0.295" height="0.295" transform="rotate(180.0 45.928 -29.6725)" fill="black"/>
+    <rect x="45.608" y="-29.9925" width="0.345" height="0.295" transform="rotate(-90.0 45.7805 -29.845)" fill="black"/>
+    <rect x="45.7805" y="-30.165" width="0.295" height="0.295" fill="black"/>
+    <rect x="45.903" y="-29.9925" width="0.345" height="0.295" transform="rotate(90.0 46.0755 -29.845)" fill="black"/>
+    <path d="M 45.1055 -29.6725 L 44.8105 -29.6725 L 44.8105 -30.0175 L 45.1055 -30.0175 L 45.1055 -29.6725" fill="black"/>
+    <circle cx="45.1055" cy="-29.6725" r="0.1475" fill="black"/>
+    <circle cx="44.8105" cy="-29.6725" r="0.1475" fill="black"/>
+    <circle cx="44.8105" cy="-30.0175" r="0.1475" fill="black"/>
+    <circle cx="45.1055" cy="-30.0175" r="0.1475" fill="black"/>
+    <rect x="44.8105" y="-29.82" width="0.295" height="0.295" transform="rotate(180.0 44.958 -29.6725)" fill="black"/>
+    <rect x="44.638" y="-29.9925" width="0.345" height="0.295" transform="rotate(-90.0 44.8105 -29.845)" fill="black"/>
+    <rect x="44.8105" y="-30.165" width="0.295" height="0.295" fill="black"/>
+    <rect x="44.933" y="-29.9925" width="0.345" height="0.295" transform="rotate(90.0 45.1055 -29.845)" fill="black"/>
+    <path d="M 47.1985 -31.3945 L 47.1985 -31.6895 L 47.5435 -31.6895 L 47.5435 -31.3945 L 47.1985 -31.3945" fill="black"/>
+    <circle cx="47.1985" cy="-31.3945" r="0.1475" fill="black"/>
+    <circle cx="47.1985" cy="-31.6895" r="0.1475" fill="black"/>
+    <circle cx="47.5435" cy="-31.6895" r="0.1475" fill="black"/>
+    <circle cx="47.5435" cy="-31.3945" r="0.1475" fill="black"/>
+    <rect x="47.051" y="-31.6895" width="0.295" height="0.295" transform="rotate(-90.0 47.1985 -31.542)" fill="black"/>
+    <rect x="47.1985" y="-31.837" width="0.345" height="0.295" fill="black"/>
+    <rect x="47.396" y="-31.6895" width="0.295" height="0.295" transform="rotate(90.0 47.5435 -31.542)" fill="black"/>
+    <rect x="47.1985" y="-31.542" width="0.345" height="0.295" transform="rotate(180.0 47.371 -31.3945)" fill="black"/>
+    <path d="M 47.1985 -32.3645 L 47.1985 -32.6595 L 47.5435 -32.6595 L 47.5435 -32.3645 L 47.1985 -32.3645" fill="black"/>
+    <circle cx="47.1985" cy="-32.3645" r="0.1475" fill="black"/>
+    <circle cx="47.1985" cy="-32.6595" r="0.1475" fill="black"/>
+    <circle cx="47.5435" cy="-32.6595" r="0.1475" fill="black"/>
+    <circle cx="47.5435" cy="-32.3645" r="0.1475" fill="black"/>
+    <rect x="47.051" y="-32.6595" width="0.295" height="0.295" transform="rotate(-90.0 47.1985 -32.512)" fill="black"/>
+    <rect x="47.1985" y="-32.807" width="0.345" height="0.295" fill="black"/>
+    <rect x="47.396" y="-32.6595" width="0.295" height="0.295" transform="rotate(90.0 47.5435 -32.512)" fill="black"/>
+    <rect x="47.1985" y="-32.512" width="0.345" height="0.295" transform="rotate(180.0 47.371 -32.3645)" fill="black"/>
+    <path d="M 48.6388 -30.9977 L 48.6388 -31.4352 L 49.1513 -31.4352 L 49.1513 -30.9977 L 48.6388 -30.9977" fill="black"/>
+    <circle cx="48.6388" cy="-30.9977" r="0.21875" fill="black"/>
+    <circle cx="48.6388" cy="-31.4352" r="0.21875" fill="black"/>
+    <circle cx="49.1513" cy="-31.4352" r="0.21875" fill="black"/>
+    <circle cx="49.1513" cy="-30.9977" r="0.21875" fill="black"/>
+    <rect x="48.42" y="-31.4352" width="0.4375" height="0.4375" transform="rotate(-90.0 48.6388 -31.2165)" fill="black"/>
+    <rect x="48.6388" y="-31.654" width="0.5125" height="0.4375" fill="black"/>
+    <rect x="48.9325" y="-31.4352" width="0.4375" height="0.4375" transform="rotate(90.0 49.1513 -31.2165)" fill="black"/>
+    <rect x="48.6388" y="-31.2165" width="0.5125" height="0.4375" transform="rotate(180.0 48.895 -30.9977)" fill="black"/>
+    <path d="M 48.6388 -32.5727 L 48.6388 -33.0102 L 49.1513 -33.0102 L 49.1513 -32.5727 L 48.6388 -32.5727" fill="black"/>
+    <circle cx="48.6388" cy="-32.5727" r="0.21875" fill="black"/>
+    <circle cx="48.6388" cy="-33.0102" r="0.21875" fill="black"/>
+    <circle cx="49.1513" cy="-33.0102" r="0.21875" fill="black"/>
+    <circle cx="49.1513" cy="-32.5727" r="0.21875" fill="black"/>
+    <rect x="48.42" y="-33.0102" width="0.4375" height="0.4375" transform="rotate(-90.0 48.6388 -32.7915)" fill="black"/>
+    <rect x="48.6388" y="-33.229" width="0.5125" height="0.4375" fill="black"/>
+    <rect x="48.9325" y="-33.0102" width="0.4375" height="0.4375" transform="rotate(90.0 49.1513 -32.7915)" fill="black"/>
+    <rect x="48.6388" y="-32.7915" width="0.5125" height="0.4375" transform="rotate(180.0 48.895 -32.5727)" fill="black"/>
+    <path d="M 36.6293 -42.4889 L 36.9243 -42.4889 L 36.9243 -42.1439 L 36.6293 -42.1439 L 36.6293 -42.4889" fill="black"/>
+    <circle cx="36.6293" cy="-42.4889" r="0.1475" fill="black"/>
+    <circle cx="36.9243" cy="-42.4889" r="0.1475" fill="black"/>
+    <circle cx="36.9243" cy="-42.1439" r="0.1475" fill="black"/>
+    <circle cx="36.6293" cy="-42.1439" r="0.1475" fill="black"/>
+    <rect x="36.6293" y="-42.6364" width="0.295" height="0.295" fill="black"/>
+    <rect x="36.7518" y="-42.4639" width="0.345" height="0.295" transform="rotate(90.0 36.9243 -42.3164)" fill="black"/>
+    <rect x="36.6293" y="-42.2914" width="0.295" height="0.295" transform="rotate(180.0 36.7768 -42.1439)" fill="black"/>
+    <rect x="36.4568" y="-42.4639" width="0.345" height="0.295" transform="rotate(-90.0 36.6293 -42.3164)" fill="black"/>
+    <path d="M 37.5993 -42.4889 L 37.8943 -42.4889 L 37.8943 -42.1439 L 37.5993 -42.1439 L 37.5993 -42.4889" fill="black"/>
+    <circle cx="37.5993" cy="-42.4889" r="0.1475" fill="black"/>
+    <circle cx="37.8943" cy="-42.4889" r="0.1475" fill="black"/>
+    <circle cx="37.8943" cy="-42.1439" r="0.1475" fill="black"/>
+    <circle cx="37.5993" cy="-42.1439" r="0.1475" fill="black"/>
+    <rect x="37.5993" y="-42.6364" width="0.295" height="0.295" fill="black"/>
+    <rect x="37.7218" y="-42.4639" width="0.345" height="0.295" transform="rotate(90.0 37.8943 -42.3164)" fill="black"/>
+    <rect x="37.5993" y="-42.2914" width="0.295" height="0.295" transform="rotate(180.0 37.7468 -42.1439)" fill="black"/>
+    <rect x="37.4268" y="-42.4639" width="0.345" height="0.295" transform="rotate(-90.0 37.5993 -42.3164)" fill="black"/>
+    <path d="M 34.9303 -43.9699 L 34.9303 -44.2649 L 35.2753 -44.2649 L 35.2753 -43.9699 L 34.9303 -43.9699" fill="black"/>
+    <circle cx="34.9303" cy="-43.9699" r="0.1475" fill="black"/>
+    <circle cx="34.9303" cy="-44.2649" r="0.1475" fill="black"/>
+    <circle cx="35.2753" cy="-44.2649" r="0.1475" fill="black"/>
+    <circle cx="35.2753" cy="-43.9699" r="0.1475" fill="black"/>
+    <rect x="34.7828" y="-44.2649" width="0.295" height="0.295" transform="rotate(-90.0 34.9303 -44.1174)" fill="black"/>
+    <rect x="34.9303" y="-44.4124" width="0.345" height="0.295" fill="black"/>
+    <rect x="35.1278" y="-44.2649" width="0.295" height="0.295" transform="rotate(90.0 35.2753 -44.1174)" fill="black"/>
+    <rect x="34.9303" y="-44.1174" width="0.345" height="0.295" transform="rotate(180.0 35.1028 -43.9699)" fill="black"/>
+    <path d="M 34.9303 -44.9399 L 34.9303 -45.2349 L 35.2753 -45.2349 L 35.2753 -44.9399 L 34.9303 -44.9399" fill="black"/>
+    <circle cx="34.9303" cy="-44.9399" r="0.1475" fill="black"/>
+    <circle cx="34.9303" cy="-45.2349" r="0.1475" fill="black"/>
+    <circle cx="35.2753" cy="-45.2349" r="0.1475" fill="black"/>
+    <circle cx="35.2753" cy="-44.9399" r="0.1475" fill="black"/>
+    <rect x="34.7828" y="-45.2349" width="0.295" height="0.295" transform="rotate(-90.0 34.9303 -45.0874)" fill="black"/>
+    <rect x="34.9303" y="-45.3824" width="0.345" height="0.295" fill="black"/>
+    <rect x="35.1278" y="-45.2349" width="0.295" height="0.295" transform="rotate(90.0 35.2753 -45.0874)" fill="black"/>
+    <rect x="34.9303" y="-45.0874" width="0.345" height="0.295" transform="rotate(180.0 35.1028 -44.9399)" fill="black"/>
+    <path d="M 36.2155 -32.8729 L 35.9205 -32.8729 L 35.9205 -33.2179 L 36.2155 -33.2179 L 36.2155 -32.8729" fill="black"/>
+    <circle cx="36.2155" cy="-32.8729" r="0.1475" fill="black"/>
+    <circle cx="35.9205" cy="-32.8729" r="0.1475" fill="black"/>
+    <circle cx="35.9205" cy="-33.2179" r="0.1475" fill="black"/>
+    <circle cx="36.2155" cy="-33.2179" r="0.1475" fill="black"/>
+    <rect x="35.9205" y="-33.0204" width="0.295" height="0.295" transform="rotate(180.0 36.068 -32.8729)" fill="black"/>
+    <rect x="35.748" y="-33.1929" width="0.345" height="0.295" transform="rotate(-90.0 35.9205 -33.0454)" fill="black"/>
+    <rect x="35.9205" y="-33.3654" width="0.295" height="0.295" fill="black"/>
+    <rect x="36.043" y="-33.1929" width="0.345" height="0.295" transform="rotate(90.0 36.2155 -33.0454)" fill="black"/>
+    <path d="M 35.2455 -32.8729 L 34.9505 -32.8729 L 34.9505 -33.2179 L 35.2455 -33.2179 L 35.2455 -32.8729" fill="black"/>
+    <circle cx="35.2455" cy="-32.8729" r="0.1475" fill="black"/>
+    <circle cx="34.9505" cy="-32.8729" r="0.1475" fill="black"/>
+    <circle cx="34.9505" cy="-33.2179" r="0.1475" fill="black"/>
+    <circle cx="35.2455" cy="-33.2179" r="0.1475" fill="black"/>
+    <rect x="34.9505" y="-33.0204" width="0.295" height="0.295" transform="rotate(180.0 35.098 -32.8729)" fill="black"/>
+    <rect x="34.778" y="-33.1929" width="0.345" height="0.295" transform="rotate(-90.0 34.9505 -33.0454)" fill="black"/>
+    <rect x="34.9505" y="-33.3654" width="0.295" height="0.295" fill="black"/>
+    <rect x="35.073" y="-33.1929" width="0.345" height="0.295" transform="rotate(90.0 35.2455 -33.0454)" fill="black"/>
+    <path d="M 59.5732 -45.6999 L 59.2782 -45.6999 L 59.2782 -46.0449 L 59.5732 -46.0449 L 59.5732 -45.6999" fill="black"/>
+    <circle cx="59.5732" cy="-45.6999" r="0.1475" fill="black"/>
+    <circle cx="59.2782" cy="-45.6999" r="0.1475" fill="black"/>
+    <circle cx="59.2782" cy="-46.0449" r="0.1475" fill="black"/>
+    <circle cx="59.5732" cy="-46.0449" r="0.1475" fill="black"/>
+    <rect x="59.2782" y="-45.8474" width="0.295" height="0.295" transform="rotate(180.0 59.4257 -45.6999)" fill="black"/>
+    <rect x="59.1057" y="-46.0199" width="0.345" height="0.295" transform="rotate(-90.0 59.2782 -45.8724)" fill="black"/>
+    <rect x="59.2782" y="-46.1924" width="0.295" height="0.295" fill="black"/>
+    <rect x="59.4007" y="-46.0199" width="0.345" height="0.295" transform="rotate(90.0 59.5732 -45.8724)" fill="black"/>
+    <path d="M 58.6032 -45.6999 L 58.3082 -45.6999 L 58.3082 -46.0449 L 58.6032 -46.0449 L 58.6032 -45.6999" fill="black"/>
+    <circle cx="58.6032" cy="-45.6999" r="0.1475" fill="black"/>
+    <circle cx="58.3082" cy="-45.6999" r="0.1475" fill="black"/>
+    <circle cx="58.3082" cy="-46.0449" r="0.1475" fill="black"/>
+    <circle cx="58.6032" cy="-46.0449" r="0.1475" fill="black"/>
+    <rect x="58.3082" y="-45.8474" width="0.295" height="0.295" transform="rotate(180.0 58.4557 -45.6999)" fill="black"/>
+    <rect x="58.1357" y="-46.0199" width="0.345" height="0.295" transform="rotate(-90.0 58.3082 -45.8724)" fill="black"/>
+    <rect x="58.3082" y="-46.1924" width="0.295" height="0.295" fill="black"/>
+    <rect x="58.4307" y="-46.0199" width="0.345" height="0.295" transform="rotate(90.0 58.6032 -45.8724)" fill="black"/>
+    <path d="M 39.6035 -57.7035 L 39.8985 -57.7035 L 39.8985 -57.3585 L 39.6035 -57.3585 L 39.6035 -57.7035" fill="black"/>
+    <circle cx="39.6035" cy="-57.7035" r="0.1475" fill="black"/>
+    <circle cx="39.8985" cy="-57.7035" r="0.1475" fill="black"/>
+    <circle cx="39.8985" cy="-57.3585" r="0.1475" fill="black"/>
+    <circle cx="39.6035" cy="-57.3585" r="0.1475" fill="black"/>
+    <rect x="39.6035" y="-57.851" width="0.295" height="0.295" fill="black"/>
+    <rect x="39.726" y="-57.6785" width="0.345" height="0.295" transform="rotate(90.0 39.8985 -57.531)" fill="black"/>
+    <rect x="39.6035" y="-57.506" width="0.295" height="0.295" transform="rotate(180.0 39.751 -57.3585)" fill="black"/>
+    <rect x="39.431" y="-57.6785" width="0.345" height="0.295" transform="rotate(-90.0 39.6035 -57.531)" fill="black"/>
+    <path d="M 40.5735 -57.7035 L 40.8685 -57.7035 L 40.8685 -57.3585 L 40.5735 -57.3585 L 40.5735 -57.7035" fill="black"/>
+    <circle cx="40.5735" cy="-57.7035" r="0.1475" fill="black"/>
+    <circle cx="40.8685" cy="-57.7035" r="0.1475" fill="black"/>
+    <circle cx="40.8685" cy="-57.3585" r="0.1475" fill="black"/>
+    <circle cx="40.5735" cy="-57.3585" r="0.1475" fill="black"/>
+    <rect x="40.5735" y="-57.851" width="0.295" height="0.295" fill="black"/>
+    <rect x="40.696" y="-57.6785" width="0.345" height="0.295" transform="rotate(90.0 40.8685 -57.531)" fill="black"/>
+    <rect x="40.5735" y="-57.506" width="0.295" height="0.295" transform="rotate(180.0 40.721 -57.3585)" fill="black"/>
+    <rect x="40.401" y="-57.6785" width="0.345" height="0.295" transform="rotate(-90.0 40.5735 -57.531)" fill="black"/>
+    <path d="M 42.5705 -68.3715 L 42.8655 -68.3715 L 42.8655 -68.0265 L 42.5705 -68.0265 L 42.5705 -68.3715" fill="black"/>
+    <circle cx="42.5705" cy="-68.3715" r="0.1475" fill="black"/>
+    <circle cx="42.8655" cy="-68.3715" r="0.1475" fill="black"/>
+    <circle cx="42.8655" cy="-68.0265" r="0.1475" fill="black"/>
+    <circle cx="42.5705" cy="-68.0265" r="0.1475" fill="black"/>
+    <rect x="42.5705" y="-68.519" width="0.295" height="0.295" fill="black"/>
+    <rect x="42.693" y="-68.3465" width="0.345" height="0.295" transform="rotate(90.0 42.8655 -68.199)" fill="black"/>
+    <rect x="42.5705" y="-68.174" width="0.295" height="0.295" transform="rotate(180.0 42.718 -68.0265)" fill="black"/>
+    <rect x="42.398" y="-68.3465" width="0.345" height="0.295" transform="rotate(-90.0 42.5705 -68.199)" fill="black"/>
+    <path d="M 43.5405 -68.3715 L 43.8355 -68.3715 L 43.8355 -68.0265 L 43.5405 -68.0265 L 43.5405 -68.3715" fill="black"/>
+    <circle cx="43.5405" cy="-68.3715" r="0.1475" fill="black"/>
+    <circle cx="43.8355" cy="-68.3715" r="0.1475" fill="black"/>
+    <circle cx="43.8355" cy="-68.0265" r="0.1475" fill="black"/>
+    <circle cx="43.5405" cy="-68.0265" r="0.1475" fill="black"/>
+    <rect x="43.5405" y="-68.519" width="0.295" height="0.295" fill="black"/>
+    <rect x="43.663" y="-68.3465" width="0.345" height="0.295" transform="rotate(90.0 43.8355 -68.199)" fill="black"/>
+    <rect x="43.5405" y="-68.174" width="0.295" height="0.295" transform="rotate(180.0 43.688 -68.0265)" fill="black"/>
+    <rect x="43.368" y="-68.3465" width="0.345" height="0.295" transform="rotate(-90.0 43.5405 -68.199)" fill="black"/>
+    <path d="M 60.2995 -36.9115 L 60.0045 -36.9115 L 60.0045 -37.2565 L 60.2995 -37.2565 L 60.2995 -36.9115" fill="black"/>
+    <circle cx="60.2995" cy="-36.9115" r="0.1475" fill="black"/>
+    <circle cx="60.0045" cy="-36.9115" r="0.1475" fill="black"/>
+    <circle cx="60.0045" cy="-37.2565" r="0.1475" fill="black"/>
+    <circle cx="60.2995" cy="-37.2565" r="0.1475" fill="black"/>
+    <rect x="60.0045" y="-37.059" width="0.295" height="0.295" transform="rotate(180.0 60.152 -36.9115)" fill="black"/>
+    <rect x="59.832" y="-37.2315" width="0.345" height="0.295" transform="rotate(-90.0 60.0045 -37.084)" fill="black"/>
+    <rect x="60.0045" y="-37.404" width="0.295" height="0.295" fill="black"/>
+    <rect x="60.127" y="-37.2315" width="0.345" height="0.295" transform="rotate(90.0 60.2995 -37.084)" fill="black"/>
+    <path d="M 59.3295 -36.9115 L 59.0345 -36.9115 L 59.0345 -37.2565 L 59.3295 -37.2565 L 59.3295 -36.9115" fill="black"/>
+    <circle cx="59.3295" cy="-36.9115" r="0.1475" fill="black"/>
+    <circle cx="59.0345" cy="-36.9115" r="0.1475" fill="black"/>
+    <circle cx="59.0345" cy="-37.2565" r="0.1475" fill="black"/>
+    <circle cx="59.3295" cy="-37.2565" r="0.1475" fill="black"/>
+    <rect x="59.0345" y="-37.059" width="0.295" height="0.295" transform="rotate(180.0 59.182 -36.9115)" fill="black"/>
+    <rect x="58.862" y="-37.2315" width="0.345" height="0.295" transform="rotate(-90.0 59.0345 -37.084)" fill="black"/>
+    <rect x="59.0345" y="-37.404" width="0.295" height="0.295" fill="black"/>
+    <rect x="59.157" y="-37.2315" width="0.345" height="0.295" transform="rotate(90.0 59.3295 -37.084)" fill="black"/>
+    <path d="M 58.2475 -38.1025 L 58.2475 -38.3975 L 58.5925 -38.3975 L 58.5925 -38.1025 L 58.2475 -38.1025" fill="black"/>
+    <circle cx="58.2475" cy="-38.1025" r="0.1475" fill="black"/>
+    <circle cx="58.2475" cy="-38.3975" r="0.1475" fill="black"/>
+    <circle cx="58.5925" cy="-38.3975" r="0.1475" fill="black"/>
+    <circle cx="58.5925" cy="-38.1025" r="0.1475" fill="black"/>
+    <rect x="58.1" y="-38.3975" width="0.295" height="0.295" transform="rotate(-90.0 58.2475 -38.25)" fill="black"/>
+    <rect x="58.2475" y="-38.545" width="0.345" height="0.295" fill="black"/>
+    <rect x="58.445" y="-38.3975" width="0.295" height="0.295" transform="rotate(90.0 58.5925 -38.25)" fill="black"/>
+    <rect x="58.2475" y="-38.25" width="0.345" height="0.295" transform="rotate(180.0 58.42 -38.1025)" fill="black"/>
+    <path d="M 58.2475 -39.0725 L 58.2475 -39.3675 L 58.5925 -39.3675 L 58.5925 -39.0725 L 58.2475 -39.0725" fill="black"/>
+    <circle cx="58.2475" cy="-39.0725" r="0.1475" fill="black"/>
+    <circle cx="58.2475" cy="-39.3675" r="0.1475" fill="black"/>
+    <circle cx="58.5925" cy="-39.3675" r="0.1475" fill="black"/>
+    <circle cx="58.5925" cy="-39.0725" r="0.1475" fill="black"/>
+    <rect x="58.1" y="-39.3675" width="0.295" height="0.295" transform="rotate(-90.0 58.2475 -39.22)" fill="black"/>
+    <rect x="58.2475" y="-39.515" width="0.345" height="0.295" fill="black"/>
+    <rect x="58.445" y="-39.3675" width="0.295" height="0.295" transform="rotate(90.0 58.5925 -39.22)" fill="black"/>
+    <rect x="58.2475" y="-39.22" width="0.345" height="0.295" transform="rotate(180.0 58.42 -39.0725)" fill="black"/>
+    <path d="M 51.3535 -38.9635 L 51.3535 -38.6685 L 51.0085 -38.6685 L 51.0085 -38.9635 L 51.3535 -38.9635" fill="black"/>
+    <circle cx="51.3535" cy="-38.9635" r="0.1475" fill="black"/>
+    <circle cx="51.3535" cy="-38.6685" r="0.1475" fill="black"/>
+    <circle cx="51.0085" cy="-38.6685" r="0.1475" fill="black"/>
+    <circle cx="51.0085" cy="-38.9635" r="0.1475" fill="black"/>
+    <rect x="51.206" y="-38.9635" width="0.295" height="0.295" transform="rotate(90.0 51.3535 -38.816)" fill="black"/>
+    <rect x="51.0085" y="-38.816" width="0.345" height="0.295" transform="rotate(180.0 51.181 -38.6685)" fill="black"/>
+    <rect x="50.861" y="-38.9635" width="0.295" height="0.295" transform="rotate(-90.0 51.0085 -38.816)" fill="black"/>
+    <rect x="51.0085" y="-39.111" width="0.345" height="0.295" fill="black"/>
+    <path d="M 51.3535 -37.9935 L 51.3535 -37.6985 L 51.0085 -37.6985 L 51.0085 -37.9935 L 51.3535 -37.9935" fill="black"/>
+    <circle cx="51.3535" cy="-37.9935" r="0.1475" fill="black"/>
+    <circle cx="51.3535" cy="-37.6985" r="0.1475" fill="black"/>
+    <circle cx="51.0085" cy="-37.6985" r="0.1475" fill="black"/>
+    <circle cx="51.0085" cy="-37.9935" r="0.1475" fill="black"/>
+    <rect x="51.206" y="-37.9935" width="0.295" height="0.295" transform="rotate(90.0 51.3535 -37.846)" fill="black"/>
+    <rect x="51.0085" y="-37.846" width="0.345" height="0.295" transform="rotate(180.0 51.181 -37.6985)" fill="black"/>
+    <rect x="50.861" y="-37.9935" width="0.295" height="0.295" transform="rotate(-90.0 51.0085 -37.846)" fill="black"/>
+    <rect x="51.0085" y="-38.141" width="0.345" height="0.295" fill="black"/>
+    <path d="M 56.6442 -58.9438 L 56.6442 -58.5063 L 56.1317 -58.5063 L 56.1317 -58.9438 L 56.6442 -58.9438" fill="black"/>
+    <circle cx="56.6442" cy="-58.9438" r="0.21875" fill="black"/>
+    <circle cx="56.6442" cy="-58.5063" r="0.21875" fill="black"/>
+    <circle cx="56.1317" cy="-58.5063" r="0.21875" fill="black"/>
+    <circle cx="56.1317" cy="-58.9438" r="0.21875" fill="black"/>
+    <rect x="56.4255" y="-58.9438" width="0.4375" height="0.4375" transform="rotate(90.0 56.6442 -58.725)" fill="black"/>
+    <rect x="56.1317" y="-58.725" width="0.5125" height="0.4375" transform="rotate(180.0 56.388 -58.5063)" fill="black"/>
+    <rect x="55.913" y="-58.9438" width="0.4375" height="0.4375" transform="rotate(-90.0 56.1317 -58.725)" fill="black"/>
+    <rect x="56.1317" y="-59.1625" width="0.5125" height="0.4375" fill="black"/>
+    <path d="M 56.6442 -57.3687 L 56.6442 -56.9312 L 56.1317 -56.9312 L 56.1317 -57.3687 L 56.6442 -57.3687" fill="black"/>
+    <circle cx="56.6442" cy="-57.3687" r="0.21875" fill="black"/>
+    <circle cx="56.6442" cy="-56.9312" r="0.21875" fill="black"/>
+    <circle cx="56.1317" cy="-56.9312" r="0.21875" fill="black"/>
+    <circle cx="56.1317" cy="-57.3687" r="0.21875" fill="black"/>
+    <rect x="56.4255" y="-57.3687" width="0.4375" height="0.4375" transform="rotate(90.0 56.6442 -57.15)" fill="black"/>
+    <rect x="56.1317" y="-57.15" width="0.5125" height="0.4375" transform="rotate(180.0 56.388 -56.9312)" fill="black"/>
+    <rect x="55.913" y="-57.3687" width="0.4375" height="0.4375" transform="rotate(-90.0 56.1317 -57.15)" fill="black"/>
+    <rect x="56.1317" y="-57.5875" width="0.5125" height="0.4375" fill="black"/>
+    <path d="M 58.4222 -58.9438 L 58.4222 -58.5063 L 57.9097 -58.5063 L 57.9097 -58.9438 L 58.4222 -58.9438" fill="black"/>
+    <circle cx="58.4222" cy="-58.9438" r="0.21875" fill="black"/>
+    <circle cx="58.4222" cy="-58.5063" r="0.21875" fill="black"/>
+    <circle cx="57.9097" cy="-58.5063" r="0.21875" fill="black"/>
+    <circle cx="57.9097" cy="-58.9438" r="0.21875" fill="black"/>
+    <rect x="58.2035" y="-58.9438" width="0.4375" height="0.4375" transform="rotate(90.0 58.4222 -58.725)" fill="black"/>
+    <rect x="57.9097" y="-58.725" width="0.5125" height="0.4375" transform="rotate(180.0 58.166 -58.5063)" fill="black"/>
+    <rect x="57.691" y="-58.9438" width="0.4375" height="0.4375" transform="rotate(-90.0 57.9097 -58.725)" fill="black"/>
+    <rect x="57.9097" y="-59.1625" width="0.5125" height="0.4375" fill="black"/>
+    <path d="M 58.4222 -57.3687 L 58.4222 -56.9312 L 57.9097 -56.9312 L 57.9097 -57.3687 L 58.4222 -57.3687" fill="black"/>
+    <circle cx="58.4222" cy="-57.3687" r="0.21875" fill="black"/>
+    <circle cx="58.4222" cy="-56.9312" r="0.21875" fill="black"/>
+    <circle cx="57.9097" cy="-56.9312" r="0.21875" fill="black"/>
+    <circle cx="57.9097" cy="-57.3687" r="0.21875" fill="black"/>
+    <rect x="58.2035" y="-57.3687" width="0.4375" height="0.4375" transform="rotate(90.0 58.4222 -57.15)" fill="black"/>
+    <rect x="57.9097" y="-57.15" width="0.5125" height="0.4375" transform="rotate(180.0 58.166 -56.9312)" fill="black"/>
+    <rect x="57.691" y="-57.3687" width="0.4375" height="0.4375" transform="rotate(-90.0 57.9097 -57.15)" fill="black"/>
+    <rect x="57.9097" y="-57.5875" width="0.5125" height="0.4375" fill="black"/>
+    <path d="M 60.2003 -58.9438 L 60.2003 -58.5063 L 59.6878 -58.5063 L 59.6878 -58.9438 L 60.2003 -58.9438" fill="black"/>
+    <circle cx="60.2003" cy="-58.9438" r="0.21875" fill="black"/>
+    <circle cx="60.2003" cy="-58.5063" r="0.21875" fill="black"/>
+    <circle cx="59.6878" cy="-58.5063" r="0.21875" fill="black"/>
+    <circle cx="59.6878" cy="-58.9438" r="0.21875" fill="black"/>
+    <rect x="59.9815" y="-58.9438" width="0.4375" height="0.4375" transform="rotate(90.0 60.2003 -58.725)" fill="black"/>
+    <rect x="59.6878" y="-58.725" width="0.5125" height="0.4375" transform="rotate(180.0 59.944 -58.5063)" fill="black"/>
+    <rect x="59.469" y="-58.9438" width="0.4375" height="0.4375" transform="rotate(-90.0 59.6878 -58.725)" fill="black"/>
+    <rect x="59.6878" y="-59.1625" width="0.5125" height="0.4375" fill="black"/>
+    <path d="M 60.2003 -57.3687 L 60.2003 -56.9312 L 59.6878 -56.9312 L 59.6878 -57.3687 L 60.2003 -57.3687" fill="black"/>
+    <circle cx="60.2003" cy="-57.3687" r="0.21875" fill="black"/>
+    <circle cx="60.2003" cy="-56.9312" r="0.21875" fill="black"/>
+    <circle cx="59.6878" cy="-56.9312" r="0.21875" fill="black"/>
+    <circle cx="59.6878" cy="-57.3687" r="0.21875" fill="black"/>
+    <rect x="59.9815" y="-57.3687" width="0.4375" height="0.4375" transform="rotate(90.0 60.2003 -57.15)" fill="black"/>
+    <rect x="59.6878" y="-57.15" width="0.5125" height="0.4375" transform="rotate(180.0 59.944 -56.9312)" fill="black"/>
+    <rect x="59.469" y="-57.3687" width="0.4375" height="0.4375" transform="rotate(-90.0 59.6878 -57.15)" fill="black"/>
+    <rect x="59.6878" y="-57.5875" width="0.5125" height="0.4375" fill="black"/>
+    <rect x="60.989" y="-30.111" width="0.45" height="0.6" fill="black"/>
+    <rect x="60.989" y="-32.211" width="0.45" height="0.6" fill="black"/>
+    <rect x="32.119" y="-50.8345" width="0.6" height="0.45" fill="black"/>
+    <rect x="30.019" y="-50.8345" width="0.6" height="0.45" fill="black"/>
+    <rect x="34.6402" y="-31.5938" width="0.6" height="1.15" fill="black"/>
+    <rect x="35.5902" y="-31.5938" width="0.6" height="1.15" fill="black"/>
+    <rect x="36.5402" y="-31.5938" width="0.6" height="1.15" fill="black"/>
+    <rect x="36.5402" y="-29.0938" width="0.6" height="1.15" fill="black"/>
+    <rect x="34.6402" y="-29.0938" width="0.6" height="1.15" fill="black"/>
+    <path d="M 61.8513 -39.0048 L 61.8513 -38.5673 L 61.3387 -38.5673 L 61.3387 -39.0048 L 61.8513 -39.0048" fill="black"/>
+    <circle cx="61.8513" cy="-39.0048" r="0.21875" fill="black"/>
+    <circle cx="61.8513" cy="-38.5673" r="0.21875" fill="black"/>
+    <circle cx="61.3387" cy="-38.5673" r="0.21875" fill="black"/>
+    <circle cx="61.3387" cy="-39.0048" r="0.21875" fill="black"/>
+    <rect x="61.6325" y="-39.0048" width="0.4375" height="0.4375" transform="rotate(90.0 61.8513 -38.786)" fill="black"/>
+    <rect x="61.3387" y="-38.786" width="0.5125" height="0.4375" transform="rotate(180.0 61.595 -38.5673)" fill="black"/>
+    <rect x="61.12" y="-39.0048" width="0.4375" height="0.4375" transform="rotate(-90.0 61.3387 -38.786)" fill="black"/>
+    <rect x="61.3387" y="-39.2235" width="0.5125" height="0.4375" fill="black"/>
+    <path d="M 61.8513 -37.4297 L 61.8513 -36.9922 L 61.3387 -36.9922 L 61.3387 -37.4297 L 61.8513 -37.4297" fill="black"/>
+    <circle cx="61.8513" cy="-37.4297" r="0.21875" fill="black"/>
+    <circle cx="61.8513" cy="-36.9922" r="0.21875" fill="black"/>
+    <circle cx="61.3387" cy="-36.9922" r="0.21875" fill="black"/>
+    <circle cx="61.3387" cy="-37.4297" r="0.21875" fill="black"/>
+    <rect x="61.6325" y="-37.4297" width="0.4375" height="0.4375" transform="rotate(90.0 61.8513 -37.211)" fill="black"/>
+    <rect x="61.3387" y="-37.211" width="0.5125" height="0.4375" transform="rotate(180.0 61.595 -36.9922)" fill="black"/>
+    <rect x="61.12" y="-37.4297" width="0.4375" height="0.4375" transform="rotate(-90.0 61.3387 -37.211)" fill="black"/>
+    <rect x="61.3387" y="-37.6485" width="0.5125" height="0.4375" fill="black"/>
+    <path d="M 59.6878 -38.2623 L 59.6878 -38.6998 L 60.2003 -38.6998 L 60.2003 -38.2623 L 59.6878 -38.2623" fill="black"/>
+    <circle cx="59.6878" cy="-38.2623" r="0.21875" fill="black"/>
+    <circle cx="59.6878" cy="-38.6998" r="0.21875" fill="black"/>
+    <circle cx="60.2003" cy="-38.6998" r="0.21875" fill="black"/>
+    <circle cx="60.2003" cy="-38.2623" r="0.21875" fill="black"/>
+    <rect x="59.469" y="-38.6998" width="0.4375" height="0.4375" transform="rotate(-90.0 59.6878 -38.481)" fill="black"/>
+    <rect x="59.6878" y="-38.9185" width="0.5125" height="0.4375" fill="black"/>
+    <rect x="59.9815" y="-38.6998" width="0.4375" height="0.4375" transform="rotate(90.0 60.2003 -38.481)" fill="black"/>
+    <rect x="59.6878" y="-38.481" width="0.5125" height="0.4375" transform="rotate(180.0 59.944 -38.2623)" fill="black"/>
+    <path d="M 59.6878 -39.8372 L 59.6878 -40.2747 L 60.2003 -40.2747 L 60.2003 -39.8372 L 59.6878 -39.8372" fill="black"/>
+    <circle cx="59.6878" cy="-39.8372" r="0.21875" fill="black"/>
+    <circle cx="59.6878" cy="-40.2747" r="0.21875" fill="black"/>
+    <circle cx="60.2003" cy="-40.2747" r="0.21875" fill="black"/>
+    <circle cx="60.2003" cy="-39.8372" r="0.21875" fill="black"/>
+    <rect x="59.469" y="-40.2747" width="0.4375" height="0.4375" transform="rotate(-90.0 59.6878 -40.056)" fill="black"/>
+    <rect x="59.6878" y="-40.4935" width="0.5125" height="0.4375" fill="black"/>
+    <rect x="59.9815" y="-40.2747" width="0.4375" height="0.4375" transform="rotate(90.0 60.2003 -40.056)" fill="black"/>
+    <rect x="59.6878" y="-40.056" width="0.5125" height="0.4375" transform="rotate(180.0 59.944 -39.8372)" fill="black"/>
+    <rect x="30.042" y="-57.756" width="0.95" height="0.45" fill="black"/>
+    <rect x="30.042" y="-59.026" width="0.95" height="0.45" fill="black"/>
+    <rect x="30.042" y="-60.296" width="0.95" height="0.45" fill="black"/>
+    <rect x="30.042" y="-61.566" width="0.95" height="0.45" fill="black"/>
+    <rect x="37.842" y="-61.566" width="0.95" height="0.45" fill="black"/>
+    <rect x="37.842" y="-60.296" width="0.95" height="0.45" fill="black"/>
+    <rect x="37.842" y="-59.026" width="0.95" height="0.45" fill="black"/>
+    <rect x="37.842" y="-57.756" width="0.95" height="0.45" fill="black"/>
+    <rect x="32.692" y="-61.611" width="3.45" height="4.35" fill="black"/>
+    <rect x="55.353" y="-65.42" width="0.8" height="1.3" fill="black"/>
+    <path d="M 57.003 -65.02 L 57.003 -64.52" fill="none" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="0.8"/>
+    <path d="M 58.253 -65.02 L 58.253 -64.52" fill="none" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="0.8"/>
+    <path d="M 59.503 -65.02 L 59.503 -64.52" fill="none" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="0.8"/>
+    <rect x="64.12" y="-59.074" width="1.3" height="0.8" fill="black"/>
+    <path d="M 64.52 -57.424 L 65.02 -57.424" fill="none" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="0.8"/>
+    <path d="M 64.52 -56.174 L 65.02 -56.174" fill="none" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="0.8"/>
+    <path d="M 64.52 -54.924 L 65.02 -54.924" fill="none" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="0.8"/>
+    <rect x="43.265" y="-67.177" width="0.33" height="0.3" fill="black"/>
+    <rect x="43.255" y="-66.717" width="0.3" height="0.33" fill="black"/>
+    <rect x="42.765" y="-66.727" width="0.33" height="0.3" fill="black"/>
+    <rect x="42.805" y="-67.217" width="0.3" height="0.33" fill="black"/>
+    <rect x="43.579" y="-38.034" width="0.35" height="0.58" fill="black"/>
+    <rect x="44.079" y="-38.034" width="0.35" height="0.58" fill="black"/>
+    <rect x="44.579" y="-38.034" width="0.35" height="0.58" fill="black"/>
+    <rect x="45.079" y="-38.034" width="0.35" height="0.58" fill="black"/>
+    <rect x="45.579" y="-38.034" width="0.35" height="0.58" fill="black"/>
+    <rect x="46.079" y="-38.034" width="0.35" height="0.58" fill="black"/>
+    <rect x="46.579" y="-38.034" width="0.35" height="0.58" fill="black"/>
+    <rect x="46.874" y="-39.079" width="0.58" height="0.35" fill="black"/>
+    <rect x="46.579" y="-40.354" width="0.35" height="0.58" fill="black"/>
+    <rect x="46.079" y="-40.354" width="0.35" height="0.58" fill="black"/>
+    <rect x="45.579" y="-40.354" width="0.35" height="0.58" fill="black"/>
+    <rect x="45.079" y="-40.354" width="0.35" height="0.58" fill="black"/>
+    <rect x="44.579" y="-40.354" width="0.35" height="0.58" fill="black"/>
+    <rect x="44.079" y="-40.354" width="0.35" height="0.58" fill="black"/>
+    <rect x="43.579" y="-40.354" width="0.35" height="0.58" fill="black"/>
+    <rect x="43.054" y="-39.079" width="0.58" height="0.35" fill="black"/>
+    <rect x="30.869" y="-54.7925" width="1.0" height="1.0" fill="black"/>
+    <path d="M 31.369 -53.0225 L 31.369 -53.0225" fill="none" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.0"/>
+    <path d="M 32.92 -35.463 L 33.795 -35.463 L 33.795 -35.313 L 32.92 -35.313 L 32.92 -35.463" fill="black"/>
+    <circle cx="32.92" cy="-35.463" r="0.075" fill="black"/>
+    <circle cx="33.795" cy="-35.463" r="0.075" fill="black"/>
+    <circle cx="33.795" cy="-35.313" r="0.075" fill="black"/>
+    <circle cx="32.92" cy="-35.313" r="0.075" fill="black"/>
+    <rect x="32.92" y="-35.538" width="0.875" height="0.15" fill="black"/>
+    <rect x="33.72" y="-35.463" width="0.15" height="0.15" transform="rotate(90.0 33.795 -35.388)" fill="black"/>
+    <rect x="32.92" y="-35.388" width="0.875" height="0.15" transform="rotate(180.0 33.3575 -35.313)" fill="black"/>
+    <rect x="32.845" y="-35.463" width="0.15" height="0.15" transform="rotate(-90.0 32.92 -35.388)" fill="black"/>
+    <path d="M 32.92 -36.113 L 33.795 -36.113 L 33.795 -35.963 L 32.92 -35.963 L 32.92 -36.113" fill="black"/>
+    <circle cx="32.92" cy="-36.113" r="0.075" fill="black"/>
+    <circle cx="33.795" cy="-36.113" r="0.075" fill="black"/>
+    <circle cx="33.795" cy="-35.963" r="0.075" fill="black"/>
+    <circle cx="32.92" cy="-35.963" r="0.075" fill="black"/>
+    <rect x="32.92" y="-36.188" width="0.875" height="0.15" fill="black"/>
+    <rect x="33.72" y="-36.113" width="0.15" height="0.15" transform="rotate(90.0 33.795 -36.038)" fill="black"/>
+    <rect x="32.92" y="-36.038" width="0.875" height="0.15" transform="rotate(180.0 33.3575 -35.963)" fill="black"/>
+    <rect x="32.845" y="-36.113" width="0.15" height="0.15" transform="rotate(-90.0 32.92 -36.038)" fill="black"/>
+    <path d="M 32.92 -36.763 L 33.795 -36.763 L 33.795 -36.613 L 32.92 -36.613 L 32.92 -36.763" fill="black"/>
+    <circle cx="32.92" cy="-36.763" r="0.075" fill="black"/>
+    <circle cx="33.795" cy="-36.763" r="0.075" fill="black"/>
+    <circle cx="33.795" cy="-36.613" r="0.075" fill="black"/>
+    <circle cx="32.92" cy="-36.613" r="0.075" fill="black"/>
+    <rect x="32.92" y="-36.838" width="0.875" height="0.15" fill="black"/>
+    <rect x="33.72" y="-36.763" width="0.15" height="0.15" transform="rotate(90.0 33.795 -36.688)" fill="black"/>
+    <rect x="32.92" y="-36.688" width="0.875" height="0.15" transform="rotate(180.0 33.3575 -36.613)" fill="black"/>
+    <rect x="32.845" y="-36.763" width="0.15" height="0.15" transform="rotate(-90.0 32.92 -36.688)" fill="black"/>
+    <path d="M 32.92 -37.413 L 33.795 -37.413 L 33.795 -37.263 L 32.92 -37.263 L 32.92 -37.413" fill="black"/>
+    <circle cx="32.92" cy="-37.413" r="0.075" fill="black"/>
+    <circle cx="33.795" cy="-37.413" r="0.075" fill="black"/>
+    <circle cx="33.795" cy="-37.263" r="0.075" fill="black"/>
+    <circle cx="32.92" cy="-37.263" r="0.075" fill="black"/>
+    <rect x="32.92" y="-37.488" width="0.875" height="0.15" fill="black"/>
+    <rect x="33.72" y="-37.413" width="0.15" height="0.15" transform="rotate(90.0 33.795 -37.338)" fill="black"/>
+    <rect x="32.92" y="-37.338" width="0.875" height="0.15" transform="rotate(180.0 33.3575 -37.263)" fill="black"/>
+    <rect x="32.845" y="-37.413" width="0.15" height="0.15" transform="rotate(-90.0 32.92 -37.338)" fill="black"/>
+    <path d="M 32.92 -38.063 L 33.795 -38.063 L 33.795 -37.913 L 32.92 -37.913 L 32.92 -38.063" fill="black"/>
+    <circle cx="32.92" cy="-38.063" r="0.075" fill="black"/>
+    <circle cx="33.795" cy="-38.063" r="0.075" fill="black"/>
+    <circle cx="33.795" cy="-37.913" r="0.075" fill="black"/>
+    <circle cx="32.92" cy="-37.913" r="0.075" fill="black"/>
+    <rect x="32.92" y="-38.138" width="0.875" height="0.15" fill="black"/>
+    <rect x="33.72" y="-38.063" width="0.15" height="0.15" transform="rotate(90.0 33.795 -37.988)" fill="black"/>
+    <rect x="32.92" y="-37.988" width="0.875" height="0.15" transform="rotate(180.0 33.3575 -37.913)" fill="black"/>
+    <rect x="32.845" y="-38.063" width="0.15" height="0.15" transform="rotate(-90.0 32.92 -37.988)" fill="black"/>
+    <path d="M 32.92 -38.713 L 33.795 -38.713 L 33.795 -38.563 L 32.92 -38.563 L 32.92 -38.713" fill="black"/>
+    <circle cx="32.92" cy="-38.713" r="0.075" fill="black"/>
+    <circle cx="33.795" cy="-38.713" r="0.075" fill="black"/>
+    <circle cx="33.795" cy="-38.563" r="0.075" fill="black"/>
+    <circle cx="32.92" cy="-38.563" r="0.075" fill="black"/>
+    <rect x="32.92" y="-38.788" width="0.875" height="0.15" fill="black"/>
+    <rect x="33.72" y="-38.713" width="0.15" height="0.15" transform="rotate(90.0 33.795 -38.638)" fill="black"/>
+    <rect x="32.92" y="-38.638" width="0.875" height="0.15" transform="rotate(180.0 33.3575 -38.563)" fill="black"/>
+    <rect x="32.845" y="-38.713" width="0.15" height="0.15" transform="rotate(-90.0 32.92 -38.638)" fill="black"/>
+    <path d="M 32.92 -39.363 L 33.795 -39.363 L 33.795 -39.213 L 32.92 -39.213 L 32.92 -39.363" fill="black"/>
+    <circle cx="32.92" cy="-39.363" r="0.075" fill="black"/>
+    <circle cx="33.795" cy="-39.363" r="0.075" fill="black"/>
+    <circle cx="33.795" cy="-39.213" r="0.075" fill="black"/>
+    <circle cx="32.92" cy="-39.213" r="0.075" fill="black"/>
+    <rect x="32.92" y="-39.438" width="0.875" height="0.15" fill="black"/>
+    <rect x="33.72" y="-39.363" width="0.15" height="0.15" transform="rotate(90.0 33.795 -39.288)" fill="black"/>
+    <rect x="32.92" y="-39.288" width="0.875" height="0.15" transform="rotate(180.0 33.3575 -39.213)" fill="black"/>
+    <rect x="32.845" y="-39.363" width="0.15" height="0.15" transform="rotate(-90.0 32.92 -39.288)" fill="black"/>
+    <path d="M 34.17 -40.613 L 34.32 -40.613 L 34.32 -39.738 L 34.17 -39.738 L 34.17 -40.613" fill="black"/>
+    <circle cx="34.17" cy="-40.613" r="0.075" fill="black"/>
+    <circle cx="34.32" cy="-40.613" r="0.075" fill="black"/>
+    <circle cx="34.32" cy="-39.738" r="0.075" fill="black"/>
+    <circle cx="34.17" cy="-39.738" r="0.075" fill="black"/>
+    <rect x="34.17" y="-40.688" width="0.15" height="0.15" fill="black"/>
+    <rect x="33.8825" y="-40.2505" width="0.875" height="0.15" transform="rotate(90.0 34.32 -40.1755)" fill="black"/>
+    <rect x="34.17" y="-39.813" width="0.15" height="0.15" transform="rotate(180.0 34.245 -39.738)" fill="black"/>
+    <rect x="33.7325" y="-40.2505" width="0.875" height="0.15" transform="rotate(-90.0 34.17 -40.1755)" fill="black"/>
+    <path d="M 34.82 -40.613 L 34.97 -40.613 L 34.97 -39.738 L 34.82 -39.738 L 34.82 -40.613" fill="black"/>
+    <circle cx="34.82" cy="-40.613" r="0.075" fill="black"/>
+    <circle cx="34.97" cy="-40.613" r="0.075" fill="black"/>
+    <circle cx="34.97" cy="-39.738" r="0.075" fill="black"/>
+    <circle cx="34.82" cy="-39.738" r="0.075" fill="black"/>
+    <rect x="34.82" y="-40.688" width="0.15" height="0.15" fill="black"/>
+    <rect x="34.5325" y="-40.2505" width="0.875" height="0.15" transform="rotate(90.0 34.97 -40.1755)" fill="black"/>
+    <rect x="34.82" y="-39.813" width="0.15" height="0.15" transform="rotate(180.0 34.895 -39.738)" fill="black"/>
+    <rect x="34.3825" y="-40.2505" width="0.875" height="0.15" transform="rotate(-90.0 34.82 -40.1755)" fill="black"/>
+    <path d="M 35.47 -40.613 L 35.62 -40.613 L 35.62 -39.738 L 35.47 -39.738 L 35.47 -40.613" fill="black"/>
+    <circle cx="35.47" cy="-40.613" r="0.075" fill="black"/>
+    <circle cx="35.62" cy="-40.613" r="0.075" fill="black"/>
+    <circle cx="35.62" cy="-39.738" r="0.075" fill="black"/>
+    <circle cx="35.47" cy="-39.738" r="0.075" fill="black"/>
+    <rect x="35.47" y="-40.688" width="0.15" height="0.15" fill="black"/>
+    <rect x="35.1825" y="-40.2505" width="0.875" height="0.15" transform="rotate(90.0 35.62 -40.1755)" fill="black"/>
+    <rect x="35.47" y="-39.813" width="0.15" height="0.15" transform="rotate(180.0 35.545 -39.738)" fill="black"/>
+    <rect x="35.0325" y="-40.2505" width="0.875" height="0.15" transform="rotate(-90.0 35.47 -40.1755)" fill="black"/>
+    <path d="M 36.12 -40.613 L 36.27 -40.613 L 36.27 -39.738 L 36.12 -39.738 L 36.12 -40.613" fill="black"/>
+    <circle cx="36.12" cy="-40.613" r="0.075" fill="black"/>
+    <circle cx="36.27" cy="-40.613" r="0.075" fill="black"/>
+    <circle cx="36.27" cy="-39.738" r="0.075" fill="black"/>
+    <circle cx="36.12" cy="-39.738" r="0.075" fill="black"/>
+    <rect x="36.12" y="-40.688" width="0.15" height="0.15" fill="black"/>
+    <rect x="35.8325" y="-40.2505" width="0.875" height="0.15" transform="rotate(90.0 36.27 -40.1755)" fill="black"/>
+    <rect x="36.12" y="-39.813" width="0.15" height="0.15" transform="rotate(180.0 36.195 -39.738)" fill="black"/>
+    <rect x="35.6825" y="-40.2505" width="0.875" height="0.15" transform="rotate(-90.0 36.12 -40.1755)" fill="black"/>
+    <path d="M 36.77 -40.613 L 36.92 -40.613 L 36.92 -39.738 L 36.77 -39.738 L 36.77 -40.613" fill="black"/>
+    <circle cx="36.77" cy="-40.613" r="0.075" fill="black"/>
+    <circle cx="36.92" cy="-40.613" r="0.075" fill="black"/>
+    <circle cx="36.92" cy="-39.738" r="0.075" fill="black"/>
+    <circle cx="36.77" cy="-39.738" r="0.075" fill="black"/>
+    <rect x="36.77" y="-40.688" width="0.15" height="0.15" fill="black"/>
+    <rect x="36.4825" y="-40.2505" width="0.875" height="0.15" transform="rotate(90.0 36.92 -40.1755)" fill="black"/>
+    <rect x="36.77" y="-39.813" width="0.15" height="0.15" transform="rotate(180.0 36.845 -39.738)" fill="black"/>
+    <rect x="36.3325" y="-40.2505" width="0.875" height="0.15" transform="rotate(-90.0 36.77 -40.1755)" fill="black"/>
+    <path d="M 37.42 -40.613 L 37.57 -40.613 L 37.57 -39.738 L 37.42 -39.738 L 37.42 -40.613" fill="black"/>
+    <circle cx="37.42" cy="-40.613" r="0.075" fill="black"/>
+    <circle cx="37.57" cy="-40.613" r="0.075" fill="black"/>
+    <circle cx="37.57" cy="-39.738" r="0.075" fill="black"/>
+    <circle cx="37.42" cy="-39.738" r="0.075" fill="black"/>
+    <rect x="37.42" y="-40.688" width="0.15" height="0.15" fill="black"/>
+    <rect x="37.1325" y="-40.2505" width="0.875" height="0.15" transform="rotate(90.0 37.57 -40.1755)" fill="black"/>
+    <rect x="37.42" y="-39.813" width="0.15" height="0.15" transform="rotate(180.0 37.495 -39.738)" fill="black"/>
+    <rect x="36.9825" y="-40.2505" width="0.875" height="0.15" transform="rotate(-90.0 37.42 -40.1755)" fill="black"/>
+    <path d="M 38.07 -40.613 L 38.22 -40.613 L 38.22 -39.738 L 38.07 -39.738 L 38.07 -40.613" fill="black"/>
+    <circle cx="38.07" cy="-40.613" r="0.075" fill="black"/>
+    <circle cx="38.22" cy="-40.613" r="0.075" fill="black"/>
+    <circle cx="38.22" cy="-39.738" r="0.075" fill="black"/>
+    <circle cx="38.07" cy="-39.738" r="0.075" fill="black"/>
+    <rect x="38.07" y="-40.688" width="0.15" height="0.15" fill="black"/>
+    <rect x="37.7825" y="-40.2505" width="0.875" height="0.15" transform="rotate(90.0 38.22 -40.1755)" fill="black"/>
+    <rect x="38.07" y="-39.813" width="0.15" height="0.15" transform="rotate(180.0 38.145 -39.738)" fill="black"/>
+    <rect x="37.6325" y="-40.2505" width="0.875" height="0.15" transform="rotate(-90.0 38.07 -40.1755)" fill="black"/>
+    <path d="M 38.595 -39.363 L 39.47 -39.363 L 39.47 -39.213 L 38.595 -39.213 L 38.595 -39.363" fill="black"/>
+    <circle cx="38.595" cy="-39.363" r="0.075" fill="black"/>
+    <circle cx="39.47" cy="-39.363" r="0.075" fill="black"/>
+    <circle cx="39.47" cy="-39.213" r="0.075" fill="black"/>
+    <circle cx="38.595" cy="-39.213" r="0.075" fill="black"/>
+    <rect x="38.595" y="-39.438" width="0.875" height="0.15" fill="black"/>
+    <rect x="39.395" y="-39.363" width="0.15" height="0.15" transform="rotate(90.0 39.47 -39.288)" fill="black"/>
+    <rect x="38.595" y="-39.288" width="0.875" height="0.15" transform="rotate(180.0 39.0325 -39.213)" fill="black"/>
+    <rect x="38.52" y="-39.363" width="0.15" height="0.15" transform="rotate(-90.0 38.595 -39.288)" fill="black"/>
+    <path d="M 38.595 -38.713 L 39.47 -38.713 L 39.47 -38.563 L 38.595 -38.563 L 38.595 -38.713" fill="black"/>
+    <circle cx="38.595" cy="-38.713" r="0.075" fill="black"/>
+    <circle cx="39.47" cy="-38.713" r="0.075" fill="black"/>
+    <circle cx="39.47" cy="-38.563" r="0.075" fill="black"/>
+    <circle cx="38.595" cy="-38.563" r="0.075" fill="black"/>
+    <rect x="38.595" y="-38.788" width="0.875" height="0.15" fill="black"/>
+    <rect x="39.395" y="-38.713" width="0.15" height="0.15" transform="rotate(90.0 39.47 -38.638)" fill="black"/>
+    <rect x="38.595" y="-38.638" width="0.875" height="0.15" transform="rotate(180.0 39.0325 -38.563)" fill="black"/>
+    <rect x="38.52" y="-38.713" width="0.15" height="0.15" transform="rotate(-90.0 38.595 -38.638)" fill="black"/>
+    <path d="M 38.595 -38.063 L 39.47 -38.063 L 39.47 -37.913 L 38.595 -37.913 L 38.595 -38.063" fill="black"/>
+    <circle cx="38.595" cy="-38.063" r="0.075" fill="black"/>
+    <circle cx="39.47" cy="-38.063" r="0.075" fill="black"/>
+    <circle cx="39.47" cy="-37.913" r="0.075" fill="black"/>
+    <circle cx="38.595" cy="-37.913" r="0.075" fill="black"/>
+    <rect x="38.595" y="-38.138" width="0.875" height="0.15" fill="black"/>
+    <rect x="39.395" y="-38.063" width="0.15" height="0.15" transform="rotate(90.0 39.47 -37.988)" fill="black"/>
+    <rect x="38.595" y="-37.988" width="0.875" height="0.15" transform="rotate(180.0 39.0325 -37.913)" fill="black"/>
+    <rect x="38.52" y="-38.063" width="0.15" height="0.15" transform="rotate(-90.0 38.595 -37.988)" fill="black"/>
+    <path d="M 38.595 -37.413 L 39.47 -37.413 L 39.47 -37.263 L 38.595 -37.263 L 38.595 -37.413" fill="black"/>
+    <circle cx="38.595" cy="-37.413" r="0.075" fill="black"/>
+    <circle cx="39.47" cy="-37.413" r="0.075" fill="black"/>
+    <circle cx="39.47" cy="-37.263" r="0.075" fill="black"/>
+    <circle cx="38.595" cy="-37.263" r="0.075" fill="black"/>
+    <rect x="38.595" y="-37.488" width="0.875" height="0.15" fill="black"/>
+    <rect x="39.395" y="-37.413" width="0.15" height="0.15" transform="rotate(90.0 39.47 -37.338)" fill="black"/>
+    <rect x="38.595" y="-37.338" width="0.875" height="0.15" transform="rotate(180.0 39.0325 -37.263)" fill="black"/>
+    <rect x="38.52" y="-37.413" width="0.15" height="0.15" transform="rotate(-90.0 38.595 -37.338)" fill="black"/>
+    <path d="M 38.595 -36.763 L 39.47 -36.763 L 39.47 -36.613 L 38.595 -36.613 L 38.595 -36.763" fill="black"/>
+    <circle cx="38.595" cy="-36.763" r="0.075" fill="black"/>
+    <circle cx="39.47" cy="-36.763" r="0.075" fill="black"/>
+    <circle cx="39.47" cy="-36.613" r="0.075" fill="black"/>
+    <circle cx="38.595" cy="-36.613" r="0.075" fill="black"/>
+    <rect x="38.595" y="-36.838" width="0.875" height="0.15" fill="black"/>
+    <rect x="39.395" y="-36.763" width="0.15" height="0.15" transform="rotate(90.0 39.47 -36.688)" fill="black"/>
+    <rect x="38.595" y="-36.688" width="0.875" height="0.15" transform="rotate(180.0 39.0325 -36.613)" fill="black"/>
+    <rect x="38.52" y="-36.763" width="0.15" height="0.15" transform="rotate(-90.0 38.595 -36.688)" fill="black"/>
+    <path d="M 38.595 -36.113 L 39.47 -36.113 L 39.47 -35.963 L 38.595 -35.963 L 38.595 -36.113" fill="black"/>
+    <circle cx="38.595" cy="-36.113" r="0.075" fill="black"/>
+    <circle cx="39.47" cy="-36.113" r="0.075" fill="black"/>
+    <circle cx="39.47" cy="-35.963" r="0.075" fill="black"/>
+    <circle cx="38.595" cy="-35.963" r="0.075" fill="black"/>
+    <rect x="38.595" y="-36.188" width="0.875" height="0.15" fill="black"/>
+    <rect x="39.395" y="-36.113" width="0.15" height="0.15" transform="rotate(90.0 39.47 -36.038)" fill="black"/>
+    <rect x="38.595" y="-36.038" width="0.875" height="0.15" transform="rotate(180.0 39.0325 -35.963)" fill="black"/>
+    <rect x="38.52" y="-36.113" width="0.15" height="0.15" transform="rotate(-90.0 38.595 -36.038)" fill="black"/>
+    <path d="M 38.595 -35.463 L 39.47 -35.463 L 39.47 -35.313 L 38.595 -35.313 L 38.595 -35.463" fill="black"/>
+    <circle cx="38.595" cy="-35.463" r="0.075" fill="black"/>
+    <circle cx="39.47" cy="-35.463" r="0.075" fill="black"/>
+    <circle cx="39.47" cy="-35.313" r="0.075" fill="black"/>
+    <circle cx="38.595" cy="-35.313" r="0.075" fill="black"/>
+    <rect x="38.595" y="-35.538" width="0.875" height="0.15" fill="black"/>
+    <rect x="39.395" y="-35.463" width="0.15" height="0.15" transform="rotate(90.0 39.47 -35.388)" fill="black"/>
+    <rect x="38.595" y="-35.388" width="0.875" height="0.15" transform="rotate(180.0 39.0325 -35.313)" fill="black"/>
+    <rect x="38.52" y="-35.463" width="0.15" height="0.15" transform="rotate(-90.0 38.595 -35.388)" fill="black"/>
+    <path d="M 38.07 -34.938 L 38.22 -34.938 L 38.22 -34.063 L 38.07 -34.063 L 38.07 -34.938" fill="black"/>
+    <circle cx="38.07" cy="-34.938" r="0.075" fill="black"/>
+    <circle cx="38.22" cy="-34.938" r="0.075" fill="black"/>
+    <circle cx="38.22" cy="-34.063" r="0.075" fill="black"/>
+    <circle cx="38.07" cy="-34.063" r="0.075" fill="black"/>
+    <rect x="38.07" y="-35.013" width="0.15" height="0.15" fill="black"/>
+    <rect x="37.7825" y="-34.5755" width="0.875" height="0.15" transform="rotate(90.0 38.22 -34.5005)" fill="black"/>
+    <rect x="38.07" y="-34.138" width="0.15" height="0.15" transform="rotate(180.0 38.145 -34.063)" fill="black"/>
+    <rect x="37.6325" y="-34.5755" width="0.875" height="0.15" transform="rotate(-90.0 38.07 -34.5005)" fill="black"/>
+    <path d="M 37.42 -34.938 L 37.57 -34.938 L 37.57 -34.063 L 37.42 -34.063 L 37.42 -34.938" fill="black"/>
+    <circle cx="37.42" cy="-34.938" r="0.075" fill="black"/>
+    <circle cx="37.57" cy="-34.938" r="0.075" fill="black"/>
+    <circle cx="37.57" cy="-34.063" r="0.075" fill="black"/>
+    <circle cx="37.42" cy="-34.063" r="0.075" fill="black"/>
+    <rect x="37.42" y="-35.013" width="0.15" height="0.15" fill="black"/>
+    <rect x="37.1325" y="-34.5755" width="0.875" height="0.15" transform="rotate(90.0 37.57 -34.5005)" fill="black"/>
+    <rect x="37.42" y="-34.138" width="0.15" height="0.15" transform="rotate(180.0 37.495 -34.063)" fill="black"/>
+    <rect x="36.9825" y="-34.5755" width="0.875" height="0.15" transform="rotate(-90.0 37.42 -34.5005)" fill="black"/>
+    <path d="M 36.77 -34.938 L 36.92 -34.938 L 36.92 -34.063 L 36.77 -34.063 L 36.77 -34.938" fill="black"/>
+    <circle cx="36.77" cy="-34.938" r="0.075" fill="black"/>
+    <circle cx="36.92" cy="-34.938" r="0.075" fill="black"/>
+    <circle cx="36.92" cy="-34.063" r="0.075" fill="black"/>
+    <circle cx="36.77" cy="-34.063" r="0.075" fill="black"/>
+    <rect x="36.77" y="-35.013" width="0.15" height="0.15" fill="black"/>
+    <rect x="36.4825" y="-34.5755" width="0.875" height="0.15" transform="rotate(90.0 36.92 -34.5005)" fill="black"/>
+    <rect x="36.77" y="-34.138" width="0.15" height="0.15" transform="rotate(180.0 36.845 -34.063)" fill="black"/>
+    <rect x="36.3325" y="-34.5755" width="0.875" height="0.15" transform="rotate(-90.0 36.77 -34.5005)" fill="black"/>
+    <path d="M 36.12 -34.938 L 36.27 -34.938 L 36.27 -34.063 L 36.12 -34.063 L 36.12 -34.938" fill="black"/>
+    <circle cx="36.12" cy="-34.938" r="0.075" fill="black"/>
+    <circle cx="36.27" cy="-34.938" r="0.075" fill="black"/>
+    <circle cx="36.27" cy="-34.063" r="0.075" fill="black"/>
+    <circle cx="36.12" cy="-34.063" r="0.075" fill="black"/>
+    <rect x="36.12" y="-35.013" width="0.15" height="0.15" fill="black"/>
+    <rect x="35.8325" y="-34.5755" width="0.875" height="0.15" transform="rotate(90.0 36.27 -34.5005)" fill="black"/>
+    <rect x="36.12" y="-34.138" width="0.15" height="0.15" transform="rotate(180.0 36.195 -34.063)" fill="black"/>
+    <rect x="35.6825" y="-34.5755" width="0.875" height="0.15" transform="rotate(-90.0 36.12 -34.5005)" fill="black"/>
+    <path d="M 35.47 -34.938 L 35.62 -34.938 L 35.62 -34.063 L 35.47 -34.063 L 35.47 -34.938" fill="black"/>
+    <circle cx="35.47" cy="-34.938" r="0.075" fill="black"/>
+    <circle cx="35.62" cy="-34.938" r="0.075" fill="black"/>
+    <circle cx="35.62" cy="-34.063" r="0.075" fill="black"/>
+    <circle cx="35.47" cy="-34.063" r="0.075" fill="black"/>
+    <rect x="35.47" y="-35.013" width="0.15" height="0.15" fill="black"/>
+    <rect x="35.1825" y="-34.5755" width="0.875" height="0.15" transform="rotate(90.0 35.62 -34.5005)" fill="black"/>
+    <rect x="35.47" y="-34.138" width="0.15" height="0.15" transform="rotate(180.0 35.545 -34.063)" fill="black"/>
+    <rect x="35.0325" y="-34.5755" width="0.875" height="0.15" transform="rotate(-90.0 35.47 -34.5005)" fill="black"/>
+    <path d="M 34.82 -34.938 L 34.97 -34.938 L 34.97 -34.063 L 34.82 -34.063 L 34.82 -34.938" fill="black"/>
+    <circle cx="34.82" cy="-34.938" r="0.075" fill="black"/>
+    <circle cx="34.97" cy="-34.938" r="0.075" fill="black"/>
+    <circle cx="34.97" cy="-34.063" r="0.075" fill="black"/>
+    <circle cx="34.82" cy="-34.063" r="0.075" fill="black"/>
+    <rect x="34.82" y="-35.013" width="0.15" height="0.15" fill="black"/>
+    <rect x="34.5325" y="-34.5755" width="0.875" height="0.15" transform="rotate(90.0 34.97 -34.5005)" fill="black"/>
+    <rect x="34.82" y="-34.138" width="0.15" height="0.15" transform="rotate(180.0 34.895 -34.063)" fill="black"/>
+    <rect x="34.3825" y="-34.5755" width="0.875" height="0.15" transform="rotate(-90.0 34.82 -34.5005)" fill="black"/>
+    <path d="M 34.17 -34.938 L 34.32 -34.938 L 34.32 -34.063 L 34.17 -34.063 L 34.17 -34.938" fill="black"/>
+    <circle cx="34.17" cy="-34.938" r="0.075" fill="black"/>
+    <circle cx="34.32" cy="-34.938" r="0.075" fill="black"/>
+    <circle cx="34.32" cy="-34.063" r="0.075" fill="black"/>
+    <circle cx="34.17" cy="-34.063" r="0.075" fill="black"/>
+    <rect x="34.17" y="-35.013" width="0.15" height="0.15" fill="black"/>
+    <rect x="33.8825" y="-34.5755" width="0.875" height="0.15" transform="rotate(90.0 34.32 -34.5005)" fill="black"/>
+    <rect x="34.17" y="-34.138" width="0.15" height="0.15" transform="rotate(180.0 34.245 -34.063)" fill="black"/>
+    <rect x="33.7325" y="-34.5755" width="0.875" height="0.15" transform="rotate(-90.0 34.17 -34.5005)" fill="black"/>
+    <path d="M 34.32 -39.213 L 38.07 -39.213 L 38.07 -35.463 L 34.32 -35.463 L 34.32 -39.213" fill="black"/>
+    <circle cx="34.32" cy="-39.213" r="0.250002" fill="black"/>
+    <circle cx="38.07" cy="-39.213" r="0.250002" fill="black"/>
+    <circle cx="38.07" cy="-35.463" r="0.250002" fill="black"/>
+    <circle cx="34.32" cy="-35.463" r="0.250002" fill="black"/>
+    <rect x="34.32" y="-39.463" width="3.75" height="0.500004" fill="black"/>
+    <rect x="36.195" y="-37.588" width="3.75" height="0.500004" transform="rotate(90.0 38.07 -37.338)" fill="black"/>
+    <rect x="34.32" y="-35.713" width="3.75" height="0.500004" transform="rotate(180.0 36.195 -35.463)" fill="black"/>
+    <rect x="32.445" y="-37.588" width="3.75" height="0.500004" transform="rotate(-90.0 34.32 -37.338)" fill="black"/>
+    <rect x="24.15" y="-48.85" width="1.7" height="1.7" fill="black"/>
+    <path d="M 22.46 -48.0 L 22.46 -48.0" fill="none" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.7"/>
+    <path d="M 25.0 -45.46 L 25.0 -45.46" fill="none" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.7"/>
+    <path d="M 22.46 -45.46 L 22.46 -45.46" fill="none" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.7"/>
+    <path d="M 25.0 -42.92 L 25.0 -42.92" fill="none" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.7"/>
+    <path d="M 22.46 -42.92 L 22.46 -42.92" fill="none" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.7"/>
+    <path d="M 25.0 -40.38 L 25.0 -40.38" fill="none" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.7"/>
+    <path d="M 22.46 -40.38 L 22.46 -40.38" fill="none" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.7"/>
+    <path d="M 25.0 -37.84 L 25.0 -37.84" fill="none" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.7"/>
+    <path d="M 22.46 -37.84 L 22.46 -37.84" fill="none" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.7"/>
+    <path d="M 25.0 -35.3 L 25.0 -35.3" fill="none" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.7"/>
+    <path d="M 22.46 -35.3 L 22.46 -35.3" fill="none" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.7"/>
+    <path d="M 25.0 -32.76 L 25.0 -32.76" fill="none" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.7"/>
+    <path d="M 22.46 -32.76 L 22.46 -32.76" fill="none" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.7"/>
+    <path d="M 25.0 -30.22 L 25.0 -30.22" fill="none" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.7"/>
+    <path d="M 22.46 -30.22 L 22.46 -30.22" fill="none" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.7"/>
+    <rect x="26.6912" y="-31.1014" width="1.7" height="1.7" fill="black"/>
+    <path d="M 27.5412 -32.7914 L 27.5412 -32.7914" fill="none" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.7"/>
+    <path d="M 27.5412 -35.3314 L 27.5412 -35.3314" fill="none" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.7"/>
+    <path d="M 27.5412 -37.8714 L 27.5412 -37.8714" fill="none" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.7"/>
+    <path d="M 27.5412 -40.4114 L 27.5412 -40.4114" fill="none" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.7"/>
+    <path d="M 27.5412 -42.9514 L 27.5412 -42.9514" fill="none" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.7"/>
+    <path d="M 27.5412 -45.4914 L 27.5412 -45.4914" fill="none" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.7"/>
+    <path d="M 27.5412 -48.0314 L 27.5412 -48.0314" fill="none" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.7"/>
+    <path d="M 40.4391 -27.8793 L 40.4391 -27.4418 L 39.9265 -27.4418 L 39.9265 -27.8793 L 40.4391 -27.8793" fill="black"/>
+    <circle cx="40.4391" cy="-27.8793" r="0.21875" fill="black"/>
+    <circle cx="40.4391" cy="-27.4418" r="0.21875" fill="black"/>
+    <circle cx="39.9265" cy="-27.4418" r="0.21875" fill="black"/>
+    <circle cx="39.9265" cy="-27.8793" r="0.21875" fill="black"/>
+    <rect x="40.2203" y="-27.8793" width="0.4375" height="0.4375" transform="rotate(90.0 40.4391 -27.6606)" fill="black"/>
+    <rect x="39.9265" y="-27.6606" width="0.5125" height="0.4375" transform="rotate(180.0 40.1828 -27.4418)" fill="black"/>
+    <rect x="39.7078" y="-27.8793" width="0.4375" height="0.4375" transform="rotate(-90.0 39.9265 -27.6606)" fill="black"/>
+    <rect x="39.9265" y="-28.0981" width="0.5125" height="0.4375" fill="black"/>
+    <path d="M 40.4391 -26.3043 L 40.4391 -25.8668 L 39.9265 -25.8668 L 39.9265 -26.3043 L 40.4391 -26.3043" fill="black"/>
+    <circle cx="40.4391" cy="-26.3043" r="0.21875" fill="black"/>
+    <circle cx="40.4391" cy="-25.8668" r="0.21875" fill="black"/>
+    <circle cx="39.9265" cy="-25.8668" r="0.21875" fill="black"/>
+    <circle cx="39.9265" cy="-26.3043" r="0.21875" fill="black"/>
+    <rect x="40.2203" y="-26.3043" width="0.4375" height="0.4375" transform="rotate(90.0 40.4391 -26.0856)" fill="black"/>
+    <rect x="39.9265" y="-26.0856" width="0.5125" height="0.4375" transform="rotate(180.0 40.1828 -25.8668)" fill="black"/>
+    <rect x="39.7078" y="-26.3043" width="0.4375" height="0.4375" transform="rotate(-90.0 39.9265 -26.0856)" fill="black"/>
+    <rect x="39.9265" y="-26.5231" width="0.5125" height="0.4375" fill="black"/>
+    <path d="M 42.8243 -27.4881 L 42.5293 -27.4881 L 42.5293 -27.8331 L 42.8243 -27.8331 L 42.8243 -27.4881" fill="black"/>
+    <circle cx="42.8243" cy="-27.4881" r="0.1475" fill="black"/>
+    <circle cx="42.5293" cy="-27.4881" r="0.1475" fill="black"/>
+    <circle cx="42.5293" cy="-27.8331" r="0.1475" fill="black"/>
+    <circle cx="42.8243" cy="-27.8331" r="0.1475" fill="black"/>
+    <rect x="42.5293" y="-27.6356" width="0.295" height="0.295" transform="rotate(180.0 42.6768 -27.4881)" fill="black"/>
+    <rect x="42.3568" y="-27.8081" width="0.345" height="0.295" transform="rotate(-90.0 42.5293 -27.6606)" fill="black"/>
+    <rect x="42.5293" y="-27.9806" width="0.295" height="0.295" fill="black"/>
+    <rect x="42.6518" y="-27.8081" width="0.345" height="0.295" transform="rotate(90.0 42.8243 -27.6606)" fill="black"/>
+    <path d="M 41.8543 -27.4881 L 41.5593 -27.4881 L 41.5593 -27.8331 L 41.8543 -27.8331 L 41.8543 -27.4881" fill="black"/>
+    <circle cx="41.8543" cy="-27.4881" r="0.1475" fill="black"/>
+    <circle cx="41.5593" cy="-27.4881" r="0.1475" fill="black"/>
+    <circle cx="41.5593" cy="-27.8331" r="0.1475" fill="black"/>
+    <circle cx="41.8543" cy="-27.8331" r="0.1475" fill="black"/>
+    <rect x="41.5593" y="-27.6356" width="0.295" height="0.295" transform="rotate(180.0 41.7068 -27.4881)" fill="black"/>
+    <rect x="41.3868" y="-27.8081" width="0.345" height="0.295" transform="rotate(-90.0 41.5593 -27.6606)" fill="black"/>
+    <rect x="41.5593" y="-27.9806" width="0.295" height="0.295" fill="black"/>
+    <rect x="41.6818" y="-27.8081" width="0.345" height="0.295" transform="rotate(90.0 41.8543 -27.6606)" fill="black"/>
+    <path d="M 50.564 -34.887 L 50.564 -35.182 L 50.909 -35.182 L 50.909 -34.887 L 50.564 -34.887" fill="black"/>
+    <circle cx="50.564" cy="-34.887" r="0.1475" fill="black"/>
+    <circle cx="50.564" cy="-35.182" r="0.1475" fill="black"/>
+    <circle cx="50.909" cy="-35.182" r="0.1475" fill="black"/>
+    <circle cx="50.909" cy="-34.887" r="0.1475" fill="black"/>
+    <rect x="50.4165" y="-35.182" width="0.295" height="0.295" transform="rotate(-90.0 50.564 -35.0345)" fill="black"/>
+    <rect x="50.564" y="-35.3295" width="0.345" height="0.295" fill="black"/>
+    <rect x="50.7615" y="-35.182" width="0.295" height="0.295" transform="rotate(90.0 50.909 -35.0345)" fill="black"/>
+    <rect x="50.564" y="-35.0345" width="0.345" height="0.295" transform="rotate(180.0 50.7365 -34.887)" fill="black"/>
+    <path d="M 50.564 -35.857 L 50.564 -36.152 L 50.909 -36.152 L 50.909 -35.857 L 50.564 -35.857" fill="black"/>
+    <circle cx="50.564" cy="-35.857" r="0.1475" fill="black"/>
+    <circle cx="50.564" cy="-36.152" r="0.1475" fill="black"/>
+    <circle cx="50.909" cy="-36.152" r="0.1475" fill="black"/>
+    <circle cx="50.909" cy="-35.857" r="0.1475" fill="black"/>
+    <rect x="50.4165" y="-36.152" width="0.295" height="0.295" transform="rotate(-90.0 50.564 -36.0045)" fill="black"/>
+    <rect x="50.564" y="-36.2995" width="0.345" height="0.295" fill="black"/>
+    <rect x="50.7615" y="-36.152" width="0.295" height="0.295" transform="rotate(90.0 50.909 -36.0045)" fill="black"/>
+    <rect x="50.564" y="-36.0045" width="0.345" height="0.295" transform="rotate(180.0 50.7365 -35.857)" fill="black"/>
+    <path d="M 65.931 -50.9295 L 65.931 -51.2245 L 66.276 -51.2245 L 66.276 -50.9295 L 65.931 -50.9295" fill="black"/>
+    <circle cx="65.931" cy="-50.9295" r="0.1475" fill="black"/>
+    <circle cx="65.931" cy="-51.2245" r="0.1475" fill="black"/>
+    <circle cx="66.276" cy="-51.2245" r="0.1475" fill="black"/>
+    <circle cx="66.276" cy="-50.9295" r="0.1475" fill="black"/>
+    <rect x="65.7835" y="-51.2245" width="0.295" height="0.295" transform="rotate(-90.0 65.931 -51.077)" fill="black"/>
+    <rect x="65.931" y="-51.372" width="0.345" height="0.295" fill="black"/>
+    <rect x="66.1285" y="-51.2245" width="0.295" height="0.295" transform="rotate(90.0 66.276 -51.077)" fill="black"/>
+    <rect x="65.931" y="-51.077" width="0.345" height="0.295" transform="rotate(180.0 66.1035 -50.9295)" fill="black"/>
+    <path d="M 65.931 -51.8995 L 65.931 -52.1945 L 66.276 -52.1945 L 66.276 -51.8995 L 65.931 -51.8995" fill="black"/>
+    <circle cx="65.931" cy="-51.8995" r="0.1475" fill="black"/>
+    <circle cx="65.931" cy="-52.1945" r="0.1475" fill="black"/>
+    <circle cx="66.276" cy="-52.1945" r="0.1475" fill="black"/>
+    <circle cx="66.276" cy="-51.8995" r="0.1475" fill="black"/>
+    <rect x="65.7835" y="-52.1945" width="0.295" height="0.295" transform="rotate(-90.0 65.931 -52.047)" fill="black"/>
+    <rect x="65.931" y="-52.342" width="0.345" height="0.295" fill="black"/>
+    <rect x="66.1285" y="-52.1945" width="0.295" height="0.295" transform="rotate(90.0 66.276 -52.047)" fill="black"/>
+    <rect x="65.931" y="-52.047" width="0.345" height="0.295" transform="rotate(180.0 66.1035 -51.8995)" fill="black"/>
+    <path d="M 64.5975 -50.9295 L 64.5975 -51.2245 L 64.9425 -51.2245 L 64.9425 -50.9295 L 64.5975 -50.9295" fill="black"/>
+    <circle cx="64.5975" cy="-50.9295" r="0.1475" fill="black"/>
+    <circle cx="64.5975" cy="-51.2245" r="0.1475" fill="black"/>
+    <circle cx="64.9425" cy="-51.2245" r="0.1475" fill="black"/>
+    <circle cx="64.9425" cy="-50.9295" r="0.1475" fill="black"/>
+    <rect x="64.45" y="-51.2245" width="0.295" height="0.295" transform="rotate(-90.0 64.5975 -51.077)" fill="black"/>
+    <rect x="64.5975" y="-51.372" width="0.345" height="0.295" fill="black"/>
+    <rect x="64.795" y="-51.2245" width="0.295" height="0.295" transform="rotate(90.0 64.9425 -51.077)" fill="black"/>
+    <rect x="64.5975" y="-51.077" width="0.345" height="0.295" transform="rotate(180.0 64.77 -50.9295)" fill="black"/>
+    <path d="M 64.5975 -51.8995 L 64.5975 -52.1945 L 64.9425 -52.1945 L 64.9425 -51.8995 L 64.5975 -51.8995" fill="black"/>
+    <circle cx="64.5975" cy="-51.8995" r="0.1475" fill="black"/>
+    <circle cx="64.5975" cy="-52.1945" r="0.1475" fill="black"/>
+    <circle cx="64.9425" cy="-52.1945" r="0.1475" fill="black"/>
+    <circle cx="64.9425" cy="-51.8995" r="0.1475" fill="black"/>
+    <rect x="64.45" y="-52.1945" width="0.295" height="0.295" transform="rotate(-90.0 64.5975 -52.047)" fill="black"/>
+    <rect x="64.5975" y="-52.342" width="0.345" height="0.295" fill="black"/>
+    <rect x="64.795" y="-52.1945" width="0.295" height="0.295" transform="rotate(90.0 64.9425 -52.047)" fill="black"/>
+    <rect x="64.5975" y="-52.047" width="0.345" height="0.295" transform="rotate(180.0 64.77 -51.8995)" fill="black"/>
+    <path d="M 54.4375 -60.0965 L 54.4375 -60.3915 L 54.7825 -60.3915 L 54.7825 -60.0965 L 54.4375 -60.0965" fill="black"/>
+    <circle cx="54.4375" cy="-60.0965" r="0.1475" fill="black"/>
+    <circle cx="54.4375" cy="-60.3915" r="0.1475" fill="black"/>
+    <circle cx="54.7825" cy="-60.3915" r="0.1475" fill="black"/>
+    <circle cx="54.7825" cy="-60.0965" r="0.1475" fill="black"/>
+    <rect x="54.29" y="-60.3915" width="0.295" height="0.295" transform="rotate(-90.0 54.4375 -60.244)" fill="black"/>
+    <rect x="54.4375" y="-60.539" width="0.345" height="0.295" fill="black"/>
+    <rect x="54.635" y="-60.3915" width="0.295" height="0.295" transform="rotate(90.0 54.7825 -60.244)" fill="black"/>
+    <rect x="54.4375" y="-60.244" width="0.345" height="0.295" transform="rotate(180.0 54.61 -60.0965)" fill="black"/>
+    <path d="M 54.4375 -61.0665 L 54.4375 -61.3615 L 54.7825 -61.3615 L 54.7825 -61.0665 L 54.4375 -61.0665" fill="black"/>
+    <circle cx="54.4375" cy="-61.0665" r="0.1475" fill="black"/>
+    <circle cx="54.4375" cy="-61.3615" r="0.1475" fill="black"/>
+    <circle cx="54.7825" cy="-61.3615" r="0.1475" fill="black"/>
+    <circle cx="54.7825" cy="-61.0665" r="0.1475" fill="black"/>
+    <rect x="54.29" y="-61.3615" width="0.295" height="0.295" transform="rotate(-90.0 54.4375 -61.214)" fill="black"/>
+    <rect x="54.4375" y="-61.509" width="0.345" height="0.295" fill="black"/>
+    <rect x="54.635" y="-61.3615" width="0.295" height="0.295" transform="rotate(90.0 54.7825 -61.214)" fill="black"/>
+    <rect x="54.4375" y="-61.214" width="0.345" height="0.295" transform="rotate(180.0 54.61 -61.0665)" fill="black"/>
+    <path d="M 57.9935 -60.0965 L 57.9935 -60.3915 L 58.3385 -60.3915 L 58.3385 -60.0965 L 57.9935 -60.0965" fill="black"/>
+    <circle cx="57.9935" cy="-60.0965" r="0.1475" fill="black"/>
+    <circle cx="57.9935" cy="-60.3915" r="0.1475" fill="black"/>
+    <circle cx="58.3385" cy="-60.3915" r="0.1475" fill="black"/>
+    <circle cx="58.3385" cy="-60.0965" r="0.1475" fill="black"/>
+    <rect x="57.846" y="-60.3915" width="0.295" height="0.295" transform="rotate(-90.0 57.9935 -60.244)" fill="black"/>
+    <rect x="57.9935" y="-60.539" width="0.345" height="0.295" fill="black"/>
+    <rect x="58.191" y="-60.3915" width="0.295" height="0.295" transform="rotate(90.0 58.3385 -60.244)" fill="black"/>
+    <rect x="57.9935" y="-60.244" width="0.345" height="0.295" transform="rotate(180.0 58.166 -60.0965)" fill="black"/>
+    <path d="M 57.9935 -61.0665 L 57.9935 -61.3615 L 58.3385 -61.3615 L 58.3385 -61.0665 L 57.9935 -61.0665" fill="black"/>
+    <circle cx="57.9935" cy="-61.0665" r="0.1475" fill="black"/>
+    <circle cx="57.9935" cy="-61.3615" r="0.1475" fill="black"/>
+    <circle cx="58.3385" cy="-61.3615" r="0.1475" fill="black"/>
+    <circle cx="58.3385" cy="-61.0665" r="0.1475" fill="black"/>
+    <rect x="57.846" y="-61.3615" width="0.295" height="0.295" transform="rotate(-90.0 57.9935 -61.214)" fill="black"/>
+    <rect x="57.9935" y="-61.509" width="0.345" height="0.295" fill="black"/>
+    <rect x="58.191" y="-61.3615" width="0.295" height="0.295" transform="rotate(90.0 58.3385 -61.214)" fill="black"/>
+    <rect x="57.9935" y="-61.214" width="0.345" height="0.295" transform="rotate(180.0 58.166 -61.0665)" fill="black"/>
+    <path d="M 59.7715 -60.1013 L 59.7715 -60.3963 L 60.1165 -60.3963 L 60.1165 -60.1013 L 59.7715 -60.1013" fill="black"/>
+    <circle cx="59.7715" cy="-60.1013" r="0.1475" fill="black"/>
+    <circle cx="59.7715" cy="-60.3963" r="0.1475" fill="black"/>
+    <circle cx="60.1165" cy="-60.3963" r="0.1475" fill="black"/>
+    <circle cx="60.1165" cy="-60.1013" r="0.1475" fill="black"/>
+    <rect x="59.624" y="-60.3963" width="0.295" height="0.295" transform="rotate(-90.0 59.7715 -60.2488)" fill="black"/>
+    <rect x="59.7715" y="-60.5438" width="0.345" height="0.295" fill="black"/>
+    <rect x="59.969" y="-60.3963" width="0.295" height="0.295" transform="rotate(90.0 60.1165 -60.2488)" fill="black"/>
+    <rect x="59.7715" y="-60.2488" width="0.345" height="0.295" transform="rotate(180.0 59.944 -60.1013)" fill="black"/>
+    <path d="M 59.7715 -61.0713 L 59.7715 -61.3663 L 60.1165 -61.3663 L 60.1165 -61.0713 L 59.7715 -61.0713" fill="black"/>
+    <circle cx="59.7715" cy="-61.0713" r="0.1475" fill="black"/>
+    <circle cx="59.7715" cy="-61.3663" r="0.1475" fill="black"/>
+    <circle cx="60.1165" cy="-61.3663" r="0.1475" fill="black"/>
+    <circle cx="60.1165" cy="-61.0713" r="0.1475" fill="black"/>
+    <rect x="59.624" y="-61.3663" width="0.295" height="0.295" transform="rotate(-90.0 59.7715 -61.2188)" fill="black"/>
+    <rect x="59.7715" y="-61.5138" width="0.345" height="0.295" fill="black"/>
+    <rect x="59.969" y="-61.3663" width="0.295" height="0.295" transform="rotate(90.0 60.1165 -61.2188)" fill="black"/>
+    <rect x="59.7715" y="-61.2188" width="0.345" height="0.295" transform="rotate(180.0 59.944 -61.0713)" fill="black"/>
+    <path d="M 54.4015 -41.6559 L 54.4015 -41.3609 L 54.0565 -41.3609 L 54.0565 -41.6559 L 54.4015 -41.6559" fill="black"/>
+    <circle cx="54.4015" cy="-41.6559" r="0.1475" fill="black"/>
+    <circle cx="54.4015" cy="-41.3609" r="0.1475" fill="black"/>
+    <circle cx="54.0565" cy="-41.3609" r="0.1475" fill="black"/>
+    <circle cx="54.0565" cy="-41.6559" r="0.1475" fill="black"/>
+    <rect x="54.254" y="-41.6559" width="0.295" height="0.295" transform="rotate(90.0 54.4015 -41.5084)" fill="black"/>
+    <rect x="54.0565" y="-41.5084" width="0.345" height="0.295" transform="rotate(180.0 54.229 -41.3609)" fill="black"/>
+    <rect x="53.909" y="-41.6559" width="0.295" height="0.295" transform="rotate(-90.0 54.0565 -41.5084)" fill="black"/>
+    <rect x="54.0565" y="-41.8034" width="0.345" height="0.295" fill="black"/>
+    <path d="M 54.4015 -40.6859 L 54.4015 -40.3909 L 54.0565 -40.3909 L 54.0565 -40.6859 L 54.4015 -40.6859" fill="black"/>
+    <circle cx="54.4015" cy="-40.6859" r="0.1475" fill="black"/>
+    <circle cx="54.4015" cy="-40.3909" r="0.1475" fill="black"/>
+    <circle cx="54.0565" cy="-40.3909" r="0.1475" fill="black"/>
+    <circle cx="54.0565" cy="-40.6859" r="0.1475" fill="black"/>
+    <rect x="54.254" y="-40.6859" width="0.295" height="0.295" transform="rotate(90.0 54.4015 -40.5384)" fill="black"/>
+    <rect x="54.0565" y="-40.5384" width="0.345" height="0.295" transform="rotate(180.0 54.229 -40.3909)" fill="black"/>
+    <rect x="53.909" y="-40.6859" width="0.295" height="0.295" transform="rotate(-90.0 54.0565 -40.5384)" fill="black"/>
+    <rect x="54.0565" y="-40.8334" width="0.345" height="0.295" fill="black"/>
+    <path d="M 30.2235 -64.7245 L 29.9285 -64.7245 L 29.9285 -65.0695 L 30.2235 -65.0695 L 30.2235 -64.7245" fill="black"/>
+    <circle cx="30.2235" cy="-64.7245" r="0.1475" fill="black"/>
+    <circle cx="29.9285" cy="-64.7245" r="0.1475" fill="black"/>
+    <circle cx="29.9285" cy="-65.0695" r="0.1475" fill="black"/>
+    <circle cx="30.2235" cy="-65.0695" r="0.1475" fill="black"/>
+    <rect x="29.9285" y="-64.872" width="0.295" height="0.295" transform="rotate(180.0 30.076 -64.7245)" fill="black"/>
+    <rect x="29.756" y="-65.0445" width="0.345" height="0.295" transform="rotate(-90.0 29.9285 -64.897)" fill="black"/>
+    <rect x="29.9285" y="-65.217" width="0.295" height="0.295" fill="black"/>
+    <rect x="30.051" y="-65.0445" width="0.345" height="0.295" transform="rotate(90.0 30.2235 -64.897)" fill="black"/>
+    <path d="M 29.2535 -64.7245 L 28.9585 -64.7245 L 28.9585 -65.0695 L 29.2535 -65.0695 L 29.2535 -64.7245" fill="black"/>
+    <circle cx="29.2535" cy="-64.7245" r="0.1475" fill="black"/>
+    <circle cx="28.9585" cy="-64.7245" r="0.1475" fill="black"/>
+    <circle cx="28.9585" cy="-65.0695" r="0.1475" fill="black"/>
+    <circle cx="29.2535" cy="-65.0695" r="0.1475" fill="black"/>
+    <rect x="28.9585" y="-64.872" width="0.295" height="0.295" transform="rotate(180.0 29.106 -64.7245)" fill="black"/>
+    <rect x="28.786" y="-65.0445" width="0.345" height="0.295" transform="rotate(-90.0 28.9585 -64.897)" fill="black"/>
+    <rect x="28.9585" y="-65.217" width="0.295" height="0.295" fill="black"/>
+    <rect x="29.081" y="-65.0445" width="0.345" height="0.295" transform="rotate(90.0 29.2535 -64.897)" fill="black"/>
+    <path d="M 37.2085 -64.7245 L 36.9135 -64.7245 L 36.9135 -65.0695 L 37.2085 -65.0695 L 37.2085 -64.7245" fill="black"/>
+    <circle cx="37.2085" cy="-64.7245" r="0.1475" fill="black"/>
+    <circle cx="36.9135" cy="-64.7245" r="0.1475" fill="black"/>
+    <circle cx="36.9135" cy="-65.0695" r="0.1475" fill="black"/>
+    <circle cx="37.2085" cy="-65.0695" r="0.1475" fill="black"/>
+    <rect x="36.9135" y="-64.872" width="0.295" height="0.295" transform="rotate(180.0 37.061 -64.7245)" fill="black"/>
+    <rect x="36.741" y="-65.0445" width="0.345" height="0.295" transform="rotate(-90.0 36.9135 -64.897)" fill="black"/>
+    <rect x="36.9135" y="-65.217" width="0.295" height="0.295" fill="black"/>
+    <rect x="37.036" y="-65.0445" width="0.345" height="0.295" transform="rotate(90.0 37.2085 -64.897)" fill="black"/>
+    <path d="M 36.2385 -64.7245 L 35.9435 -64.7245 L 35.9435 -65.0695 L 36.2385 -65.0695 L 36.2385 -64.7245" fill="black"/>
+    <circle cx="36.2385" cy="-64.7245" r="0.1475" fill="black"/>
+    <circle cx="35.9435" cy="-64.7245" r="0.1475" fill="black"/>
+    <circle cx="35.9435" cy="-65.0695" r="0.1475" fill="black"/>
+    <circle cx="36.2385" cy="-65.0695" r="0.1475" fill="black"/>
+    <rect x="35.9435" y="-64.872" width="0.295" height="0.295" transform="rotate(180.0 36.091 -64.7245)" fill="black"/>
+    <rect x="35.771" y="-65.0445" width="0.345" height="0.295" transform="rotate(-90.0 35.9435 -64.897)" fill="black"/>
+    <rect x="35.9435" y="-65.217" width="0.295" height="0.295" fill="black"/>
+    <rect x="36.066" y="-65.0445" width="0.345" height="0.295" transform="rotate(90.0 36.2385 -64.897)" fill="black"/>
+    <path d="M 39.6035 -58.9735 L 39.8985 -58.9735 L 39.8985 -58.6285 L 39.6035 -58.6285 L 39.6035 -58.9735" fill="black"/>
+    <circle cx="39.6035" cy="-58.9735" r="0.1475" fill="black"/>
+    <circle cx="39.8985" cy="-58.9735" r="0.1475" fill="black"/>
+    <circle cx="39.8985" cy="-58.6285" r="0.1475" fill="black"/>
+    <circle cx="39.6035" cy="-58.6285" r="0.1475" fill="black"/>
+    <rect x="39.6035" y="-59.121" width="0.295" height="0.295" fill="black"/>
+    <rect x="39.726" y="-58.9485" width="0.345" height="0.295" transform="rotate(90.0 39.8985 -58.801)" fill="black"/>
+    <rect x="39.6035" y="-58.776" width="0.295" height="0.295" transform="rotate(180.0 39.751 -58.6285)" fill="black"/>
+    <rect x="39.431" y="-58.9485" width="0.345" height="0.295" transform="rotate(-90.0 39.6035 -58.801)" fill="black"/>
+    <path d="M 40.5735 -58.9735 L 40.8685 -58.9735 L 40.8685 -58.6285 L 40.5735 -58.6285 L 40.5735 -58.9735" fill="black"/>
+    <circle cx="40.5735" cy="-58.9735" r="0.1475" fill="black"/>
+    <circle cx="40.8685" cy="-58.9735" r="0.1475" fill="black"/>
+    <circle cx="40.8685" cy="-58.6285" r="0.1475" fill="black"/>
+    <circle cx="40.5735" cy="-58.6285" r="0.1475" fill="black"/>
+    <rect x="40.5735" y="-59.121" width="0.295" height="0.295" fill="black"/>
+    <rect x="40.696" y="-58.9485" width="0.345" height="0.295" transform="rotate(90.0 40.8685 -58.801)" fill="black"/>
+    <rect x="40.5735" y="-58.776" width="0.295" height="0.295" transform="rotate(180.0 40.721 -58.6285)" fill="black"/>
+    <rect x="40.401" y="-58.9485" width="0.345" height="0.295" transform="rotate(-90.0 40.5735 -58.801)" fill="black"/>
+    <path d="M 27.521 -61.8945 L 27.816 -61.8945 L 27.816 -61.5495 L 27.521 -61.5495 L 27.521 -61.8945" fill="black"/>
+    <circle cx="27.521" cy="-61.8945" r="0.1475" fill="black"/>
+    <circle cx="27.816" cy="-61.8945" r="0.1475" fill="black"/>
+    <circle cx="27.816" cy="-61.5495" r="0.1475" fill="black"/>
+    <circle cx="27.521" cy="-61.5495" r="0.1475" fill="black"/>
+    <rect x="27.521" y="-62.042" width="0.295" height="0.295" fill="black"/>
+    <rect x="27.6435" y="-61.8695" width="0.345" height="0.295" transform="rotate(90.0 27.816 -61.722)" fill="black"/>
+    <rect x="27.521" y="-61.697" width="0.295" height="0.295" transform="rotate(180.0 27.6685 -61.5495)" fill="black"/>
+    <rect x="27.3485" y="-61.8695" width="0.345" height="0.295" transform="rotate(-90.0 27.521 -61.722)" fill="black"/>
+    <path d="M 28.491 -61.8945 L 28.786 -61.8945 L 28.786 -61.5495 L 28.491 -61.5495 L 28.491 -61.8945" fill="black"/>
+    <circle cx="28.491" cy="-61.8945" r="0.1475" fill="black"/>
+    <circle cx="28.786" cy="-61.8945" r="0.1475" fill="black"/>
+    <circle cx="28.786" cy="-61.5495" r="0.1475" fill="black"/>
+    <circle cx="28.491" cy="-61.5495" r="0.1475" fill="black"/>
+    <rect x="28.491" y="-62.042" width="0.295" height="0.295" fill="black"/>
+    <rect x="28.6135" y="-61.8695" width="0.345" height="0.295" transform="rotate(90.0 28.786 -61.722)" fill="black"/>
+    <rect x="28.491" y="-61.697" width="0.295" height="0.295" transform="rotate(180.0 28.6385 -61.5495)" fill="black"/>
+    <rect x="28.3185" y="-61.8695" width="0.345" height="0.295" transform="rotate(-90.0 28.491 -61.722)" fill="black"/>
+    <rect x="49.892" y="-25.796" width="0.8" height="1.3" fill="black"/>
+    <path d="M 49.042 -25.396 L 49.042 -24.896" fill="none" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="0.8"/>
+    <path d="M 47.792 -25.396 L 47.792 -24.896" fill="none" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="0.8"/>
+    <path d="M 46.542 -25.396 L 46.542 -24.896" fill="none" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="0.8"/>
+    <rect x="38.1078" y="-24.8736" width="0.8" height="0.4" fill="black"/>
+    <rect x="38.1078" y="-23.9236" width="0.8" height="0.4" fill="black"/>
+    <rect x="38.1078" y="-22.9736" width="0.8" height="0.4" fill="black"/>
+    <rect x="35.1078" y="-22.9736" width="0.8" height="0.4" fill="black"/>
+    <rect x="35.1078" y="-23.9236" width="0.8" height="0.4" fill="black"/>
+    <rect x="35.1078" y="-24.8736" width="0.8" height="0.4" fill="black"/>
+    <rect x="36.1328" y="-24.9736" width="1.75" height="2.5" fill="black"/>
+    <rect x="59.6907" y="-47.9399" width="0.65" height="1.05" fill="black"/>
+    <rect x="59.6907" y="-52.0899" width="0.65" height="1.05" fill="black"/>
+    <rect x="57.5407" y="-47.9399" width="0.65" height="1.05" fill="black"/>
+    <rect x="57.5407" y="-52.0899" width="0.65" height="1.05" fill="black"/>
+    <rect x="63.13" y="-49.124" width="0.74" height="2.4" fill="black"/>
+    <rect x="63.13" y="-45.224" width="0.74" height="2.4" fill="black"/>
+    <rect x="64.4" y="-49.124" width="0.74" height="2.4" fill="black"/>
+    <rect x="64.4" y="-45.224" width="0.74" height="2.4" fill="black"/>
+    <rect x="65.67" y="-49.124" width="0.74" height="2.4" fill="black"/>
+    <rect x="65.67" y="-45.224" width="0.74" height="2.4" fill="black"/>
+    <rect x="66.94" y="-49.124" width="0.74" height="2.4" fill="black"/>
+    <rect x="66.94" y="-45.224" width="0.74" height="2.4" fill="black"/>
+    <rect x="68.21" y="-49.124" width="0.74" height="2.4" fill="black"/>
+    <rect x="68.21" y="-45.224" width="0.74" height="2.4" fill="black"/>
+    <rect x="58.611" y="-33.8682" width="1.06" height="0.65" fill="black"/>
+    <rect x="58.611" y="-34.8182" width="1.06" height="0.65" fill="black"/>
+    <rect x="58.611" y="-35.7682" width="1.06" height="0.65" fill="black"/>
+    <rect x="60.811" y="-35.7682" width="1.06" height="0.65" fill="black"/>
+    <rect x="60.811" y="-34.8182" width="1.06" height="0.65" fill="black"/>
+    <rect x="60.811" y="-33.8682" width="1.06" height="0.65" fill="black"/>
+    <rect x="56.369" y="-34.295" width="0.8" height="1.45" fill="black"/>
+    <rect x="55.099" y="-34.295" width="0.8" height="1.45" fill="black"/>
+    <rect x="53.829" y="-34.295" width="0.8" height="1.45" fill="black"/>
+    <rect x="52.559" y="-34.295" width="0.8" height="1.45" fill="black"/>
+    <rect x="52.559" y="-39.545" width="0.8" height="1.45" fill="black"/>
+    <rect x="53.829" y="-39.545" width="0.8" height="1.45" fill="black"/>
+    <rect x="55.099" y="-39.545" width="0.8" height="1.45" fill="black"/>
+    <rect x="56.369" y="-39.545" width="0.8" height="1.45" fill="black"/>
+    <rect x="31.223" y="-25.796" width="0.8" height="1.3" fill="black"/>
+    <path d="M 30.373 -25.396 L 30.373 -24.896" fill="none" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="0.8"/>
+    <path d="M 56.2155 -60.0965 L 56.2155 -60.3915 L 56.5605 -60.3915 L 56.5605 -60.0965 L 56.2155 -60.0965" fill="black"/>
+    <circle cx="56.2155" cy="-60.0965" r="0.1475" fill="black"/>
+    <circle cx="56.2155" cy="-60.3915" r="0.1475" fill="black"/>
+    <circle cx="56.5605" cy="-60.3915" r="0.1475" fill="black"/>
+    <circle cx="56.5605" cy="-60.0965" r="0.1475" fill="black"/>
+    <rect x="56.068" y="-60.3915" width="0.295" height="0.295" transform="rotate(-90.0 56.2155 -60.244)" fill="black"/>
+    <rect x="56.2155" y="-60.539" width="0.345" height="0.295" fill="black"/>
+    <rect x="56.413" y="-60.3915" width="0.295" height="0.295" transform="rotate(90.0 56.5605 -60.244)" fill="black"/>
+    <rect x="56.2155" y="-60.244" width="0.345" height="0.295" transform="rotate(180.0 56.388 -60.0965)" fill="black"/>
+    <path d="M 56.2155 -61.0665 L 56.2155 -61.3615 L 56.5605 -61.3615 L 56.5605 -61.0665 L 56.2155 -61.0665" fill="black"/>
+    <circle cx="56.2155" cy="-61.0665" r="0.1475" fill="black"/>
+    <circle cx="56.2155" cy="-61.3615" r="0.1475" fill="black"/>
+    <circle cx="56.5605" cy="-61.3615" r="0.1475" fill="black"/>
+    <circle cx="56.5605" cy="-61.0665" r="0.1475" fill="black"/>
+    <rect x="56.068" y="-61.3615" width="0.295" height="0.295" transform="rotate(-90.0 56.2155 -61.214)" fill="black"/>
+    <rect x="56.2155" y="-61.509" width="0.345" height="0.295" fill="black"/>
+    <rect x="56.413" y="-61.3615" width="0.295" height="0.295" transform="rotate(90.0 56.5605 -61.214)" fill="black"/>
+    <rect x="56.2155" y="-61.214" width="0.345" height="0.295" transform="rotate(180.0 56.388 -61.0665)" fill="black"/>
+    <rect x="44.329" y="-31.304" width="0.35" height="0.3" fill="black"/>
+    <rect x="44.329" y="-31.804" width="0.35" height="0.3" fill="black"/>
+    <rect x="44.329" y="-32.304" width="0.35" height="0.3" fill="black"/>
+    <rect x="44.329" y="-32.804" width="0.35" height="0.3" fill="black"/>
+    <rect x="44.854" y="-32.829" width="0.3" height="0.35" fill="black"/>
+    <rect x="45.354" y="-32.829" width="0.3" height="0.35" fill="black"/>
+    <rect x="45.829" y="-32.804" width="0.35" height="0.3" fill="black"/>
+    <rect x="45.829" y="-32.304" width="0.35" height="0.3" fill="black"/>
+    <rect x="45.829" y="-31.804" width="0.35" height="0.3" fill="black"/>
+    <rect x="45.829" y="-31.304" width="0.35" height="0.3" fill="black"/>
+    <rect x="45.354" y="-31.329" width="0.3" height="0.35" fill="black"/>
+    <rect x="44.854" y="-31.329" width="0.3" height="0.35" fill="black"/>
+    <circle cx="24.0" cy="-66.0" r="3.2" fill="black"/>
+    <circle cx="24.0" cy="-63.6" r="0.4" fill="black"/>
+    <circle cx="24.0" cy="-68.4" r="0.4" fill="black"/>
+    <circle cx="22.3029" cy="-67.6971" r="0.4" fill="black"/>
+    <circle cx="21.6" cy="-66.0" r="0.4" fill="black"/>
+    <circle cx="26.4" cy="-66.0" r="0.4" fill="black"/>
+    <circle cx="22.3029" cy="-64.3029" r="0.4" fill="black"/>
+    <circle cx="25.6971" cy="-64.3029" r="0.4" fill="black"/>
+    <circle cx="25.6971" cy="-67.6971" r="0.4" fill="black"/>
+    <circle cx="66.0" cy="-68.4" r="0.4" fill="black"/>
+    <circle cx="68.4" cy="-66.0" r="0.4" fill="black"/>
+    <circle cx="64.3029" cy="-67.6971" r="0.4" fill="black"/>
+    <circle cx="67.6971" cy="-67.6971" r="0.4" fill="black"/>
+    <circle cx="63.6" cy="-66.0" r="0.4" fill="black"/>
+    <circle cx="67.6971" cy="-64.3029" r="0.4" fill="black"/>
+    <circle cx="66.0" cy="-66.0" r="3.2" fill="black"/>
+    <circle cx="66.0" cy="-63.6" r="0.4" fill="black"/>
+    <circle cx="64.3029" cy="-64.3029" r="0.4" fill="black"/>
+    <circle cx="64.3029" cy="-25.6971" r="0.4" fill="black"/>
+    <circle cx="64.3029" cy="-22.3029" r="0.4" fill="black"/>
+    <circle cx="63.6" cy="-24.0" r="0.4" fill="black"/>
+    <circle cx="66.0" cy="-24.0" r="3.2" fill="black"/>
+    <circle cx="67.6971" cy="-25.6971" r="0.4" fill="black"/>
+    <circle cx="66.0" cy="-26.4" r="0.4" fill="black"/>
+    <circle cx="68.4" cy="-24.0" r="0.4" fill="black"/>
+    <circle cx="66.0" cy="-21.6" r="0.4" fill="black"/>
+    <circle cx="67.6971" cy="-22.3029" r="0.4" fill="black"/>
+    <circle cx="25.6971" cy="-22.3029" r="0.4" fill="black"/>
+    <circle cx="25.6971" cy="-25.6971" r="0.4" fill="black"/>
+    <circle cx="24.0" cy="-21.6" r="0.4" fill="black"/>
+    <circle cx="26.4" cy="-24.0" r="0.4" fill="black"/>
+    <circle cx="22.3029" cy="-25.6971" r="0.4" fill="black"/>
+    <circle cx="22.3029" cy="-22.3029" r="0.4" fill="black"/>
+    <circle cx="21.6" cy="-24.0" r="0.4" fill="black"/>
+    <circle cx="24.0" cy="-24.0" r="3.2" fill="black"/>
+    <circle cx="24.0" cy="-26.4" r="0.4" fill="black"/>
+    <path d="M 39.4715 -50.8815 L 39.1765 -50.8815 L 39.1765 -51.2265 L 39.4715 -51.2265 L 39.4715 -50.8815" fill="black"/>
+    <circle cx="39.4715" cy="-50.8815" r="0.1475" fill="black"/>
+    <circle cx="39.1765" cy="-50.8815" r="0.1475" fill="black"/>
+    <circle cx="39.1765" cy="-51.2265" r="0.1475" fill="black"/>
+    <circle cx="39.4715" cy="-51.2265" r="0.1475" fill="black"/>
+    <rect x="39.1765" y="-51.029" width="0.295" height="0.295" transform="rotate(180.0 39.324 -50.8815)" fill="black"/>
+    <rect x="39.004" y="-51.2015" width="0.345" height="0.295" transform="rotate(-90.0 39.1765 -51.054)" fill="black"/>
+    <rect x="39.1765" y="-51.374" width="0.295" height="0.295" fill="black"/>
+    <rect x="39.299" y="-51.2015" width="0.345" height="0.295" transform="rotate(90.0 39.4715 -51.054)" fill="black"/>
+    <path d="M 38.5015 -50.8815 L 38.2065 -50.8815 L 38.2065 -51.2265 L 38.5015 -51.2265 L 38.5015 -50.8815" fill="black"/>
+    <circle cx="38.5015" cy="-50.8815" r="0.1475" fill="black"/>
+    <circle cx="38.2065" cy="-50.8815" r="0.1475" fill="black"/>
+    <circle cx="38.2065" cy="-51.2265" r="0.1475" fill="black"/>
+    <circle cx="38.5015" cy="-51.2265" r="0.1475" fill="black"/>
+    <rect x="38.2065" y="-51.029" width="0.295" height="0.295" transform="rotate(180.0 38.354 -50.8815)" fill="black"/>
+    <rect x="38.034" y="-51.2015" width="0.345" height="0.295" transform="rotate(-90.0 38.2065 -51.054)" fill="black"/>
+    <rect x="38.2065" y="-51.374" width="0.295" height="0.295" fill="black"/>
+    <rect x="38.329" y="-51.2015" width="0.345" height="0.295" transform="rotate(90.0 38.5015 -51.054)" fill="black"/>
+    <rect x="34.364" y="-49.554" width="1.2" height="1.4" fill="black"/>
+    <rect x="34.364" y="-51.754" width="1.2" height="1.4" fill="black"/>
+    <rect x="36.064" y="-51.754" width="1.2" height="1.4" fill="black"/>
+    <rect x="36.064" y="-49.554" width="1.2" height="1.4" fill="black"/>
+    <rect x="40.536" y="-48.445" width="1.0" height="0.25" fill="black"/>
+    <rect x="40.536" y="-48.945" width="1.0" height="0.25" fill="black"/>
+    <rect x="40.536" y="-49.445" width="1.0" height="0.25" fill="black"/>
+    <rect x="40.536" y="-49.945" width="1.0" height="0.25" fill="black"/>
+    <rect x="40.536" y="-50.445" width="1.0" height="0.25" fill="black"/>
+    <rect x="40.536" y="-50.945" width="1.0" height="0.25" fill="black"/>
+    <rect x="40.536" y="-51.445" width="1.0" height="0.25" fill="black"/>
+    <rect x="40.536" y="-51.945" width="1.0" height="0.25" fill="black"/>
+    <rect x="40.536" y="-52.445" width="1.0" height="0.25" fill="black"/>
+    <rect x="40.536" y="-52.945" width="1.0" height="0.25" fill="black"/>
+    <rect x="40.536" y="-53.445" width="1.0" height="0.25" fill="black"/>
+    <rect x="40.536" y="-53.945" width="1.0" height="0.25" fill="black"/>
+    <rect x="40.536" y="-54.445" width="1.0" height="0.25" fill="black"/>
+    <rect x="40.536" y="-54.945" width="1.0" height="0.25" fill="black"/>
+    <rect x="40.536" y="-55.445" width="1.0" height="0.25" fill="black"/>
+    <rect x="40.536" y="-55.945" width="1.0" height="0.25" fill="black"/>
+    <rect x="42.861" y="-58.27" width="0.25" height="1.0" fill="black"/>
+    <rect x="43.361" y="-58.27" width="0.25" height="1.0" fill="black"/>
+    <rect x="43.861" y="-58.27" width="0.25" height="1.0" fill="black"/>
+    <rect x="44.361" y="-58.27" width="0.25" height="1.0" fill="black"/>
+    <rect x="44.861" y="-58.27" width="0.25" height="1.0" fill="black"/>
+    <rect x="45.361" y="-58.27" width="0.25" height="1.0" fill="black"/>
+    <rect x="45.861" y="-58.27" width="0.25" height="1.0" fill="black"/>
+    <rect x="46.361" y="-58.27" width="0.25" height="1.0" fill="black"/>
+    <rect x="46.861" y="-58.27" width="0.25" height="1.0" fill="black"/>
+    <rect x="47.361" y="-58.27" width="0.25" height="1.0" fill="black"/>
+    <rect x="47.861" y="-58.27" width="0.25" height="1.0" fill="black"/>
+    <rect x="48.361" y="-58.27" width="0.25" height="1.0" fill="black"/>
+    <rect x="48.861" y="-58.27" width="0.25" height="1.0" fill="black"/>
+    <rect x="49.361" y="-58.27" width="0.25" height="1.0" fill="black"/>
+    <rect x="49.861" y="-58.27" width="0.25" height="1.0" fill="black"/>
+    <rect x="50.361" y="-58.27" width="0.25" height="1.0" fill="black"/>
+    <rect x="51.936" y="-55.945" width="1.0" height="0.25" fill="black"/>
+    <rect x="51.936" y="-55.445" width="1.0" height="0.25" fill="black"/>
+    <rect x="51.936" y="-54.945" width="1.0" height="0.25" fill="black"/>
+    <rect x="51.936" y="-54.445" width="1.0" height="0.25" fill="black"/>
+    <rect x="51.936" y="-53.945" width="1.0" height="0.25" fill="black"/>
+    <rect x="51.936" y="-53.445" width="1.0" height="0.25" fill="black"/>
+    <rect x="51.936" y="-52.945" width="1.0" height="0.25" fill="black"/>
+    <rect x="51.936" y="-52.445" width="1.0" height="0.25" fill="black"/>
+    <rect x="51.936" y="-51.945" width="1.0" height="0.25" fill="black"/>
+    <rect x="51.936" y="-51.445" width="1.0" height="0.25" fill="black"/>
+    <rect x="51.936" y="-50.945" width="1.0" height="0.25" fill="black"/>
+    <rect x="51.936" y="-50.445" width="1.0" height="0.25" fill="black"/>
+    <rect x="51.936" y="-49.945" width="1.0" height="0.25" fill="black"/>
+    <rect x="51.936" y="-49.445" width="1.0" height="0.25" fill="black"/>
+    <rect x="51.936" y="-48.945" width="1.0" height="0.25" fill="black"/>
+    <rect x="51.936" y="-48.445" width="1.0" height="0.25" fill="black"/>
+    <rect x="50.361" y="-46.87" width="0.25" height="1.0" fill="black"/>
+    <rect x="49.861" y="-46.87" width="0.25" height="1.0" fill="black"/>
+    <rect x="49.361" y="-46.87" width="0.25" height="1.0" fill="black"/>
+    <rect x="48.861" y="-46.87" width="0.25" height="1.0" fill="black"/>
+    <rect x="48.361" y="-46.87" width="0.25" height="1.0" fill="black"/>
+    <rect x="47.861" y="-46.87" width="0.25" height="1.0" fill="black"/>
+    <rect x="47.361" y="-46.87" width="0.25" height="1.0" fill="black"/>
+    <rect x="46.861" y="-46.87" width="0.25" height="1.0" fill="black"/>
+    <rect x="46.361" y="-46.87" width="0.25" height="1.0" fill="black"/>
+    <rect x="45.861" y="-46.87" width="0.25" height="1.0" fill="black"/>
+    <rect x="45.361" y="-46.87" width="0.25" height="1.0" fill="black"/>
+    <rect x="44.861" y="-46.87" width="0.25" height="1.0" fill="black"/>
+    <rect x="44.361" y="-46.87" width="0.25" height="1.0" fill="black"/>
+    <rect x="43.861" y="-46.87" width="0.25" height="1.0" fill="black"/>
+    <rect x="43.361" y="-46.87" width="0.25" height="1.0" fill="black"/>
+    <rect x="42.861" y="-46.87" width="0.25" height="1.0" fill="black"/>
+    <path d="M 37.0742 -54.0998 L 36.6367 -54.0998 L 36.6367 -54.6123 L 37.0742 -54.6123 L 37.0742 -54.0998" fill="black"/>
+    <circle cx="37.0742" cy="-54.0998" r="0.21875" fill="black"/>
+    <circle cx="36.6367" cy="-54.0998" r="0.21875" fill="black"/>
+    <circle cx="36.6367" cy="-54.6123" r="0.21875" fill="black"/>
+    <circle cx="37.0742" cy="-54.6123" r="0.21875" fill="black"/>
+    <rect x="36.6367" y="-54.3185" width="0.4375" height="0.4375" transform="rotate(180.0 36.8555 -54.0998)" fill="black"/>
+    <rect x="36.3805" y="-54.5748" width="0.5125" height="0.4375" transform="rotate(-90.0 36.6367 -54.356)" fill="black"/>
+    <rect x="36.6367" y="-54.831" width="0.4375" height="0.4375" fill="black"/>
+    <rect x="36.818" y="-54.5748" width="0.5125" height="0.4375" transform="rotate(90.0 37.0742 -54.356)" fill="black"/>
+    <path d="M 35.4993 -54.0998 L 35.0618 -54.0998 L 35.0618 -54.6123 L 35.4993 -54.6123 L 35.4993 -54.0998" fill="black"/>
+    <circle cx="35.4993" cy="-54.0998" r="0.21875" fill="black"/>
+    <circle cx="35.0618" cy="-54.0998" r="0.21875" fill="black"/>
+    <circle cx="35.0618" cy="-54.6123" r="0.21875" fill="black"/>
+    <circle cx="35.4993" cy="-54.6123" r="0.21875" fill="black"/>
+    <rect x="35.0618" y="-54.3185" width="0.4375" height="0.4375" transform="rotate(180.0 35.2805 -54.0998)" fill="black"/>
+    <rect x="34.8055" y="-54.5748" width="0.5125" height="0.4375" transform="rotate(-90.0 35.0618 -54.356)" fill="black"/>
+    <rect x="35.0618" y="-54.831" width="0.4375" height="0.4375" fill="black"/>
+    <rect x="35.243" y="-54.5748" width="0.5125" height="0.4375" transform="rotate(90.0 35.4993 -54.356)" fill="black"/>
+    <path d="M 52.5325 -57.9145 L 52.5325 -58.2095 L 52.8775 -58.2095 L 52.8775 -57.9145 L 52.5325 -57.9145" fill="black"/>
+    <circle cx="52.5325" cy="-57.9145" r="0.1475" fill="black"/>
+    <circle cx="52.5325" cy="-58.2095" r="0.1475" fill="black"/>
+    <circle cx="52.8775" cy="-58.2095" r="0.1475" fill="black"/>
+    <circle cx="52.8775" cy="-57.9145" r="0.1475" fill="black"/>
+    <rect x="52.385" y="-58.2095" width="0.295" height="0.295" transform="rotate(-90.0 52.5325 -58.062)" fill="black"/>
+    <rect x="52.5325" y="-58.357" width="0.345" height="0.295" fill="black"/>
+    <rect x="52.73" y="-58.2095" width="0.295" height="0.295" transform="rotate(90.0 52.8775 -58.062)" fill="black"/>
+    <rect x="52.5325" y="-58.062" width="0.345" height="0.295" transform="rotate(180.0 52.705 -57.9145)" fill="black"/>
+    <path d="M 52.5325 -58.8845 L 52.5325 -59.1795 L 52.8775 -59.1795 L 52.8775 -58.8845 L 52.5325 -58.8845" fill="black"/>
+    <circle cx="52.5325" cy="-58.8845" r="0.1475" fill="black"/>
+    <circle cx="52.5325" cy="-59.1795" r="0.1475" fill="black"/>
+    <circle cx="52.8775" cy="-59.1795" r="0.1475" fill="black"/>
+    <circle cx="52.8775" cy="-58.8845" r="0.1475" fill="black"/>
+    <rect x="52.385" y="-59.1795" width="0.295" height="0.295" transform="rotate(-90.0 52.5325 -59.032)" fill="black"/>
+    <rect x="52.5325" y="-59.327" width="0.345" height="0.295" fill="black"/>
+    <rect x="52.73" y="-59.1795" width="0.295" height="0.295" transform="rotate(90.0 52.8775 -59.032)" fill="black"/>
+    <rect x="52.5325" y="-59.032" width="0.345" height="0.295" transform="rotate(180.0 52.705 -58.8845)" fill="black"/>
+    <path d="M 44.3205 -60.1525 L 44.0255 -60.1525 L 44.0255 -60.4975 L 44.3205 -60.4975 L 44.3205 -60.1525" fill="black"/>
+    <circle cx="44.3205" cy="-60.1525" r="0.1475" fill="black"/>
+    <circle cx="44.0255" cy="-60.1525" r="0.1475" fill="black"/>
+    <circle cx="44.0255" cy="-60.4975" r="0.1475" fill="black"/>
+    <circle cx="44.3205" cy="-60.4975" r="0.1475" fill="black"/>
+    <rect x="44.0255" y="-60.3" width="0.295" height="0.295" transform="rotate(180.0 44.173 -60.1525)" fill="black"/>
+    <rect x="43.853" y="-60.4725" width="0.345" height="0.295" transform="rotate(-90.0 44.0255 -60.325)" fill="black"/>
+    <rect x="44.0255" y="-60.645" width="0.295" height="0.295" fill="black"/>
+    <rect x="44.148" y="-60.4725" width="0.345" height="0.295" transform="rotate(90.0 44.3205 -60.325)" fill="black"/>
+    <path d="M 43.3505 -60.1525 L 43.0555 -60.1525 L 43.0555 -60.4975 L 43.3505 -60.4975 L 43.3505 -60.1525" fill="black"/>
+    <circle cx="43.3505" cy="-60.1525" r="0.1475" fill="black"/>
+    <circle cx="43.0555" cy="-60.1525" r="0.1475" fill="black"/>
+    <circle cx="43.0555" cy="-60.4975" r="0.1475" fill="black"/>
+    <circle cx="43.3505" cy="-60.4975" r="0.1475" fill="black"/>
+    <rect x="43.0555" y="-60.3" width="0.295" height="0.295" transform="rotate(180.0 43.203 -60.1525)" fill="black"/>
+    <rect x="42.883" y="-60.4725" width="0.345" height="0.295" transform="rotate(-90.0 43.0555 -60.325)" fill="black"/>
+    <rect x="43.0555" y="-60.645" width="0.295" height="0.295" fill="black"/>
+    <rect x="43.178" y="-60.4725" width="0.345" height="0.295" transform="rotate(90.0 43.3505 -60.325)" fill="black"/>
+    <path d="M 51.3895 -57.9145 L 51.3895 -58.2095 L 51.7345 -58.2095 L 51.7345 -57.9145 L 51.3895 -57.9145" fill="black"/>
+    <circle cx="51.3895" cy="-57.9145" r="0.1475" fill="black"/>
+    <circle cx="51.3895" cy="-58.2095" r="0.1475" fill="black"/>
+    <circle cx="51.7345" cy="-58.2095" r="0.1475" fill="black"/>
+    <circle cx="51.7345" cy="-57.9145" r="0.1475" fill="black"/>
+    <rect x="51.242" y="-58.2095" width="0.295" height="0.295" transform="rotate(-90.0 51.3895 -58.062)" fill="black"/>
+    <rect x="51.3895" y="-58.357" width="0.345" height="0.295" fill="black"/>
+    <rect x="51.587" y="-58.2095" width="0.295" height="0.295" transform="rotate(90.0 51.7345 -58.062)" fill="black"/>
+    <rect x="51.3895" y="-58.062" width="0.345" height="0.295" transform="rotate(180.0 51.562 -57.9145)" fill="black"/>
+    <path d="M 51.3895 -58.8845 L 51.3895 -59.1795 L 51.7345 -59.1795 L 51.7345 -58.8845 L 51.3895 -58.8845" fill="black"/>
+    <circle cx="51.3895" cy="-58.8845" r="0.1475" fill="black"/>
+    <circle cx="51.3895" cy="-59.1795" r="0.1475" fill="black"/>
+    <circle cx="51.7345" cy="-59.1795" r="0.1475" fill="black"/>
+    <circle cx="51.7345" cy="-58.8845" r="0.1475" fill="black"/>
+    <rect x="51.242" y="-59.1795" width="0.295" height="0.295" transform="rotate(-90.0 51.3895 -59.032)" fill="black"/>
+    <rect x="51.3895" y="-59.327" width="0.345" height="0.295" fill="black"/>
+    <rect x="51.587" y="-59.1795" width="0.295" height="0.295" transform="rotate(90.0 51.7345 -59.032)" fill="black"/>
+    <rect x="51.3895" y="-59.032" width="0.345" height="0.295" transform="rotate(180.0 51.562 -58.8845)" fill="black"/>
+    <path d="M 52.5805 -46.2481 L 52.8755 -46.2481 L 52.8755 -45.9031 L 52.5805 -45.9031 L 52.5805 -46.2481" fill="black"/>
+    <circle cx="52.5805" cy="-46.2481" r="0.1475" fill="black"/>
+    <circle cx="52.8755" cy="-46.2481" r="0.1475" fill="black"/>
+    <circle cx="52.8755" cy="-45.9031" r="0.1475" fill="black"/>
+    <circle cx="52.5805" cy="-45.9031" r="0.1475" fill="black"/>
+    <rect x="52.5805" y="-46.3956" width="0.295" height="0.295" fill="black"/>
+    <rect x="52.703" y="-46.2231" width="0.345" height="0.295" transform="rotate(90.0 52.8755 -46.0756)" fill="black"/>
+    <rect x="52.5805" y="-46.0506" width="0.295" height="0.295" transform="rotate(180.0 52.728 -45.9031)" fill="black"/>
+    <rect x="52.408" y="-46.2231" width="0.345" height="0.295" transform="rotate(-90.0 52.5805 -46.0756)" fill="black"/>
+    <path d="M 53.5505 -46.2481 L 53.8455 -46.2481 L 53.8455 -45.9031 L 53.5505 -45.9031 L 53.5505 -46.2481" fill="black"/>
+    <circle cx="53.5505" cy="-46.2481" r="0.1475" fill="black"/>
+    <circle cx="53.8455" cy="-46.2481" r="0.1475" fill="black"/>
+    <circle cx="53.8455" cy="-45.9031" r="0.1475" fill="black"/>
+    <circle cx="53.5505" cy="-45.9031" r="0.1475" fill="black"/>
+    <rect x="53.5505" y="-46.3956" width="0.295" height="0.295" fill="black"/>
+    <rect x="53.673" y="-46.2231" width="0.345" height="0.295" transform="rotate(90.0 53.8455 -46.0756)" fill="black"/>
+    <rect x="53.5505" y="-46.0506" width="0.295" height="0.295" transform="rotate(180.0 53.698 -45.9031)" fill="black"/>
+    <rect x="53.378" y="-46.2231" width="0.345" height="0.295" transform="rotate(-90.0 53.5505 -46.0756)" fill="black"/>
+    <path d="M 40.8915 -46.9445 L 40.5965 -46.9445 L 40.5965 -47.2895 L 40.8915 -47.2895 L 40.8915 -46.9445" fill="black"/>
+    <circle cx="40.8915" cy="-46.9445" r="0.1475" fill="black"/>
+    <circle cx="40.5965" cy="-46.9445" r="0.1475" fill="black"/>
+    <circle cx="40.5965" cy="-47.2895" r="0.1475" fill="black"/>
+    <circle cx="40.8915" cy="-47.2895" r="0.1475" fill="black"/>
+    <rect x="40.5965" y="-47.092" width="0.295" height="0.295" transform="rotate(180.0 40.744 -46.9445)" fill="black"/>
+    <rect x="40.424" y="-47.2645" width="0.345" height="0.295" transform="rotate(-90.0 40.5965 -47.117)" fill="black"/>
+    <rect x="40.5965" y="-47.437" width="0.295" height="0.295" fill="black"/>
+    <rect x="40.719" y="-47.2645" width="0.345" height="0.295" transform="rotate(90.0 40.8915 -47.117)" fill="black"/>
+    <path d="M 39.9215 -46.9445 L 39.6265 -46.9445 L 39.6265 -47.2895 L 39.9215 -47.2895 L 39.9215 -46.9445" fill="black"/>
+    <circle cx="39.9215" cy="-46.9445" r="0.1475" fill="black"/>
+    <circle cx="39.6265" cy="-46.9445" r="0.1475" fill="black"/>
+    <circle cx="39.6265" cy="-47.2895" r="0.1475" fill="black"/>
+    <circle cx="39.9215" cy="-47.2895" r="0.1475" fill="black"/>
+    <rect x="39.6265" y="-47.092" width="0.295" height="0.295" transform="rotate(180.0 39.774 -46.9445)" fill="black"/>
+    <rect x="39.454" y="-47.2645" width="0.345" height="0.295" transform="rotate(-90.0 39.6265 -47.117)" fill="black"/>
+    <rect x="39.6265" y="-47.437" width="0.295" height="0.295" fill="black"/>
+    <rect x="39.749" y="-47.2645" width="0.345" height="0.295" transform="rotate(90.0 39.9215 -47.117)" fill="black"/>
+    <path d="M 53.7005 -48.8135 L 53.9955 -48.8135 L 53.9955 -48.4685 L 53.7005 -48.4685 L 53.7005 -48.8135" fill="black"/>
+    <circle cx="53.7005" cy="-48.8135" r="0.1475" fill="black"/>
+    <circle cx="53.9955" cy="-48.8135" r="0.1475" fill="black"/>
+    <circle cx="53.9955" cy="-48.4685" r="0.1475" fill="black"/>
+    <circle cx="53.7005" cy="-48.4685" r="0.1475" fill="black"/>
+    <rect x="53.7005" y="-48.961" width="0.295" height="0.295" fill="black"/>
+    <rect x="53.823" y="-48.7885" width="0.345" height="0.295" transform="rotate(90.0 53.9955 -48.641)" fill="black"/>
+    <rect x="53.7005" y="-48.616" width="0.295" height="0.295" transform="rotate(180.0 53.848 -48.4685)" fill="black"/>
+    <rect x="53.528" y="-48.7885" width="0.345" height="0.295" transform="rotate(-90.0 53.7005 -48.641)" fill="black"/>
+    <path d="M 54.6705 -48.8135 L 54.9655 -48.8135 L 54.9655 -48.4685 L 54.6705 -48.4685 L 54.6705 -48.8135" fill="black"/>
+    <circle cx="54.6705" cy="-48.8135" r="0.1475" fill="black"/>
+    <circle cx="54.9655" cy="-48.8135" r="0.1475" fill="black"/>
+    <circle cx="54.9655" cy="-48.4685" r="0.1475" fill="black"/>
+    <circle cx="54.6705" cy="-48.4685" r="0.1475" fill="black"/>
+    <rect x="54.6705" y="-48.961" width="0.295" height="0.295" fill="black"/>
+    <rect x="54.793" y="-48.7885" width="0.345" height="0.295" transform="rotate(90.0 54.9655 -48.641)" fill="black"/>
+    <rect x="54.6705" y="-48.616" width="0.295" height="0.295" transform="rotate(180.0 54.818 -48.4685)" fill="black"/>
+    <rect x="54.498" y="-48.7885" width="0.345" height="0.295" transform="rotate(-90.0 54.6705 -48.641)" fill="black"/>
+    <path d="M 49.9925 -59.0345 L 49.9925 -59.3295 L 50.3375 -59.3295 L 50.3375 -59.0345 L 49.9925 -59.0345" fill="black"/>
+    <circle cx="49.9925" cy="-59.0345" r="0.1475" fill="black"/>
+    <circle cx="49.9925" cy="-59.3295" r="0.1475" fill="black"/>
+    <circle cx="50.3375" cy="-59.3295" r="0.1475" fill="black"/>
+    <circle cx="50.3375" cy="-59.0345" r="0.1475" fill="black"/>
+    <rect x="49.845" y="-59.3295" width="0.295" height="0.295" transform="rotate(-90.0 49.9925 -59.182)" fill="black"/>
+    <rect x="49.9925" y="-59.477" width="0.345" height="0.295" fill="black"/>
+    <rect x="50.19" y="-59.3295" width="0.295" height="0.295" transform="rotate(90.0 50.3375 -59.182)" fill="black"/>
+    <rect x="49.9925" y="-59.182" width="0.345" height="0.295" transform="rotate(180.0 50.165 -59.0345)" fill="black"/>
+    <path d="M 49.9925 -60.0045 L 49.9925 -60.2995 L 50.3375 -60.2995 L 50.3375 -60.0045 L 49.9925 -60.0045" fill="black"/>
+    <circle cx="49.9925" cy="-60.0045" r="0.1475" fill="black"/>
+    <circle cx="49.9925" cy="-60.2995" r="0.1475" fill="black"/>
+    <circle cx="50.3375" cy="-60.2995" r="0.1475" fill="black"/>
+    <circle cx="50.3375" cy="-60.0045" r="0.1475" fill="black"/>
+    <rect x="49.845" y="-60.2995" width="0.295" height="0.295" transform="rotate(-90.0 49.9925 -60.152)" fill="black"/>
+    <rect x="49.9925" y="-60.447" width="0.345" height="0.295" fill="black"/>
+    <rect x="50.19" y="-60.2995" width="0.295" height="0.295" transform="rotate(90.0 50.3375 -60.152)" fill="black"/>
+    <rect x="49.9925" y="-60.152" width="0.345" height="0.295" transform="rotate(180.0 50.165 -60.0045)" fill="black"/>
+    <path d="M 35.2045 -47.1625 L 35.4995 -47.1625 L 35.4995 -46.8175 L 35.2045 -46.8175 L 35.2045 -47.1625" fill="black"/>
+    <circle cx="35.2045" cy="-47.1625" r="0.1475" fill="black"/>
+    <circle cx="35.4995" cy="-47.1625" r="0.1475" fill="black"/>
+    <circle cx="35.4995" cy="-46.8175" r="0.1475" fill="black"/>
+    <circle cx="35.2045" cy="-46.8175" r="0.1475" fill="black"/>
+    <rect x="35.2045" y="-47.31" width="0.295" height="0.295" fill="black"/>
+    <rect x="35.327" y="-47.1375" width="0.345" height="0.295" transform="rotate(90.0 35.4995 -46.99)" fill="black"/>
+    <rect x="35.2045" y="-46.965" width="0.295" height="0.295" transform="rotate(180.0 35.352 -46.8175)" fill="black"/>
+    <rect x="35.032" y="-47.1375" width="0.345" height="0.295" transform="rotate(-90.0 35.2045 -46.99)" fill="black"/>
+    <path d="M 36.1745 -47.1625 L 36.4695 -47.1625 L 36.4695 -46.8175 L 36.1745 -46.8175 L 36.1745 -47.1625" fill="black"/>
+    <circle cx="36.1745" cy="-47.1625" r="0.1475" fill="black"/>
+    <circle cx="36.4695" cy="-47.1625" r="0.1475" fill="black"/>
+    <circle cx="36.4695" cy="-46.8175" r="0.1475" fill="black"/>
+    <circle cx="36.1745" cy="-46.8175" r="0.1475" fill="black"/>
+    <rect x="36.1745" y="-47.31" width="0.295" height="0.295" fill="black"/>
+    <rect x="36.297" y="-47.1375" width="0.345" height="0.295" transform="rotate(90.0 36.4695 -46.99)" fill="black"/>
+    <rect x="36.1745" y="-46.965" width="0.295" height="0.295" transform="rotate(180.0 36.322 -46.8175)" fill="black"/>
+    <rect x="36.002" y="-47.1375" width="0.345" height="0.295" transform="rotate(-90.0 36.1745 -46.99)" fill="black"/>
+    <path d="M 38.5265 -54.3765 L 38.5265 -54.0815 L 38.1815 -54.0815 L 38.1815 -54.3765 L 38.5265 -54.3765" fill="black"/>
+    <circle cx="38.5265" cy="-54.3765" r="0.1475" fill="black"/>
+    <circle cx="38.5265" cy="-54.0815" r="0.1475" fill="black"/>
+    <circle cx="38.1815" cy="-54.0815" r="0.1475" fill="black"/>
+    <circle cx="38.1815" cy="-54.3765" r="0.1475" fill="black"/>
+    <rect x="38.379" y="-54.3765" width="0.295" height="0.295" transform="rotate(90.0 38.5265 -54.229)" fill="black"/>
+    <rect x="38.1815" y="-54.229" width="0.345" height="0.295" transform="rotate(180.0 38.354 -54.0815)" fill="black"/>
+    <rect x="38.034" y="-54.3765" width="0.295" height="0.295" transform="rotate(-90.0 38.1815 -54.229)" fill="black"/>
+    <rect x="38.1815" y="-54.524" width="0.345" height="0.295" fill="black"/>
+    <path d="M 38.5265 -53.4065 L 38.5265 -53.1115 L 38.1815 -53.1115 L 38.1815 -53.4065 L 38.5265 -53.4065" fill="black"/>
+    <circle cx="38.5265" cy="-53.4065" r="0.1475" fill="black"/>
+    <circle cx="38.5265" cy="-53.1115" r="0.1475" fill="black"/>
+    <circle cx="38.1815" cy="-53.1115" r="0.1475" fill="black"/>
+    <circle cx="38.1815" cy="-53.4065" r="0.1475" fill="black"/>
+    <rect x="38.379" y="-53.4065" width="0.295" height="0.295" transform="rotate(90.0 38.5265 -53.259)" fill="black"/>
+    <rect x="38.1815" y="-53.259" width="0.345" height="0.295" transform="rotate(180.0 38.354 -53.1115)" fill="black"/>
+    <rect x="38.034" y="-53.4065" width="0.295" height="0.295" transform="rotate(-90.0 38.1815 -53.259)" fill="black"/>
+    <rect x="38.1815" y="-53.554" width="0.345" height="0.295" fill="black"/>
+    <path d="M 44.3205 -59.0095 L 44.0255 -59.0095 L 44.0255 -59.3545 L 44.3205 -59.3545 L 44.3205 -59.0095" fill="black"/>
+    <circle cx="44.3205" cy="-59.0095" r="0.1475" fill="black"/>
+    <circle cx="44.0255" cy="-59.0095" r="0.1475" fill="black"/>
+    <circle cx="44.0255" cy="-59.3545" r="0.1475" fill="black"/>
+    <circle cx="44.3205" cy="-59.3545" r="0.1475" fill="black"/>
+    <rect x="44.0255" y="-59.157" width="0.295" height="0.295" transform="rotate(180.0 44.173 -59.0095)" fill="black"/>
+    <rect x="43.853" y="-59.3295" width="0.345" height="0.295" transform="rotate(-90.0 44.0255 -59.182)" fill="black"/>
+    <rect x="44.0255" y="-59.502" width="0.295" height="0.295" fill="black"/>
+    <rect x="44.148" y="-59.3295" width="0.345" height="0.295" transform="rotate(90.0 44.3205 -59.182)" fill="black"/>
+    <path d="M 43.3505 -59.0095 L 43.0555 -59.0095 L 43.0555 -59.3545 L 43.3505 -59.3545 L 43.3505 -59.0095" fill="black"/>
+    <circle cx="43.3505" cy="-59.0095" r="0.1475" fill="black"/>
+    <circle cx="43.0555" cy="-59.0095" r="0.1475" fill="black"/>
+    <circle cx="43.0555" cy="-59.3545" r="0.1475" fill="black"/>
+    <circle cx="43.3505" cy="-59.3545" r="0.1475" fill="black"/>
+    <rect x="43.0555" y="-59.157" width="0.295" height="0.295" transform="rotate(180.0 43.203 -59.0095)" fill="black"/>
+    <rect x="42.883" y="-59.3295" width="0.345" height="0.295" transform="rotate(-90.0 43.0555 -59.182)" fill="black"/>
+    <rect x="43.0555" y="-59.502" width="0.295" height="0.295" fill="black"/>
+    <rect x="43.178" y="-59.3295" width="0.345" height="0.295" transform="rotate(90.0 43.3505 -59.182)" fill="black"/>
+    <path d="M 42.5705 -45.1305 L 42.8655 -45.1305 L 42.8655 -44.7855 L 42.5705 -44.7855 L 42.5705 -45.1305" fill="black"/>
+    <circle cx="42.5705" cy="-45.1305" r="0.1475" fill="black"/>
+    <circle cx="42.8655" cy="-45.1305" r="0.1475" fill="black"/>
+    <circle cx="42.8655" cy="-44.7855" r="0.1475" fill="black"/>
+    <circle cx="42.5705" cy="-44.7855" r="0.1475" fill="black"/>
+    <rect x="42.5705" y="-45.278" width="0.295" height="0.295" fill="black"/>
+    <rect x="42.693" y="-45.1055" width="0.345" height="0.295" transform="rotate(90.0 42.8655 -44.958)" fill="black"/>
+    <rect x="42.5705" y="-44.933" width="0.295" height="0.295" transform="rotate(180.0 42.718 -44.7855)" fill="black"/>
+    <rect x="42.398" y="-45.1055" width="0.345" height="0.295" transform="rotate(-90.0 42.5705 -44.958)" fill="black"/>
+    <path d="M 43.5405 -45.1305 L 43.8355 -45.1305 L 43.8355 -44.7855 L 43.5405 -44.7855 L 43.5405 -45.1305" fill="black"/>
+    <circle cx="43.5405" cy="-45.1305" r="0.1475" fill="black"/>
+    <circle cx="43.8355" cy="-45.1305" r="0.1475" fill="black"/>
+    <circle cx="43.8355" cy="-44.7855" r="0.1475" fill="black"/>
+    <circle cx="43.5405" cy="-44.7855" r="0.1475" fill="black"/>
+    <rect x="43.5405" y="-45.278" width="0.295" height="0.295" fill="black"/>
+    <rect x="43.663" y="-45.1055" width="0.345" height="0.295" transform="rotate(90.0 43.8355 -44.958)" fill="black"/>
+    <rect x="43.5405" y="-44.933" width="0.295" height="0.295" transform="rotate(180.0 43.688 -44.7855)" fill="black"/>
+    <rect x="43.368" y="-45.1055" width="0.345" height="0.295" transform="rotate(-90.0 43.5405 -44.958)" fill="black"/>
+    <path d="M 41.4043 -45.4562 L 41.4043 -45.0187 L 40.8918 -45.0187 L 40.8918 -45.4562 L 41.4043 -45.4562" fill="black"/>
+    <circle cx="41.4043" cy="-45.4562" r="0.21875" fill="black"/>
+    <circle cx="41.4043" cy="-45.0187" r="0.21875" fill="black"/>
+    <circle cx="40.8918" cy="-45.0187" r="0.21875" fill="black"/>
+    <circle cx="40.8918" cy="-45.4562" r="0.21875" fill="black"/>
+    <rect x="41.1855" y="-45.4562" width="0.4375" height="0.4375" transform="rotate(90.0 41.4043 -45.2375)" fill="black"/>
+    <rect x="40.8918" y="-45.2375" width="0.5125" height="0.4375" transform="rotate(180.0 41.148 -45.0187)" fill="black"/>
+    <rect x="40.673" y="-45.4562" width="0.4375" height="0.4375" transform="rotate(-90.0 40.8918 -45.2375)" fill="black"/>
+    <rect x="40.8918" y="-45.675" width="0.5125" height="0.4375" fill="black"/>
+    <path d="M 41.4043 -43.8813 L 41.4043 -43.4438 L 40.8918 -43.4438 L 40.8918 -43.8813 L 41.4043 -43.8813" fill="black"/>
+    <circle cx="41.4043" cy="-43.8813" r="0.21875" fill="black"/>
+    <circle cx="41.4043" cy="-43.4438" r="0.21875" fill="black"/>
+    <circle cx="40.8918" cy="-43.4438" r="0.21875" fill="black"/>
+    <circle cx="40.8918" cy="-43.8813" r="0.21875" fill="black"/>
+    <rect x="41.1855" y="-43.8813" width="0.4375" height="0.4375" transform="rotate(90.0 41.4043 -43.6625)" fill="black"/>
+    <rect x="40.8918" y="-43.6625" width="0.5125" height="0.4375" transform="rotate(180.0 41.148 -43.4438)" fill="black"/>
+    <rect x="40.673" y="-43.8813" width="0.4375" height="0.4375" transform="rotate(-90.0 40.8918 -43.6625)" fill="black"/>
+    <rect x="40.8918" y="-44.1" width="0.5125" height="0.4375" fill="black"/>
+    <path d="M 54.8663 -58.9438 L 54.8663 -58.5063 L 54.3537 -58.5063 L 54.3537 -58.9438 L 54.8663 -58.9438" fill="black"/>
+    <circle cx="54.8663" cy="-58.9438" r="0.21875" fill="black"/>
+    <circle cx="54.8663" cy="-58.5063" r="0.21875" fill="black"/>
+    <circle cx="54.3537" cy="-58.5063" r="0.21875" fill="black"/>
+    <circle cx="54.3537" cy="-58.9438" r="0.21875" fill="black"/>
+    <rect x="54.6475" y="-58.9438" width="0.4375" height="0.4375" transform="rotate(90.0 54.8663 -58.725)" fill="black"/>
+    <rect x="54.3537" y="-58.725" width="0.5125" height="0.4375" transform="rotate(180.0 54.61 -58.5063)" fill="black"/>
+    <rect x="54.135" y="-58.9438" width="0.4375" height="0.4375" transform="rotate(-90.0 54.3537 -58.725)" fill="black"/>
+    <rect x="54.3537" y="-59.1625" width="0.5125" height="0.4375" fill="black"/>
+    <path d="M 54.8663 -57.3687 L 54.8663 -56.9312 L 54.3537 -56.9312 L 54.3537 -57.3687 L 54.8663 -57.3687" fill="black"/>
+    <circle cx="54.8663" cy="-57.3687" r="0.21875" fill="black"/>
+    <circle cx="54.8663" cy="-56.9312" r="0.21875" fill="black"/>
+    <circle cx="54.3537" cy="-56.9312" r="0.21875" fill="black"/>
+    <circle cx="54.3537" cy="-57.3687" r="0.21875" fill="black"/>
+    <rect x="54.6475" y="-57.3687" width="0.4375" height="0.4375" transform="rotate(90.0 54.8663 -57.15)" fill="black"/>
+    <rect x="54.3537" y="-57.15" width="0.5125" height="0.4375" transform="rotate(180.0 54.61 -56.9312)" fill="black"/>
+    <rect x="54.135" y="-57.3687" width="0.4375" height="0.4375" transform="rotate(-90.0 54.3537 -57.15)" fill="black"/>
+    <rect x="54.3537" y="-57.5875" width="0.5125" height="0.4375" fill="black"/>
+    <rect x="59.036" y="-25.796" width="0.8" height="1.3" fill="black"/>
+    <path d="M 58.186 -25.396 L 58.186 -24.896" fill="none" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="0.8"/>
+    <path d="M 56.936 -25.396 L 56.936 -24.896" fill="none" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="0.8"/>
+    <path d="M 55.686 -25.396 L 55.686 -24.896" fill="none" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="0.8"/>
+    <rect x="24.2635" y="-56.3815" width="2.4" height="2.4" fill="black"/>
+    <circle cx="25.4635" cy="-58.6815" r="1.2" fill="black"/>
+    <circle cx="65.367" cy="-31.663" r="0.4" fill="black"/>
+    <circle cx="65.367" cy="-36.663" r="0.4" fill="black"/>
+    <rect x="63.617" y="-35.688" width="1.3" height="0.45" fill="black"/>
+    <rect x="63.617" y="-35.038" width="1.3" height="0.45" fill="black"/>
+    <rect x="63.617" y="-34.388" width="1.3" height="0.45" fill="black"/>
+    <rect x="63.617" y="-33.738" width="1.3" height="0.45" fill="black"/>
+    <rect x="63.617" y="-33.088" width="1.3" height="0.45" fill="black"/>
+    <circle cx="68.117" cy="-30.288" r="0.9" fill="black"/>
+    <circle cx="64.317" cy="-30.438" r="1.0" fill="black"/>
+    <circle cx="68.117" cy="-38.038" r="0.9" fill="black"/>
+    <circle cx="64.317" cy="-37.888" r="1.0" fill="black"/>
+  </g>
+</svg>
