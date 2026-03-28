@@ -21,7 +21,7 @@ The supplied source code already reveals the encryption logic. The task is there
 
 ## First Commands To Run
 
-Start with the original challenge materials in this folder. The goal is to identify the bug or recovery path from the provided files, then follow the numbered walkthrough below to reach the flag manually.
+Start with the original challenge materials in this folder. Treat this like a proper writeup: inspect what was provided, identify the relevant clue or weakness, verify it with the commands below, and continue until you can see or submit the final flag manually.
 
 ```bash
 cd "/home/eliah/Desktop/CTF/HackTheBox/Dynastic"
@@ -36,6 +36,17 @@ find challenge_download -maxdepth 2 -type f | sort
 file 'crypto_dynastic.zip'
 strings -n 5 'crypto_dynastic.zip' | head -200
 ```
+
+## Writeup Flow
+
+This README follows a public-writeup style structure: start from the provided files or exposed service, confirm the key weakness or clue with manual commands, use that confirmed finding to move forward, and stop only when the final flag or recovered result is visible.
+
+When you work through it, keep asking four questions:
+
+1. What is the challenge giving me locally or remotely?
+2. What exact behavior, bug, artifact, or hidden assumption matters?
+3. How do I verify that with a command or inspection step?
+4. How does that verified result lead to the final flag?
 
 ## Cipher Logic
 
@@ -109,6 +120,13 @@ Use the walkthrough above as the authoritative solve path. The short command blo
 cd "/home/eliah/Desktop/CTF/HackTheBox/Dynastic"
 ls -lah
 ```
+
+## Final Flags
+
+Following the manual path in this README leads to these recovered flags:
+
+- `HTB{DID_YOU_KNOW_ABOUT_THE_TRITHEMIUS_CIPHER?!_IT_IS_SIMILAR_TO_CAESAR_CIPHER}`
+- `HTB{{{message}`
 
 ## Study Notes
 

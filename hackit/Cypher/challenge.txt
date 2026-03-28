@@ -1,0 +1,12 @@
+Challenge: Cypher
+Platform: HackIT
+Category: Crypto
+Points: 50
+
+Prompt:
+How about bashing this cipher:
+
+TIS{ZgYzhs_Xrksvi_Prwwl!}
+
+Submission note:
+The platform accepts the solved flag with the `GoH{...}` wrapper.

@@ -19,13 +19,24 @@ This folder documents three flags built around SQL injection, missing authorizat
 
 ## First Commands To Run
 
-This folder does not include original challenge files. Start by reading the challenge description and the manual walkthrough below, then connect to a fresh challenge instance and reproduce the steps one by one.
+This folder does not include original challenge files. Follow the walkthrough the same way you would read a public writeup: understand the target behavior first, then reproduce each manual step against a fresh instance until the flag is visible.
 
 ```bash
 cd "/home/eliah/Desktop/CTF/HackerOne/Micro-CMS_v2"
 ls -lah
 printf 'Follow the manual walkthrough below against the live service.\n'
 ```
+
+## Writeup Flow
+
+This README follows a public-writeup style structure: start from the provided files or exposed service, confirm the key weakness or clue with manual commands, use that confirmed finding to move forward, and stop only when the final flag or recovered result is visible.
+
+When you work through it, keep asking four questions:
+
+1. What is the challenge giving me locally or remotely?
+2. What exact behavior, bug, artifact, or hidden assumption matters?
+3. How do I verify that with a command or inspection step?
+4. How does that verified result lead to the final flag?
 
 ## Why This Level Is Educational
 
@@ -88,6 +99,14 @@ Use the walkthrough above as the authoritative solve path. The short command blo
 cd "/home/eliah/Desktop/CTF/HackerOne/Micro-CMS_v2"
 ls -lah
 ```
+
+## Final Flags
+
+Following the manual path in this README leads to these recovered flags:
+
+- `^FLAG^b29d86c59bef7fd7ef0c299e7bbe51cbe86011e44cd37e043d75900540a09f30$FLAG$`
+- `^FLAG^5f538f1310ed3f1a16733115ae227533b3f351c982e9e17fb18e7c02e469fcbc$FLAG$`
+- `^FLAG^f4e54b81c7cff368969c63b2c360caf4580c10db82a06cb3c68763838029be35$FLAG$`
 
 ## Study Notes
 

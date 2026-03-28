@@ -19,13 +19,24 @@ This folder documents four distinct flag paths, each revealing a different class
 
 ## First Commands To Run
 
-This folder does not include original challenge files. Start by reading the challenge description and the manual walkthrough below, then connect to a fresh challenge instance and reproduce the steps one by one.
+This folder does not include original challenge files. Follow the walkthrough the same way you would read a public writeup: understand the target behavior first, then reproduce each manual step against a fresh instance until the flag is visible.
 
 ```bash
 cd "/home/eliah/Desktop/CTF/HackerOne/Micro-CMS_v1"
 ls -lah
 printf 'Follow the manual walkthrough below against the live service.\n'
 ```
+
+## Writeup Flow
+
+This README follows a public-writeup style structure: start from the provided files or exposed service, confirm the key weakness or clue with manual commands, use that confirmed finding to move forward, and stop only when the final flag or recovered result is visible.
+
+When you work through it, keep asking four questions:
+
+1. What is the challenge giving me locally or remotely?
+2. What exact behavior, bug, artifact, or hidden assumption matters?
+3. How do I verify that with a command or inspection step?
+4. How does that verified result lead to the final flag?
 
 ## Why This Level Is Good Practice
 
@@ -91,6 +102,15 @@ Use the walkthrough above as the authoritative solve path. The short command blo
 cd "/home/eliah/Desktop/CTF/HackerOne/Micro-CMS_v1"
 ls -lah
 ```
+
+## Final Flags
+
+Following the manual path in this README leads to these recovered flags:
+
+- `^FLAG^481befa1cf2357f7f6ea22d5e74ca15b12b3714b7d0dacafdb88d8211e23347e$FLAG$`
+- `^FLAG^9ed632e91db3e8c2700cff8ca565e6341f4e10864a8cbd00b9d3fb1bce424520$FLAG$`
+- `^FLAG^680c70842ddaf2233afb0dceb895b8c37d25bc04a764dd497aa94dd766adade2$FLAG$`
+- `^FLAG^b688020e0f646d6a20457df946434b395d1ac1f9b60b21ea582e5a075cc2b2f6$FLAG$`
 
 ## Study Notes
 

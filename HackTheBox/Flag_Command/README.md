@@ -18,13 +18,24 @@ The challenge is a strong example of a common web-security lesson: values hidden
 
 ## First Commands To Run
 
-This folder does not include original challenge files. Start by reading the challenge description and the manual walkthrough below, then connect to a fresh challenge instance and reproduce the steps one by one.
+This folder does not include original challenge files. Follow the walkthrough the same way you would read a public writeup: understand the target behavior first, then reproduce each manual step against a fresh instance until the flag is visible.
 
 ```bash
 cd "/home/eliah/Desktop/CTF/HackTheBox/Flag_Command"
 ls -lah
 printf 'Follow the manual walkthrough below against the live service.\n'
 ```
+
+## Writeup Flow
+
+This README follows a public-writeup style structure: start from the provided files or exposed service, confirm the key weakness or clue with manual commands, use that confirmed finding to move forward, and stop only when the final flag or recovered result is visible.
+
+When you work through it, keep asking four questions:
+
+1. What is the challenge giving me locally or remotely?
+2. What exact behavior, bug, artifact, or hidden assumption matters?
+3. How do I verify that with a command or inspection step?
+4. How does that verified result lead to the final flag?
 
 ## How The Application Works
 
@@ -96,6 +107,10 @@ Use the walkthrough above as the authoritative solve path. The short command blo
 cd "/home/eliah/Desktop/CTF/HackTheBox/Flag_Command"
 ls -lah
 ```
+
+## Final Flag
+
+Following the manual path in this README leads to: `HTB{D3v3l0p3r_t00l5_4r3_b35t_wh4t_y0u_Th1nk??!_a514b53e08c2e001d25041c95a2f7053}`
 
 ## Study Notes
 

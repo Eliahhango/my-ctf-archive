@@ -1,0 +1,11 @@
+Challenge: Welcome
+Platform: HackIT
+Category: Crypto
+Points: 50
+
+Prompt:
+My friend sent me this message, can you decipher it for me ?
+
+R29Te1dlbGNvbWVfdG9fc2l0ZSF9
+
+Flag format: GoH{flag}

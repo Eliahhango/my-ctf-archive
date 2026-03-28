@@ -23,7 +23,7 @@ This is a useful challenge because it teaches a real operational security lesson
 
 ## First Commands To Run
 
-Start with the original challenge materials in this folder. The goal is to identify the bug or recovery path from the provided files, then follow the numbered walkthrough below to reach the flag manually.
+Start with the original challenge materials in this folder. Treat this like a proper writeup: inspect what was provided, identify the relevant clue or weakness, verify it with the commands below, and continue until you can see or submit the final flag manually.
 
 ```bash
 cd "/home/eliah/Desktop/CTF/picoCTF/Failure_Failure"
@@ -36,6 +36,17 @@ Useful first inspection commands:
 sed -n '1,220p' 'app.py'
 sed -n '1,220p' 'haproxy.cfg'
 ```
+
+## Writeup Flow
+
+This README follows a public-writeup style structure: start from the provided files or exposed service, confirm the key weakness or clue with manual commands, use that confirmed finding to move forward, and stop only when the final flag or recovered result is visible.
+
+When you work through it, keep asking four questions:
+
+1. What is the challenge giving me locally or remotely?
+2. What exact behavior, bug, artifact, or hidden assumption matters?
+3. How do I verify that with a command or inspection step?
+4. How does that verified result lead to the final flag?
 
 ## Core Vulnerability
 
@@ -141,6 +152,10 @@ Use the walkthrough above as the authoritative solve path. The short command blo
 cd "/home/eliah/Desktop/CTF/picoCTF/Failure_Failure"
 ls -lah
 ```
+
+## Final Flag
+
+Following the manual path in this README leads to: `picoCTF{f41l0v3r_f0r_7h3_w1n_df560c35}`
 
 ## Study Notes
 
