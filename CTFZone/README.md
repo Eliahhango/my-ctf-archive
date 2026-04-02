@@ -7,6 +7,7 @@ This directory contains CTFZone challenge material and challenge walkthrough not
 ## Challenge Folders
 
 - `Follow_The_Media`
+- `Phantom_Recursion`
 
 ## Recommended Workflow
 

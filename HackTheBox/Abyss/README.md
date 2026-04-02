@@ -1,143 +1,134 @@
-# Abyss
-
-## Overview
-
-This directory contains the local materials and manual walkthrough for the `Abyss` challenge on Hack The Box CTF Try Out. This is a binary exploitation challenge built around an unsafe login parser. The important idea is not just that a buffer can be overflowed, but that the overflow happens because raw input from `read()` is later treated like a NUL-terminated C string.
-
-This README is written so the challenge can be solved manually from the files and commands in this folder. The archived notes remain useful as a historical reference, but they are no longer the primary path through the material.
+# Abyss (Hack The Box) - Professional PoC Writeup
 
 ## Challenge Profile
 
-- Challenge: `Abyss`
-- Category: `Pwn / Binary Exploitation`
-- Platform: `Hack The Box - CTF Try Out`
+| Field | Value |
+|---|---|
+| Challenge | Abyss |
+| Category | Pwn |
+| Difficulty | Easy |
+| Primary dropped file | `pwn_abyss (1).zip` |
+| Existing local PoC before this update | Present |
+| Core bug class | Parser-driven stack overflow from unterminated `read()` data |
 
-## Directory Contents
+## Scope And Ethics
 
-- `abyss_poc.sh`
-- `pwn_abyss/`
-- `pwn_abyss.zip`
+This material is for authorized CTF infrastructure only. Do not run this PoC
+against systems you do not own or have explicit permission to test.
 
-## First Commands To Run
+## Technical Summary
 
-Start with the original challenge materials in this folder. Treat this like a proper writeup: inspect what was provided, identify the relevant clue or weakness, verify it with the commands below, and continue until you can see or submit the final flag manually.
+The login parser reads raw bytes into a fixed stack buffer and then copies
+`USER` and `PASS` fields with loops that only stop at `\0`:
+
+```c
+while (buf[i] != '\0') {
+    pass[i - 5] = buf[i];
+    i++;
+}
+```
+
+Because `read(0, buf, sizeof(buf))` does not append a null terminator, a full
+`PASS` payload with no `\0` causes the copy loop to walk beyond intended input,
+corrupting adjacent stack state including saved return control.
+
+Exploit flow:
+1. Send command `LOGIN` (`0`).
+2. Send crafted `USER` payload.
+3. Send 512-byte `PASS` body (no null byte) to trigger overflow.
+4. Partially overwrite saved RIP low bytes with `0x4014eb`.
+5. Execution re-enters `cmd_read()` at the `logged_in` test branch point.
+6. Send `flag.txt` as filename and capture `HTB{...}` from output.
+
+## Vulnerable Behavior
+
+1. Raw `read()` input is treated as null-terminated text without enforcing a terminator.
+2. Unbounded parser loops copy attacker-controlled bytes until accidental `\0`.
+3. Stack corruption in `cmd_login()` permits saved return-address overwrite.
+4. Control-flow redirection bypasses intended authentication gate in normal path.
+
+## Manual Verification Steps
+
+1. Inspect vulnerable source:
+
+```bash
+sed -n '1,260p' pwn_abyss/challenge/source.c
+```
+
+2. Inspect login parser and read gate in disassembly:
+
+```bash
+objdump -d -Mintel pwn_abyss/challenge/abyss | sed -n '280,520p'
+```
+
+Key locations:
+
+```text
+cmd_login: 0x401296
+cmd_read:  0x4014a9
+0x4014eb:  test eax,eax   ; logged_in check site used by partial overwrite
+```
+
+3. Run the exploit chain against target and extract flag.
+
+## Automated PoC
+
+Script:
+`abyss_poc.sh`
+
+### Usage
 
 ```bash
 cd "/home/eliah/Desktop/CTF/HackTheBox/Abyss"
-ls -lah
-unzip -l "pwn_abyss.zip"
+chmod +x abyss_poc.sh
+./abyss_poc.sh <host> <port>
 ```
 
-Useful first inspection commands:
+### Common examples
 
 ```bash
-file 'pwn_abyss.zip'
-strings -n 5 'pwn_abyss.zip' | head -200
+./abyss_poc.sh 154.57.164.69 32244
+./abyss_poc.sh --host 154.57.164.69 --port 32244 --verbose
+./abyss_poc.sh --host 154.57.164.69 --port 32244 --json
 ```
 
-## Writeup Flow
+## Options
 
-This README follows a public-writeup style structure: start from the provided files or exposed service, confirm the key weakness or clue with manual commands, use that confirmed finding to move forward, and stop only when the final flag or recovered result is visible.
+- `--host <host>`: target host or IP.
+- `--port <port>`: target TCP port.
+- `--timeout <seconds>`: socket timeout, default `8`.
+- `--stage-delay <sec>`: delay between protocol stages, default `0.6`.
+- `--json`: machine-readable JSON output.
+- `--verbose`: print debug output.
+- `-h`, `--help`: show usage help.
 
-When you work through it, keep asking four questions:
+## Exit Codes
 
-1. What is the challenge giving me locally or remotely?
-2. What exact behavior, bug, artifact, or hidden assumption matters?
-3. How do I verify that with a command or inspection step?
-4. How does that verified result lead to the final flag?
+- `0`: exploit succeeded and flag extracted.
+- `2`: invalid CLI arguments.
+- `3`: connectivity/protocol failure.
+- `4`: exploit sent but flag not found.
 
-## What The Binary Does
+## Why The Exploit Works
 
-The program implements a small command protocol with three actions:
+- Login parser relies on `\0` termination but uses raw `read()`.
+- Crafted payload keeps parser copying out-of-bounds into stack metadata.
+- Partial RIP overwrite avoids null-byte constraints of full 64-bit address writes.
+- Redirecting to `0x4014eb` lands in `cmd_read()` path after auth decision point.
 
-- `0` for login
-- `1` for read
-- `2` for exit
+## Defensive Guidance
 
-At a high level, it looks like a normal authenticated file reader. The login routine accepts a `USER ...` line and a `PASS ...` line, compares them against credentials loaded from `.creds`, and only then allows the read path to continue.
+- Never process raw `read()` buffers as C strings without explicit termination.
+- Track and enforce exact byte lengths when parsing protocol fields.
+- Use bounded copy routines and strict field-size checks.
+- Add compiler/runtime hardening (stack canaries, PIE, full RELRO, stronger control-flow protections).
 
-That design is misleading. The real weakness is in how the parser handles the raw data returned by `read()`.
+## Result Note
 
-## Root Cause
-
-The vulnerable function reads a full block of bytes into a stack buffer and then copies bytes into local arrays until a NUL byte is encountered. The problem is that `read()` does not append a terminator. If the attacker sends a full-size input with no `\x00` byte, the parser keeps walking past the end of the intended input and begins reading adjacent stack memory as if it were still part of the string.
-
-That turns a parsing bug into a controllable stack overflow.
-
-This is the exact lesson the challenge is built to teach: unstructured input from `read()`, `recv()`, or `fread()` is not automatically safe to treat as a string. If a developer forgets to terminate it or fails to track the exact byte count, later string logic can walk out of bounds and corrupt memory.
-
-## Exploitation Strategy
-
-The exploit does not need a long ROP chain. A simpler and cleaner path works.
-
-1. Connect to the target.
-2. Send the command integer for login.
-3. Send a crafted `USER` value.
-4. Send a full-sized `PASS` value that contains no NUL byte.
-5. Let the vulnerable parser overflow into the saved return address.
-6. Perform a partial return-address overwrite so execution lands inside `cmd_read()`.
-7. Skip the authentication check and provide `flag.txt` as the filename.
-
-The manual exploit path uses a partial overwrite instead of a full 8-byte address because the vulnerable loop stops on the first NUL byte. A full 64-bit pointer would introduce zero bytes too early. Overwriting only the low bytes avoids that issue and is enough to redirect control flow.
-
-## Why The Partial Overwrite Works
-
-The intended return target is `0x4014eb`, which is already inside the file-read logic after the logged-in check has succeeded. That is more reliable than trying to build a larger chain.
-
-The manual exploit path uses:
-
-- a carefully aligned `USER` payload
-- a full-sized `PASS` payload with no terminator
-- the low three bytes of the target address
-
-That combination is enough to turn the parser bug into an authentication bypass and direct file read.
-
-## Manual Analysis Commands
-
-If you want to retrace the solve manually, these are good commands to run:
-
-```bash
-cd "/home/eliah/Desktop/CTF/HackTheBox/Abyss"
-objdump -d -Mintel pwn_abyss/abyss | less
-strings -n 5 pwn_abyss/abyss | less
-gdb -q pwn_abyss/abyss
-```
-
-Inside `gdb`, the usual path is:
-
-```gdb
-disassemble main
-disassemble cmd_login
-disassemble cmd_read
-```
-
-What you are looking for:
-
-- where the input buffer is allocated
-- where the parser copies `USER` and `PASS`
-- where the copy loop stops
-- where the return address sits relative to the stack buffer
-- where a useful re-entry point exists in the read path
-
-## Manual Reproduction Flow
-
-Use the walkthrough above as the authoritative solve path. The short command block below is only the setup phase before you execute the numbered manual steps in this README.
-
-```bash
-cd "/home/eliah/Desktop/CTF/HackTheBox/Abyss"
-ls -lah
-```
+Flag values are instance-specific. The format remains `HTB{...}`.
 
 ## Final Flag
 
-Following the manual path in this README leads to: `HTB{sH0u1D_h4v3-NU11-t3rmIn4tEd_buf!_310873ad542dac635c2bd22f3f1e8cf7}`
-
-## Study Notes
-
-This is a useful challenge for practicing three core exploitation ideas:
-
-- the difference between raw byte input and C strings
-- parser-driven overflows that do not look like classic `gets()` bugs
-- partial return-address overwrites when full pointers are inconvenient
-
-The deeper learning comes from stepping through the vulnerable login parser and watching how the unterminated `PASS` input changes stack state. The archived notes are only a later reference.
+Target instance: `154.57.164.69:32244`  
+Solved on: `2026-04-02`  
+Flag: `HTB{sH0u1D_h4v3-NU11-t3rmIn4tEd_buf!_d6b1090b1d62b29d8e894de757982644}`

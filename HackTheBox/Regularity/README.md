@@ -1,123 +1,144 @@
-# Regularity
-
-## Overview
-
-This directory contains the local materials and manual walkthrough for the `Regularity` challenge on Hack The Box CTF Try Out. This is a binary exploitation challenge with a clean stack overflow and a very convenient jump gadget. The unusual part is that you do not need a stack address leak to run shellcode, because the program already leaves a register pointing at your controlled buffer.
-
-That makes the challenge a strong example of how register state can remove the need for a more complicated exploit chain.
+# Regularity (Hack The Box) - Professional PoC Writeup
 
 ## Challenge Profile
 
-- Challenge: `Regularity`
-- Category: `Pwn`
-- Platform: `Hack The Box CTF Try Out`
+| Field | Value |
+|---|---|
+| Challenge | Regularity |
+| Category | Pwn |
+| Difficulty | Very Easy |
+| Primary dropped file | `pwn_regularity (1).zip` |
+| Existing local PoC before this update | Present |
+| Core bug class | Stack overflow + control-flow redirection to `jmp rsi` |
 
-## Directory Contents
+## Scope And Ethics
 
-- `pwn_regularity/`
-- `pwn_regularity.zip`
-- `regularity_poc.sh`
+This material is for authorized CTF infrastructure only. Do not run this PoC
+against systems you do not own or have explicit permission to test.
 
-## First Commands To Run
+## Technical Summary
 
-Start with the original challenge materials in this folder. Treat this like a proper writeup: inspect what was provided, identify the relevant clue or weakness, verify it with the commands below, and continue until you can see or submit the final flag manually.
+The binary reads `0x110` bytes into a stack buffer of `0x100` bytes inside its
+custom `read` routine:
+
+- `sub rsp, 0x100`
+- `mov edx, 0x110`
+- `syscall` (`read`)
+
+This overflows past the local buffer and reaches saved return state. The same
+binary also contains a direct `jmp rsi` gadget at `0x401041`, and `rsi` still
+points to attacker-controlled input buffer after the vulnerable `read` returns.
+
+Exploit flow:
+1. Send shellcode at start of input.
+2. Pad to RIP offset (`0x100`).
+3. Overwrite RIP with `0x401041` (`jmp rsi`).
+4. Shellcode executes `open("flag.txt")`, `read`, `write`, `exit`.
+5. Parse `HTB{...}` from service output.
+
+## Vulnerable Behavior
+
+1. Stack allocation is smaller than requested input length.
+2. No stack canary or other guard in this handcrafted syscall-only binary.
+3. Executable stack (`GNU_STACK` is `RWE`) allows direct shellcode execution.
+4. Register state (`rsi`) is attacker-controlled at return site.
+
+## Manual Verification Steps
+
+1. Confirm ELF type and fixed base:
+
+```bash
+file pwn_regularity/regularity
+readelf -h pwn_regularity/regularity
+```
+
+2. Confirm executable stack:
+
+```bash
+readelf -l pwn_regularity/regularity
+```
+
+Look for:
+
+```text
+GNU_STACK ... RWE
+```
+
+3. Confirm vulnerable `read` and control gadget:
+
+```bash
+objdump -d -Mintel pwn_regularity/regularity | sed -n '1,180p'
+```
+
+Relevant instructions:
+
+```text
+40104b: sub rsp,0x100
+401060: mov edx,0x110
+401065: syscall
+...
+401041: jmp rsi
+```
+
+4. Send payload (shellcode + RIP overwrite to `0x401041`) and extract flag.
+
+## Automated PoC
+
+Script:
+`regularity_poc.sh`
+
+### Usage
 
 ```bash
 cd "/home/eliah/Desktop/CTF/HackTheBox/Regularity"
-ls -lah
-unzip -l "pwn_regularity.zip"
+chmod +x regularity_poc.sh
+./regularity_poc.sh <host> <port>
 ```
 
-Useful first inspection commands:
+### Common examples
 
 ```bash
-file 'pwn_regularity.zip'
-strings -n 5 'pwn_regularity.zip' | head -200
+./regularity_poc.sh 154.57.164.74 32184
+./regularity_poc.sh --host 154.57.164.74 --port 32184 --verbose
+./regularity_poc.sh --host 154.57.164.74 --port 32184 --json
 ```
 
-## Writeup Flow
+## Options
 
-This README follows a public-writeup style structure: start from the provided files or exposed service, confirm the key weakness or clue with manual commands, use that confirmed finding to move forward, and stop only when the final flag or recovered result is visible.
+- `--host <host>`: target host or IP.
+- `--port <port>`: target TCP port.
+- `--timeout <seconds>`: socket timeout, default `5`.
+- `--json`: machine-readable JSON output.
+- `--verbose`: print debug output.
+- `-h`, `--help`: show usage help.
 
-When you work through it, keep asking four questions:
+## Exit Codes
 
-1. What is the challenge giving me locally or remotely?
-2. What exact behavior, bug, artifact, or hidden assumption matters?
-3. How do I verify that with a command or inspection step?
-4. How does that verified result lead to the final flag?
+- `0`: exploit succeeded and flag extracted.
+- `2`: invalid CLI arguments.
+- `3`: connectivity/request failure.
+- `4`: exploit sent but flag not found.
 
-## What The Binary Does
+## Why The Exploit Works
 
-The program is minimal:
+- Input length (`0x110`) exceeds local stack buffer (`0x100`).
+- Attacker gains RIP control through overflow.
+- `jmp rsi` gadget uses already-controlled pointer to payload buffer.
+- Executable stack allows shellcode execution without ROP chain complexity.
 
-1. it prints a greeting
-2. it reads user input
-3. it prints a closing line
-4. it exits
+## Defensive Guidance
 
-The vulnerability is in the custom `read` helper. It allocates `0x100` bytes on the stack but reads `0x110` bytes, so the overflow reaches past the buffer and into the saved return state.
+- Enforce strict length checks before reading into stack buffers.
+- Compile with modern hardening (`-fstack-protector`, PIE, NX, RELRO).
+- Avoid executable stack unless absolutely required.
+- Prefer safe wrappers over hand-written raw syscall parsers for user input.
 
-## Why This Challenge Is Nicer Than It First Looks
+## Result Note
 
-Many shellcode-overflow problems require a stack leak so the attacker knows where the payload landed. This one avoids that requirement because:
-
-- the input buffer is located at `rsp`
-- the program keeps `rsi` pointing at that buffer after `read()` returns
-- the binary contains a direct `jmp rsi` gadget at `0x401041`
-
-That means the exploit can simply:
-
-1. place shellcode at the start of the input
-2. pad to the return address
-3. overwrite RIP with `0x401041`
-
-Execution then jumps directly into the controlled stack buffer.
-
-## Exploit Structure
-
-The saved exploit uses 64-bit shellcode that:
-
-- opens `flag.txt`
-- reads the flag contents
-- writes them to stdout
-- exits
-
-The shellcode is placed at the beginning of the payload. After padding to the saved return address, the exploit writes the `jmp rsi` gadget address.
-
-That is all that is needed.
-
-## Manual Analysis Commands
-
-If you want to inspect the binary manually, these are good commands:
-
-```bash
-cd "/home/eliah/Desktop/CTF/HackTheBox/Regularity"
-checksec --file=pwn_regularity/regularity
-objdump -d -Mintel pwn_regularity/regularity | less
-ROPgadget --binary pwn_regularity/regularity | grep 'jmp rsi'
-```
-
-What you want to confirm:
-
-- the exact stack allocation size
-- the exact read length
-- the offset from the buffer to saved RIP
-- the existence of `jmp rsi`
-- that `rsi` still points at your input when control returns
-
-## Manual Reproduction Flow
-
-Use the walkthrough above as the authoritative solve path. The short command block below is only the setup phase before you execute the numbered manual steps in this README.
-
-```bash
-cd "/home/eliah/Desktop/CTF/HackTheBox/Regularity"
-ls -lah
-```
+Flag values are instance-specific. The format remains `HTB{...}`.
 
 ## Final Flag
 
-Following the manual path in this README leads to: `HTB{jMp_rSi_jUmP_aLl_tH3_w4y!}`
-
-## Study Notes
-
-This challenge is worth revisiting if you are practicing shellcode-based exploitation. It is especially useful as a reminder that register state after a syscall can matter just as much as the overflow itself. Sometimes the easiest path is not to leak an address, but to reuse a register that already points where you want to go.
+Target instance: `154.57.164.74:32184`  
+Solved on: `2026-04-02`  
+Flag: `HTB{juMp1nG_w1tH_tH3_r3gIsT3rS?_868b1ba015353017f809a2ae0d76220c}`

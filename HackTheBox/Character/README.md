@@ -1,104 +1,123 @@
-# Character
-
-## Overview
-
-This directory contains the local materials and manual walkthrough for the `Character` challenge on Hack The Box. This is a very simple terminal-style challenge, but it demonstrates an important security lesson clearly: leaking a secret one character at a time is still leaking the secret.
-
-The service is designed to feel tedious for a human. The correct response is to automate the repeated requests and reconstruct the full flag from the individual character disclosures.
+# Character (Hack The Box) - Professional PoC Writeup
 
 ## Challenge Profile
 
-- Challenge: `Character`
-- Category: `terminal / warmup`
-- Platform: `Hack The Box`
-- Difficulty: `very easy`
+| Field | Value |
+|---|---|
+| Challenge | Character |
+| Category | Terminal / Warmup |
+| Vulnerability Class | Incremental secret disclosure |
+| Transport | Raw TCP |
+| Prompt style | One character per requested index |
 
-## Directory Contents
+## Scope And Ethics
 
-- `character_poc.sh`
+This material is for authorized CTF infrastructure only. Do not run this PoC
+against systems you do not own or have explicit permission to test.
 
-## First Commands To Run
+## Technical Summary
 
-This folder does not include original challenge files. Follow the walkthrough the same way you would read a public writeup: understand the target behavior first, then reproduce each manual step against a fresh instance until the flag is visible.
+The service asks for a numeric index and returns one flag character at that
+position. By repeatedly querying index `0,1,2,...` and concatenating responses,
+the full flag can be reconstructed until the server returns `Index out of range`.
 
-```bash
-cd "/home/eliah/Desktop/CTF/HackTheBox/Character"
-ls -lah
-printf 'Follow the manual walkthrough below against the live service.\n'
-```
+## Vulnerable Behavior
 
-## Writeup Flow
+1. Service discloses secret data deterministically by index.
+2. No meaningful anti-automation controls prevent bulk extraction.
+3. Response format is stable: `Character at Index N: X`.
+4. Entire secret can be rebuilt with a simple loop.
 
-This README follows a public-writeup style structure: start from the provided files or exposed service, confirm the key weakness or clue with manual commands, use that confirmed finding to move forward, and stop only when the final flag or recovered result is visible.
+## Manual Verification Steps
 
-When you work through it, keep asking four questions:
-
-1. What is the challenge giving me locally or remotely?
-2. What exact behavior, bug, artifact, or hidden assumption matters?
-3. How do I verify that with a command or inspection step?
-4. How does that verified result lead to the final flag?
-
-## What The Service Does
-
-The challenge exposes a service that accepts an integer index and returns the corresponding flag character. It keeps doing this until the requested index is outside the valid range.
-
-So the interaction model is effectively:
-
-1. send index
-2. receive one character
-3. increment index
-4. repeat until the service says the index is out of range
-
-## Why This Is A Security Problem
-
-Sometimes developers believe they are safe because they do not reveal the whole secret at once. That is not real protection. If an attacker can query one position at a time, they can reconstruct the entire value with trivial automation.
-
-This challenge is a good reminder that partial disclosure remains disclosure.
-
-## Manual Solve Idea
-
-If you want to see the issue manually once, connect with `nc`:
+1. Connect to the service:
 
 ```bash
 nc <HOST> <PORT>
 ```
 
-Then request:
-
-- `0`
-- `1`
-- `2`
-- `3`
-
-You will quickly see that the service is just walking you through the flag one position at a time.
-
-That is the point where scripting becomes the obvious answer.
-
-## Optional Archive Reference
-
-The archived notes in this folder automate the same idea by keeping one socket open, sending increasing integers, and parsing lines of the form:
+2. Send a few indexes manually:
 
 ```text
-Character at Index N: X
+0
+1
+2
+3
 ```
 
-and appends each returned character to a local string until the service reports that the index is out of range.
+3. Observe output format:
 
-The script also handles slight network timing issues by performing short follow-up reads when the result and the next prompt arrive in separate packets.
+```text
+Character at Index 0: H
+Character at Index 1: T
+Character at Index 2: B
+Character at Index 3: {
+```
 
-## Manual Reproduction Flow
+4. Continue incrementing indexes until:
 
-Use the walkthrough above as the authoritative solve path. The short command block below is only the setup phase before you execute the numbered manual steps in this README.
+```text
+Index out of range
+```
+
+## Automated PoC
+
+Script:
+`character_poc.sh`
+
+### Usage
 
 ```bash
 cd "/home/eliah/Desktop/CTF/HackTheBox/Character"
-ls -lah
+chmod +x character_poc.sh
+./character_poc.sh <host> <port>
 ```
+
+### Common examples
+
+```bash
+./character_poc.sh 154.57.164.76 31059
+./character_poc.sh --host 154.57.164.76 --port 31059 --verbose
+./character_poc.sh --host 154.57.164.76 --port 31059 --json
+```
+
+## Options
+
+- `--host <host>`: target host or IP.
+- `--port <port>`: target TCP port.
+- `--timeout <seconds>`: socket timeout, default `8`.
+- `--max-index <n>`: maximum index attempts, default `500`.
+- `--json`: machine-readable JSON output.
+- `--verbose`: print debug details.
+- `-h`, `--help`: show usage help.
+
+## Exit Codes
+
+- `0`: exploit succeeded and flag extracted.
+- `2`: invalid CLI arguments.
+- `3`: target connectivity failure.
+- `4`: protocol parse failure.
+- `5`: extraction completed but no `HTB{...}` pattern detected.
+
+## Why The Exploit Works
+
+- Returning one character at a time still leaks the full secret.
+- Index-based access gives direct random access into flag contents.
+- Repetition is trivial to automate over a single persistent socket.
+
+## Defensive Guidance
+
+- Do not expose secret bytes/characters by user-controlled index.
+- Enforce strict authorization before revealing sensitive values.
+- Add rate limits, anomaly detection, and challenge/response controls.
+- Prefer challenge designs that never return real secret material incrementally.
+
+## Result Note
+
+Flag values are instance-specific. The format remains `HTB{...}`.
 
 ## Final Flag
 
-Following the manual path in this README leads to: `HTB{tH15_1s_4_r3aLly_l0nG_fL4g_i_h0p3_f0r_y0Ur_s4k3_tH4t_y0U_sCr1pTEd_tH1s_oR_els3_iT_t0oK_qU1t3_l0ng!!}`
-
-## Study Notes
-
-This challenge is easy, but it teaches a real principle: if a service lets an attacker query secret state incrementally, the attacker can usually automate the collection process. It is a useful warmup for basic socket scripting and response parsing.
+Target instance: `154.57.164.76:31059`  
+Solved on: `2026-04-02`  
+Flag: `HTB{tH15_1s_4_r3aLly_l0nG_fL4g_i_h0p3_f0r_y0Ur_s4k3_tH4t_y0U_sCr1pTEd_tH1s_oR_els3_iT_t0oK_qU1t3_l0ng!!}`

