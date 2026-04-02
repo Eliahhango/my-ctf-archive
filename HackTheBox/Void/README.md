@@ -1,54 +1,24 @@
-# Void
-
-## Overview
-
-This directory contains the local materials and manual walkthrough for the `Void` challenge on Hack The Box CTF Try Out. This is a compact binary exploitation challenge whose main lesson is that even a tiny binary with almost no imported functions can still be exploited if the attacker understands how ELF dynamic resolution works.
-
-The archived notes in this folder preserve one working payload, while this README explains why those bytes are needed and how the attack works conceptually.
+# Void (Hack The Box) - Professional PoC Writeup
 
 ## Challenge Profile
 
-- Challenge: `Void`
-- Category: `Pwn / Binary Exploitation`
-- Platform: `Hack The Box - CTF Try Out`
+| Field | Value |
+|---|---|
+| Challenge | Void |
+| Category | Pwn |
+| Difficulty | Medium |
+| Primary dropped file | `pwn_void (1).zip` |
+| Existing local PoC before this update | Present |
+| Core bug class | Stack overflow + ret2dlresolve |
 
-## Directory Contents
+## Scope And Ethics
 
-- `challenge/`
-- `pwn_void.zip`
-- `void_poc.sh`
+This material is for authorized CTF infrastructure only. Do not run this PoC
+against systems you do not own or have explicit permission to test.
 
-## First Commands To Run
+## Technical Summary
 
-Start with the original challenge materials in this folder. Treat this like a proper writeup: inspect what was provided, identify the relevant clue or weakness, verify it with the commands below, and continue until you can see or submit the final flag manually.
-
-```bash
-cd "/home/eliah/Desktop/CTF/HackTheBox/Void"
-ls -lah
-unzip -l "pwn_void.zip"
-```
-
-Useful first inspection commands:
-
-```bash
-file 'pwn_void.zip'
-strings -n 5 'pwn_void.zip' | head -200
-```
-
-## Writeup Flow
-
-This README follows a public-writeup style structure: start from the provided files or exposed service, confirm the key weakness or clue with manual commands, use that confirmed finding to move forward, and stop only when the final flag or recovered result is visible.
-
-When you work through it, keep asking four questions:
-
-1. What is the challenge giving me locally or remotely?
-2. What exact behavior, bug, artifact, or hidden assumption matters?
-3. How do I verify that with a command or inspection step?
-4. How does that verified result lead to the final flag?
-
-## Vulnerable Function
-
-The core bug is very small:
+The binary is intentionally minimal. It has a single vulnerable function:
 
 ```c
 void vuln() {
@@ -57,96 +27,131 @@ void vuln() {
 }
 ```
 
-That means:
+Because `0xc8` bytes are read into a `0x40`-byte stack buffer, return control
+is reachable at offset `72` (`64` buffer + `8` saved `rbp`).
 
-- the stack buffer is `0x40` bytes
-- saved `rbp` adds another `8` bytes
-- saved `rip` is reached at offset `72`
+There is no direct `win()` function and only one PLT import (`read`). A normal
+ret2win or standard libc-leak path is not available, so the intended technique
+is `ret2dlresolve`:
 
-This is a textbook stack overflow. The challenge becomes interesting because the binary is intentionally stripped down.
+1. Stage 1 overflows stack and sets up a small ROP chain.
+2. ROP calls `read` again to load forged resolver data.
+3. Chain invokes PLT resolver trampoline (`plt0`).
+4. Fake relocation/symbol records resolve `system` at runtime.
+5. Resolved call executes `system("cat flag.txt")`.
 
-## Why A Standard ret2win Approach Does Not Work
+## Vulnerable Behavior
 
-There is no convenient `win()` function. The import table is tiny. The binary does not hand us the usual building blocks for a straightforward libc leak and follow-up `system("/bin/sh")` chain.
+1. Stack overflow via oversized `read` into fixed local buffer.
+2. No stack canary in challenge binary.
+3. Very small import surface encourages loader-abuse exploitation.
+4. Dynamic linker metadata can be forged under attacker control.
 
-That pushes the solve toward a more advanced technique: `ret2dlresolve`.
+## Manual Verification Steps
 
-## What ret2dlresolve Means Here
-
-ELF binaries rely on the dynamic linker to resolve imported functions at runtime. If you can control execution and present the linker with forged relocation metadata, you can trick it into resolving a function that the program did not originally import.
-
-In this challenge, the target function is `system`, and the desired command is:
+1. Confirm vulnerable instructions and stack layout:
 
 ```bash
-cat flag.txt
+objdump -d -Mintel challenge/void | sed -n '120,220p'
 ```
 
-So the overall idea is:
+Relevant instructions:
 
-1. Overflow the stack.
-2. Use a small ROP chain to call `read` again.
-3. Place a second-stage forged relocation/symbol blob into memory.
-4. Jump through the dynamic resolver trampoline.
-5. Resolve `system` on demand.
-6. Execute `system("cat flag.txt")`.
+```text
+401126: sub rsp,0x40
+40112e: mov edx,0xc8
+40113b: call read@plt
+```
 
-## Why This Challenge Is Educational
-
-The important lesson is that dynamic linking metadata is part of the attack surface. A binary can look too small to exploit in the usual ways and still be completely solvable once you understand `plt0`, relocation entries, and symbol resolution.
-
-This challenge is a strong exercise if you are moving beyond beginner ret2win problems and into loader-aware exploitation.
-
-## Manual Analysis Commands
-
-If you want to reconstruct the logic by hand, these commands are useful:
+2. Confirm dynamic relocations/imports are minimal:
 
 ```bash
-cd "/home/eliah/Desktop/CTF/HackTheBox/Void"
-checksec --file=challenge/void
 readelf -r challenge/void
 readelf -s challenge/void
-objdump -d -Mintel challenge/void | less
-ROPgadget --binary challenge/void | head -100
 ```
 
-What you want to identify:
+Key observation:
 
-- the exact overflow offset
-- a gadget for `pop rdi`
-- a gadget for `pop rsi; pop r15; ret`
-- the `read@plt` entry
-- the resolver trampoline in the PLT
-- a writable memory region for the second-stage blob
+```text
+.rela.plt contains only read@GLIBC_2.2.5
+```
 
-## How The Saved archived notes Is Structured
+3. Confirm useful gadgets:
 
-The archived notes in this folder preserve two payloads:
+```bash
+HackTheBox/Void/.venv/bin/ROPgadget --binary challenge/void --only 'pop|ret'
+```
 
-- `stage1`: the initial overflow and primary ROP chain
-- `stage2`: the forged `ret2dlresolve` data used to resolve `system`
+Notable gadgets:
 
-That design keeps the script portable. You do not need `pwntools` at runtime, because the exploit already embeds the final bytes that were generated from the local challenge binary.
+```text
+0x4011bb : pop rdi ; ret
+0x4011b9 : pop rsi ; pop r15 ; ret
+0x401016 : ret
+```
 
-## Manual Reproduction Flow
+4. Run exploit (two-stage payload: overflow + forged resolver structures).
 
-Use the walkthrough above as the authoritative solve path. The short command block below is only the setup phase before you execute the numbered manual steps in this README.
+5. Extract `HTB{...}` from output.
+
+## Automated PoC
+
+Script:
+`void_poc.sh`
+
+### Usage
 
 ```bash
 cd "/home/eliah/Desktop/CTF/HackTheBox/Void"
-ls -lah
+chmod +x void_poc.sh
+./void_poc.sh <host> <port>
 ```
+
+### Common examples
+
+```bash
+./void_poc.sh 154.57.164.77 31676
+./void_poc.sh --host 154.57.164.77 --port 31676 --verbose
+./void_poc.sh --host 154.57.164.77 --port 31676 --json
+```
+
+## Options
+
+- `--host <host>`: target host or IP.
+- `--port <port>`: target TCP port.
+- `--timeout <seconds>`: socket timeout, default `8`.
+- `--stage-delay <seconds>`: delay between stage1 and stage2, default `0.20`.
+- `--json`: machine-readable JSON output.
+- `--verbose`: print debug output.
+- `-h`, `--help`: show usage help.
+
+## Exit Codes
+
+- `0`: exploit succeeded and flag extracted.
+- `2`: invalid CLI arguments.
+- `3`: connectivity/protocol failure.
+- `4`: exploit sent but flag not found.
+
+## Why The Exploit Works
+
+- Overflow gives RIP control despite tiny program logic.
+- Direct ret2win is unavailable due missing target functionality.
+- Dynamic resolver (`plt0`) can be abused with crafted relocation entries.
+- Runtime resolution of `system` provides a command execution primitive.
+
+## Defensive Guidance
+
+- Enforce strict read-size limits tied to destination buffer size.
+- Enable full hardening (`-fstack-protector`, PIE, RELRO, FORTIFY).
+- Consider seccomp/sandboxing to constrain post-exploitation impact.
+- Treat dynamic linker attack surface as part of threat model.
+
+## Result Note
+
+Flag values are instance-specific. The format remains `HTB{...}`.
 
 ## Final Flag
 
-Following the manual path in this README leads to: `HTB{pwnt00l5_h0mep4g3_15_u54ful}`
-
-## Study Notes
-
-This challenge is especially valuable if you want practice with:
-
-- precise stack offset calculation
-- small import-table binaries
-- PLT and GOT internals
-- the dynamic loader as an exploitation primitive
-
-The best learning path is to step through the loader-related entries with `readelf` and `objdump` until the second-stage payload structure makes sense. The archived notes are only a reference after that analysis.
+Target instance: `154.57.164.77:31676`  
+Solved on: `2026-04-02`  
+Flag: `HTB{pwnt00l5_h0mep4g3_15_u54ful}`

@@ -1,0 +1,10 @@
+
+config core 'common'
+	option PRIVACY '0'
+	option NETMODE 'lanapmode'
+	option INITTED 'YES'
+	option ROUTER_NAME 'Xiaomi_4F58'
+	option ROUTER_NAME_PENDING '1'
+	option ROUTER_LOCALE '家'
+	option BANDWIDTH '0'
+

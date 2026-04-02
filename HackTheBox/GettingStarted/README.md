@@ -1,128 +1,141 @@
-# GettingStarted
-
-## Overview
-
-This directory contains the local materials and manual walkthrough for the `GettingStarted` challenge on Hack The Box - CTF Try Out. This README is written as a practical walkthrough so someone can open the folder, inspect the challenge files, understand the intended weakness, and reproduce the solve with commands that are easy to copy and run.
+# Getting Started (Hack The Box) - Professional PoC Writeup
 
 ## Challenge Profile
 
-- Challenge: `GettingStarted`
-- Category: `Pwn / Binary Exploitation`
-- Platform: `Hack The Box - CTF Try Out`
+| Field | Value |
+|---|---|
+| Challenge | Getting Started |
+| Category | Pwn |
+| Difficulty | Very Easy |
+| Primary dropped file | `pwn_getting_started (1).zip` |
+| Existing local PoC before this update | Present |
+| Core bug class | Stack buffer overflow (`scanf("%s")`) causing adjacent variable corruption |
 
-## Directory Contents
+## Scope And Ethics
 
-- `challenge/`
-- `getting_started_poc.sh`
-- `pwn_getting_started.zip`
+This material is for authorized CTF infrastructure only. Do not run this PoC
+against systems you do not own or have explicit permission to test.
 
-## First Commands To Run
+## Technical Summary
 
-Start with the original challenge materials in this folder. Treat this like a proper writeup: inspect what was provided, identify the relevant clue or weakness, verify it with the commands below, and continue until you can see or submit the final flag manually.
+The binary allocates `0x30` bytes for a stack buffer and later reads unchecked
+string input into that buffer via `scanf("%s", buffer)`.
+
+A nearby variable `target` is initialized as `0xdeadbeef` and checked after
+input:
+
+1. `target == 0xdeadbeef` -> no flag path.
+2. `target != 0xdeadbeef` -> `win()` is called.
+
+Because `target` sits after the buffer in the stack frame, a simple overflow is
+enough to flip it without needing RIP control.
+
+Exploit flow:
+1. Send `44` bytes (`"A" * 44`).
+2. Overflow crosses buffer boundary and corrupts `target`.
+3. Condition fails (`target != 0xdeadbeef`).
+4. Program jumps into `win()` and prints `flag.txt`.
+
+## Vulnerable Behavior
+
+1. Unbounded `%s` input is written to a fixed local stack buffer.
+2. No length constraint is applied before `scanf`.
+3. Security-relevant stack variable (`target`) is adjacent to attacker-controlled buffer.
+4. Program logic trusts `target` integrity after unsafe write.
+
+## Manual Verification Steps
+
+1. Confirm binary type and mitigations:
+
+```bash
+file challenge/gs
+checksec --file=challenge/gs
+```
+
+2. Inspect vulnerable main logic:
+
+```bash
+objdump -d -Mintel challenge/gs | sed -n '420,560p'
+```
+
+Relevant instructions:
+
+```text
+16a4: sub rsp,0x30
+16de: mov eax,0xdeadbeef
+16e3: mov QWORD PTR [rbp-0x8],rax
+17a8: lea rdi,[... "%s" ...]
+17b4: call __isoc99_scanf@plt
+17ca: cmp QWORD PTR [rbp-0x8],rax
+17dc: call win
+```
+
+3. Send overflow payload manually:
+
+```bash
+python3 -c 'print("A"*44)' | nc 154.57.164.64 30860
+```
+
+4. Confirm returned output contains `HTB{...}`.
+
+## Automated PoC
+
+Script:
+`getting_started_poc.sh`
+
+### Usage
 
 ```bash
 cd "/home/eliah/Desktop/CTF/HackTheBox/GettingStarted"
-ls -lah
-unzip -l "pwn_getting_started.zip"
+chmod +x getting_started_poc.sh
+./getting_started_poc.sh <host> <port>
 ```
 
-Useful first inspection commands:
+### Common examples
 
 ```bash
-file 'pwn_getting_started.zip'
-strings -n 5 'pwn_getting_started.zip' | head -200
+./getting_started_poc.sh 154.57.164.64 30860
+./getting_started_poc.sh --host 154.57.164.64 --port 30860 --verbose
+./getting_started_poc.sh --host 154.57.164.64 --port 30860 --json
 ```
 
-## Writeup Flow
+## Options
 
-This README follows a public-writeup style structure: start from the provided files or exposed service, confirm the key weakness or clue with manual commands, use that confirmed finding to move forward, and stop only when the final flag or recovered result is visible.
+- `--host <host>`: target host or IP.
+- `--port <port>`: target TCP port.
+- `--timeout <seconds>`: socket timeout, default `5`.
+- `--length <bytes>`: payload length, default `44`.
+- `--json`: machine-readable JSON output.
+- `--verbose`: print debug output.
+- `-h`, `--help`: show usage help.
 
-When you work through it, keep asking four questions:
+## Exit Codes
 
-1. What is the challenge giving me locally or remotely?
-2. What exact behavior, bug, artifact, or hidden assumption matters?
-3. How do I verify that with a command or inspection step?
-4. How does that verified result lead to the final flag?
+- `0`: exploit succeeded and flag extracted.
+- `2`: invalid CLI arguments.
+- `3`: connectivity/request failure.
+- `4`: exploit sent but flag not found.
 
-## Walkthrough
+## Why The Exploit Works
 
-Challenge: GettingStarted
-Platform: Hack The Box - CTF Try Out
-Category: Pwn / Binary Exploitation
+- `%s` reads past intended buffer boundary when input is longer than 32 bytes.
+- `target` resides at a higher stack offset than `buffer`, reachable by overflow.
+- Logic uses a simple equality check on `target` instead of integrity-safe design.
+- Any non-`0xdeadbeef` value triggers the flag routine.
 
-### Scenario summary
+## Defensive Guidance
 
-This is a beginner stack-overflow challenge. The binary prints the stack
-layout for us, then asks for input. Our job is not to fully hijack control
-flow yet. We only need to overflow a stack buffer far enough to corrupt a
-nearby variable named "target".
+- Replace unsafe `%s` reads with bounded input handling.
+- Enforce explicit maximum lengths (`fgets`, width-limited format strings).
+- Separate control variables from directly adjacent user buffers.
+- Add compiler/runtime hardening and secure coding checks in CI.
 
-### Real-world concept
+## Result Note
 
-In unsafe native code, data placed next to a buffer on the stack can be
-changed if input is copied without proper bounds checking. Even when we do
-not control RIP yet, changing a security-relevant variable can still be
-enough to win. This is the same mindset used in many real exploits:
-attackers first look for the *smallest useful corruption* before going for
-full code execution.
-
-### Provided files
-
-- pwn_getting_started.zip
-- challenge/gs
-- challenge/wrapper.py
-- challenge/glibc/libc.so.6
-- challenge/glibc/ld-linux-x86-64.so.2
-
-Remote target used during solve:
-- 154.57.164.67:31260
-
-Important observation from reversing:
-main() allocates 0x30 bytes on the stack and lays out local data as:
-buffer[32]  at rbp-0x30
-alignment   at rbp-0x10
-target      at rbp-0x08
-
-The code initializes target to 0xdeadbeef and later does:
-if (target != 0xdeadbeef) { win(); }
-
-That means the easiest exploit is:
-1. Fill the 32-byte buffer
-2. Overwrite the 8-byte alignment dummy
-3. Continue into target so it is no longer 0xdeadbeef
-
-Offset math:
-32 bytes buffer
-+ 8 bytes alignment
-= 40 bytes to reach target
-
-We send 44 'A' bytes.
-Why 44?
-- bytes 0..31 fill the buffer
-- bytes 32..39 overwrite alignment
-- bytes 40..43 overwrite the low 4 bytes of target with 0x41414141
-- the trailing NUL written by scanf lands inside the target field, which is
-still fine because the value is no longer 0xdeadbeef
-
-Manual reproduction idea:
-python3 -c 'print("A"*44)' | nc 154.57.164.67 31260
-
-Final live flag obtained during testing:
-HTB{b0f_tut0r14l5_4r3_g00d}
-
-## Manual Reproduction Flow
-
-Use the walkthrough above as the authoritative solve path. The short command block below is only the setup phase before you execute the numbered manual steps in this README.
-
-```bash
-cd "/home/eliah/Desktop/CTF/HackTheBox/GettingStarted"
-ls -lah
-```
+Flag values may vary by instance. The format remains `HTB{...}`.
 
 ## Final Flag
 
-Following the manual path in this README leads to: `HTB{b0f_tut0r14l5_4r3_g00d}`
-
-## Study Notes
-
-This challenge is worth revisiting if you are practicing `Pwn / Binary Exploitation` problems. Inspect the binary yourself first, confirm the weakness manually, and use the archived solve notes only after you have traced the bug and exploit path on your own.
+Target instance: `154.57.164.64:30860`  
+Solved on: `2026-04-02`  
+Flag: `HTB{b0f_tut0r14l5_4r3_g00d}`

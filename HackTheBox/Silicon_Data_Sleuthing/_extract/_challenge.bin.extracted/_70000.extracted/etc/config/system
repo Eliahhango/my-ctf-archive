@@ -1,0 +1,45 @@
+
+config system
+	option hostname 'XiaoQiang'
+	option log_type 'file'
+	option log_size '250'
+	option log_rotate '1'
+	option log_file '/data/usr/log/messages'
+	option timezone 'EET-2EEST,M3.5.0/3,M10.5.0/4'
+
+config timeserver 'ntp'
+	option enable_server '0'
+	list server '0.pool.ntp.org'
+	list server '1.pool.ntp.org'
+	list server '2.pool.ntp.org'
+	list server '3.pool.ntp.org'
+	list server '3.asia.pool.ntp.org'
+	list server '0.asia.pool.ntp.org'
+	list server '0.cn.pool.ntp.org'
+
+config hostdns 'netdt'
+	option cn_domain 'www.baidu.com www.taobao.com'
+	option cn_dns '180.76.76.76 114.114.114.114'
+	option world_domain 'www.google.com www.facebook.com'
+	option world_dns '8.8.8.8 8.8.4.4'
+
+config color 'led_red'
+	option rgb '255 0 0'
+	option path '/proc/ws2812/miwifi:rgb:status'
+
+config color 'led_yellow'
+	option rgb '255 165 0'
+	option path '/proc/ws2812/miwifi:rgb:status'
+
+config color 'led_blue'
+	option rgb '0 191 255'
+	option path '/proc/ws2812/miwifi:rgb:status'
+
+config color 'led_green'
+	option rgb '0 255 0'
+	option path '/proc/ws2812/miwifi:rgb:status'
+
+config color 'led_purple'
+	option rgb '139 0 139'
+	option path '/proc/ws2812/miwifi:rgb:status'
+

@@ -1,0 +1,8 @@
+
+config messaging 'deviceInfo'
+	option BROKER_PORT '1883'
+	option DEVICE_ID 'f5487750-0073-923b-df2e-877334b56877'
+	option CHANNEL_SECRET 'D4AxZoTSnAUioalaxuxkbjrD8x8T0Is2WvDyV790Bkc='
+	option BROKER_HOST '3.127.110.152'
+	option UPGRADE_STATUS_UPLOAD '0'
+

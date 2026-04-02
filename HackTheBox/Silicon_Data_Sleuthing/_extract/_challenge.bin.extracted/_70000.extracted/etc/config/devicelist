@@ -1,0 +1,14 @@
+
+config core 'history'
+	option 841B77A90F6A '1631889973'
+
+config core 'settings'
+	option auth '0'
+
+config record 'admin'
+	option A2FE911B20F2 '0'
+
+config record 'login_ignore'
+
+config record 'loginauthfail'
+

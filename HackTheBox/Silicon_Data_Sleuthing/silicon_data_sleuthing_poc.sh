@@ -2,44 +2,143 @@
 
 set -euo pipefail
 
-# Challenge: Silicon Data Sleuthing
-# Platform: Hack The Box
-# Category: Forensics
+# -----------------------------------------------------------------------------
+# PoC: Hack The Box - Silicon Data Sleuthing
+# Type: Firmware-forensics questionnaire automation (OpenWrt artifact answers)
 #
-# Remote target used during solve:
-#   154.57.164.67:32562
-#
-# Challenge summary:
-# The task revolves around analyzing an extracted OpenWrt firmware image and
-# answering fixed questions about the router's configuration.
-#
-# Recovered answers:
-#   - OpenWrt version: 23.05.0
-#   - Linux kernel version: 5.15.134
-#   - Root password hash:
-#       root:$1$YfuRJudo$cXCiIJXn9fWLIt8WY2Okp1:19804:0:99999:7:::
-#   - PPPoE username: yohZ5ah
-#   - PPPoE password: ae-h+i$i^Ngohroorie!bieng6kee7oh
-#   - WiFi SSID: VLT-AP01
-#   - WiFi password: french-halves-vehicular-favorable
-#   - WAN->LAN forwarded ports: 1778,2289,8088
-#
-# Final flag obtained during testing:
-#   HTB{Y0u'v3_m4st3r3d_0p3nWRT_d4t4_3xtr4ct10n!!_ccc7c86e99701a06e8997bef3acd71f8}
-#
-# Note:
-# The signed HTB download URL returned a 500 Server Error during this session,
-# so this script reproduces the successful remote solve directly.
+# This script is intended for authorized CTF infrastructure only.
+# -----------------------------------------------------------------------------
 
-host="${1:-154.57.164.67}"
-port="${2:-32562}"
+readonly SCRIPT_NAME="$(basename "$0")"
+readonly DEFAULT_TIMEOUT=10
 
-python3 - "$host" "$port" <<'PY'
+HOST=""
+PORT=""
+TIMEOUT="${DEFAULT_TIMEOUT}"
+JSON_OUTPUT=0
+VERBOSE=0
+
+usage() {
+  cat <<USAGE
+Usage:
+  ${SCRIPT_NAME} <host> <port>
+  ${SCRIPT_NAME} --host <host> --port <port> [options]
+
+Options:
+  --host <host>            Target host/IP
+  --port <port>            Target TCP port
+  --timeout <seconds>      Socket timeout (default: ${DEFAULT_TIMEOUT})
+  --json                   Print result as JSON
+  --verbose                Enable debug output
+  -h, --help               Show this help message
+
+Exit codes:
+  0  Success (flag extracted)
+  1  Generic failure
+  2  Invalid arguments
+  3  Connectivity/protocol failure
+  4  Answers sent but flag not found
+USAGE
+}
+
+log_info() {
+  if [[ "${JSON_OUTPUT}" -eq 0 ]]; then
+    printf '[*] %s\n' "$*" >&2
+  fi
+}
+
+log_debug() {
+  if [[ "${VERBOSE}" -eq 1 && "${JSON_OUTPUT}" -eq 0 ]]; then
+    printf '[D] %s\n' "$*" >&2
+  fi
+}
+
+log_error() {
+  printf '[-] %s\n' "$*" >&2
+}
+
+parse_args() {
+  local positional=()
+
+  while [[ $# -gt 0 ]]; do
+    case "$1" in
+      --host)
+        HOST="${2:-}"
+        shift 2
+        ;;
+      --port)
+        PORT="${2:-}"
+        shift 2
+        ;;
+      --timeout)
+        TIMEOUT="${2:-}"
+        shift 2
+        ;;
+      --json)
+        JSON_OUTPUT=1
+        shift
+        ;;
+      --verbose)
+        VERBOSE=1
+        shift
+        ;;
+      -h|--help)
+        usage
+        exit 0
+        ;;
+      -* )
+        log_error "Unknown option: $1"
+        usage >&2
+        exit 2
+        ;;
+      *)
+        positional+=("$1")
+        shift
+        ;;
+    esac
+  done
+
+  if [[ -z "${HOST}" && ${#positional[@]} -ge 1 ]]; then
+    HOST="${positional[0]}"
+  fi
+  if [[ -z "${PORT}" && ${#positional[@]} -ge 2 ]]; then
+    PORT="${positional[1]}"
+  fi
+
+  if [[ -z "${HOST}" || -z "${PORT}" ]]; then
+    log_error "Host and port are required."
+    usage >&2
+    exit 2
+  fi
+
+  if ! [[ "${PORT}" =~ ^[0-9]+$ ]] || (( PORT < 1 || PORT > 65535 )); then
+    log_error "Invalid port: ${PORT}"
+    exit 2
+  fi
+
+  if ! [[ "${TIMEOUT}" =~ ^[0-9]+([.][0-9]+)?$ ]]; then
+    log_error "Invalid timeout: ${TIMEOUT}"
+    exit 2
+  fi
+}
+
+main() {
+  parse_args "$@"
+
+  log_info "Target: ${HOST}:${PORT}"
+  log_debug "Submitting known OpenWrt artifact answers in prompt order"
+
+  python3 - "$HOST" "$PORT" "$TIMEOUT" "$JSON_OUTPUT" "$VERBOSE" <<'PY'
+import json
+import re
 import socket
 import sys
 
 host = sys.argv[1]
 port = int(sys.argv[2])
+timeout = float(sys.argv[3])
+json_output = sys.argv[4] == "1"
+verbose = sys.argv[5] == "1"
 
 answers = [
     "23.05.0",
@@ -52,39 +151,76 @@ answers = [
     "1778,2289,8088",
 ]
 
-with socket.create_connection((host, port), timeout=10) as sock:
-    sock.settimeout(15)
+
+def emit_debug(msg: str) -> None:
+    if verbose and not json_output:
+        print(f"[D] {msg}", file=sys.stderr)
+
+
+def fail(code: int, msg: str) -> None:
+    if json_output:
+        print(json.dumps({"ok": False, "error": msg, "target": f"{host}:{port}"}))
+    else:
+        print(f"[-] {msg}", file=sys.stderr)
+    raise SystemExit(code)
+
+
+try:
+    sock = socket.create_connection((host, port), timeout=timeout)
+except Exception as exc:
+    fail(3, f"Connection failed: {exc}")
+
+try:
+    sock.settimeout(timeout)
     buffer = b""
 
-    for answer in answers:
+    for idx, answer in enumerate(answers, start=1):
         while b"> " not in buffer:
-            chunk = sock.recv(4096)
+            try:
+                chunk = sock.recv(4096)
+            except socket.timeout:
+                fail(3, f"Timeout waiting for prompt #{idx}")
             if not chunk:
-                raise SystemExit("[-] Connection closed before the next prompt.")
+                fail(3, f"Connection closed before prompt #{idx}")
             buffer += chunk
 
+        emit_debug(f"Prompt #{idx} reached; sending answer")
         sock.sendall(answer.encode() + b"\n")
         buffer = b""
 
-    output = b""
+    chunks = []
     while True:
         try:
-            chunk = sock.recv(4096)
+            data = sock.recv(4096)
         except socket.timeout:
             break
-        if not chunk:
+        if not data:
             break
-        output += chunk
+        chunks.append(data)
+finally:
+    sock.close()
 
-text = output.decode("latin-1", errors="ignore")
-marker = "HTB{"
-if marker not in text:
-    raise SystemExit("[-] Flag not found in service response.")
+text = b"".join(chunks).decode("latin1", errors="ignore")
+match = re.search(r"HTB\{[^}]+\}", text)
 
-start = text.index(marker)
-end = text.find("}", start)
-if end == -1:
-    raise SystemExit("[-] Flag start found, but closing brace missing.")
+if not match:
+    if verbose and not json_output:
+        print("[D] Response preview:", file=sys.stderr)
+        print(text[:1000], file=sys.stderr)
+    fail(4, "Flag pattern not found in target response")
 
-print(text[start:end + 1])
+flag = match.group(0)
+
+if json_output:
+    print(json.dumps({
+        "ok": True,
+        "target": f"{host}:{port}",
+        "answers_sent": len(answers),
+        "flag": flag,
+    }))
+else:
+    print(flag)
 PY
+}
+
+main "$@"

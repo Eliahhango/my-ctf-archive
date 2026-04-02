@@ -1,0 +1,8 @@
+
+config backup 'lan'
+	option ipaddr '192.168.31.1'
+	option proto 'static'
+	option netmask '255.255.255.0'
+	option type 'bridge'
+	option ifname 'eth0'
+
