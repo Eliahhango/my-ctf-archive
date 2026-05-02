@@ -31,7 +31,11 @@ jobs:
           has_any '**/*.js' '**/*.jsx' '**/*.mjs' '**/*.cjs' '**/*.ts' '**/*.tsx' && langs+=("javascript-typescript") || true
           has_any '**/*.py' && langs+=("python") || true
           has_any '**/*.go' && langs+=("go") || true
-          has_any '**/*.java' '**/*.kt' '**/*.kts' && langs+=("java-kotlin") || true
+          if has_any '**/*.java' '**/*.kt' '**/*.kts'; then
+            if has_any '**/pom.xml' '**/build.gradle' '**/build.gradle.kts' '**/settings.gradle' '**/settings.gradle.kts' '**/mvnw' '**/gradlew'; then
+              langs+=("java-kotlin")
+            fi
+          fi
           has_any '**/*.c' '**/*.h' '**/*.cpp' '**/*.cc' '**/*.cxx' '**/*.hpp' && langs+=("c-cpp") || true
           has_any '**/*.cs' && langs+=("csharp") || true
           has_any '**/*.rb' && langs+=("ruby") || true
